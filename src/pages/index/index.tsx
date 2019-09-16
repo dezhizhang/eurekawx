@@ -1,11 +1,9 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Button, Text } from '@tarojs/components'
+import { View, Swiper, SwiperItem,ScrollView } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
-
 import { add, minus, asyncAdd } from '../../actions/counter'
-
-import './index.less'
+import  './index.less'
 
 // #region 书写注意
 //
@@ -62,7 +60,7 @@ class Index extends Component {
    * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
    */
     config: Config = {
-    navigationBarTitleText: '首页'
+    navigationBarTitleText: '商城'
   }
 
   componentWillReceiveProps (nextProps) {
@@ -77,13 +75,41 @@ class Index extends Component {
 
   render () {
     return (
-      <View className='index'>
-        <Button className='add_btn' onClick={this.props.add}>+</Button>
-        <Button className='dec_btn' onClick={this.props.dec}>-</Button>
-        <Button className='dec_btn' onClick={this.props.asyncAdd}>async</Button>
-        <View><Text>{this.props.counter.num}</Text></View>
-        <View><Text>Hello, World</Text></View>
-      </View>
+      <ScrollView className='index'
+        scrollY
+        scrollWithAnimation
+      >
+        <View className='wrapper'>
+          <View className="search"></View>
+          <Swiper
+            className='swiper'
+            indicatorColor='#999'
+            indicatorActiveColor='#333'
+            circular
+            indicatorDots
+            autoplay>
+            <SwiperItem>
+              <View className='demo-text-1'>1</View>
+            </SwiperItem>
+            <SwiperItem>
+              <View className='demo-text-2'>2</View>
+            </SwiperItem>
+            <SwiperItem>
+              <View className='demo-text-3'>3</View>
+            </SwiperItem>
+          </Swiper>
+          <View className="category">
+              <View className="item"></View>
+              <View className="item"></View>
+              <View className="item"></View>
+              <View className="item"></View>
+          </View>
+          <View className="advert"></View>
+          <View className="hot"></View>
+          <View className="banner"></View>
+        </View>
+        
+      </ScrollView>
     )
   }
 }

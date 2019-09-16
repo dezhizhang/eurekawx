@@ -1,11 +1,8 @@
 import '@tarojs/async-await'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { Provider } from '@tarojs/redux'
-
 import Index from './pages/index'
-
 import configStore from './store'
-
 import './app.less'
 
 // 如果需要在 h5 环境中开启 React Devtools
@@ -15,7 +12,6 @@ import './app.less'
 // }
 
 const store = configStore()
-
 class App extends Component {
 
   /**
@@ -31,9 +27,9 @@ class App extends Component {
     ],
     window: {
       backgroundTextStyle: 'light',
-      navigationBarBackgroundColor: '#fff',
+      navigationBarBackgroundColor: '#735ff7',
       navigationBarTitleText: 'WeChat',
-      navigationBarTextStyle: 'black'
+      navigationBarTextStyle: 'white'
     }
   }
 
