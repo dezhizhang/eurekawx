@@ -1,6 +1,6 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Swiper, SwiperItem,ScrollView } from '@tarojs/components'
+import { View, Swiper, SwiperItem,ScrollView,Input } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import { add, minus, asyncAdd } from '../../actions/counter'
 import  './index.less'
@@ -81,7 +81,9 @@ class Index extends Component {
       >
         <View className='wrapper'>
           <View className="list">
-            <View className="search"></View>
+            {/* <View className="search">
+              <Input className="search_input" placeholder='搜索商品名称或类型'/>
+            </View> */}
             <Swiper
               className='swiper'
               indicatorColor='#999'
