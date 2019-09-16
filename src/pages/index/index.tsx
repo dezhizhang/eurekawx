@@ -116,8 +116,6 @@ class Index extends Component {
             </View>
           </View>
         </View>
-        
-        
       </ScrollView>
     )
   }
