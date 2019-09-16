@@ -80,34 +80,43 @@ class Index extends Component {
         scrollWithAnimation
       >
         <View className='wrapper'>
-          <View className="search"></View>
-          <Swiper
-            className='swiper'
-            indicatorColor='#999'
-            indicatorActiveColor='#333'
-            circular
-            indicatorDots
-            autoplay>
-            <SwiperItem>
-              <View className='demo-text-1'>1</View>
-            </SwiperItem>
-            <SwiperItem>
-              <View className='demo-text-2'>2</View>
-            </SwiperItem>
-            <SwiperItem>
-              <View className='demo-text-3'>3</View>
-            </SwiperItem>
-          </Swiper>
-          <View className="category">
-              <View className="item"></View>
-              <View className="item"></View>
-              <View className="item"></View>
-              <View className="item"></View>
+          <View className="list">
+            <View className="search"></View>
+            <Swiper
+              className='swiper'
+              indicatorColor='#999'
+              indicatorActiveColor='#333'
+              circular
+              indicatorDots
+              autoplay>
+              <SwiperItem>
+                <View className='demo-text-1'>1</View>
+              </SwiperItem>
+              <SwiperItem>
+                <View className='demo-text-2'>2</View>
+              </SwiperItem>
+              <SwiperItem>
+                <View className='demo-text-3'>3</View>
+              </SwiperItem>
+            </Swiper>
+            <View className="category">
+                <View className="item"></View>
+                <View className="item"></View>
+                <View className="item"></View>
+                <View className="item"></View>
+            </View>
+            <View className="advert"></View>
+            <View className="hot"></View>
           </View>
-          <View className="advert"></View>
-          <View className="hot"></View>
-          <View className="banner"></View>
+          <View className="product"></View>
+          <View className='product_item'>
+            <View className="product_wrapper">
+              <View className="item"></View>
+              <View className="item"></View>    
+            </View>
+          </View>
         </View>
+        
         
       </ScrollView>
     )

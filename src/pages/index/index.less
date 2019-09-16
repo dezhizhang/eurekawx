@@ -2,43 +2,73 @@
   flex-direction: column;
   width: 100%;
   .wrapper{
-    padding:20px 30px 0px 30px;
-    .search{
-      height: 60px;
-      width: 100%;
-      background: #e6e3e3;
-      border-radius: 30px;
+    .list{
+      padding:20px 30px 0px 30px;
       margin-bottom: 20px;
-    }
-    .swiper{
-      height: 300px;
-      max-height: 300px;
-      border-radius: 10px;
-      background: yellow;
-      margin-bottom: 20px;
-    }
-    .category{
-      height: 166px;
-      max-height: 166px;
-      background: red;
-      border-radius: 10px;
-      margin-bottom:26px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      .item{
-        flex: 1;
+      .search{
+        height: 60px;
+        width: 100%;
+        background: #e6e3e3;
+        border-radius: 30px;
+        margin-bottom: 20px;
+      }
+      .swiper{
+        height: 300px;
+        max-height: 300px;
+        border-radius: 10px;
+        background: yellow;
+        margin-bottom: 20px;
+      }
+      .category{
+        height: 166px;
+        max-height: 166px;
+        background: red;
+        border-radius: 10px;
+        margin-bottom:26px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .item{
+          flex: 1;
+        }
+      }
+      .advert{
+        height: 126px;
+        max-height: 126px;
+        border-radius: 63px;
+        background: #8973f8;
+        margin-bottom: 20px;
+      }
+      .hot{
+        height: 370px;
+        max-height: 370px;
+        background: green;
       }
     }
-    .advert{
-      height: 126px;
-      max-height: 126px;
-      border-radius: 63px;
-      background: #8973f8;
+    .product{
+      height: 70px;
+      text-align: center;
+      line-height: 70px;
+      background: red;
+      margin-bottom: 20px;
     }
-    .hot{
-      height: 370px;
-      max-height: 370px;
+    .product_item{
+      padding: 0px 30px 0px 30px;
+      .product_wrapper{
+          display: flex;
+          justify-content: center;
+          align-content: center;
+          margin-bottom: 20px;
+          .item{
+            flex: 1;
+            height: 440px;
+            border-radius: 10px;
+            background: yellow;
+            border: 1px solid #ccc;
+          }
+      }
+
     }
+   
   }
 }
