@@ -1,9 +1,10 @@
 import { ComponentClass } from 'react'
 import { connect } from '@tarojs/redux'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Swiper, SwiperItem,ScrollView, } from '@tarojs/components'
+import { View, Swiper, SwiperItem,ScrollView,Image  } from '@tarojs/components'
 import { add, minus, asyncAdd } from '../../actions/counter'
-import { getFocusInfo } from '../../service/api'
+import { getFocusInfo,getAdvertInfo } from '../../service/api'
+import { baseURL } from '../../utils/tools'
 import  './index.less'
 import category from '../../images/category.png'
 
@@ -55,7 +56,8 @@ interface Index {
 }))
 class Index extends Component {
     state = {
-      focusData:[]
+      focusData:[],
+      advertData:[],
     }
     /**
    * 指定config的类型声明为: Taro.Config
@@ -73,17 +75,27 @@ class Index extends Component {
   }
   componentDidMount() {
     this.getFocusData();
+    this.getadvertData()
   }
-  getFocusData = async ()=>  {
-     const res = await getFocusInfo();
-     console.log(res.data);
-
-     if(res.data.code == 200) {
-       let focusData = res.data.data
+  getFocusData = async () =>  {
+     const result = await getFocusInfo();
+     const data = result.data;
+     if(data.code == 200) {
+       let focusData = data.data
        this.setState({focusData})
      }
 
   }
+  getadvertData = async () =>  {
+     const result = await getAdvertInfo();
+     const data = result.data;
+     if(data.code == 200) {
+       let advertData = data.data;
+       this.setState({advertData})
+     }
+
+  }
+
   componentWillUnmount () { }
 
   componentDidShow () { }
@@ -91,10 +103,7 @@ class Index extends Component {
   componentDidHide () { }
 
   render () {
-    const { focusData } = this.state;
-    console.log(focusData);
-
-
+    const { focusData,advertData } = this.state;
     return (
       <ScrollView className='index'
         scrollY
@@ -104,14 +113,14 @@ class Index extends Component {
           <View className="list">
             <Swiper
               className='swiper'
-              indicatorColor='#999'
-              indicatorActiveColor='#333'
+              indicatorColor='#537afb'
+              indicatorActiveColor='#735ff7'
               circular
               indicatorDots
               autoplay>
               {focusData.length && focusData.map((item,index) => {
                  return (<SwiperItem key={index}>
-                   <View className="bannner"><Image className="banner_image" mode='aspectFill' src={`http://127.0.0.1:7001${item.focus_img}`}/></View>
+                   <View className="bannner"><Image className="banner_image" mode='aspectFill' src={`${baseURL}${item.focus_img}`}/></View>
                  </SwiperItem>)
               })}
             </Swiper>
@@ -152,7 +161,11 @@ class Index extends Component {
                   <View className="bottom">更多</View>
                 </View>
             </View>
-            <View className="advert"></View>
+            <View className="advert">
+              {advertData.length&&advertData.map((item,index) => {
+                return (<Image className="advert_image" key={index} mode='aspectFill' src={`${baseURL}${item.advert_img}`}></Image>)
+              })}
+            </View>
             <View className="hot"></View>
           </View>
           <View className="product"></View>
