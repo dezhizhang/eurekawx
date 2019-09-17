@@ -2,10 +2,10 @@ import { ComponentClass } from 'react'
 import { connect } from '@tarojs/redux'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Swiper, SwiperItem,ScrollView, } from '@tarojs/components'
-import Config from '../../common/config';
 import { add, minus, asyncAdd } from '../../actions/counter'
 import { getFocusInfo } from '../../service/api'
 import  './index.less'
+
 
 // #region 书写注意
 //
@@ -110,7 +110,7 @@ class Index extends Component {
               autoplay>
               {focusData.length && focusData.map((item,index) => {
                  return (<SwiperItem key={index}>
-                   <View><Image mode='aspectFill' className='big_image' src={`${Config.API_HOST}${item.focus_img}`}/></View>
+                   <View className="bannner"><Image className="banner_image" mode='aspectFill' src={`http://127.0.0.1:7001${item.focus_img}`}/></View>
                  </SwiperItem>)
               })}
             </Swiper>
