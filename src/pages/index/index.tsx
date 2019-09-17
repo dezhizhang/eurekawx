@@ -1,8 +1,10 @@
 import { ComponentClass } from 'react'
-import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Swiper, SwiperItem,ScrollView,Input } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
+import Taro, { Component, Config } from '@tarojs/taro'
+import { View, Swiper, SwiperItem,ScrollView, } from '@tarojs/components'
+import Config from '../../common/config';
 import { add, minus, asyncAdd } from '../../actions/counter'
+import { getFocusInfo } from '../../service/api'
 import  './index.less'
 
 // #region 书写注意
@@ -51,7 +53,9 @@ interface Index {
   }
 }))
 class Index extends Component {
-
+    state = {
+      focusData:[]
+    }
     /**
    * 指定config的类型声明为: Taro.Config
    *
@@ -66,7 +70,19 @@ class Index extends Component {
   componentWillReceiveProps (nextProps) {
     console.log(this.props, nextProps)
   }
+  componentDidMount() {
+    this.getFocusData();
+  }
+  getFocusData = async ()=>  {
+     const res = await getFocusInfo();
+     console.log(res.data);
 
+     if(res.data.code == 200) {
+       let focusData = res.data.data
+       this.setState({focusData})
+     }
+
+  }
   componentWillUnmount () { }
 
   componentDidShow () { }
@@ -74,6 +90,10 @@ class Index extends Component {
   componentDidHide () { }
 
   render () {
+    const { focusData } = this.state;
+    console.log(focusData);
+
+
     return (
       <ScrollView className='index'
         scrollY
@@ -81,9 +101,6 @@ class Index extends Component {
       >
         <View className='wrapper'>
           <View className="list">
-            {/* <View className="search">
-              <Input className="search_input" placeholder='搜索商品名称或类型'/>
-            </View> */}
             <Swiper
               className='swiper'
               indicatorColor='#999'
@@ -91,15 +108,11 @@ class Index extends Component {
               circular
               indicatorDots
               autoplay>
-              <SwiperItem>
-                <View className='demo-text-1'>1</View>
-              </SwiperItem>
-              <SwiperItem>
-                <View className='demo-text-2'>2</View>
-              </SwiperItem>
-              <SwiperItem>
-                <View className='demo-text-3'>3</View>
-              </SwiperItem>
+              {focusData.length && focusData.map((item,index) => {
+                 return (<SwiperItem key={index}>
+                   <View><Image mode='aspectFill' className='big_image' src={`${Config.API_HOST}${item.focus_img}`}/></View>
+                 </SwiperItem>)
+              })}
             </Swiper>
             <View className="category">
                 <View className="item"></View>
