@@ -1,6 +1,7 @@
 .index {
   flex-direction: column;
   width: 100%;
+  background: #f3f3f3;
   .wrapper{
     .list{
       padding:20px 30px 0px 30px;
@@ -42,14 +43,42 @@
       .category{
         height: 166px;
         max-height: 166px;
-        background: red;
         border-radius: 10px;
         margin-bottom:26px;
         display: flex;
-        align-items: center;
         justify-content: center;
+        background: #ffff;
         .item{
           flex: 1;
+          .top{
+            height: 110px;
+            width: 100%;
+            text-align: center;
+            line-height: 110px;
+            display: flex;
+            align-content: center;
+            justify-content: center;
+            .image_wrapper{
+              width: 90px;
+              height: 90px;
+              max-width: 90px;
+              max-height: 90px;
+              overflow: hidden;
+              margin-top: 20px;
+              .image{
+                width: 100%;
+                height: 100%;
+                display: block;
+              }
+            }
+          }
+          .bottom{
+            height: auto;
+            width: 100%;
+            text-align: center;
+            font-size: 24px;
+            color: #666666;
+          }
         }
       }
       .advert{

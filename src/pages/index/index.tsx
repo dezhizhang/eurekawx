@@ -5,6 +5,7 @@ import { View, Swiper, SwiperItem,ScrollView, } from '@tarojs/components'
 import { add, minus, asyncAdd } from '../../actions/counter'
 import { getFocusInfo } from '../../service/api'
 import  './index.less'
+import category from '../../images/category.png'
 
 
 // #region 书写注意
@@ -115,10 +116,41 @@ class Index extends Component {
               })}
             </Swiper>
             <View className="category">
-                <View className="item"></View>
-                <View className="item"></View>
-                <View className="item"></View>
-                <View className="item"></View>
+                <View className="item">
+                  <View className="top">
+                    <View className="image_wrapper">
+                      <Image className="image" mode='aspectFill'  src={category}/>
+                    </View>
+                   
+                  </View>
+                  <View className="bottom">女装</View>
+                </View>
+                <View className="item">
+                  <View className="top">
+                    <View className="image_wrapper">
+                      <Image className="image" mode='aspectFill'  src={category}/>
+                    </View>
+                   
+                  </View>
+                  <View className="bottom">男装</View>
+                </View>
+                <View className="item">
+                  <View className="top">
+                    <View className="image_wrapper">
+                      <Image className="image" mode='aspectFill'  src={category}/>
+                    </View>
+                   
+                  </View>
+                  <View className="bottom">套装</View>
+                </View>
+                <View className="item">
+                  <View className="top">
+                    <View className="image_wrapper">
+                      <Image className="image" mode='aspectFill'  src={category}/>
+                    </View>
+                  </View>
+                  <View className="bottom">更多</View>
+                </View>
             </View>
             <View className="advert"></View>
             <View className="hot"></View>
