@@ -98,7 +98,40 @@
       .hot{
         height: 370px;
         max-height: 370px;
-        background: green;
+        border-radius: 10px;
+        background: #ffffff;
+        .top{
+          height: 80px;
+          border-top-right-radius: 10px;         
+          border-top-left-radius: 10px;
+          display: flex;
+          align-content: center;
+          overflow: hidden;
+          border-bottom:1px solid #000;
+          .left{
+            height: 40px;
+            line-height: 40px;
+            width: 120px;
+            border-top-right-radius: 40px;
+            border-bottom-right-radius: 40px;
+            background: #6a66f8;
+            margin-top: 20px;
+            font-size: 24px;
+            text-align: center;
+            color: #fff;
+
+          }
+          .right{
+             flex: 1;
+             height: 40px;
+             line-height: 40px;
+             font-size: 24px;
+             margin-top: 20px;
+             margin-right: 30px;
+             color: #456ffb;
+             text-align: right;
+          }
+        }
       }
     }
     .product{

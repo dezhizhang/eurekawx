@@ -166,7 +166,13 @@ class Index extends Component {
                 return (<Image className="advert_image" key={index} mode='aspectFill' src={`${baseURL}${item.advert_img}`}></Image>)
               })}
             </View>
-            <View className="hot"></View>
+            <View className="hot">
+              <View className="top">
+                 <View className="left">热门产品</View>
+                 <View className="right">MORE</View>
+              </View>
+              <View className="bottom"></View>
+            </View>
           </View>
           <View className="product"></View>
           <View className='product_item'>
