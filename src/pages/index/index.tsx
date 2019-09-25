@@ -9,6 +9,8 @@ import  './index.less'
 import category from '../../images/category.png'
 import goods from '../../images/goods.png'
 import cart from '../../images/icon/cart.png'
+import product from '../../images/product.png'
+import bay from '../../images/bay.png'
 
 
 // #region 书写注意
@@ -222,7 +224,20 @@ class Index extends Component {
           </View>
           <View className='product_item'>
             <View className="product_wrapper">
-              <View className="item"></View>
+              <View className="item">
+                <View className="item-top">
+                  <Image className="image" mode='aspectFill'  src={product}/>
+                </View>
+                <View className="item-bottom">
+                  <View className="bottom-desc">2019潮流韩版蝙蝠衫</View>
+                  <View className="bottom-text">
+                      <View className="text-left">￥100</View>
+                      <View className="text-right">
+                        <Image className="image" src={bay}/>
+                      </View>
+                  </View>
+                </View>
+              </View>
               <View className="item"></View>    
             </View>
           </View>
