@@ -7,6 +7,7 @@ import { getFocusInfo,getAdvertInfo } from '../../service/api'
 import { baseURL } from '../../utils/tools'
 import  './index.less'
 import category from '../../images/category.png'
+import goods from '../../images/goods.png'
 
 
 // #region 书写注意
@@ -172,7 +173,41 @@ class Index extends Component {
                  <View className="right">MORE</View>
               </View>
               <View className="bottom">
-                
+                <Swiper
+                  circular
+                  >
+                  <SwiperItem>
+                    <View className='swiper-item'>
+                      <View className='item'>
+                        <View className="item-top">
+                            <Image className="image" mode='aspectFill'  src={goods}/>
+                        </View>
+                        <View className="item-bottom">
+                          <View className="bottom-top">潮流碎花连衣裙</View>
+                          <View className="bottom-bottom"></View>
+                        </View>
+                      </View>
+                      <View className="item">
+                        <View className="item-top">
+                            <Image className="image" mode='aspectFill'  src={goods}/>
+                        </View>
+                        <View className="item-bottom"></View>
+                      </View>
+                      <View className="item">
+                        <View className="item-top">
+                            <Image className="image" mode='aspectFill'  src={goods}/>
+                        </View>
+                        <View className="item-bottom"></View>
+                      </View>
+                    </View>
+                  </SwiperItem>
+                  <SwiperItem>
+                    <View className='swiper-item'>2</View>
+                  </SwiperItem>
+                  <SwiperItem>
+                    <View className='swiper-item'>3</View>
+                  </SwiperItem>
+                </Swiper>
               </View>
             </View>
           </View>
