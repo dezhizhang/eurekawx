@@ -171,10 +171,14 @@ class Index extends Component {
                  <View className="left">热门产品</View>
                  <View className="right">MORE</View>
               </View>
-              <View className="bottom"></View>
+              <View className="bottom">
+                
+              </View>
             </View>
           </View>
-          <View className="product"></View>
+          <View className="product">
+             主打产品
+          </View>
           <View className='product_item'>
             <View className="product_wrapper">
               <View className="item"></View>
