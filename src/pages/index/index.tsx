@@ -8,6 +8,7 @@ import { baseURL } from '../../utils/tools'
 import  './index.less'
 import category from '../../images/category.png'
 import goods from '../../images/goods.png'
+import cart from '../../images/icon/cart.png'
 
 
 // #region 书写注意
@@ -184,7 +185,12 @@ class Index extends Component {
                         </View>
                         <View className="item-bottom">
                           <View className="bottom-top">潮流碎花连衣裙</View>
-                          <View className="bottom-bottom"></View>
+                          <View className="bottom-bottom">
+                            <View className="bottom-left">￥89</View>
+                            <View className="bottom-right">
+                              <Image className="image" mode='aspectFill'  src={cart}/>
+                            </View>
+                          </View>
                         </View>
                       </View>
                       <View className="item">
