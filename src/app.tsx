@@ -23,10 +23,10 @@ class App extends Component {
    */
   config: Config = {
     pages: [
+      'pages/maintain/index',
       'pages/index/index',
-      'pages/category/index',
-      'pages/cart/index',
-      'pages/my/index'
+     
+     
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -41,18 +41,8 @@ class App extends Component {
         iconPath: "./images/tab/index.png",
         selectedIconPath: "./images/tab/index.png"
       }, {
-        pagePath: "pages/category/index",
-        text: "分类",
-        iconPath: "./images/tab/index.png",
-        selectedIconPath: "./images/tab/index.png"
-      },{
-        pagePath: "pages/cart/index",
-        text: "购物车",
-        iconPath: "./images/tab/index.png",
-        selectedIconPath: "./images/tab/index.png"
-      },{
-        pagePath: "pages/my/index",
-        text: "我的",
+        pagePath: "pages/maintain/index",
+        text: "维修",
         iconPath: "./images/tab/index.png",
         selectedIconPath: "./images/tab/index.png"
       }],
