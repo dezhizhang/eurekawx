@@ -1,6 +1,6 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Swiper, SwiperItem,ScrollView,Input,Text } from '@tarojs/components'
+import { View, Swiper, SwiperItem,ScrollView,Input,Text, Button } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import { add, minus, asyncAdd } from '../../actions/counter'
 import  './index.less'
@@ -80,7 +80,7 @@ class Index extends Component {
             <View className="header">为了给你提供更好的服务，请准确填写如下信息</View>
             <View className="content">
                 <View className="content-input">
-                    <Text className="text">姓名：</Text>
+                    <Text className="text">姓　　名：</Text>
                     <Input className="input" placeholder='请输入您的姓名'/>
                 </View>
                 <View className="content-input">
@@ -95,9 +95,14 @@ class Index extends Component {
                     <Text className="text">问题描述：</Text>
                     <Input className="input" placeholder="请输入您遇到的问题"/>
                 </View>
-                <View className="image"></View>
+                <View className="image">
+                  <View className="image-left"></View> 
+                  <View className="image-right"></View>
+                </View>
             </View>
-            <View className="bottom"></View>
+            <View className="bottom">
+                <Button className="btn">提交</Button>
+            </View>
          </View>
      </View>
     )
