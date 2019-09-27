@@ -66,10 +66,10 @@ class Index extends Component {
    * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
    */
   state = {
-    username:String,
-    mobile:String,
-    address:String,
-    description:String
+    username:'',
+    mobile:'',
+    address:'',
+    description:''
   }
     config: Config = {
     navigationBarTitleText: '信息登记'
@@ -102,7 +102,18 @@ class Index extends Component {
   }
   handleSubmit = () => {
     const { username,mobile,address,description } = this.state;
-    
+  
+    if(username && mobile && address) {
+
+    } else if(!username){
+      console.log('姓名不能为空');
+    } else if(!mobile) {
+      console.log('联系电话不能为空');
+    } else if(!address){
+      console.log('联系地址不能为空');
+    }
+
+
     
 
   }
