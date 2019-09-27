@@ -96,8 +96,10 @@ class Index extends Component {
                     <Input className="input" placeholder="请输入您遇到的问题"/>
                 </View>
                 <View className="image">
-                  <View className="image-left"></View> 
-                  <View className="image-right"></View>
+                  <View className="image-flex image-left">
+                 
+                  </View> 
+                  <View className="image-flex image-right"></View>
                 </View>
             </View>
             <View className="bottom">
