@@ -1,8 +1,9 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Swiper, SwiperItem,ScrollView,Input,Text, Button } from '@tarojs/components'
+import { View, Input,Text, Button,Image } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import { add, minus, asyncAdd } from '../../actions/counter'
+import goods from '../../images/goods.png'
 import  './index.less'
 
 // #region 书写注意
@@ -91,15 +92,17 @@ class Index extends Component {
                     <Text className="text">联系地址：</Text>
                     <Input className="input" placeholder="请输入您的联系地址"/>
                 </View>
-                <View className="content-input">
+                <View className="content-input" style={{borderBottom:'none'}}>
                     <Text className="text">问题描述：</Text>
                     <Input className="input" placeholder="请输入您遇到的问题"/>
                 </View>
                 <View className="image">
                   <View className="image-flex image-left">
-                 
+                      <Image src={goods} mode='aspectFill' className="image"/>
                   </View> 
-                  <View className="image-flex image-right"></View>
+                  <View className="image-flex image-right">
+                      <Image src={goods} mode='aspectFill' className="image"/>
+                  </View>
                 </View>
             </View>
             <View className="bottom">
