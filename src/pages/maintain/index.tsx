@@ -30,7 +30,12 @@ type PageDispatchProps = {
 
 type PageOwnProps = {}
 
-type PageState = {}
+type PageState = {
+  username:String,
+  mobile:String,
+  address:String,
+  description:String
+}
 
 type IProps = PageStateProps & PageDispatchProps & PageOwnProps
 
@@ -60,6 +65,12 @@ class Index extends Component {
    * 对于像 navigationBarTextStyle: 'black' 这样的推导出的类型是 string
    * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
    */
+  state = {
+    username:String,
+    mobile:String,
+    address:String,
+    description:String
+  }
     config: Config = {
     navigationBarTitleText: '信息登记'
   }
@@ -73,7 +84,28 @@ class Index extends Component {
   componentDidShow () { }
 
   componentDidHide () { }
+  handleUserName = (event:any) => {
+     const username = event.target.value;
+     this.setState({username})
+  }
+  handleMobile = (event:any) => {
+    const mobile = event.target.value;
+    this.setState({mobile});
+  }
+  handleAddress = (event:any) => {
+    let address = event.target.value;
+    this.setState({address})
+  }
+  handleDescription = (event:any) => {
+    let description = event.target.value;
+    this.setState({description})
+  }
+  handleSubmit = () => {
+    const { username,mobile,address,description } = this.state;
+    
+    
 
+  }
   render () {
     return (
      <View className="maintain">
@@ -82,19 +114,19 @@ class Index extends Component {
             <View className="content">
                 <View className="content-input">
                     <Text className="text">姓　　名：</Text>
-                    <Input className="input" placeholder='请输入您的姓名'/>
+                    <Input className="input" placeholder='请输入您的姓名' onChange={this.handleUserName}/>
                 </View>
                 <View className="content-input">
                     <Text className="text">联系电话：</Text>
-                    <Input className="input" placeholder='请输入您的联系电话'/>
+                    <Input className="input" placeholder='请输入您的联系电话' onChange={this.handleMobile}/>
                 </View>
                 <View className="content-input">
                     <Text className="text">联系地址：</Text>
-                    <Input className="input" placeholder="请输入您的联系地址"/>
+                    <Input className="input" placeholder="请输入您的联系地址" onChange={this.handleAddress}/>
                 </View>
                 <View className="content-input" style={{borderBottom:'none'}}>
                     <Text className="text">问题描述：</Text>
-                    <Input className="input" placeholder="请输入您遇到的问题"/>
+                    <Input className="input" placeholder="请输入您遇到的问题" onChange={this.handleDescription}/>
                 </View>
                 <View className="image">
                   <View className="image-flex image-left">
@@ -106,7 +138,7 @@ class Index extends Component {
                 </View>
             </View>
             <View className="bottom">
-                <Button className="btn">提交</Button>
+                <Button className="btn" onClick={this.handleSubmit}>提交</Button>
             </View>
          </View>
      </View>
@@ -121,4 +153,4 @@ class Index extends Component {
 //
 // #endregion
 
-export default Index as ComponentClass<PageOwnProps, PageState>
+export default Index as unknown as ComponentClass<PageOwnProps, PageState>
