@@ -24,3 +24,7 @@ export default function request(url, options) {
 
   return Taro.request({url, ...newOptions})
 }
+
+
+
+

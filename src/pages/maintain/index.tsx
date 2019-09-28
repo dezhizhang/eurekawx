@@ -1,5 +1,5 @@
 import { ComponentClass } from 'react'
-import Taro, { Component, Config } from '@tarojs/taro'
+import Taro, { Component, Config, saveImageToPhotosAlbum } from '@tarojs/taro'
 import { View, Input,Text, Button,Image } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import { add, minus, asyncAdd } from '../../actions/counter'
@@ -70,7 +70,8 @@ class Index extends Component {
     username:'',
     mobile:'',
     address:'',
-    description:''
+    description:'',
+    tempFilePaths:''
   }
     config: Config = {
     navigationBarTitleText: '信息登记'
@@ -100,6 +101,18 @@ class Index extends Component {
   handleDescription = (event:any) => {
     let description = event.target.value;
     this.setState({description})
+  }
+  handleChooseImage = () => {
+    let that = this;
+    const params = {
+      count:1,
+      sizeType:['original', 'compressed'],
+      sourceType: ['album', 'camera']
+    }
+    Taro.chooseImage(params).then(res => {
+       const tempFilePaths = res.tempFilePaths;
+       that.setState({tempFilePaths});
+    })
   }
   handleSubmit = () => {
     const { username,mobile,address,description } = this.state;
@@ -133,6 +146,7 @@ class Index extends Component {
     } 
   }
   render () {
+    const { tempFilePaths } = this.state;
     return (
      <View className="maintain">
          <View className="header">
@@ -155,8 +169,8 @@ class Index extends Component {
                     <Input className="input" placeholder="请输入您遇到的问题" onChange={this.handleDescription}/>
                 </View>
                 <View className="image">
-                  <View className="image-flex image-left">
-                      <Image src={goods} mode='aspectFill' className="image"/>
+                  <View onClick={this.handleChooseImage} className="image-flex image-left">
+                      <Image src={!tempFilePaths ? goods:tempFilePaths} mode='aspectFill' className="image"/>
                   </View> 
                   <View className="image-flex image-right">
                       <Image src={goods} mode='aspectFill' className="image"/>
