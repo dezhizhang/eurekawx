@@ -9,5 +9,15 @@ export const showToast = (params) => {
         icon: params.icon || 'success',
         image:'',
         duration: params.duration || 2000
-      })
+    })
+}
+//loading
+export const showLoading = (params) => {
+    Taro.showLoading({
+        title: params.title || 'loading'
+    })
+}
+//消失loading
+export const hideLoading = () => {
+    Taro.hideLoading()
 }

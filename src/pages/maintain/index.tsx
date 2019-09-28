@@ -1,10 +1,10 @@
 import { ComponentClass } from 'react'
-import Taro, { Component, Config, saveImageToPhotosAlbum } from '@tarojs/taro'
+import Taro, { Component, Config, } from '@tarojs/taro'
 import { View, Input,Text, Button,Image } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import { add, minus, asyncAdd } from '../../actions/counter'
 import { uploadInfo } from '../../service/api'
-import { showToast } from '../../utils/tools'
+import { showToast,showLoading,hideLoading } from '../../utils/tools'
 import goods from '../../images/goods.png'
 import  './index.less'
 
@@ -133,9 +133,17 @@ class Index extends Component {
           description,
           tempFilePaths
         }
+        showLoading({title:'信息上传中'});
         uploadInfo(params).then(res => {
-          console.log(res);
-          
+          // console.log(res);
+          let data = JSON.parse(res.data);
+          if(data.code == 200) {
+            hideLoading();
+            showToast({
+              title:'上传成功',
+              icon:'success'
+            })
+          }
         })
       }
      
