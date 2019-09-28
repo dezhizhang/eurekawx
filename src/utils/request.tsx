@@ -35,7 +35,7 @@ export const uploadFile  = (url,options) => {
       'Content-Type':'multipart/form-data'
      },
      formData:{
-       ...options.data
+       ...options
      }
    }
    return Taro.uploadFile(params);

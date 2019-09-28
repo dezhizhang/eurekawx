@@ -118,7 +118,6 @@ class Index extends Component {
   handleSubmit = () => {
     const { username,mobile,address,description,tempFilePaths } = this.state;
     const reg = /^1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]{8}$/
-  
     if(username && mobile && address) {
       if(!reg.test(mobile)) {
         showToast({
@@ -135,7 +134,6 @@ class Index extends Component {
         }
         showLoading({title:'信息上传中'});
         uploadInfo(params).then(res => {
-          // console.log(res);
           let data = JSON.parse(res.data);
           if(data.code == 200) {
             hideLoading();
