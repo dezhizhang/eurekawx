@@ -3,6 +3,7 @@ import Taro, { Component, Config, saveImageToPhotosAlbum } from '@tarojs/taro'
 import { View, Input,Text, Button,Image } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import { add, minus, asyncAdd } from '../../actions/counter'
+import { uploadInfo } from '../../service/api'
 import { showToast } from '../../utils/tools'
 import goods from '../../images/goods.png'
 import  './index.less'
@@ -110,12 +111,12 @@ class Index extends Component {
       sourceType: ['album', 'camera']
     }
     Taro.chooseImage(params).then(res => {
-       const tempFilePaths = res.tempFilePaths;
+       const tempFilePaths = res.tempFilePaths[0]; 
        that.setState({tempFilePaths});
     })
   }
   handleSubmit = () => {
-    const { username,mobile,address,description } = this.state;
+    const { username,mobile,address,description,tempFilePaths } = this.state;
     const reg = /^1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]{8}$/
   
     if(username && mobile && address) {
@@ -125,7 +126,17 @@ class Index extends Component {
           icon:'none'
         })
       } else {//提交数据
-
+        const params = {
+          username,
+          mobile,
+          address,
+          description,
+          tempFilePaths
+        }
+        uploadInfo(params).then(res => {
+          console.log(res);
+          
+        })
       }
      
     } else if(!username){

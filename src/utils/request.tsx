@@ -1,5 +1,5 @@
 import Taro from '@tarojs/taro'
-export default function request(url, options) {
+export const  request = (url, options) => {
   let newOptions = { ...options };
   if (newOptions.method === 'POST' || newOptions.method === 'PUT') {
     if (!(newOptions.body instanceof FormData)) {
@@ -24,6 +24,25 @@ export default function request(url, options) {
 
   return Taro.request({url, ...newOptions})
 }
+
+//上传
+export const uploadFile  = (url,options) => {
+   const params = {
+     url:url,
+     filePath:options.tempFilePaths,
+     name:'image_url',
+     header:{
+      'Content-Type':'multipart/form-data'
+     },
+     formData:{
+       ...options.data
+     }
+   }
+   return Taro.uploadFile(params);
+
+}
+
+
 
 
 
