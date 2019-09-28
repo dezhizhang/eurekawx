@@ -3,6 +3,7 @@ import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Input,Text, Button,Image } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import { add, minus, asyncAdd } from '../../actions/counter'
+import { showToast } from '../../utils/tools'
 import goods from '../../images/goods.png'
 import  './index.less'
 
@@ -102,20 +103,34 @@ class Index extends Component {
   }
   handleSubmit = () => {
     const { username,mobile,address,description } = this.state;
+    const reg = /^1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]{8}$/
   
     if(username && mobile && address) {
+      if(!reg.test(mobile)) {
+        showToast({
+          title:'手机号不合法',
+          icon:'none'
+        })
+      } else {//提交数据
 
+      }
+     
     } else if(!username){
-      console.log('姓名不能为空');
+      showToast({
+        title:'用户名不能为空',
+        icon:'none',
+      });
     } else if(!mobile) {
-      console.log('联系电话不能为空');
+      showToast({
+        title:'联系电话不能为空',
+        icon:'none'
+      });
     } else if(!address){
-      console.log('联系地址不能为空');
-    }
-
-
-    
-
+       showToast({
+         title:'联系地址不能为空',
+         icon:'none'
+       })
+    } 
   }
   render () {
     return (
