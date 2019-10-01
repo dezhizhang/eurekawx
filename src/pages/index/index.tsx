@@ -3,7 +3,7 @@ import { connect } from '@tarojs/redux'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Swiper, SwiperItem,ScrollView,Image  } from '@tarojs/components'
 import { add, minus, asyncAdd } from '../../actions/counter'
-import { getFocusInfo,getAdvertInfo } from '../../service/api'
+import { getFocusInfo,getAdvertInfo,getProductHot } from '../../service/api'
 import { baseURL } from '../../utils/tools'
 import  './index.less'
 import category from '../../images/category.png'
@@ -62,6 +62,7 @@ class Index extends Component {
     state = {
       focusData:[],
       advertData:[],
+      hotData:[],
     }
     /**
    * 指定config的类型声明为: Taro.Config
@@ -79,7 +80,8 @@ class Index extends Component {
   }
   componentDidMount() {
     this.getFocusData();
-    this.getadvertData()
+    this.getadvertData();
+    this.getProductHotData()
   }
   getFocusData = async () =>  {
      const result = await getFocusInfo();
@@ -97,8 +99,27 @@ class Index extends Component {
        let advertData = data.data;
        this.setState({advertData})
      }
-
   }
+  getProductHotData = async () => {
+    const result = await getProductHot();
+    const data = result.data;
+    if(data.code == 200) {
+      let hotData = data.data;
+      this.setState({hotData});
+    }
+  }
+  //数组转换方法
+  arrTrans = (num,arr) => {
+    let iconsArr = [];
+    arr.forEach((item, index) => {
+      let page = Math.floor(index / num); // 计算该元素为第几个素组内
+      if (!iconsArr[page]) { // 判断是否存在
+        iconsArr[page] = [];
+      }
+      iconsArr[page].push(item);
+    });
+    return iconsArr;
+  } 
 
   componentWillUnmount () { }
 
@@ -107,7 +128,9 @@ class Index extends Component {
   componentDidHide () { }
 
   render () {
-    const { focusData,advertData } = this.state;
+    const { focusData,advertData,hotData } = this.state;
+    let hotArr = this.arrTrans(3,hotData); //3代表二维数据有几个
+
     return (
       <ScrollView className='index'
         scrollY
@@ -179,42 +202,29 @@ class Index extends Component {
                 <Swiper
                   circular
                   >
-                  <SwiperItem>
-                    <View className='swiper-item'>
-                      <View className='item'>
-                        <View className="item-top">
-                            <Image className="image" mode='aspectFill'  src={goods}/>
-                        </View>
-                        <View className="item-bottom">
-                          <View className="bottom-top">潮流碎花连衣裙</View>
+                  {hotArr.map((item,index) => {
+                    return <SwiperItem key={index}>
+                     <View className='swiper-item'>
+                       {item.map((list,number) => {
+                         console.log(list)
+                         return <View className='item' key={number}>
+                         <View className="item-top">
+                             <Image className="image" mode='aspectFill'  src={`${baseURL}${list.product_url}`}/>
+                         </View>
+                         <View className="item-bottom">
+                          <View className="bottom-top">{list.description}</View>
                           <View className="bottom-bottom">
-                            <View className="bottom-left">￥89</View>
+                            <View className="bottom-left">￥{list.price}</View>
                             <View className="bottom-right">
                               <Image className="image" mode='aspectFill'  src={cart}/>
                             </View>
                           </View>
-                        </View>
+                         </View>
                       </View>
-                      <View className="item">
-                        <View className="item-top">
-                            <Image className="image" mode='aspectFill'  src={goods}/>
-                        </View>
-                        <View className="item-bottom"></View>
-                      </View>
-                      <View className="item">
-                        <View className="item-top">
-                            <Image className="image" mode='aspectFill'  src={goods}/>
-                        </View>
-                        <View className="item-bottom"></View>
-                      </View>
-                    </View>
-                  </SwiperItem>
-                  <SwiperItem>
-                    <View className='swiper-item'>2</View>
-                  </SwiperItem>
-                  <SwiperItem>
-                    <View className='swiper-item'>3</View>
-                  </SwiperItem>
+                       })}
+                     </View>
+                   </SwiperItem>
+                  })}
                 </Swiper>
               </View>
             </View>

@@ -9,6 +9,10 @@ export async function getFocusInfo() {
 export async function getAdvertInfo() {
   return request(`${Config.API_HOST}/api/advert/info`);
 }
+//热门产品
+export async function getProductHot() {
+  return request(`${Config.API_HOST}/api/product/hot`);
+}
 
 //提交维修
 export async function uploadInfo(data) {
