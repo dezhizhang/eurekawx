@@ -194,7 +194,7 @@ class Index extends Component {
                     </View>
                    
                   </View>
-                  <View className="bottom">硬件</View>
+                  <View className="bottom">设备</View>
                 </View>
                 <View className="item">
                   <View className="top">

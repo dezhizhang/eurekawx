@@ -76,7 +76,7 @@ class Index extends Component {
     tempFilePaths:''
   }
     config: Config = {
-    navigationBarTitleText: '信息登记'
+    navigationBarTitleText: '预约登记'
   }
 
   componentWillReceiveProps (nextProps) {
@@ -141,7 +141,10 @@ class Index extends Component {
             showToast({
               title:'上传成功',
               icon:'success'
-            })
+            });
+            Taro.navigateTo({
+              url: '../index/index'
+            });
           }
         })
       }
@@ -168,10 +171,10 @@ class Index extends Component {
     return (
      <View className="maintain">
          <View className="header">
-            <View className="header">为了给你提供更好的服务，请准确填写如下信息</View>
+            <View className="header-text">为了给你提供更好的服务，请准确填写如下信息</View>
             <View className="content">
                 <View className="content-input">
-                    <Text className="text">姓　　名：</Text>
+                    <Text className="text">真实姓名：</Text>
                     <Input className="input" placeholder='请输入您的姓名' onChange={this.handleUserName}/>
                 </View>
                 <View className="content-input">
