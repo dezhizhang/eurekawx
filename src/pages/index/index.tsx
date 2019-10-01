@@ -133,21 +133,14 @@ class Index extends Component {
   } 
 
   onReachBottom = async() => {
-    let { page } = this.state;
+    let { page,listData } = this.state;
     page++;
-    console.log(page);
-
     const result = await getProductList({page:page});
     const data = result.data;
     if(data.code == 200) {
-      let listData = data.data;
-      console.log(listData);
-
-      // this.setState({listData})
+      let listArr = listData.concat(data.data);
+      this.setState({listData:listArr})
     }
-
-
-
   }
 
   componentWillUnmount () { }
@@ -159,13 +152,11 @@ class Index extends Component {
   render () {
     const { focusData,advertData,hotData,listData } = this.state;
     let hotArr = this.arrTrans(3,hotData); //3代表二维数据有几个
-    console.log(listData);
-
-
     return (
       <ScrollView className='index'
         scrollY={true}
         scrollWithAnimation={true}
+        enableBackToTop
       >
         <View className='wrapper'>
           <View className="list">
