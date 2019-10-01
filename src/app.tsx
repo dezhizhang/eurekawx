@@ -37,12 +37,12 @@ class App extends Component {
         pagePath: "pages/index/index",
         text: "首页",
         iconPath: "./images/tab/index.png",
-        selectedIconPath: "./images/tab/index.png"
+        selectedIconPath: "./images/tab/index_active.png"
       }, {
         pagePath: "pages/maintain/index",
-        text: "维修",
-        iconPath: "./images/tab/index.png",
-        selectedIconPath: "./images/tab/index.png"
+        text: "预约",
+        iconPath: "./images/tab/make.png",
+        selectedIconPath: "./images/tab/make_active.png"
       }],
     }
   }

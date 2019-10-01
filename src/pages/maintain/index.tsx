@@ -5,7 +5,8 @@ import { connect } from '@tarojs/redux'
 import { add, minus, asyncAdd } from '../../actions/counter'
 import { uploadInfo } from '../../service/api'
 import { showToast,showLoading,hideLoading } from '../../utils/tools'
-import goods from '../../images/goods.png'
+import server from '../../images/server.png'
+import upload from '../../images/upload.png'
 import  './index.less'
 
 // #region 书写注意
@@ -187,10 +188,10 @@ class Index extends Component {
                 </View>
                 <View className="image">
                   <View onClick={this.handleChooseImage} className="image-flex image-left">
-                      <Image src={!tempFilePaths ? goods:tempFilePaths} mode='aspectFill' className="image"/>
+                      <Image src={!tempFilePaths ? upload:tempFilePaths} mode='aspectFill' className="image"/>
                   </View> 
                   <View className="image-flex image-right">
-                      <Image src={goods} mode='aspectFill' className="image"/>
+                      <Image src={server} mode='aspectFill' className="image"/>
                   </View>
                 </View>
             </View>

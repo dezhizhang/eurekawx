@@ -73,7 +73,7 @@ class Index extends Component {
    * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
    */
     config: Config = {
-    navigationBarTitleText: '商城'
+    navigationBarTitleText: 'e瑞轻办公文具'
   }
 
   componentWillReceiveProps (nextProps) {
@@ -92,7 +92,6 @@ class Index extends Component {
        let focusData = data.data
        this.setState({focusData})
      }
-
   }
   getadvertData = async () =>  {
      const result = await getAdvertInfo();
@@ -118,6 +117,11 @@ class Index extends Component {
       let listData = data.data;
       this.setState({listData})
     }
+  }
+  handleAdvert = () => {
+    Taro.navigateTo({
+      url: '../maintain/index'
+    });
   }
   //数组转换方法
   arrTrans = (num,arr) => {
@@ -181,7 +185,7 @@ class Index extends Component {
                     </View>
                    
                   </View>
-                  <View className="bottom">女装</View>
+                  <View className="bottom">办公</View>
                 </View>
                 <View className="item">
                   <View className="top">
@@ -190,7 +194,7 @@ class Index extends Component {
                     </View>
                    
                   </View>
-                  <View className="bottom">男装</View>
+                  <View className="bottom">硬件</View>
                 </View>
                 <View className="item">
                   <View className="top">
@@ -199,7 +203,7 @@ class Index extends Component {
                     </View>
                    
                   </View>
-                  <View className="bottom">套装</View>
+                  <View className="bottom">文具</View>
                 </View>
                 <View className="item">
                   <View className="top">
@@ -210,7 +214,7 @@ class Index extends Component {
                   <View className="bottom">更多</View>
                 </View>
             </View>
-            <View className="advert">
+            <View className="advert" onClick={this.handleAdvert}>
               {advertData.length&&advertData.map((item,index) => {
                 return (<Image className="advert_image" key={index} mode='aspectFill' src={`${baseURL}${item.advert_img}`}></Image>)
               })}
@@ -280,7 +284,6 @@ class Index extends Component {
 }
 
 // #region 导出注意
-//
 // 经过上面的声明后需要将导出的 Taro.Component 子类修改为子类本身的 props 属性
 // 这样在使用这个子类时 Ts 才不会提示缺少 JSX 类型参数错误
 //
