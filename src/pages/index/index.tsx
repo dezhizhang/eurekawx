@@ -9,7 +9,6 @@ import  './index.less'
 import category from '../../images/category.png'
 import goods from '../../images/goods.png'
 import cart from '../../images/icon/cart.png'
-import product from '../../images/product.png'
 import bay from '../../images/bay.png'
 
 
@@ -64,6 +63,7 @@ class Index extends Component {
       advertData:[],
       hotData:[],
       listData:[],
+      page:1
     }
     /**
    * 指定config的类型声明为: Taro.Config
@@ -111,7 +111,8 @@ class Index extends Component {
     }
   }
   getProductListData = async () =>  {
-    const result = await getProductList({page:1});
+    const { page } = this.state;
+    const result = await getProductList({page:page});
     const data = result.data;
     if(data.code == 200) {
       let listData = data.data;
@@ -131,6 +132,24 @@ class Index extends Component {
     return iconsArr;
   } 
 
+  onReachBottom = async() => {
+    let { page } = this.state;
+    page++;
+    console.log(page);
+
+    const result = await getProductList({page:page});
+    const data = result.data;
+    if(data.code == 200) {
+      let listData = data.data;
+      console.log(listData);
+
+      // this.setState({listData})
+    }
+
+
+
+  }
+
   componentWillUnmount () { }
 
   componentDidShow () { }
@@ -145,8 +164,8 @@ class Index extends Component {
 
     return (
       <ScrollView className='index'
-        scrollY
-        scrollWithAnimation
+        scrollY={true}
+        scrollWithAnimation={true}
       >
         <View className='wrapper'>
           <View className="list">
