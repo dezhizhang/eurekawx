@@ -3,7 +3,7 @@ import { connect } from '@tarojs/redux'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Swiper, SwiperItem,ScrollView,Image  } from '@tarojs/components'
 import { add, minus, asyncAdd } from '../../actions/counter'
-import { getFocusInfo,getAdvertInfo,getProductHot } from '../../service/api'
+import { getFocusInfo,getAdvertInfo,getProductHot,getProductList } from '../../service/api'
 import { baseURL } from '../../utils/tools'
 import  './index.less'
 import category from '../../images/category.png'
@@ -63,6 +63,7 @@ class Index extends Component {
       focusData:[],
       advertData:[],
       hotData:[],
+      listData:[],
     }
     /**
    * 指定config的类型声明为: Taro.Config
@@ -81,7 +82,8 @@ class Index extends Component {
   componentDidMount() {
     this.getFocusData();
     this.getadvertData();
-    this.getProductHotData()
+    this.getProductHotData();
+    this.getProductListData();
   }
   getFocusData = async () =>  {
      const result = await getFocusInfo();
@@ -108,6 +110,14 @@ class Index extends Component {
       this.setState({hotData});
     }
   }
+  getProductListData = async () =>  {
+    const result = await getProductList({page:1});
+    const data = result.data;
+    if(data.code == 200) {
+      let listData = data.data;
+      this.setState({listData})
+    }
+  }
   //数组转换方法
   arrTrans = (num,arr) => {
     let iconsArr = [];
@@ -128,8 +138,10 @@ class Index extends Component {
   componentDidHide () { }
 
   render () {
-    const { focusData,advertData,hotData } = this.state;
+    const { focusData,advertData,hotData,listData } = this.state;
     let hotArr = this.arrTrans(3,hotData); //3代表二维数据有几个
+    console.log(listData);
+
 
     return (
       <ScrollView className='index'
@@ -206,7 +218,6 @@ class Index extends Component {
                     return <SwiperItem key={index}>
                      <View className='swiper-item'>
                        {item.map((list,number) => {
-                         console.log(list)
                          return <View className='item' key={number}>
                          <View className="item-top">
                              <Image className="image" mode='aspectFill'  src={`${baseURL}${list.product_url}`}/>
@@ -234,21 +245,22 @@ class Index extends Component {
           </View>
           <View className='product_item'>
             <View className="product_wrapper">
-              <View className="item">
+              {listData.map((item,index) => {
+                return  <View className="item" key={index}>
                 <View className="item-top">
-                  <Image className="image" mode='aspectFill'  src={product}/>
+                  <Image className="image" mode='aspectFill'  src={`${baseURL}${item.product_url}`}/>
                 </View>
                 <View className="item-bottom">
-                  <View className="bottom-desc">2019潮流韩版蝙蝠衫</View>
+                  <View className="bottom-desc">{item.description}</View>
                   <View className="bottom-text">
-                      <View className="text-left">￥100</View>
+                      <View className="text-left">￥{item.price}</View>
                       <View className="text-right">
                         <Image className="image" src={bay}/>
                       </View>
                   </View>
                 </View>
               </View>
-              <View className="item"></View>    
+              })}
             </View>
           </View>
         </View>

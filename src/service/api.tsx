@@ -13,6 +13,10 @@ export async function getAdvertInfo() {
 export async function getProductHot() {
   return request(`${Config.API_HOST}/api/product/hot`);
 }
+//主打产品
+export async function getProductList(params) {
+  return request(`${Config.API_HOST}/api/product/list?page=${params.page}`);
+} 
 
 //提交维修
 export async function uploadInfo(data) {
