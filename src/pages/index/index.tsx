@@ -4,10 +4,9 @@ import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Swiper, SwiperItem,ScrollView,Image  } from '@tarojs/components'
 import { add, minus, asyncAdd } from '../../actions/counter'
 import { getFocusInfo,getAdvertInfo,getProductHot,getProductList } from '../../service/api'
-import { baseURL } from '../../utils/tools'
+import { baseURL,showLoading,hideLoading } from '../../utils/tools'
 import  './index.less'
 import category from '../../images/category.png'
-import goods from '../../images/goods.png'
 import cart from '../../images/icon/cart.png'
 import bay from '../../images/bay.png'
 
@@ -63,6 +62,7 @@ class Index extends Component {
       advertData:[],
       hotData:[],
       listData:[],
+      listArr:[],
       page:1
     }
     /**
@@ -141,9 +141,11 @@ class Index extends Component {
     page++;
     const result = await getProductList({page:page});
     const data = result.data;
+    showLoading({title:'加载中'})
     if(data.code == 200) {
+      hideLoading();
       let listArr = listData.concat(data.data);
-      this.setState({listData:listArr})
+      this.setState({listData:listArr,page});
     }
   }
 
@@ -156,6 +158,7 @@ class Index extends Component {
   render () {
     const { focusData,advertData,hotData,listData } = this.state;
     let hotArr = this.arrTrans(3,hotData); //3代表二维数据有几个
+  
     return (
       <ScrollView className='index'
         scrollY={true}
