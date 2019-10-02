@@ -5,10 +5,13 @@ import { View, Swiper, SwiperItem,ScrollView,Image  } from '@tarojs/components'
 import { add, minus, asyncAdd } from '../../actions/counter'
 import { getFocusInfo,getAdvertInfo,getProductHot,getProductList } from '../../service/api'
 import { baseURL,showLoading,hideLoading } from '../../utils/tools'
-import  './index.less'
 import category from '../../images/category.png'
+import facility from '../../images/facility.png'
+import stationery from '../../images/stationery.png'
+import evenmore from '../../images/evenmore.png'
 import cart from '../../images/icon/cart.png'
 import bay from '../../images/bay.png'
+import  './index.less'
 
 
 // #region 书写注意
@@ -119,7 +122,7 @@ class Index extends Component {
     }
   }
   handleAdvert = () => {
-    Taro.navigateTo({
+    Taro.switchTab({
       url: '../maintain/index'
     });
   }
@@ -193,7 +196,7 @@ class Index extends Component {
                 <View className="item">
                   <View className="top">
                     <View className="image_wrapper">
-                      <Image className="image" mode='aspectFill'  src={category}/>
+                      <Image className="image" mode='aspectFill'  src={facility}/>
                     </View>
                    
                   </View>
@@ -202,16 +205,15 @@ class Index extends Component {
                 <View className="item">
                   <View className="top">
                     <View className="image_wrapper">
-                      <Image className="image" mode='aspectFill'  src={category}/>
+                      <Image className="image" mode='aspectFill'  src={stationery}/>
                     </View>
-                   
                   </View>
                   <View className="bottom">文具</View>
                 </View>
                 <View className="item">
                   <View className="top">
                     <View className="image_wrapper">
-                      <Image className="image" mode='aspectFill'  src={category}/>
+                      <Image className="image" mode='aspectFill'  src={evenmore}/>
                     </View>
                   </View>
                   <View className="bottom">更多</View>

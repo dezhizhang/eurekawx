@@ -82,12 +82,6 @@ class Index extends Component {
   componentWillReceiveProps (nextProps) {
     console.log(this.props, nextProps)
   }
-
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
   handleUserName = (event:any) => {
      const username = event.target.value;
      this.setState({username})
@@ -119,7 +113,7 @@ class Index extends Component {
   handleSubmit = () => {
     const { username,mobile,address,description,tempFilePaths } = this.state;
     const reg = /^1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]{8}$/
-    if(username && mobile && address) {
+    if(username && mobile && address && tempFilePaths) {
       if(!reg.test(mobile)) {
         showToast({
           title:'手机号不合法',
@@ -142,7 +136,7 @@ class Index extends Component {
               title:'上传成功',
               icon:'success'
             });
-            Taro.navigateTo({
+            Taro.switchTab({
               url: '../index/index'
             });
           }
@@ -164,6 +158,11 @@ class Index extends Component {
          title:'联系地址不能为空',
          icon:'none'
        })
+    } else if(!tempFilePaths) {
+      showToast({
+        title:'请上传维修图片',
+        icon:'none'
+      })
     } 
   }
   render () {
@@ -171,11 +170,11 @@ class Index extends Component {
     return (
      <View className="maintain">
          <View className="header">
-            <View className="header-text">为了给你提供更好的服务，请准确填写如下信息</View>
+            <View className="header-text">提示：为了给你提供更好的服务，请准确填写如下信息</View>
             <View className="content">
                 <View className="content-input">
                     <Text className="text">真实姓名：</Text>
-                    <Input className="input" placeholder='请输入您的姓名' onChange={this.handleUserName}/>
+                    <Input className="input" placeholder='请输入您的真实姓名' onChange={this.handleUserName}/>
                 </View>
                 <View className="content-input">
                     <Text className="text">联系电话：</Text>
@@ -185,16 +184,22 @@ class Index extends Component {
                     <Text className="text">联系地址：</Text>
                     <Input className="input" placeholder="请输入您的联系地址" onChange={this.handleAddress}/>
                 </View>
-                <View className="content-input" style={{borderBottom:'none'}}>
+                <View className="content-input">
                     <Text className="text">问题描述：</Text>
                     <Input className="input" placeholder="请输入您遇到的问题" onChange={this.handleDescription}/>
                 </View>
                 <View className="image">
-                  <View onClick={this.handleChooseImage} className="image-flex image-left">
+                  <View onClick={this.handleChooseImage} className="image-flex">
+                    <View className="image-top">点击上传</View>
+                    <View className="image-bottom bottom-left">
                       <Image src={!tempFilePaths ? upload:tempFilePaths} mode='aspectFill' className="image"/>
+                    </View>
                   </View> 
-                  <View className="image-flex image-right">
-                      <Image src={server} mode='aspectFill' className="image"/>
+                  <View className="image-flex">
+                      <View className="image-top">示例图片</View>
+                      <View className="image-bottom">
+                        <Image src={server} mode='aspectFill' className="image"/>
+                      </View>
                   </View>
                 </View>
             </View>
