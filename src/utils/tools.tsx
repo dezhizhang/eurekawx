@@ -1,4 +1,4 @@
-export const baseURL = 'https://www.jianlan.vip'
+export const baseURL = 'https://www.eureka.net.cn'
 import Taro from '@tarojs/taro'
 
 //提示
