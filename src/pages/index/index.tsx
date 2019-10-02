@@ -258,24 +258,24 @@ class Index extends Component {
              主打产品
           </View>
           <View className='product_item'>
-            <View className="product_wrapper">
-              {listData.map((item,index) => {
-                return  <View className="item" key={index}>
-                <View className="item-top">
-                  <Image className="image" mode='aspectFill'  src={`${baseURL}${item.product_url}`}/>
-                </View>
-                <View className="item-bottom">
-                  <View className="bottom-desc">{item.description}</View>
-                  <View className="bottom-text">
-                      <View className="text-left">￥{item.price}</View>
-                      <View className="text-right">
-                        <Image className="image" src={bay}/>
-                      </View>
-                  </View>
+          <View className="product_wrapper">
+            {listData.map((item,index) => {
+              return  <View className="item" key={index}>
+              <View className="item-top">
+                <Image className="image" mode='aspectFill'  src={`${baseURL}${item.product_url}`}/>
+              </View>
+              <View className="item-bottom">
+                <View className="bottom-desc">{item.description}</View>
+                <View className="bottom-text">
+                    <View className="text-left">￥{item.price}</View>
+                    <View className="text-right">
+                      <Image className="image" src={bay}/>
+                    </View>
                 </View>
               </View>
-              })}
             </View>
+            })}
+          </View>
           </View>
         </View>
       </ScrollView>
@@ -288,5 +288,7 @@ class Index extends Component {
 // 这样在使用这个子类时 Ts 才不会提示缺少 JSX 类型参数错误
 //
 // #endregion
+
+
 
 export default Index as ComponentClass<PageOwnProps, PageState>
