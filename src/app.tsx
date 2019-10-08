@@ -25,6 +25,8 @@ class App extends Component {
     pages: [
       'pages/index/index',
       'pages/maintain/index',
+      'pages/cart/index',
+      'pages/my/index'
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -38,12 +40,25 @@ class App extends Component {
         text: "首页",
         iconPath: "./images/tab/index.png",
         selectedIconPath: "./images/tab/index_active.png"
-      }, {
+      },
+      {
+        pagePath: "pages/cart/index",
+        text:'购物车',
+        iconPath:'./images/tab/cart.png',
+        selectedIconPath:'./images/tab/cart_active.png'
+      },
+      {
         pagePath: "pages/maintain/index",
         text: "预约",
         iconPath: "./images/tab/make.png",
         selectedIconPath: "./images/tab/make_active.png"
-      }],
+      },{
+        pagePath:"pages/my/index",
+        text:"我的",
+        iconPath:"./images/tab/my.png",
+        selectedIconPath:"./images/tab/my_active.png"
+      }
+    ],
     }
   }
 
