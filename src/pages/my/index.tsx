@@ -6,6 +6,7 @@ import { connect } from '@tarojs/redux'
 import { add, minus, asyncAdd } from '../../actions/counter'
 import myHeader from '../../images/my_header.png'
 import facility from '../../images/facility.png'
+import gift from '../../images/gift.png'
 import  './index.less'
 
 // #region 书写注意
@@ -94,7 +95,7 @@ class Index extends Component {
             <View className="header_right">
                <View className="right">
                   <View className="icon">
-                    <Image src={facility} className="image"/>
+                    <Image src={gift} className="image"/>
                   </View>
                   <View className="text">推荐送礼</View>
                </View>
