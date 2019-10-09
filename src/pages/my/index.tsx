@@ -87,6 +87,18 @@ class Index extends Component {
               <Image src={facility} className="avatar"/>
               {/* <AtAvatar className="avatar" image='https://jdc.jd.com/img/200'/> */}
             </View>
+            <View className="header_user">
+              <View className="user_name">路啊路</View>
+              <View className="user_address">ID:65788768</View>
+            </View>
+            <View className="header_right">
+               <View className="right">
+                  <View className="icon">
+                    <Image src={facility} className="image"/>
+                  </View>
+                  <View className="text">推荐送礼</View>
+               </View>
+            </View>
           </View>
           <View className="header_content">
              
