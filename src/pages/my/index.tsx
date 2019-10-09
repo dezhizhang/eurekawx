@@ -1,8 +1,9 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Swiper, SwiperItem,ScrollView,Input } from '@tarojs/components'
+import { View, Swiper, SwiperItem,ScrollView,Input,Image } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import { add, minus, asyncAdd } from '../../actions/counter'
+import myHeader from '../../images/my_header.png'
 import  './index.less'
 
 // #region 书写注意
@@ -74,7 +75,17 @@ class Index extends Component {
   componentDidHide () { }
 
   render () {
-    return (<View>111</View>)
+    return (<View className="my">
+      <View className="header">
+          <View className="header_top">
+             <Image className="header_image" src={myHeader}/>
+          </View>
+          <View className="header_content">
+             
+          </View>
+      </View>
+      <View className="content"></View>
+    </View>)
   }
 }
 

@@ -23,10 +23,11 @@ class App extends Component {
    */
   config: Config = {
     pages: [
+      'pages/my/index',
       'pages/index/index',
       'pages/maintain/index',
       'pages/cart/index',
-      'pages/my/index'
+     
     ],
     window: {
       backgroundTextStyle: 'light',
