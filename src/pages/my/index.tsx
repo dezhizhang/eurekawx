@@ -123,7 +123,18 @@ class Index extends Component {
                     <View className="item_bottom">12</View>
                   </View>
                 </View>
-                <View className="box_bottom"></View>
+                <View className="box_bottom">
+                    <View className="bottom_wrapper">
+                      <View className="bottom_item">
+                        <View className="item_top"></View>
+                        <View className="item_bottom"></View>
+                      </View>
+                      <View className="bottom_item">
+                        <View className="item_top"></View>
+                        <View className="item_bottom"></View>
+                      </View>
+                    </View>
+                </View>
               </View>
             </View>
           </View>
