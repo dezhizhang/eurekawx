@@ -103,7 +103,29 @@ class Index extends Component {
           </View>
           <View className="header_content">
           <View className="content_card">
-         
+            <View className="card_info">
+              <View className="info_box">
+                <View className="box_top">
+                  <View className="top_item">
+                    <View className="item_top">待付款</View>
+                    <View className="item_bottom">3</View>
+                  </View>
+                  <View className="top_item">
+                    <View className="item_top">待收货</View>
+                    <View className="item_bottom">3</View>
+                  </View>
+                  <View className="top_item">
+                    <View className="item_top">以完成</View>
+                    <View className="item_bottom">6</View>
+                  </View>
+                  <View className="top_item">
+                    <View className="item_top">待评价</View>
+                    <View className="item_bottom">12</View>
+                  </View>
+                </View>
+                <View className="box_bottom"></View>
+              </View>
+            </View>
           </View>
       </View>
       </View>
