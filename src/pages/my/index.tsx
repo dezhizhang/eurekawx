@@ -1,9 +1,11 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Swiper, SwiperItem,ScrollView,Input,Image } from '@tarojs/components'
+import { View,Image } from '@tarojs/components'
+import { AtAvatar  } from 'taro-ui'
 import { connect } from '@tarojs/redux'
 import { add, minus, asyncAdd } from '../../actions/counter'
 import myHeader from '../../images/my_header.png'
+import facility from '../../images/facility.png'
 import  './index.less'
 
 // #region 书写注意
@@ -78,7 +80,13 @@ class Index extends Component {
     return (<View className="my">
       <View className="header">
           <View className="header_top">
-             <Image className="header_image" src={myHeader}/>
+            <View className="header_image">
+              <Image className="image" src={myHeader}/>
+            </View>
+            <View className="header_avatar">
+              <Image src={facility} className="avatar"/>
+              {/* <AtAvatar className="avatar" image='https://jdc.jd.com/img/200'/> */}
+            </View>
           </View>
           <View className="header_content">
              
