@@ -102,8 +102,10 @@ class Index extends Component {
             </View>
           </View>
           <View className="header_content">
-             
+          <View className="content_card">
+         
           </View>
+      </View>
       </View>
       <View className="content"></View>
     </View>)
