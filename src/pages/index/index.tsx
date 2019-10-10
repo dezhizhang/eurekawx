@@ -232,6 +232,7 @@ class Index extends Component {
               <View className="bottom">
                 <Swiper
                   circular
+                  autoplay
                   >
                   {hotArr.map((item,index) => {
                     return <SwiperItem key={index}>
