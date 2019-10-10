@@ -221,6 +221,36 @@ class Index extends Component {
           </View>
         </View>
       </View>
+      <View className="footer">
+        <View className="content-item">
+            <View className="item">
+              <View className="icon-left">
+                <Image className="image" src={msg}/>
+              </View>
+              <View className="text-left">我的设置</View>
+              <View className="text-right">
+                <View className="text-number">16</View>
+              </View>
+              <View className="icon-right">
+                <Image src={arrow} className="image"/>
+              </View>
+            </View>
+        </View>
+        <View className="content-item">
+            <View className="item">
+              <View className="icon-left">
+                <Image className="image" src={msg}/>
+              </View>
+              <View className="text-left">官方客服</View>
+              <View className="text-right">
+                <View className="text-number">16</View>
+              </View>
+              <View className="icon-right">
+                <Image src={arrow} className="image"/>
+              </View>
+            </View>
+        </View>
+      </View>
     </View>
     )
   }
