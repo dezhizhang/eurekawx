@@ -146,17 +146,35 @@
                             }
 
                         }
-                        .box_bottom{
-                            padding: 30px 60px 0px 60px;
-                            .bottom_wrapper{
+                        .box-bottom{
+                            padding: 20px 60px 0px 60px;
+                            .bottom-wrapper{
                                 display: flex;
                                 justify-content: center;
                                 align-items: center;
-                                .bottom_item{
+                                .bottom-item{
                                     flex: 1;
-                                    background: red;
+                                    text-align: center;
+                                    flex-direction: column;
+                                    display: flex;
+                                    align-items: center;
+                                    .item-top{
+                                        text-align: center;
+                                        width: 64px;
+                                        height: 48px;
+                                        overflow: hidden;
+                                        margin-bottom: 10px;
+                                        .image{
+                                            width: 100%;
+                                            height: 100%;
+                                            overflow: hidden;
+                                        }
+                                    }
+                                    .item-bottom{
+                                        font-size: 24px;
+                                    }
                                 }
-                                .bottom_item:nth-of-type(2){
+                                .bottom-item:nth-of-type(2){
                                    margin-left: 240px;
                                 }
 

@@ -7,6 +7,7 @@ import { add, minus, asyncAdd } from '../../actions/counter'
 import myHeader from '../../images/my_header.png'
 import facility from '../../images/facility.png'
 import gift from '../../images/gift.png'
+import allOrder from '../../images/all_order.png'
 import  './index.less'
 
 // #region 书写注意
@@ -123,15 +124,19 @@ class Index extends Component {
                     <View className="item_bottom">12</View>
                   </View>
                 </View>
-                <View className="box_bottom">
-                    <View className="bottom_wrapper">
-                      <View className="bottom_item">
-                        <View className="item_top"></View>
-                        <View className="item_bottom"></View>
+                <View className="box-bottom">
+                    <View className="bottom-wrapper">
+                      <View className="bottom-item">
+                        <View className="item-top">
+                           <Image src={allOrder} className="image"/>
+                        </View>
+                        <View className="item-bottom">所有订单</View>
                       </View>
-                      <View className="bottom_item">
-                        <View className="item_top"></View>
-                        <View className="item_bottom"></View>
+                      <View className="bottom-item">
+                        <View className="item-top">
+                          <Image src={allOrder} className="image"/>
+                        </View>
+                        <View className="item-bottom">完成订单</View>
                       </View>
                     </View>
                 </View>
