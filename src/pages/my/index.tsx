@@ -8,6 +8,8 @@ import myHeader from '../../images/my_header.png'
 import facility from '../../images/facility.png'
 import gift from '../../images/gift.png'
 import allOrder from '../../images/all_order.png'
+import msg from '../../images/icon/msg.png'
+import arrow from '../../images/icon/arrow.png'
 import  './index.less'
 
 // #region 书写注意
@@ -79,7 +81,8 @@ class Index extends Component {
   componentDidHide () { }
 
   render () {
-    return (<View className="my">
+    return (
+    <View className="my">
       <View className="header">
           <View className="header_top">
             <View className="header_image">
@@ -112,11 +115,11 @@ class Index extends Component {
                     <View className="item_bottom">3</View>
                   </View>
                   <View className="top_item">
-                    <View className="item_top">待收货</View>
+                    <View className="item_top">待发货</View>
                     <View className="item_bottom">3</View>
                   </View>
                   <View className="top_item">
-                    <View className="item_top">以完成</View>
+                    <View className="item_top">待收货</View>
                     <View className="item_bottom">6</View>
                   </View>
                   <View className="top_item">
@@ -145,8 +148,81 @@ class Index extends Component {
           </View>
       </View>
       </View>
-      <View className="content"></View>
-    </View>)
+      <View className="content">
+        <View className="content-item">
+          <View className="item">
+             <View className="icon-left">
+               <Image className="image" src={msg}/>
+             </View>
+             <View className="text-left">我的消息</View>
+             <View className="text-right">
+               <View className="text-number">16</View>
+             </View>
+             <View className="icon-right">
+               <Image src={arrow} className="image"/>
+             </View>
+          </View>
+        </View>
+        <View className="content-item">
+          <View className="item">
+             <View className="icon-left">
+               <Image className="image" src={msg}/>
+             </View>
+             <View className="text-left">我的收藏</View>
+             <View className="text-right">
+               {/* <View className="text-number">16</View> */}
+             </View>
+             <View className="icon-right">
+               <Image src={arrow} className="image"/>
+             </View>
+          </View>
+        </View>
+        <View className="content-item">
+          <View className="item">
+             <View className="icon-left">
+               <Image className="image" src={msg}/>
+             </View>
+             <View className="text-left">我的卡券</View>
+             <View className="text-right">
+              你有3张优惠券待使用
+               {/* <View className="text-number">16</View> */}
+             </View>
+             <View className="icon-right">
+               <Image src={arrow} className="image"/>
+             </View>
+          </View>
+        </View>
+        <View className="content-item">
+          <View className="item">
+             <View className="icon-left">
+               <Image className="image" src={msg}/>
+             </View>
+             <View className="text-left">我的金币</View>
+             <View className="text-right">
+               {/* <View className="text-number">16</View> */}
+             </View>
+             <View className="icon-right">
+               <Image src={arrow} className="image"/>
+             </View>
+          </View>
+        </View>
+        <View className="content-item">
+          <View className="item">
+             <View className="icon-left">
+               <Image className="image" src={msg}/>
+             </View>
+             <View className="text-left">我的预约</View>
+             <View className="text-right">
+               {/* <View className="text-number">16</View> */}
+             </View>
+             <View className="icon-right">
+               <Image src={arrow} className="image"/>
+             </View>
+          </View>
+        </View>
+      </View>
+    </View>
+    )
   }
 }
 
