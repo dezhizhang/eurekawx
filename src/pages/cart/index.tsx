@@ -1,8 +1,10 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Swiper, SwiperItem,ScrollView,Input } from '@tarojs/components'
+import { View, Input, Radio,ScrollView,Image } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import { add, minus, asyncAdd } from '../../actions/counter'
+import arror from '../../images/icon/arrow.png'
+import detailSwiper from '../../images/detail_swiper.png'
 import  './index.less'
 
 // #region 书写注意
@@ -75,49 +77,94 @@ class Index extends Component {
 
   render () {
     return (
-      <ScrollView className='index'
+      <ScrollView className='cart'
         scrollY
         scrollWithAnimation
       >
-        <View className='wrapper'>
-          <View className="list">
-            {/* <View className="search">
-              <Input className="search_input" placeholder='搜索商品名称或类型'/>
-            </View> */}
-            <Swiper
-              className='swiper'
-              indicatorColor='#999'
-              indicatorActiveColor='#333'
-              circular
-              indicatorDots
-              autoplay>
-              <SwiperItem>
-                <View className='demo-text-1'>1</View>
-              </SwiperItem>
-              <SwiperItem>
-                <View className='demo-text-2'>2</View>
-              </SwiperItem>
-              <SwiperItem>
-                <View className='demo-text-3'>3</View>
-              </SwiperItem>
-            </Swiper>
-            <View className="category">
-                <View className="item"></View>
-                <View className="item"></View>
-                <View className="item"></View>
-                <View className="item"></View>
-            </View>
-            <View className="advert"></View>
-            <View className="hot"></View>
-          </View>
-          <View className="product"></View>
-          <View className='product_item'>
-            <View className="product_wrapper">
-              <View className="item"></View>
-              <View className="item"></View>    
+        <View className="header">
+          <View className="header-wrapper">
+            <View className="item-left">全场满99元包邮，还差44.03元包邮</View>
+            <View className="item-center">去凑单</View>
+            <View className="item-right">
+              <Image src={arror} className="image"/>
             </View>
           </View>
         </View>
+        {/* 列表 */}
+        <View className="content">
+          <View className="content-wrapper">
+            <View className="content-item">
+              <View className="item-left">
+                <Radio value='' checked className="radio"></Radio>
+              </View>
+              <View className="item-center">
+                <Image src={detailSwiper} className="image"/>
+              </View>
+              <View className="item-right">
+                <View className="right-top">新西兰皇家红苹果6个约135g/个 90元包邮送货上门</View>
+                <View className="right-bottom">
+                  <View className="bottom-left">￥27.90</View>
+                  <View className="bottom-right">
+                    <View className="number-left">-</View>
+                    <View className="number-center"><Input className="input" value="1"/></View>
+                    <View className="number-right">+</View>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+           {/* 列表 */}
+           <View className="content">
+          <View className="content-wrapper">
+            <View className="content-item">
+              <View className="item-left">
+                <Radio value='' checked className="radio"></Radio>
+              </View>
+              <View className="item-center">
+                <Image src={detailSwiper} className="image"/>
+              </View>
+              <View className="item-right">
+                <View className="right-top">新西兰皇家红苹果6个约135g/个 90元包邮送货上门</View>
+                <View className="right-bottom">
+                  <View className="bottom-left">￥27.90</View>
+                  <View className="bottom-right">
+                    <View className="number-left">-</View>
+                    <View className="number-center"><Input className="input" value="1"/></View>
+                    <View className="number-right">+</View>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+           {/* 列表 */}
+           <View className="content">
+          <View className="content-wrapper">
+            <View className="content-item">
+              <View className="item-left">
+                <Radio value='' checked className="radio"></Radio>
+              </View>
+              <View className="item-center">
+                <Image src={detailSwiper} className="image"/>
+              </View>
+              <View className="item-right">
+                <View className="right-top">新西兰皇家红苹果6个约135g/个 90元包邮送货上门</View>
+                <View className="right-bottom">
+                  <View className="bottom-left">270px</View>
+                  <View className="bottom-right">
+                    <View className="number-left">-</View>
+                    <View className="number-center"><Input className="input" value="1"/></View>
+                    <View className="number-right">+</View>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+        
+        <View className="bottom"></View>
+        
       </ScrollView>
     )
   }
