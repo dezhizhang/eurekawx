@@ -1,6 +1,6 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Swiper, SwiperItem,Image } from '@tarojs/components'
+import { View, Swiper, SwiperItem,Image, ScrollView} from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import { add, minus, asyncAdd } from '../../actions/counter'
 import detailSwiper from '../../images/detail_swiper.png'
@@ -8,6 +8,7 @@ import detailStore from '../../images/icon/detail_store.png'
 import detailCart from '../../images/icon/detail_cart.png'
 import detailService from '../../images/icon/detail_service.png'
 import detailShare from '../../images/icon/detail_share.png'
+import arrow from '../../images/icon/arrow.png'
 import  './index.less'
 
 // #region 书写注意
@@ -80,7 +81,11 @@ class Index extends Component {
 
   render () {
     return (
-     <View className="detail">
+     <ScrollView 
+        scrollY
+        className="detail"
+        scrollWithAnimation
+      >
         <View className="detail-header">
           <View className="detail-swiper">
           <Swiper
@@ -123,8 +128,17 @@ class Index extends Component {
                 </View>
               </View>
             </View>
-            <View className="content-center"></View>
-            <View className="content-bottom"></View>
+            <View className="content-center">
+              <View className="center-wrapper">
+                <View className="item-one center-item">优惠</View>
+                <View className="item-two center-item">领券后至少可减￥10</View>
+                <View className="item-three center-item">领券</View>
+                <View className="item-four">
+                  <Image className="image" src={arrow}/>
+                </View>
+              </View>
+            </View>
+            <View className="content-bottom">图文详情</View>
           </View>
         </View>
         <View className="detail-bottom">
@@ -157,7 +171,7 @@ class Index extends Component {
             <View className="detail-bgitem item-buy">立即购买</View>
           </View>
         </View>
-     </View>
+     </ScrollView>
     )
   }
 }
