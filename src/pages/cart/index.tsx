@@ -163,7 +163,17 @@ class Index extends Component {
           </View>
         </View>
         
-        <View className="bottom"></View>
+        <View className="bottom">
+          <View className="bottom-wrapper">
+            <View className="item-one">
+              <Radio value='' className="radio"></Radio>
+            </View>
+            <View className="item-two">全选</View>
+            <View className="item-three">合计(不含运费)</View>
+            <View className="item-four">￥94.23</View>
+            <View className="item-six">去支付</View>
+          </View>
+        </View>
         
       </ScrollView>
     )
