@@ -7,6 +7,7 @@ import detailSwiper from '../../images/detail_swiper.png'
 import detailStore from '../../images/icon/detail_store.png'
 import detailCart from '../../images/icon/detail_cart.png'
 import detailService from '../../images/icon/detail_service.png'
+import detailShare from '../../images/icon/detail_share.png'
 import  './index.less'
 
 // #region 书写注意
@@ -101,6 +102,29 @@ class Index extends Component {
               <View className='demo-text-3'>3</View>
             </SwiperItem>
           </Swiper>
+          </View>
+          <View className="detail-content">
+            <View className="content-top">
+              <View className="top-title">
+                <View className="title-left">短款连帽卫衣女春秋装2018新款韩版长袖宽松chic早秋上衣潮薄外套</View>
+                <View className="title-right">
+                  <View className="right-icon">
+                    <Image src={detailShare} className="image"/>
+                  </View>
+                  <View className="right-text">分享</View>
+                </View>
+              </View>
+              <View className="top-price">￥256</View>
+              <View className="top-list">
+                <View className="list-wrapper">
+                  <View className="list-item">运费：￥6</View>
+                  <View className="list-item">销量：2563</View>
+                  <View className="list-item">库存：22252</View>
+                </View>
+              </View>
+            </View>
+            <View className="content-center"></View>
+            <View className="content-bottom"></View>
           </View>
         </View>
         <View className="detail-bottom">
