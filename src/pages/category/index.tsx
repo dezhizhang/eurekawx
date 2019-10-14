@@ -1,6 +1,6 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Swiper, Image,ScrollView,Input } from '@tarojs/components'
+import { View,  Image,ScrollView, } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import { add, minus, asyncAdd } from '../../actions/counter'
 import  './index.less'
@@ -62,7 +62,7 @@ class Index extends Component {
     ]
   }
   config: Config = {
-    navigationBarTitleText: '商城'
+    navigationBarTitleText: '商品分类'
   }
 
   componentWillReceiveProps (nextProps) {
@@ -108,6 +108,71 @@ class Index extends Component {
             </View>
           </View>
         </View>
+        <View className="right-item">
+          <View className="item-box">
+            <View className="box-left">
+              <Image src={detailSwiper} className="image"/>
+            </View>
+            <View className="box-right">
+              <View className="right-top">品牌男士休闲运动装</View>
+              <View className="right-bottom">
+                <View className="bottom-left">￥280.00 </View>
+                <View className="bottom-right">
+                  <Image src={bay} className="image"/>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View className="right-item">
+          <View className="item-box">
+            <View className="box-left">
+              <Image src={detailSwiper} className="image"/>
+            </View>
+            <View className="box-right">
+              <View className="right-top">品牌男士休闲运动装</View>
+              <View className="right-bottom">
+                <View className="bottom-left">￥280.00 </View>
+                <View className="bottom-right">
+                  <Image src={bay} className="image"/>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View className="right-item">
+          <View className="item-box">
+            <View className="box-left">
+              <Image src={detailSwiper} className="image"/>
+            </View>
+            <View className="box-right">
+              <View className="right-top">品牌男士休闲运动装</View>
+              <View className="right-bottom">
+                <View className="bottom-left">￥280.00 </View>
+                <View className="bottom-right">
+                  <Image src={bay} className="image"/>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View className="right-item">
+          <View className="item-box">
+            <View className="box-left">
+              <Image src={detailSwiper} className="image"/>
+            </View>
+            <View className="box-right">
+              <View className="right-top">品牌男士休闲运动装</View>
+              <View className="right-bottom">
+                <View className="bottom-left">￥280.00 </View>
+                <View className="bottom-right">
+                  <Image src={bay} className="image"/>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+        
       </ScrollView>
      </View>
     )
