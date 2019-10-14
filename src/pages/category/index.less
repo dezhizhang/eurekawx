@@ -1,0 +1,122 @@
+.category{
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    .left{
+        width: 160px;
+        height: 100%;
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        bottom: 0px;
+        background: #fff;
+        border-right: 1px solid #eee;
+        .left-item{
+            width: 100%;
+            height: 80px;
+            line-height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .item-icon{
+                width: 4px;
+                height: 60px;
+                background:linear-gradient(130deg,rgba(115,95,247,1),rgba(83,122,251,1));
+            }
+            .item-text{
+                flex: 1;
+                height: 80px;
+                text-align: center;
+                font-weight: 400;
+                font-size: 28px;
+                font-family: 'Microsoft YaHei';
+                color: #456FFB;
+                border-bottom: 2px solid #E6E6E6;
+                margin-left: 10px;
+            }
+            
+        }
+
+    }
+    .right{
+        width: 70%;
+        overflow-x: hidden;
+        position: absolute;
+        right: 0px;
+        background: #fff;
+        padding: 0px 30px;
+        .right-item{
+            width: 100%;
+            height: 200px;
+            bottom: 30px;
+            box-shadow:0px 2px 6px 0px rgba(190,192,194,0.4);
+            border-radius: 10px;
+            margin-bottom: 30px;
+            background: #fff;
+            overflow: hidden;
+            display: flex;
+            .item-box{
+                width: 100%;
+                height: 100%;
+                margin-right: 20px;
+                margin-left: 30px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                .box-left{
+                    width: 140px;
+                    height: 140px;
+                    border-radius: 5px;
+                    .image{
+                        width: 100%;
+                        height: 100%;
+                        display: block;
+                    }
+                       
+                }
+                .box-right{
+                    flex: 1;
+                    margin-left: 20px;
+                    display: flex;
+                    flex-direction: column;
+                    .right-top{
+                        flex: 1;
+                        margin-bottom: 40px;
+                        color: #333;
+                        font-family: 'Microsoft YaHei';
+                        font-weight: 400;
+                        white-space:nowrap;
+                        overflow:hidden;
+                        text-overflow : ellipsis;
+                    }
+                    .right-bottom{
+                        flex: 1;
+                        display: flex;
+                        flex-direction: row;
+                        .bottom-left{
+                            flex: 1;
+                            font-size: 32px;
+                            font-family: 'Microsoft YaHei';
+                            color: #EC3E26;
+                            font-weight: 400;
+                        }
+                        .bottom-right{
+                            width: 130px;
+                            height: 40px;
+                            border-radius: 20px;
+                            overflow: hidden;
+                            .image{
+                                width: 100%;
+                                height: 100%;
+
+                            }
+                        }
+                    }
+
+
+                }
+            }
+        }
+    }
+
+}

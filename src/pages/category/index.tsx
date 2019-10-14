@@ -1,9 +1,11 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Swiper, SwiperItem,ScrollView,Input } from '@tarojs/components'
+import { View, Swiper, Image,ScrollView,Input } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import { add, minus, asyncAdd } from '../../actions/counter'
 import  './index.less'
+import detailSwiper from '../../images/detail_swiper.png'
+import bay from '../../images/bay.png'
 
 // #region 书写注意
 //
@@ -51,15 +53,15 @@ interface Index {
   }
 }))
 class Index extends Component {
-
-    /**
-   * 指定config的类型声明为: Taro.Config
-   *
-   * 由于 typescript 对于 object 类型推导只能推出 Key 的基本类型
-   * 对于像 navigationBarTextStyle: 'black' 这样的推导出的类型是 string
-   * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
-   */
-    config: Config = {
+  state = {
+    listArr:[
+      {key:1,name:'全 部'},
+      {key:2,name:'女装'},
+      {key:3,name:'男装'},
+      {key:4,name:'套装'}
+    ]
+  }
+  config: Config = {
     navigationBarTitleText: '商城'
   }
 
@@ -75,50 +77,39 @@ class Index extends Component {
 
   render () {
     return (
-      <ScrollView className='index'
+     <View className="category">
+       <View className="left">
+         <View className="left-item">
+           <View className="item-icon"></View>
+           <View className="item-text">全 部</View>
+         </View>
+         <View className="left-item">
+           <View style={{display:'none'}} className="item-icon"></View>
+           <View className="item-text">全 部</View>
+         </View>
+       </View>
+      <ScrollView
         scrollY
-        scrollWithAnimation
+        className="right"
       >
-        <View className='wrapper'>
-          <View className="list">
-            {/* <View className="search">
-              <Input className="search_input" placeholder='搜索商品名称或类型'/>
-            </View> */}
-            <Swiper
-              className='swiper'
-              indicatorColor='#999'
-              indicatorActiveColor='#333'
-              circular
-              indicatorDots
-              autoplay>
-              <SwiperItem>
-                <View className='demo-text-1'>1</View>
-              </SwiperItem>
-              <SwiperItem>
-                <View className='demo-text-2'>2</View>
-              </SwiperItem>
-              <SwiperItem>
-                <View className='demo-text-3'>3</View>
-              </SwiperItem>
-            </Swiper>
-            <View className="category">
-                <View className="item"></View>
-                <View className="item"></View>
-                <View className="item"></View>
-                <View className="item"></View>
+        <View className="right-item">
+          <View className="item-box">
+            <View className="box-left">
+              <Image src={detailSwiper} className="image"/>
             </View>
-            <View className="advert"></View>
-            <View className="hot"></View>
-          </View>
-          <View className="product"></View>
-          <View className='product_item'>
-            <View className="product_wrapper">
-              <View className="item"></View>
-              <View className="item"></View>    
+            <View className="box-right">
+              <View className="right-top">品牌男士休闲运动装</View>
+              <View className="right-bottom">
+                <View className="bottom-left">￥280.00 </View>
+                <View className="bottom-right">
+                  <Image src={bay} className="image"/>
+                </View>
+              </View>
             </View>
           </View>
         </View>
       </ScrollView>
+     </View>
     )
   }
 }
