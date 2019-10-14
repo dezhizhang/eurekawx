@@ -29,6 +29,7 @@ class App extends Component {
       'pages/category/index',
       'pages/my/index',
       'pages/detail/index',
+      'pages/cateInfo/index',
     
      
     ],

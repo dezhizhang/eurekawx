@@ -151,6 +151,18 @@ class Index extends Component {
       this.setState({listData:listArr,page});
     }
   }
+  //商品详情
+  handleToDetail = () => {
+    Taro.navigateTo({
+      url: '../detail/index'
+    })
+  }
+  //分类详情
+  handleToCateDetail = () => {
+    Taro.navigateTo({
+      url: '../cateinfo/index'
+    })
+  }
 
   componentWillUnmount () { }
 
@@ -184,7 +196,7 @@ class Index extends Component {
               })}
             </Swiper>
             <View className="category">
-                <View className="item">
+                <View className="item" onClick={this.handleToCateDetail}>
                   <View className="top">
                     <View className="image_wrapper">
                       <Image className="image" mode='aspectFill'  src={category}/>
@@ -238,7 +250,7 @@ class Index extends Component {
                     return <SwiperItem key={index}>
                      <View className='swiper-item'>
                        {item.map((list,number) => {
-                         return <View className='item' key={number}>
+                         return <View className='item' key={number} onClick={this.handleToDetail}>
                          <View className="item-top">
                              <Image className="image" mode='aspectFill'  src={`${baseURL}${list.product_url}`}/>
                          </View>
@@ -266,7 +278,7 @@ class Index extends Component {
           <View className='product_item'>
           <View className="product_wrapper">
             {listData.map((item,index) => {
-              return  <View className="item" key={index}>
+              return  <View className="item" key={index} onClick={this.handleToDetail}>
               <View className="item-top">
                 <Image className="image" mode='aspectFill'  src={`${baseURL}${item.product_url}`}/>
               </View>
