@@ -14,16 +14,6 @@ import bay from '../../images/bay.png'
 import  './index.less'
 
 
-// #region 书写注意
-//
-// 目前 typescript 版本还无法在装饰器模式下将 Props 注入到 Taro.Component 中的 props 属性
-// 需要显示声明 connect 的参数类型并通过 interface 的方式指定 Taro.Component 子类的 props
-// 这样才能完成类型检查和 IDE 的自动提示
-// 使用函数模式则无此限制
-// ref: https://github.com/DefinitelyTyped/DefinitelyTyped/issues/20796
-//
-// #endregion
-
 type PageStateProps = {
   counter: {
     num: number
@@ -90,14 +80,8 @@ class Index extends Component {
         }
       ]
     }
-    /**
-   * 指定config的类型声明为: Taro.Config
-   *
-   * 由于 typescript 对于 object 类型推导只能推出 Key 的基本类型
-   * 对于像 navigationBarTextStyle: 'black' 这样的推导出的类型是 string
-   * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
-   */
-    config: Config = {
+
+  config: Config = {
     navigationBarTitleText: 'e瑞轻办公文具'
   }
 
@@ -174,15 +158,15 @@ class Index extends Component {
     }
   }
   //商品详情
-  handleToDetail = () => {
+  handleToDetail = (item) => {
     Taro.navigateTo({
-      url: '../detail/index'
+      url: `../detail/index?id=${item._id}`
     })
   }
   //分类详情
-  handleToCateDetail = () => {
+  handleToCateDetail = (item) => {
     Taro.navigateTo({
-      url: '../cateinfo/index'
+      url: `../classify/index?classId=${item.classId}`
     })
   }
 
@@ -212,15 +196,16 @@ class Index extends Component {
               indicatorDots
               autoplay>
               {focusData.length && focusData.map((item,index) => {
-                 return (<SwiperItem key={index}>
-                   <View className="bannner"><Image className="banner_image" mode='aspectFill' src={`${baseURL}${item.focus_img}`}/></View>
-                 </SwiperItem>)
-              })}
+                return (
+                  <SwiperItem key={index}>
+                    <View className="bannner"><Image className="banner_image" mode='aspectFill' src={`${baseURL}${item.focus_img}`}/></View>
+                  </SwiperItem>)
+                })}
             </Swiper>
             <View className="category">
                {classifyArr.map((item,index) => {
-                 return (
-                  <View key={index} className="item" onClick={this.handleToCateDetail}>
+                return (
+                  <View key={index} className="item" onClick={() => this.handleToCateDetail(item)}>
                     <View className="top">
                       <View className="image_wrapper">
                           <Image className="image" mode='aspectFill'  src={item.src}/>
@@ -228,39 +213,7 @@ class Index extends Component {
                     </View>
                     <View className="bottom">{item.name}</View>
                   </View>
-                  )})}
-                {/* <View className="item" onClick={this.handleToCateDetail}>
-                  <View className="top">
-                    <View className="image_wrapper">
-                      <Image className="image" mode='aspectFill'  src={category}/>
-                    </View>
-                  </View>
-                  <View className="bottom">办公</View>
-                </View>
-                <View className="item">
-                  <View className="top">
-                    <View className="image_wrapper">
-                      <Image className="image" mode='aspectFill'  src={facility}/>
-                    </View>
-                  </View>
-                  <View className="bottom">设备</View>
-                </View>
-                <View className="item">
-                  <View className="top">
-                    <View className="image_wrapper">
-                      <Image className="image" mode='aspectFill'  src={stationery}/>
-                    </View>
-                  </View>
-                  <View className="bottom">文具</View>
-                </View>
-                <View className="item">
-                  <View className="top">
-                    <View className="image_wrapper">
-                      <Image className="image" mode='aspectFill'  src={evenmore}/>
-                    </View>
-                  </View>
-                  <View className="bottom">更多</View>
-                </View> */}
+                )})}
             </View>
             <View className="advert" onClick={this.handleAdvert}>
               {advertData.length&&advertData.map((item,index) => {
@@ -281,7 +234,7 @@ class Index extends Component {
                     return <SwiperItem key={index}>
                      <View className='swiper-item'>
                        {item.map((list,number) => {
-                         return <View className='item' key={number} onClick={this.handleToDetail}>
+                         return <View className='item' key={number} onClick={() => this.handleToDetail(list)}>
                          <View className="item-top">
                              <Image className="image" mode='aspectFill'  src={`${baseURL}${list.product_url}`}/>
                          </View>
@@ -309,7 +262,7 @@ class Index extends Component {
           <View className='product_item'>
           <View className="product_wrapper">
             {listData.map((item,index) => {
-              return  <View className="item" key={index} onClick={this.handleToDetail}>
+              return  <View className="item" key={index} onClick={() =>this.handleToDetail(item)}>
               <View className="item-top">
                 <Image className="image" mode='aspectFill'  src={`${baseURL}${item.product_url}`}/>
               </View>
@@ -331,13 +284,5 @@ class Index extends Component {
     )
   }
 }
-
-// #region 导出注意
-// 经过上面的声明后需要将导出的 Taro.Component 子类修改为子类本身的 props 属性
-// 这样在使用这个子类时 Ts 才不会提示缺少 JSX 类型参数错误
-//
-// #endregion
-
-
 
 export default Index as ComponentClass<PageOwnProps, PageState>

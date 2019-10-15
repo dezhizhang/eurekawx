@@ -44,13 +44,16 @@ interface Index {
   }
 }))
 class Index extends Component {
-    
+
     config: Config = {
     navigationBarTitleText: '商品分类'
   }
 
   componentWillReceiveProps (nextProps) {
     console.log(this.props, nextProps)
+  }
+  componentWillMount () {
+    console.log(this.$router.params)
   }
 
   componentWillUnmount () { }
