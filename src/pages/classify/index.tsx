@@ -1,11 +1,12 @@
 import { ComponentClass } from 'react'
-import { connect } from '@tarojs/redux'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Swiper, SwiperItem,ScrollView,Image  } from '@tarojs/components'
+import { View, Input, Radio,ScrollView,Image } from '@tarojs/components'
+import { connect } from '@tarojs/redux'
 import { add, minus, asyncAdd } from '../../actions/counter'
-
+import arror from '../../images/icon/arrow.png'
+import bay from '../../images/bay.png'
+import detailSwiper from '../../images/detail_swiper.png'
 import  './index.less'
-
 
 // #region 书写注意
 //
@@ -53,14 +54,7 @@ interface Index {
   }
 }))
 class Index extends Component {
-    state = {
-      focusData:[],
-      advertData:[],
-      hotData:[],
-      listData:[],
-      listArr:[],
-      page:1
-    }
+
     /**
    * 指定config的类型声明为: Taro.Config
    *
@@ -75,12 +69,6 @@ class Index extends Component {
   componentWillReceiveProps (nextProps) {
     console.log(this.props, nextProps)
   }
-  componentDidMount() {
-   
-  }
-
-
-
 
   componentWillUnmount () { }
 
@@ -89,25 +77,44 @@ class Index extends Component {
   componentDidHide () { }
 
   render () {
- 
     return (
-      <ScrollView className='index'
-        scrollY={true}
-        scrollWithAnimation={true}
-        enableBackToTop
+    <ScrollView className='classify'
+        scrollY
+        scrollWithAnimation
       >
-
-      </ScrollView>
+        <View className="wrapper">
+            <View className="list">
+                <View className="list-item">
+                    <View className="item-top">
+                        <Image src={detailSwiper} className="image"/>
+                    </View>
+                    <View className="item-bottom">
+                       <View className="bottom-wrapper">
+                           <View className="wrapper-top">2019潮流韩版蝙蝠衫</View>
+                           <View className="wrapper-bottom">
+                               <View className="bottom-left">￥100</View>
+                               <View className="bottom-right">
+                                   <Image src={bay} className="image"/>
+                               </View>
+                           </View>
+                       </View>
+                    </View>
+                </View>
+                <View className="list-item"></View>
+                <View className="list-item"></View>
+                <View className="list-item"></View>
+            </View>
+        </View>
+    </ScrollView>
     )
   }
 }
 
 // #region 导出注意
+//
 // 经过上面的声明后需要将导出的 Taro.Component 子类修改为子类本身的 props 属性
 // 这样在使用这个子类时 Ts 才不会提示缺少 JSX 类型参数错误
 //
 // #endregion
-
-
 
 export default Index as ComponentClass<PageOwnProps, PageState>

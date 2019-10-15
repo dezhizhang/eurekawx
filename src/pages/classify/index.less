@@ -1,0 +1,83 @@
+.classify{
+    width: 100%;
+    height: 100%;
+    background: #f3f3f3;
+    .wrapper{
+        padding: 20px 30px 0px 30px;
+        .list{
+            width: 100%;
+            display: flex;
+            flex-wrap:wrap;
+            .list-item{
+                flex: 1;
+                height: 438px;
+                border-radius: 10px;
+                min-width: 330px;
+                margin-bottom: 20px;
+                background: #fff;
+                .item-top{
+                    height: 330px;
+                    max-height: 330px;
+                    border-top-left-radius: 10px;
+                    border-top-right-radius: 10px;
+                    overflow: hidden;
+                    .image{
+                        width: 100%;
+                        height: 100%;
+                        display: block;
+                    }
+                }
+                .item-bottom{
+                   padding: 20px 10px 20px 20px;
+                   overflow: hidden;
+                   .bottom-wrapper{
+                       .wrapper-top{
+                           font-family: 'Microsoft YaHei';
+                           font-size: 24px;
+                           color: #333;
+                           white-space: nowrap;
+                           overflow: hidden;
+                           text-overflow: ellipsis;
+                           margin-bottom: 6px;
+                        }
+                       .wrapper-bottom{
+                           display: flex;
+                           align-items: center;
+                           .bottom-left{
+                               flex: 1;
+                               font-family: 'Microsoft YaHei';
+                               font-weight: 400;
+                               font-size: 32px;
+                               color: #F63A00;
+                               overflow: hidden;
+                               text-overflow: ellipsis;
+                               white-space: nowrap;
+                           }
+                           .bottom-right{
+                              width: 110px;
+                              height: 34px; 
+                              overflow: hidden;
+                              .image{
+                                  width: 100%;
+                                  height: 100%;
+                                  display: block;
+                              }
+                           }
+
+                       }
+                   }
+
+                }
+
+            }
+            .list-item:nth-of-type(odd) {
+                margin-right:15px;
+            }
+            .list-item:nth-of-type(even){
+                margin-left: 15px;
+            }
+
+        }
+
+    }
+}

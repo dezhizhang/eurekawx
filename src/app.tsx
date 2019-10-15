@@ -23,13 +23,14 @@ class App extends Component {
    */
   config: Config = {
     pages: [
+      'pages/classify/index',
       'pages/index/index',
       'pages/maintain/index',
       'pages/cart/index',
       'pages/category/index',
       'pages/my/index',
       'pages/detail/index',
-      'pages/cateInfo/index',
+   
     
      
     ],
