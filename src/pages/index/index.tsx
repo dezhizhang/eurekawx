@@ -66,7 +66,29 @@ class Index extends Component {
       hotData:[],
       listData:[],
       listArr:[],
-      page:1
+      page:1,
+      classifyArr:[
+        {
+          name:'办公',
+          classId:'1',
+          src:category
+        },
+        {
+          name:'设备',
+          classId:'2',
+          src:facility
+        },
+        {
+          name:'文具',
+          classId:'3',
+          src:stationery
+        },
+        {
+          name:'更多',
+          classId:'4',
+          src:evenmore
+        }
+      ]
     }
     /**
    * 指定config的类型声明为: Taro.Config
@@ -171,7 +193,7 @@ class Index extends Component {
   componentDidHide () { }
 
   render () {
-    const { focusData,advertData,hotData,listData } = this.state;
+    const { focusData,advertData,hotData,listData,classifyArr } = this.state;
     let hotArr = this.arrTrans(3,hotData); //3代表二维数据有几个
   
     return (
@@ -196,12 +218,22 @@ class Index extends Component {
               })}
             </Swiper>
             <View className="category">
-                <View className="item" onClick={this.handleToCateDetail}>
+               {classifyArr.map((item,index) => {
+                 return (
+                  <View key={index} className="item" onClick={this.handleToCateDetail}>
+                    <View className="top">
+                      <View className="image_wrapper">
+                          <Image className="image" mode='aspectFill'  src={item.src}/>
+                      </View>
+                    </View>
+                    <View className="bottom">{item.name}</View>
+                  </View>
+                  )})}
+                {/* <View className="item" onClick={this.handleToCateDetail}>
                   <View className="top">
                     <View className="image_wrapper">
                       <Image className="image" mode='aspectFill'  src={category}/>
                     </View>
-                   
                   </View>
                   <View className="bottom">办公</View>
                 </View>
@@ -210,7 +242,6 @@ class Index extends Component {
                     <View className="image_wrapper">
                       <Image className="image" mode='aspectFill'  src={facility}/>
                     </View>
-                   
                   </View>
                   <View className="bottom">设备</View>
                 </View>
@@ -229,7 +260,7 @@ class Index extends Component {
                     </View>
                   </View>
                   <View className="bottom">更多</View>
-                </View>
+                </View> */}
             </View>
             <View className="advert" onClick={this.handleAdvert}>
               {advertData.length&&advertData.map((item,index) => {
