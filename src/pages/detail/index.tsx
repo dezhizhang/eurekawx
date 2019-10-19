@@ -2,24 +2,15 @@ import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Swiper, SwiperItem,Image, ScrollView} from '@tarojs/components'
 import { connect } from '@tarojs/redux'
+import { getDetailInfo } from '../../service/api'
+import { showLoading,hideLoading,baseURL } from '../../utils/tools'
 import { add, minus, asyncAdd } from '../../actions/counter'
-import detailSwiper from '../../images/detail_swiper.png'
 import detailStore from '../../images/icon/detail_store.png'
 import detailCart from '../../images/icon/detail_cart.png'
 import detailService from '../../images/icon/detail_service.png'
 import detailShare from '../../images/icon/detail_share.png'
 import arrow from '../../images/icon/arrow.png'
 import  './index.less'
-
-// #region 书写注意
-//
-// 目前 typescript 版本还无法在装饰器模式下将 Props 注入到 Taro.Component 中的 props 属性
-// 需要显示声明 connect 的参数类型并通过 interface 的方式指定 Taro.Component 子类的 props
-// 这样才能完成类型检查和 IDE 的自动提示
-// 使用函数模式则无此限制
-// ref: https://github.com/DefinitelyTyped/DefinitelyTyped/issues/20796
-//
-// #endregion
 
 type PageStateProps = {
   counter: {
@@ -57,14 +48,11 @@ interface Index {
   }
 }))
 class Index extends Component {
-
-    /**
-   * 指定config的类型声明为: Taro.Config
-   *
-   * 由于 typescript 对于 object 类型推导只能推出 Key 的基本类型
-   * 对于像 navigationBarTextStyle: 'black' 这样的推导出的类型是 string
-   * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
-   */
+    state = {
+      detailData:[],
+      focus_img:[],
+      detail_img:[],
+    }
     config: Config = {
     navigationBarTitleText: '商品详情'
   }
@@ -72,6 +60,21 @@ class Index extends Component {
   componentWillReceiveProps (nextProps) {
     console.log(this.props, nextProps)
   }
+  componentWillMount () {
+    let params = this.$router.params;
+    this.detailData(params);
+  }
+  detailData = async (params) => {
+    showLoading({title:'加载中...'})
+    let detail = await getDetailInfo(params);
+    if(detail.data.code == 200) {
+      let detailData = detail.data.data;
+      let { focus_img,detail_img } = detailData[0]
+      this.setState({detailData,focus_img,detail_img});
+      hideLoading()
+    }
+  }
+  
 
   componentWillUnmount () { }
 
@@ -80,6 +83,8 @@ class Index extends Component {
   componentDidHide () { }
 
   render () {
+    let { detailData,focus_img,detail_img } = this.state;
+   
     return (
      <ScrollView 
         scrollY
@@ -95,17 +100,14 @@ class Index extends Component {
             circular
             indicatorDots
             autoplay>
-            <SwiperItem>
-              <View className='swiper-item'>
-                <Image src={detailSwiper}  className="image"/>
-              </View>
-            </SwiperItem>
-            <SwiperItem>
-            <View className='demo-text-2'>2</View>
-            </SwiperItem>
-            <SwiperItem>
-              <View className='demo-text-3'>3</View>
-            </SwiperItem>
+    
+            {focus_img&&focus_img.map((item,index) => {
+              return (<SwiperItem key={index}>
+                <View className='swiper-item'>
+                  <Image src={`${baseURL}${item}`}  className="image"/>
+                </View>
+              </SwiperItem>)
+            })}
           </Swiper>
           </View>
           <View className="detail-content">
@@ -119,12 +121,12 @@ class Index extends Component {
                   <View className="right-text">分享</View>
                 </View>
               </View>
-              <View className="top-price">￥256</View>
+              <View className="top-price">￥{detailData[0].price}</View>
               <View className="top-list">
                 <View className="list-wrapper">
-                  <View className="list-item">运费：￥6</View>
-                  <View className="list-item">销量：2563</View>
-                  <View className="list-item">库存：22252</View>
+                  <View className="list-item">运费：￥{detailData[0].freight}</View>
+                  <View className="list-item">销量：{detailData[0].sales}</View>
+                  <View className="list-item">库存：{detailData[0].inventory}</View>
                 </View>
               </View>
             </View>
@@ -138,7 +140,14 @@ class Index extends Component {
                 </View>
               </View>
             </View>
-            <View className="content-bottom">图文详情</View>
+            <View className="content-bottom">
+              <View className="bottom-title">图文详情</View>
+              {detail_img&&detail_img.map((item,index) => {
+                return (<View key={index} className="bottom-item">
+                  <Image src={`${baseURL}${item}`} className="image"/>
+                </View>
+                )})}
+            </View>
           </View>
         </View>
         <View className="detail-bottom">
@@ -175,12 +184,4 @@ class Index extends Component {
     )
   }
 }
-
-// #region 导出注意
-//
-// 经过上面的声明后需要将导出的 Taro.Component 子类修改为子类本身的 props 属性
-// 这样在使用这个子类时 Ts 才不会提示缺少 JSX 类型参数错误
-//
-// #endregion
-
 export default Index as ComponentClass<PageOwnProps, PageState>

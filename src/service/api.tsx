@@ -24,6 +24,11 @@ export async function uploadInfo(data) {
 export async function getMainList(params) {
   return request(`${Config.API_HOST}/api/product/main?main_id=${params.main_id}`)
 }
+//详情信息
+export async function getDetailInfo(params) {
+  return request(`${Config.API_HOST}/api/detail/info?detail_id=${params.detail_id}`)
+ 
+}
 
 
 
