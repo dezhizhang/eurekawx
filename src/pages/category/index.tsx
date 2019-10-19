@@ -3,19 +3,12 @@ import Taro, { Component, Config } from '@tarojs/taro'
 import { View,  Image,ScrollView, } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import { add, minus, asyncAdd } from '../../actions/counter'
+import { getCategoryList,getCategoryDetail } from '../../service/api'
+import { baseURL } from '../../utils/tools'
 import  './index.less'
-import detailSwiper from '../../images/detail_swiper.png'
 import bay from '../../images/bay.png'
 
-// #region 书写注意
-//
-// 目前 typescript 版本还无法在装饰器模式下将 Props 注入到 Taro.Component 中的 props 属性
-// 需要显示声明 connect 的参数类型并通过 interface 的方式指定 Taro.Component 子类的 props
-// 这样才能完成类型检查和 IDE 的自动提示
-// 使用函数模式则无此限制
-// ref: https://github.com/DefinitelyTyped/DefinitelyTyped/issues/20796
-//
-// #endregion
+
 
 type PageStateProps = {
   counter: {
@@ -54,12 +47,9 @@ interface Index {
 }))
 class Index extends Component {
   state = {
-    listArr:[
-      {key:1,name:'全 部'},
-      {key:2,name:'女装'},
-      {key:3,name:'男装'},
-      {key:4,name:'套装'}
-    ]
+    categoryArr:[],
+    detailArr:[],
+    currentIndex:0
   }
   config: Config = {
     navigationBarTitleText: '商品分类'
@@ -68,6 +58,33 @@ class Index extends Component {
   componentWillReceiveProps (nextProps) {
     console.log(this.props, nextProps)
   }
+  componentDidMount() {
+    this.categoryData()
+  }
+  categoryData = async () => {
+    let list = await getCategoryList();
+    if(list.data.code == 200) {
+      let categoryArr = list.data.data;
+      this.categoryDetailData(categoryArr[0])
+      this.setState({categoryArr});
+    }
+  }
+  categoryDetailData = async(item) => {
+    let detail = await getCategoryDetail({'classify_id':item._id});
+    if(detail.data.code == 200) {
+      let detailArr = detail.data.data;
+      this.setState({detailArr});
+    }
+  }
+  handleClickCategory = async(index,item) => {
+    this.setState({currentIndex:index});
+    let detail = await getCategoryDetail({'classify_id':item._id});
+    if(detail.data.code == 200) {
+      let detailArr = detail.data.data;
+      this.setState({detailArr});
+    }
+  }
+
 
   componentWillUnmount () { }
 
@@ -76,23 +93,23 @@ class Index extends Component {
   componentDidHide () { }
 
   render () {
+    let { categoryArr,currentIndex,detailArr } = this.state;
     return (
      <View className="category">
        <View className="left">
-         <View className="left-item">
-           <View className="item-icon"></View>
-           <View className="item-text">全 部</View>
-         </View>
-         <View className="left-item">
-           <View style={{display:'none'}} className="item-icon"></View>
-           <View className="item-text">全 部</View>
-         </View>
+         {categoryArr&&categoryArr.map((item,index) => {
+           return(
+            <View key={index} className="left-item" onClick={() => this.handleClickCategory(index,item)}>
+              <View  style={{display:index == currentIndex ? 'block':'none'}} className="item-icon"></View>
+              <View className="item-text">{item.name}</View>
+            </View>
+          )})}
        </View>
       <ScrollView
         scrollY
         className="right"
       >
-        <View className="right-item">
+        {/* <View className="right-item">
           <View className="item-box">
             <View className="box-left">
               <Image src={detailSwiper} className="image"/>
@@ -107,83 +124,32 @@ class Index extends Component {
               </View>
             </View>
           </View>
-        </View>
-        <View className="right-item">
+        </View> */}
+        {detailArr&&detailArr.map((item,index) => {
+          return ( <View key={index} className="right-item">
           <View className="item-box">
             <View className="box-left">
-              <Image src={detailSwiper} className="image"/>
+              <Image src={`${baseURL}${item.classify_img}`} className="image"/>
             </View>
             <View className="box-right">
-              <View className="right-top">品牌男士休闲运动装</View>
+              <View className="right-top">{item.title}</View>
               <View className="right-bottom">
-                <View className="bottom-left">￥280.00 </View>
+                <View className="bottom-left">￥{item.price} </View>
                 <View className="bottom-right">
                   <Image src={bay} className="image"/>
                 </View>
               </View>
             </View>
           </View>
-        </View>
-        <View className="right-item">
-          <View className="item-box">
-            <View className="box-left">
-              <Image src={detailSwiper} className="image"/>
-            </View>
-            <View className="box-right">
-              <View className="right-top">品牌男士休闲运动装</View>
-              <View className="right-bottom">
-                <View className="bottom-left">￥280.00 </View>
-                <View className="bottom-right">
-                  <Image src={bay} className="image"/>
-                </View>
-              </View>
-            </View>
-          </View>
-        </View>
-        <View className="right-item">
-          <View className="item-box">
-            <View className="box-left">
-              <Image src={detailSwiper} className="image"/>
-            </View>
-            <View className="box-right">
-              <View className="right-top">品牌男士休闲运动装</View>
-              <View className="right-bottom">
-                <View className="bottom-left">￥280.00 </View>
-                <View className="bottom-right">
-                  <Image src={bay} className="image"/>
-                </View>
-              </View>
-            </View>
-          </View>
-        </View>
-        <View className="right-item">
-          <View className="item-box">
-            <View className="box-left">
-              <Image src={detailSwiper} className="image"/>
-            </View>
-            <View className="box-right">
-              <View className="right-top">品牌男士休闲运动装</View>
-              <View className="right-bottom">
-                <View className="bottom-left">￥280.00 </View>
-                <View className="bottom-right">
-                  <Image src={bay} className="image"/>
-                </View>
-              </View>
-            </View>
-          </View>
-        </View>
-        
+        </View>)
+        })}
+   
+    
+
       </ScrollView>
      </View>
     )
   }
 }
-
-// #region 导出注意
-//
-// 经过上面的声明后需要将导出的 Taro.Component 子类修改为子类本身的 props 属性
-// 这样在使用这个子类时 Ts 才不会提示缺少 JSX 类型参数错误
-//
-// #endregion
 
 export default Index as ComponentClass<PageOwnProps, PageState>

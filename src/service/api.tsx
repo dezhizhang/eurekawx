@@ -27,7 +27,14 @@ export async function getMainList(params) {
 //详情信息
 export async function getDetailInfo(params) {
   return request(`${Config.API_HOST}/api/detail/info?detail_id=${params.detail_id}`)
- 
+}
+//分类列表
+export async function getCategoryList() {
+  return request(`${Config.API_HOST}/api/category/list`)
+}
+//获取分类详情
+export async function getCategoryDetail(params) {
+  return request(`${Config.API_HOST}/api/categoryDetail/list?classify_id=${params.classify_id}`)
 }
 
 
