@@ -1,4 +1,3 @@
-import {stringify} from 'qs';
 import { request,uploadFile } from '../utils/request';
 import Config from '../common/config';
 //轮播图
@@ -17,11 +16,14 @@ export async function getProductHot() {
 export async function getProductList(params) {
   return request(`${Config.API_HOST}/api/product/list?page=${params.page}`);
 } 
-
 //提交维修
 export async function uploadInfo(data) {
   return uploadFile(`${Config.API_HOST}/api/maintain/upload`,data);
 } 
+//主打分类
+export async function getMainList(params) {
+  return request(`${Config.API_HOST}/api/product/main?main_id=${params.main_id}`)
+}
 
 
 

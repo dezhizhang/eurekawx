@@ -60,22 +60,22 @@ class Index extends Component {
       classifyArr:[
         {
           name:'办公',
-          classId:'1',
+          main_id:'1',
           src:category
         },
         {
           name:'设备',
-          classId:'2',
+          main_id:'2',
           src:facility
         },
         {
           name:'文具',
-          classId:'3',
+          main_id:'3',
           src:stationery
         },
         {
           name:'更多',
-          classId:'4',
+          main_id:'4',
           src:evenmore
         }
       ]
@@ -166,7 +166,7 @@ class Index extends Component {
   //分类详情
   handleToCateDetail = (item) => {
     Taro.navigateTo({
-      url: `../classify/index?classId=${item.classId}`
+      url: `../classify/index?main_id=${item.main_id}`
     })
   }
 
