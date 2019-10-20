@@ -1,6 +1,6 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Swiper, SwiperItem,Image, ScrollView} from '@tarojs/components'
+import { View, Swiper, SwiperItem,Image, ScrollView, Button} from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import { getDetailInfo } from '../../service/api'
 import { showLoading,hideLoading,baseURL } from '../../utils/tools'
@@ -251,7 +251,18 @@ class Index extends Component {
                    <View className="item-list list-left">S码[70-90斤]</View>
                    <View className="item-list list-left">S码[70-90斤]</View>
                  </View>
-                
+                 <View className="bottom-rule">尺码</View>
+                 <View className="bottom-item">
+                   <View className="item-list">S码[70-90斤]</View>
+                   <View className="item-list list-left">S码[70-90斤]</View>
+                   <View className="item-list list-left">S码[70-90斤]</View>
+                   <View className="item-list ">S码[70-90斤]</View>
+                   <View className="item-list list-left">S码[70-90斤]</View>
+                   <View className="item-list list-left">S码[70-90斤]</View>
+                 </View>
+                 <View className="bottom-btn">
+                   <Button>确定</Button>
+                 </View>
                </View>
              </View>
           </View>
