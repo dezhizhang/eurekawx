@@ -69,7 +69,7 @@ class Index extends Component {
     let detail = await getDetailInfo(params);
     if(detail.data.code == 200) {
       let detailData = detail.data.data;
-      let { focus_img,detail_img } = detailData[0]
+      let { focus_img,detail_img } = detailData&&detailData[0];
       this.setState({detailData,focus_img,detail_img});
       hideLoading()
     }
@@ -113,7 +113,7 @@ class Index extends Component {
           <View className="detail-content">
             <View className="content-top">
               <View className="top-title">
-                <View className="title-left">短款连帽卫衣女春秋装2018新款韩版长袖宽松chic早秋上衣潮薄外套</View>
+                <View className="title-left">{detailData[0].title}</View>
                 <View className="title-right">
                   <View className="right-icon">
                     <Image src={detailShare} className="image"/>
@@ -124,9 +124,9 @@ class Index extends Component {
               <View className="top-price">￥{detailData[0].price}</View>
               <View className="top-list">
                 <View className="list-wrapper">
-                  <View className="list-item">运费：￥{detailData[0].freight}</View>
-                  <View className="list-item">销量：{detailData[0].sales}</View>
-                  <View className="list-item">库存：{detailData[0].inventory}</View>
+                  <View className="list-item">运费：￥{detailData&&detailData[0].freight}</View>
+                  <View className="list-item">销量：{detailData&&detailData[0].sales}</View>
+                  <View className="list-item">库存：{detailData&&detailData[0].inventory}</View>
                 </View>
               </View>
             </View>

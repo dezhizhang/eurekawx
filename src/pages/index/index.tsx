@@ -10,7 +10,6 @@ import facility from '../../images/facility.png'
 import stationery from '../../images/stationery.png'
 import evenmore from '../../images/evenmore.png'
 import cart from '../../images/icon/cart.png'
-import bay from '../../images/bay.png'
 import  './index.less'
 
 
@@ -160,7 +159,7 @@ class Index extends Component {
   //商品详情
   handleToDetail = (item) => {
     Taro.navigateTo({
-      url: `../detail/index?id=${item._id}`
+      url: `../detail/index?detail_id=${item._id}`
     })
   }
   //分类详情
@@ -242,9 +241,6 @@ class Index extends Component {
                           <View className="bottom-top">{list.description}</View>
                           <View className="bottom-bottom">
                             <View className="bottom-left">￥{list.price}</View>
-                            <View className="bottom-right">
-                              <Image className="image" mode='aspectFill'  src={cart}/>
-                            </View>
                           </View>
                          </View>
                       </View>
@@ -270,9 +266,6 @@ class Index extends Component {
                 <View className="bottom-desc">{item.description}</View>
                 <View className="bottom-text">
                     <View className="text-left">￥{item.price}</View>
-                    <View className="text-right">
-                      <Image className="image" src={bay}/>
-                    </View>
                 </View>
               </View>
             </View>
