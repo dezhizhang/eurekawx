@@ -10,6 +10,7 @@ import detailCart from '../../images/icon/detail_cart.png'
 import detailService from '../../images/icon/detail_service.png'
 import detailShare from '../../images/icon/detail_share.png'
 import arrow from '../../images/icon/arrow.png'
+import detailSwiper from '../../images/detail_swiper.png'
 import  './index.less'
 
 type PageStateProps = {
@@ -52,7 +53,10 @@ class Index extends Component {
       detailData:[],
       focus_img:[],
       detail_img:[],
+      showModalStatus:true,
+      animationData:'',
     }
+    
     config: Config = {
     navigationBarTitleText: '商品详情'
   }
@@ -74,7 +78,48 @@ class Index extends Component {
       hideLoading()
     }
   }
-  
+  handleShowModal = () => {
+    let that = this;
+    let animation  = Taro.createAnimation({
+        duration: 200,
+        timingFunction: "linear",
+        delay: 0
+    });
+    this.state.animation = animation
+    animation.translateY(300).step();
+    this.setState({
+      animationData:animation.export(),
+      showModalStatus:true
+    });
+    setTimeout(function () {
+      animation.translateY(0).step()
+      that.setState({
+        animationData: animation.export()
+      })
+    }.bind(this), 200)
+
+  }
+  handlehideModal = () => {
+    let that = this;
+    let animation = Taro.createAnimation({
+      duration: 200,
+      timingFunction: "linear",
+      delay: 0
+    });
+    this.animation = animation
+    animation.translateY(300).step();
+    this.setState({
+      animationData: animation.export(),
+    });
+    setTimeout(function () {
+      animation.translateY(0).step()
+      that.setState({
+        animationData: animation.export(),
+        showModalStatus: false
+      })
+    }.bind(this), 200)
+
+  }
 
   componentWillUnmount () { }
 
@@ -83,7 +128,7 @@ class Index extends Component {
   componentDidHide () { }
 
   render () {
-    let { detailData,focus_img,detail_img } = this.state;
+    let { detailData,focus_img,detail_img,animationData,showModalStatus } = this.state;
    
     return (
      <ScrollView 
@@ -176,10 +221,42 @@ class Index extends Component {
                 <View className="store-text">购物车</View>
               </View>
             </View>
-            <View className="detail-bgitem item-cart">加入购物车</View>
+            <View onClick={this.handleShowModal} className="detail-bgitem item-cart">加入购物车</View>
             <View className="detail-bgitem item-buy">立即购买</View>
           </View>
         </View>
+        <View className="detail-bg" style={{display:false?'block':'none'}}></View>
+        <View animation={animationData} style={{display:showModalStatus?'block':'none'}} className="detail-modal">
+          <View className="modal-wrapper">
+             <View className="modal-box">
+               <View className="box-top">
+                 <View className="top-left">
+                   <Image src={detailSwiper} className="image"/>
+                 </View>
+                 <View className="top-right">
+                   <View className="right-icon" onClick={this.handlehideModal}>
+                     <Image src={detailService} className="image"/>
+                   </View>
+                   <View className="right-text">2019流行连衣裙</View>
+                   <View className="right-price">￥100.00</View>
+                 </View>
+               </View>
+               <View className="box-bottom">
+                 <View className="bottom-title">尺码</View>
+                 <View className="bottom-item">
+                   <View className="item-list">S码[70-90斤]</View>
+                   <View className="item-list list-left">S码[70-90斤]</View>
+                   <View className="item-list list-left">S码[70-90斤]</View>
+                   <View className="item-list ">S码[70-90斤]</View>
+                   <View className="item-list list-left">S码[70-90斤]</View>
+                   <View className="item-list list-left">S码[70-90斤]</View>
+                 </View>
+                
+               </View>
+             </View>
+          </View>
+        </View>
+
      </ScrollView>
     )
   }

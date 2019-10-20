@@ -3,6 +3,7 @@ import Taro, { Component, Config } from '@tarojs/taro'
 import { Provider } from '@tarojs/redux'
 import Index from './pages/index'
 import configStore from './store'
+import 'taro-ui/dist/style/index.scss'
 import './app.less'
 
 const store = configStore()
