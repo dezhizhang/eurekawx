@@ -251,12 +251,15 @@ class Index extends Component {
                  <View className="bottom-rule">颜色</View>
                  <View className="bottom-item">
                    <View className="item-list">红色</View>
-                   <View className="item-list list-left">粉色</View>
+                   <View className="item-list list-left">白色</View>
                    <View className="item-list list-left">绿色</View>
-                   <View className="item-list ">白色</View>
+                 </View>
+                 <View className="bottom-number">颜色</View>
+                 <View className="bottom-item">
+                 
                  </View>
                  <View className="bottom-btn">
-                   <Button>确定</Button>
+                   <Button className="btn">确定</Button>
                  </View>
                </View>
              </View>
