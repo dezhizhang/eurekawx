@@ -244,21 +244,16 @@ class Index extends Component {
                <View className="box-bottom">
                  <View className="bottom-title">尺码</View>
                  <View className="bottom-item">
-                   <View className="item-list">S码[70-90斤]</View>
-                   <View className="item-list list-left">S码[70-90斤]</View>
-                   <View className="item-list list-left">S码[70-90斤]</View>
-                   <View className="item-list ">S码[70-90斤]</View>
-                   <View className="item-list list-left">S码[70-90斤]</View>
-                   <View className="item-list list-left">S码[70-90斤]</View>
+                   <View className="item-list">小码</View>
+                   <View className="item-list list-left">中等码</View>
+                   <View className="item-list list-left">大码</View>
                  </View>
-                 <View className="bottom-rule">尺码</View>
+                 <View className="bottom-rule">颜色</View>
                  <View className="bottom-item">
-                   <View className="item-list">S码[70-90斤]</View>
-                   <View className="item-list list-left">S码[70-90斤]</View>
-                   <View className="item-list list-left">S码[70-90斤]</View>
-                   <View className="item-list ">S码[70-90斤]</View>
-                   <View className="item-list list-left">S码[70-90斤]</View>
-                   <View className="item-list list-left">S码[70-90斤]</View>
+                   <View className="item-list">红色</View>
+                   <View className="item-list list-left">粉色</View>
+                   <View className="item-list list-left">绿色</View>
+                   <View className="item-list ">白色</View>
                  </View>
                  <View className="bottom-btn">
                    <Button>确定</Button>
