@@ -126,7 +126,7 @@ class Index extends Component {
     if(number<=1) {
       showToast({
         title:'商品数量不能小于1',
-        icon:''
+        icon:'none'
       })
     } else {
       number--;
@@ -142,6 +142,12 @@ class Index extends Component {
       number
     });
   };
+  handleInputChange = (ev) => {
+    let value = ev.target.value;
+    this.setState({
+      number:value
+    });
+  }
   componentWillUnmount () { }
 
   componentDidShow () { }
@@ -274,7 +280,7 @@ class Index extends Component {
                   <View className="bottom-left"></View>
                   <View className="bottom-right">
                     <View onClick={this.handleSubtraction} className="number-left">-</View>
-                    <View className="number-center"><Input type='number' value={number}  className="input"/></View>
+                    <View className="number-center"><Input type='number' value={number} onChange={this.handleInputChange}  className="input"/></View>
                     <View className="number-right" onClick={this.handleAddition}>+</View>
                   </View>
                 </View>
