@@ -1,6 +1,6 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Swiper, SwiperItem,Image, ScrollView, Button} from '@tarojs/components'
+import { View, Swiper, SwiperItem,Image, ScrollView, Button,Input} from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import { getDetailInfo } from '../../service/api'
 import { showLoading,hideLoading,baseURL } from '../../utils/tools'
@@ -11,6 +11,7 @@ import detailService from '../../images/icon/detail_service.png'
 import detailShare from '../../images/icon/detail_share.png'
 import arrow from '../../images/icon/arrow.png'
 import detailSwiper from '../../images/detail_swiper.png'
+import close from '../../images/icon/close.png'
 import  './index.less'
 
 type PageStateProps = {
@@ -234,7 +235,7 @@ class Index extends Component {
                  </View>
                  <View className="top-right">
                    <View className="right-icon" onClick={this.handlehideModal}>
-                     <Image src={detailService} className="image"/>
+                     <Image src={close} className="image"/>
                    </View>
                    <View className="right-text">2019流行连衣裙</View>
                    <View className="right-price">￥100.00</View>
@@ -249,6 +250,14 @@ class Index extends Component {
                  <View className="bottom-item">
                    <View className="item-list">标色</View>
                  </View>
+                 <View className="right-bottom">
+                  <View className="bottom-left"></View>
+                  <View className="bottom-right">
+                    <View className="number-left">-</View>
+                    <View className="number-center"><Input className="input" value="1"/></View>
+                    <View className="number-right">+</View>
+                  </View>
+                </View>
                  <View className="bottom-btn">
                    <Button className="btn">确定</Button>
                  </View>
