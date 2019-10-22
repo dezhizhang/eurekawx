@@ -3,7 +3,7 @@ import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Swiper, SwiperItem,Image, ScrollView, Button,Input} from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import { getDetailInfo } from '../../service/api'
-import { showLoading,hideLoading,baseURL } from '../../utils/tools'
+import { showLoading,hideLoading,baseURL,showToast } from '../../utils/tools'
 import { add, minus, asyncAdd } from '../../actions/counter'
 import detailStore from '../../images/icon/detail_store.png'
 import detailCart from '../../images/icon/detail_cart.png'
@@ -56,6 +56,7 @@ class Index extends Component {
       detail_img:[],
       showModalStatus:true,
       animationData:'',
+      number:1,
     }
     
     config: Config = {
@@ -119,9 +120,28 @@ class Index extends Component {
         showModalStatus: false
       })
     }.bind(this), 200)
-
   }
-
+  handleSubtraction = () => {
+    let { number } = this.state;
+    if(number<=1) {
+      showToast({
+        title:'商品数量不能小于1',
+        icon:''
+      })
+    } else {
+      number--;
+    }
+    this.setState({
+      number
+    });
+  };
+  handleAddition = () => {
+    let { number } = this.state;
+    number++;
+    this.setState({
+      number
+    });
+  };
   componentWillUnmount () { }
 
   componentDidShow () { }
@@ -129,7 +149,7 @@ class Index extends Component {
   componentDidHide () { }
 
   render () {
-    let { detailData,focus_img,detail_img,animationData,showModalStatus } = this.state;
+    let { detailData,focus_img,detail_img,animationData,showModalStatus,number } = this.state;
    
     return (
      <ScrollView 
@@ -253,9 +273,9 @@ class Index extends Component {
                  <View className="right-bottom">
                   <View className="bottom-left"></View>
                   <View className="bottom-right">
-                    <View className="number-left">-</View>
-                    <View className="number-center"><Input className="input" value="1"/></View>
-                    <View className="number-right">+</View>
+                    <View onClick={this.handleSubtraction} className="number-left">-</View>
+                    <View className="number-center"><Input type='number' value={number}  className="input"/></View>
+                    <View className="number-right" onClick={this.handleAddition}>+</View>
                   </View>
                 </View>
                  <View className="bottom-btn">
