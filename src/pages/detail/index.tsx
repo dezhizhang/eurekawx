@@ -145,7 +145,6 @@ class Index extends Component {
             circular
             indicatorDots
             autoplay>
-    
             {focus_img&&focus_img.map((item,index) => {
               return (<SwiperItem key={index}>
                 <View className='swiper-item'>
@@ -244,19 +243,11 @@ class Index extends Component {
                <View className="box-bottom">
                  <View className="bottom-title">尺码</View>
                  <View className="bottom-item">
-                   <View className="item-list">小码</View>
-                   <View className="item-list list-left">中等码</View>
-                   <View className="item-list list-left">大码</View>
+                   <View className="item-list">标码</View>
                  </View>
-                 <View className="bottom-rule">颜色</View>
+                 <View className="bottom-title">颜色</View>
                  <View className="bottom-item">
-                   <View className="item-list">红色</View>
-                   <View className="item-list list-left">白色</View>
-                   <View className="item-list list-left">绿色</View>
-                 </View>
-                 <View className="bottom-number">颜色</View>
-                 <View className="bottom-item">
-                 
+                   <View className="item-list">标色</View>
                  </View>
                  <View className="bottom-btn">
                    <Button className="btn">确定</Button>
