@@ -4,7 +4,7 @@ import { View, Input, Radio,ScrollView,Image } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import { add, minus, asyncAdd } from '../../actions/counter'
 import arror from '../../images/icon/arrow.png'
-import detailSwiper from '../../images/detail_swiper.png'
+import { baseURL } from '../../utils/tools'
 import  './index.less'
 
 type PageStateProps = {
@@ -43,13 +43,21 @@ interface Index {
   }
 }))
 class Index extends Component {
-
+  state = {
+    cartList:[]
+  }
   config: Config = {
     navigationBarTitleText: '购物车'
   }
 
   componentWillReceiveProps (nextProps) {
     console.log(this.props, nextProps)
+  }
+  componentDidMount() {
+    const cartList = Taro.getStorageSync('cartList');
+    this.setState({
+      cartList
+    })
   }
 
   componentWillUnmount () { }
@@ -59,6 +67,9 @@ class Index extends Component {
   componentDidHide () { }
 
   render () {
+    let { cartList } = this.state;
+    console.log(cartList);
+
     return (
       <ScrollView className='cart'
         scrollY
@@ -73,78 +84,32 @@ class Index extends Component {
             </View>
           </View>
         </View>
-        {/* 列表 */}
-        <View className="content">
-          <View className="content-wrapper">
-            <View className="content-item">
-              <View className="item-left">
-                <Radio value='' checked className="radio"></Radio>
-              </View>
-              <View className="item-center">
-                <Image src={detailSwiper} className="image"/>
-              </View>
-              <View className="item-right">
-                <View className="right-top">新西兰皇家红苹果6个约135g/个 90元包邮送货上门</View>
-                <View className="right-bottom">
-                  <View className="bottom-left">￥27.90</View>
-                  <View className="bottom-right">
-                    <View className="number-left">-</View>
-                    <View className="number-center"><Input className="input" value="1"/></View>
-                    <View className="number-right">+</View>
+          {/* 列表 */}
+          {cartList.map((item,index) => {
+            return <View key={index} className="content">
+            <View className="content-wrapper">
+              <View className="content-item">
+                <View className="item-left">
+                  <Radio value='' checked className="radio"></Radio>
+                </View>
+                <View className="item-center">
+                  <Image src={`${baseURL}${item.goods_img}`} className="image"/>
+                </View>
+                <View className="item-right">
+                  <View className="right-top">{item.title}</View>
+                  <View className="right-bottom">
+                    <View className="bottom-left">￥{item.price}</View>
+                    <View className="bottom-right">
+                      <View className="number-left">-</View>
+                      <View className="number-center"><Input className="input" value={item.number}/></View>
+                      <View className="number-right">+</View>
+                    </View>
                   </View>
                 </View>
               </View>
             </View>
           </View>
-        </View>
-           {/* 列表 */}
-           <View className="content">
-          <View className="content-wrapper">
-            <View className="content-item">
-              <View className="item-left">
-                <Radio value='' checked className="radio"></Radio>
-              </View>
-              <View className="item-center">
-                <Image src={detailSwiper} className="image"/>
-              </View>
-              <View className="item-right">
-                <View className="right-top">新西兰皇家红苹果6个约135g/个 90元包邮送货上门</View>
-                <View className="right-bottom">
-                  <View className="bottom-left">￥27.90</View>
-                  <View className="bottom-right">
-                    <View className="number-left">-</View>
-                    <View className="number-center"><Input className="input" value="1"/></View>
-                    <View className="number-right">+</View>
-                  </View>
-                </View>
-              </View>
-            </View>
-          </View>
-        </View>
-           {/* 列表 */}
-           <View className="content">
-          <View className="content-wrapper">
-            <View className="content-item">
-              <View className="item-left">
-                <Radio value='' checked className="radio"></Radio>
-              </View>
-              <View className="item-center">
-                <Image src={detailSwiper} className="image"/>
-              </View>
-              <View className="item-right">
-                <View className="right-top">新西兰皇家红苹果6个约135g/个 90元包邮送货上门</View>
-                <View className="right-bottom">
-                  <View className="bottom-left">270px</View>
-                  <View className="bottom-right">
-                    <View className="number-left">-</View>
-                    <View className="number-center"><Input className="input" value="1"/></View>
-                    <View className="number-right">+</View>
-                  </View>
-                </View>
-              </View>
-            </View>
-          </View>
-        </View>
+          })}
         <View className="bottom">
           <View className="bottom-wrapper">
             <View className="item-one">

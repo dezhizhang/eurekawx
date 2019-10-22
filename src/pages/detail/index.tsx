@@ -10,7 +10,6 @@ import detailCart from '../../images/icon/detail_cart.png'
 import detailService from '../../images/icon/detail_service.png'
 import detailShare from '../../images/icon/detail_share.png'
 import arrow from '../../images/icon/arrow.png'
-import detailSwiper from '../../images/detail_swiper.png'
 import close from '../../images/icon/close.png'
 import  './index.less'
 
@@ -54,9 +53,10 @@ class Index extends Component {
       detailData:[],
       focus_img:[],
       detail_img:[],
-      showModalStatus:true,
+      showModalStatus:false,
       animationData:'',
       number:1,
+      cartList:[],
     }
     
     config: Config = {
@@ -146,6 +146,24 @@ class Index extends Component {
     let value = ev.target.value;
     this.setState({
       number:value
+    });
+  }
+  handleSubmit = () => {
+    let { number,detailData,focus_img,cartList} = this.state;
+    let title = detailData[0].title;
+    let price =  detailData[0].price;
+    let goods_img = focus_img[0]
+    let params = {
+      number,
+      title,
+      price,
+      goods_img
+    }
+    cartList.push(params);
+    this.setState({cartList});
+    Taro.setStorageSync('cartList',cartList);
+    Taro.switchTab({
+      url: '../cart/index'
     });
   }
   componentWillUnmount () { }
@@ -257,14 +275,14 @@ class Index extends Component {
              <View className="modal-box">
                <View className="box-top">
                  <View className="top-left">
-                   <Image src={detailSwiper} className="image"/>
+                   <Image src={`${baseURL}${detail_img&&detail_img[0]}`} className="image"/>
                  </View>
                  <View className="top-right">
                    <View className="right-icon" onClick={this.handlehideModal}>
                      <Image src={close} className="image"/>
                    </View>
-                   <View className="right-text">2019流行连衣裙</View>
-                   <View className="right-price">￥100.00</View>
+                   <View className="right-text">{detailData[0].title}</View>
+                   <View className="right-price">￥{detailData[0].price}</View>
                  </View>
                </View>
                <View className="box-bottom">
@@ -285,7 +303,7 @@ class Index extends Component {
                   </View>
                 </View>
                  <View className="bottom-btn">
-                   <Button className="btn">确定</Button>
+                   <Button onClick={this.handleSubmit} className="btn">确定</Button>
                  </View>
                </View>
              </View>
