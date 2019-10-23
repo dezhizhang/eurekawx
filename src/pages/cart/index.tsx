@@ -54,15 +54,17 @@ class Index extends Component {
     console.log(this.props, nextProps)
   }
   componentDidMount() {
+   
+  }
+
+  componentWillUnmount () { }
+
+  componentDidShow () { 
     const cartList = Taro.getStorageSync('cartList');
     this.setState({
       cartList
     })
   }
-
-  componentWillUnmount () { }
-
-  componentDidShow () { }
 
   componentDidHide () { }
 

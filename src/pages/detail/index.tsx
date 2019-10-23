@@ -149,7 +149,7 @@ class Index extends Component {
     });
   }
   handleSubmit = () => {
-    let { number,detailData,focus_img,cartList} = this.state;
+    let { number,detailData,focus_img } = this.state;
     let title = detailData[0].title;
     let price =  detailData[0].price;
     let goods_img = focus_img[0]
@@ -159,16 +159,23 @@ class Index extends Component {
       price,
       goods_img
     }
-    cartList.push(params);
-    this.setState({cartList});
-    Taro.setStorageSync('cartList',cartList);
-    Taro.switchTab({
-      url: '../cart/index'
-    });
+    // let cartList = Taro.getStorageSync('cartList' ) || [];
+    // cartList.push(params);
+    // Taro.setStorageSync('cartList',cartList);
+    // // Taro.switchTab({
+    // //   url: '../cart/index'
+    // // });
   }
   componentWillUnmount () { }
 
-  componentDidShow () { }
+  componentDidShow () {
+    let isLogin = Taro.getStorageSync('isLogin');
+    if(!isLogin) {
+      Taro.switchTab({
+        url: '../my/index'
+      })
+    }
+   }
 
   componentDidHide () { }
 
