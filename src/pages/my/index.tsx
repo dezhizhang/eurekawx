@@ -1,6 +1,6 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View,Image } from '@tarojs/components'
+import { View,Image, Button } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import { userLogin } from '../../service/api'
 import { add, minus, asyncAdd } from '../../actions/counter'
@@ -48,7 +48,9 @@ interface Index {
   }
 }))
 class Index extends Component {
+    state = {
 
+    }
     config: Config = {
     navigationBarTitleText: '我的'
   }
@@ -59,21 +61,29 @@ class Index extends Component {
 
   componentWillUnmount () { }
 
-  componentDidShow = async () => { 
-    const data = await Taro.login();
-    if(data.code) {
-      let params = {
-        code:data.code,
-        appid:'wx070d1456a4a9c0fb'
-      }
-      userLogin(params).then(res => {
-        console.log(res);
+  componentDidShow  = async() => { 
 
-      })
-    }
+    // const data = await Taro.login();
+    // if(data.code) {
+    //   let params = {
+    //     code:data.code,
+    //     appid:'wx070d1456a4a9c0fb'
+    //   }
+    //   userLogin(params).then(res => {
+    //     console.log(res);
+
+
+    //   });
+    
+
+    // }
+
+
 
   }
-
+  bindGetUserInfo = (e) => {
+    console.log(e.detail.userInfo)
+  }
   componentDidHide () { }
 
   render () {
@@ -244,6 +254,7 @@ class Index extends Component {
                 <Image src={arrow} className="image"/>
               </View>
             </View>
+           
         </View>
       </View>
     </View>
