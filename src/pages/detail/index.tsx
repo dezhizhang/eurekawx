@@ -149,6 +149,7 @@ class Index extends Component {
     });
   }
   handleSubmit = () => {
+    let that = this;
     let { number,detailData,focus_img } = this.state;
     let title = detailData[0].title;
     let price =  detailData[0].price;
@@ -162,13 +163,18 @@ class Index extends Component {
       goods_img,
       openid:userInfo.openid
     }
+    showLoading({title:'加入中'});
     userInfoCartSave(params).then(res => {
-      console.log(res);
-
+      hideLoading();
+      let cart = res.data;
+      if(cart.code == 200) {
+        showToast({title:cart.msg});
+        that.handlehideModal();
+        Taro.switchTab({
+          url:'../cart/index'
+        })
+      }
     });
-
-
-    
   }
   componentWillUnmount () { }
 
