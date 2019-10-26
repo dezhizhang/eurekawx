@@ -1,8 +1,8 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View,Image, Button } from '@tarojs/components'
-import { userLogin,userInfoSave } from '../../service/api'
-import { showModal,userInfoId } from '../../utils/tools'
+import { View, Button } from '@tarojs/components'
+import { userLogin } from '../../service/api'
+import { showModal } from '../../utils/tools'
 import { connect } from '@tarojs/redux'
 import { add, minus, asyncAdd } from '../../actions/counter'
 
@@ -73,9 +73,6 @@ class Index extends Component {
               userLogin(params).then(res => {
                   if(res.data.code == 200) {
                     let result = res.data.data;
-                    userInfoSave(result).then(res => {
-                      console.log(res);
-                    })
                     let userInfoKey = JSON.stringify(result);
                     Taro.setStorageSync('userInfoKey', userInfoKey);
                   }

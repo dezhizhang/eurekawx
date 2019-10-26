@@ -2,7 +2,7 @@ import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Swiper, SwiperItem,Image, ScrollView, Button,Input} from '@tarojs/components'
 import { connect } from '@tarojs/redux'
-import { getDetailInfo } from '../../service/api'
+import { getDetailInfo,userInfoCartSave } from '../../service/api'
 import { showLoading,hideLoading,baseURL,showToast } from '../../utils/tools'
 import { add, minus, asyncAdd } from '../../actions/counter'
 import detailStore from '../../images/icon/detail_store.png'
@@ -152,19 +152,23 @@ class Index extends Component {
     let { number,detailData,focus_img } = this.state;
     let title = detailData[0].title;
     let price =  detailData[0].price;
-    let goods_img = focus_img[0]
+    let goods_img = focus_img[0];
+    let userInfoKey = Taro.getStorageSync('userInfoKey');
+    let userInfo = JSON.parse(userInfoKey)
     let params = {
       number,
       title,
       price,
-      goods_img
+      goods_img,
+      openid:userInfo.openid
     }
-    // let cartList = Taro.getStorageSync('cartList' ) || [];
-    // cartList.push(params);
-    // Taro.setStorageSync('cartList',cartList);
-    // // Taro.switchTab({
-    // //   url: '../cart/index'
-    // // });
+    userInfoCartSave(params).then(res => {
+      console.log(res);
+
+    });
+
+
+    
   }
   componentWillUnmount () { }
 

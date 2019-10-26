@@ -17,8 +17,8 @@ export async function getProductList(params) {
   return request(`${Config.API_HOST}/api/product/list?page=${params.page}`);
 } 
 //提交维修
-export async function uploadInfo(data) {
-  return uploadFile(`${Config.API_HOST}/api/maintain/upload`,data);
+export async function uploadInfo(params) {
+  return uploadFile(`${Config.API_HOST}/api/maintain/upload`,params);
 } 
 //主打分类
 export async function getMainList(params) {
@@ -40,9 +40,12 @@ export async function getCategoryDetail(params) {
 export async function userLogin(params) {
   return request(`${Config.API_HOST}/api/userInfo/login?code=${params.code}&appid=${params.appid}`);
 }
-//保存用户信息
-export async function userInfoSave(params) {
-  return request(`${Config.API_HOST}/api/userInfo/save?openid=${params.openid}`)
+//购物车
+export async function userInfoCartSave(params) {
+  return request(`${Config.API_HOST}/api/cart/save`,{
+    method:'POST',
+    body:params
+  });
 }
 
 
