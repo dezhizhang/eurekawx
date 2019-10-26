@@ -51,6 +51,10 @@ export async function userInfoCartSave(params) {
 export async function getCartList(params) {
   return request(`${Config.API_HOST}/api/userInfo/cartList?openid=${params.openid}`);
 }
+//更新购物车数量
+export async function updateCartList(params) {
+  return request(`${Config.API_HOST}/api/cart/update?id=${params.id}&number=${params.number}`);
+}
 
 
 

@@ -84,6 +84,11 @@ class Index extends Component {
       this.setState({detailArr});
     }
   }
+  handleToDetail = (item) => {
+    Taro.navigateTo({
+      url:`../detail/index?classify_id=${item.classify_id}`
+    })
+  }
 
 
   componentWillUnmount () { }
@@ -109,24 +114,8 @@ class Index extends Component {
         scrollY
         className="right"
       >
-        {/* <View className="right-item">
-          <View className="item-box">
-            <View className="box-left">
-              <Image src={detailSwiper} className="image"/>
-            </View>
-            <View className="box-right">
-              <View className="right-top">品牌男士休闲运动装</View>
-              <View className="right-bottom">
-                <View className="bottom-left">￥280.00 </View>
-                <View className="bottom-right">
-                  <Image src={bay} className="image"/>
-                </View>
-              </View>
-            </View>
-          </View>
-        </View> */}
         {detailArr&&detailArr.map((item,index) => {
-          return ( <View key={index} className="right-item">
+          return ( <View key={index} className="right-item" onClick={() => this.handleToDetail(item)}>
           <View className="item-box">
             <View className="box-left">
               <Image src={`${baseURL}${item.classify_img}`} className="image"/>
@@ -135,9 +124,9 @@ class Index extends Component {
               <View className="right-top">{item.title}</View>
               <View className="right-bottom">
                 <View className="bottom-left">￥{item.price} </View>
-                <View className="bottom-right">
+                {/* <View className="bottom-right">
                   <Image src={bay} className="image"/>
-                </View>
+                </View> */}
               </View>
             </View>
           </View>

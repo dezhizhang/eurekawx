@@ -83,6 +83,11 @@ class Index extends Component {
       url:'../login/index'
     })
   }
+  handleOrder = () => {
+    Taro.navigateTo({
+      url:'../maintain/index'
+    })
+  }
   componentDidHide () { }
 
   render () {
@@ -211,14 +216,13 @@ class Index extends Component {
              </View>
           </View>
         </View>
-        <View className="content-item">
+        <View className="content-item" onClick={this.handleOrder}>
           <View className="item">
              <View className="icon-left">
                <Image className="image" src={msg}/>
              </View>
              <View className="text-left">我的预约</View>
              <View className="text-right">
-               {/* <View className="text-number">16</View> */}
              </View>
              <View className="icon-right">
                <Image src={arrow} className="image"/>

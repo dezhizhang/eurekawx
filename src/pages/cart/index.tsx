@@ -2,7 +2,7 @@ import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Input, Radio,ScrollView,Image } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
-import { getCartList } from '../../service/api'
+import { getCartList,updateCartList } from '../../service/api'
 import { showToast,baseURL } from '../../utils/tools'
 import { add, minus, asyncAdd } from '../../actions/counter'
 import arror from '../../images/icon/arrow.png'
@@ -77,6 +77,7 @@ class Index extends Component {
           let number = cartList[i].number;
           number--;
           cartList[i].number = number;
+          updateCartList({id:item._id,number:number});
         } else {
           showToast({title:'数量不能小于1',icon:'none'})
         }
@@ -92,6 +93,7 @@ class Index extends Component {
         let number = cartList[i].number;
         number++;
         cartList[i].number = number;
+        updateCartList({id:item._id,number:number});
       }
     }
     this.setState({cartList});
