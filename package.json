@@ -43,6 +43,7 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "taro-ui": "^2.2.4",
+    "uuid": "^3.3.3",
     "yarn": "^1.17.3"
   },
   "devDependencies": {

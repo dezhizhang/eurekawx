@@ -1,11 +1,11 @@
 Arguments: 
-  D:\node.exe D:\person\eurekawx\node_modules\_yarn@1.19.1@yarn\bin\yarn.js add @tarojs/plugin-sass --silent --no-progress -D
+  D:\node.exe C:\Users\1\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add @tarojs/uuid -S
 
 PATH: 
-  C:\Users\1\AppData\Roaming\npm\node_modules\npm\node_modules\npm-lifecycle\node-gyp-bin;D:\person\eurekawx\node_modules\.bin;D:\person\eurekawx\node_modules\.bin;C:\Users\1\AppData\Local\Yarn\Data\link\node_modules\.bin;D:\person\eurekawx\node_modules\.bin;C:\Users\1\AppData\Local\Yarn\Data\link\node_modules\.bin;C:\Users\1\AppData\Local\Yarn\bin;D:\libexec\lib\node_modules\npm\bin\node-gyp-bin;D:\lib\node_modules\npm\bin\node-gyp-bin;D:\node_modules\npm\bin\node-gyp-bin;D:\;C:\Program Files (x86)\NetSarang\Xshell 6\;C:\ProgramData\Oracle\Java\javapath;"C:\ProgramData\Oracle\Java\javapath;C:\Program Files\Java\jdk1.8.0_31\bin;C:\Program Files\Java\jdk1.8.0_31\jre\bin";"C:\Program Files (x86)\Intel\iCLS Client\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem";C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;D:\Git\cmd;C:\Program Files\MongoDB\Server\4.0\bin\;C:\Program Files\PuTTY\;D:\mongodb\bin\;C:\Program Files\Java\jdk1.8.0_31\bin;C:\Program Files\Java\jdk1.8.0_31\jre\bin;D:\mysql\bin;C:\Program Files\Dart\dart-sdk\bin;D:\futter\flutter_windows_v1.5.4-hotfix.2-stable\flutter\bin;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;D:\;C:\Users\1\AppData\Local\Programs\Python\Python37-32\Scripts\;C:\Users\1\AppData\Local\Programs\Python\Python37-32\;C:\Users\1\AppData\Local\Microsoft\WindowsApps;C:\Program Files (x86)\SSH Communications Security\SSH Secure Shell;D:\软件\Microsoft VS Code\bin;C:\Users\1\AppData\Roaming\npm;
+  C:\ProgramData\Oracle\Java\javapath;"C:\ProgramData\Oracle\Java\javapath;C:\Program Files\Java\jdk1.8.0_31\bin;C:\Program Files\Java\jdk1.8.0_31\jre\bin";"C:\Program Files (x86)\Intel\iCLS Client\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem";C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;D:\Git\cmd;C:\Program Files\MongoDB\Server\4.0\bin\;C:\Program Files\PuTTY\;D:\mongodb\bin\;C:\Program Files\Java\jdk1.8.0_31\bin;C:\Program Files\Java\jdk1.8.0_31\jre\bin;D:\mysql\bin;C:\Program Files\Dart\dart-sdk\bin;D:\futter\flutter_windows_v1.5.4-hotfix.2-stable\flutter\bin;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;D:\;C:\redis;C:\Users\1\AppData\Local\Programs\Python\Python37-32\Scripts\;C:\Users\1\AppData\Local\Programs\Python\Python37-32\;C:\Users\1\AppData\Local\Microsoft\WindowsApps;C:\Program Files (x86)\SSH Communications Security\SSH Secure Shell;D:\软件\Microsoft VS Code\bin;C:\Users\1\AppData\Roaming\npm;
 
 Yarn version: 
-  1.19.1
+  1.7.0
 
 Node version: 
   10.16.2
@@ -14,7 +14,17 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: ENOENT: no such file or directory, copyfile 'C:\Users\1\AppData\Local\Yarn\Cache\v6\npm-ansi-regex-3.0.0-ed0317c322064f79466c02966bddb605ab37d998\node_modules\ansi-regex\license' -> 'D:\person\eurekawx\node_modules\@webpack-contrib\schema-utils\node_modules\ansi-regex\license'
+  Error: https://registry.yarnpkg.com/@tarojs%2fuuid: Not found
+      at Request.params.callback [as _callback] (C:\Users\1\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:65656:18)
+      at Request.self.callback (C:\Users\1\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:134675:22)
+      at Request.emit (events.js:198:13)
+      at Request.<anonymous> (C:\Users\1\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:135658:10)
+      at Request.emit (events.js:198:13)
+      at IncomingMessage.<anonymous> (C:\Users\1\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:135578:12)
+      at Object.onceWrapper (events.js:286:20)
+      at IncomingMessage.emit (events.js:203:15)
+      at endReadableNT (_stream_readable.js:1145:12)
+      at process._tickCallback (internal/process/next_tick.js:63:19)
 
 npm manifest: 
   {
@@ -46,6 +56,7 @@ npm manifest:
     "dependencies": {
       "@tarojs/async-await": "1.3.18",
       "@tarojs/components": "1.3.18",
+      "@tarojs/plugin-sass": "^1.3.21",
       "@tarojs/redux": "1.3.18",
       "@tarojs/redux-h5": "1.3.18",
       "@tarojs/router": "1.3.18",
@@ -60,7 +71,8 @@ npm manifest:
       "redux": "^4.0.0",
       "redux-logger": "^3.0.6",
       "redux-thunk": "^2.3.0",
-      "taro-ui": "^2.2.2",
+      "taro-ui": "^2.2.4",
+      "uuid": "^3.3.3",
       "yarn": "^1.17.3"
     },
     "devDependencies": {
@@ -6816,9 +6828,10 @@ Lockfile:
       safe-buffer "^5.1.2"
       yallist "^3.0.3"
   
-  taro-ui@^2.2.2:
-    version "2.2.2"
-    resolved "https://registry.yarnpkg.com/taro-ui/-/taro-ui-2.2.2.tgz#485847ed2ac2343c394477b25bbea439e0adc03d"
+  taro-ui@^2.2.4:
+    version "2.2.4"
+    resolved "https://registry.yarnpkg.com/taro-ui/-/taro-ui-2.2.4.tgz#96a486432e86d6d0d1eda70383c47c3284f5e8e6"
+    integrity sha512-EkVxp6eWnz5QLqf89Z3OVrVBZK5bvr1RgrP5ABFNizA+sMYdjHqJRV0O07Ulmj+whGLckCF5ACeE1Q4+E7iMCg==
     dependencies:
       "@types/react" "^16.7.3"
       bind-decorator "^1.0.11"

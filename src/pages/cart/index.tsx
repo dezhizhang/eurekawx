@@ -3,9 +3,9 @@ import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Input, Radio,ScrollView,Image } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import { getCartList } from '../../service/api'
+import { showToast,baseURL } from '../../utils/tools'
 import { add, minus, asyncAdd } from '../../actions/counter'
 import arror from '../../images/icon/arrow.png'
-import { baseURL } from '../../utils/tools'
 import  './index.less'
 
 type PageStateProps = {
@@ -69,13 +69,55 @@ class Index extends Component {
   }
 
   componentWillUnmount () { }
+  handleDecrement = (item) => {
+    let { cartList } = this.state;
+    for(let i=0;i<cartList.length;i++) {
+      if(item._id == cartList[i]._id) {
+        if(cartList[i].number > 1) {
+          let number = cartList[i].number;
+          number--;
+          cartList[i].number = number;
+        } else {
+          showToast({title:'数量不能小于1',icon:'none'})
+        }
+      }
+    }
+    this.setState({cartList});
+  }
 
-
-
+  handleIncrement = (item) => {
+    let { cartList } = this.state;
+    for(let i=0;i<cartList.length;i++) {
+      if(item._id == cartList[i]._id) {
+        let number = cartList[i].number;
+        number++;
+        cartList[i].number = number;
+      }
+    }
+    this.setState({cartList});
+  }
+  handleNumberChange = (ev,item) => {
+    let value = ev.target.value;
+    if(value <=0) {
+      showToast({title:'数量不能小于0',icon:'none'});
+      return;
+    }
+    let { cartList } = this.state;
+    for(let i=0;i<cartList.length;i++) {
+      if(item._id == cartList[i]._id) {
+        cartList[i].number = value;
+      }
+    }
+    this.setState({cartList});
+  }
   componentDidHide () { }
 
   render () {
     let { cartList } = this.state;
+    let totalPrice = 0;
+    for(let i=0;i<cartList.length;i++) {
+      totalPrice += cartList[i].number * cartList[i].price
+    }
     return (
       <ScrollView className='cart'
         scrollY
@@ -106,9 +148,9 @@ class Index extends Component {
                   <View className="right-bottom">
                     <View className="bottom-left">￥{item.price}</View>
                     <View className="bottom-right">
-                      <View className="number-left">-</View>
-                      <View className="number-center"><Input className="input" value={item.number}/></View>
-                      <View className="number-right">+</View>
+                      <View className="number-left" onClick={() => this.handleDecrement(item)}>-</View>
+                      <View className="number-center"><Input className="input" disabled={true} onInput={(event) => this.handleNumberChange(event,item)} value={item.number} type="number"/></View>
+                      <View className="number-right" onClick={() => this.handleIncrement(item)}>+</View>
                     </View>
                   </View>
                 </View>
@@ -123,7 +165,7 @@ class Index extends Component {
             </View>
             <View className="item-two">全选</View>
             <View className="item-three">合计(不含运费)</View>
-            <View className="item-four">￥94.23</View>
+            <View className="item-four">￥{totalPrice}</View>
             <View className="item-six">去支付</View>
           </View>
         </View>
