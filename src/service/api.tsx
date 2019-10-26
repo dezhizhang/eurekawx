@@ -40,6 +40,10 @@ export async function getCategoryDetail(params) {
 export async function userLogin(params) {
   return request(`${Config.API_HOST}/api/userInfo/login?code=${params.code}&appid=${params.appid}`);
 }
+//保存用户信息
+export async function userInfoSave(params) {
+  return request(`${Config.API_HOST}/api/userInfo/save?openid=${params.openid}`)
+}
 
 
 

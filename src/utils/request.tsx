@@ -8,6 +8,7 @@ export const  request = (url, options) => {
         'Content-Type': 'application/json; charset=utf-8',
         ...newOptions.header
       };
+      newOptions.body = JSON.stringify(newOptions.body);
     } else {
       // newOptions.body is FormData
       newOptions.header = {
@@ -21,7 +22,6 @@ export const  request = (url, options) => {
       ...newOptions.header
     }
   }
-
   return Taro.request({url, ...newOptions})
 }
 

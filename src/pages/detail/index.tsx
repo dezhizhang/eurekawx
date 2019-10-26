@@ -169,8 +169,9 @@ class Index extends Component {
   componentWillUnmount () { }
 
   componentDidShow () {
-    let isLogin = Taro.getStorageSync('isLogin');
-    if(!isLogin) {
+    let result = Taro.getStorageSync('userInfo');
+    let userInfo = JSON.parse(result);
+    if(!userInfo) {
       Taro.switchTab({
         url: '../my/index'
       })

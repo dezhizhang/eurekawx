@@ -1,7 +1,7 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View,Image, Button } from '@tarojs/components'
-import { userLogin } from '../../service/api'
+import { userLogin,userInfoSave } from '../../service/api'
 import { showModal,userInfoId } from '../../utils/tools'
 import { connect } from '@tarojs/redux'
 import { add, minus, asyncAdd } from '../../actions/counter'
@@ -73,6 +73,9 @@ class Index extends Component {
               userLogin(params).then(res => {
                   if(res.data.code == 200) {
                     let result = res.data.data;
+                    userInfoSave(result).then(res => {
+                      console.log(res);
+                    })
                     let userInfoKey = JSON.stringify(result);
                     Taro.setStorageSync('userInfoKey', userInfoKey);
                   }
@@ -93,13 +96,13 @@ class Index extends Component {
   bindGetUserInfo = (ev) => {
     if(ev.detail.userInfo){
       let result  = ev.detail.userInfo;
-      let userId = userInfoId(6);
-      result.userId = userId;
+     
       let userInfo = JSON.stringify(result);
       Taro.setStorageSync('userInfo', userInfo);
       Taro.switchTab({
         url:'../my/index'
       });
+     
     } else {
       showModal({
         title:'警告',
