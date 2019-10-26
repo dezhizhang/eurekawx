@@ -1,5 +1,5 @@
 // export const baseURL = 'https://www.eureka.net.cn'
-export const baseURL = 'http://192.168.0.140:7001'
+export const baseURL = 'http://127.0.0.1:7001'
 import Taro from '@tarojs/taro'
 
 //提示
