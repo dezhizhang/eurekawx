@@ -2,7 +2,7 @@ import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View,Image, Button } from '@tarojs/components'
 import { userLogin } from '../../service/api'
-import { showModal,showLoading,hideLoading } from '../../utils/tools'
+import { showModal,userInfoId } from '../../utils/tools'
 import { connect } from '@tarojs/redux'
 import { add, minus, asyncAdd } from '../../actions/counter'
 
@@ -61,29 +61,20 @@ class Index extends Component {
 
   }
   componentDidMount() {
-    let that = this;
     Taro.getSetting().then(res => {
       if(res.authSetting['scope.userInfo']) {
         Taro.getUserInfo().then(res => {
           if(res.userInfo) {
-            let result  = res.userInfo;
-            let userInfo = JSON.stringify(result);
-            Taro.setStorageSync('userInfo', userInfo);
             Taro.login().then(res => {
               let params = {
                 code:res.code,
                 appid:'wx070d1456a4a9c0fb',
               }
-              showLoading({title:'登录中'});
               userLogin(params).then(res => {
                   if(res.data.code == 200) {
-                    hideLoading();
                     let result = res.data.data;
                     let userInfoKey = JSON.stringify(result);
                     Taro.setStorageSync('userInfoKey', userInfoKey);
-                    Taro.switchTab({
-                      url:'../my/index'
-                    })
                   }
               })
             })
@@ -96,10 +87,28 @@ class Index extends Component {
             })
           }
         })
-      } else {
-        that.setState({isHide:true});
-      }
+      } 
     })
+  }
+  bindGetUserInfo = (ev) => {
+    if(ev.detail.userInfo){
+      let result  = ev.detail.userInfo;
+      let userId = userInfoId(6);
+      result.userId = userId;
+      let userInfo = JSON.stringify(result);
+      Taro.setStorageSync('userInfo', userInfo);
+      Taro.switchTab({
+        url:'../my/index'
+      });
+    } else {
+      showModal({
+        title:'警告',
+        content:'您还没有授权，请重新授权!',
+        showCancel:false,
+        confirmText:'授权登录'
+      })
+    }
+   
   }
 
   componentDidHide () { }
@@ -107,7 +116,7 @@ class Index extends Component {
   render () {
     return (
     <View className="login">
-        <Button openType="getUserInfo" type="primary">登录授权</Button>
+        <Button openType="getUserInfo" type="primary" onGetUserInfo={this.bindGetUserInfo}>登录授权</Button>
      
     </View>
     )
