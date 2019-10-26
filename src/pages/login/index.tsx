@@ -116,8 +116,9 @@ class Index extends Component {
   render () {
     return (
     <View className="login">
-        <Button openType="getUserInfo" type="primary" onGetUserInfo={this.bindGetUserInfo}>登录授权</Button>
-     
+      <View className="login-weapper">
+        <Button openType="getUserInfo" className="btn" type="primary" onGetUserInfo={this.bindGetUserInfo}>微信一键登录</Button>
+      </View>
     </View>
     )
   }

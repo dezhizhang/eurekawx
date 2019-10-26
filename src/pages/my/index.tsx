@@ -78,6 +78,11 @@ class Index extends Component {
       })
     }
   }
+  handleToLogin =() => {
+    Taro.navigateTo({
+      url:'../login/index'
+    })
+  }
   componentDidHide () { }
 
   render () {
@@ -89,7 +94,7 @@ class Index extends Component {
             <View className="header_image">
               <Image className="image" src={myHeader}/>
             </View>
-            <View className="header_avatar">
+            <View className="header_avatar" onClick={this.handleToLogin}>
               <Image src={userInfo&&userInfo.avatarUrl ? userInfo.avatarUrl:avatar} className="avatar"/>
             </View>
             <View className="header_user">
