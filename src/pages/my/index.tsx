@@ -61,25 +61,8 @@ class Index extends Component {
 
   componentWillUnmount () { }
 
-  componentDidShow  = async() => { 
-
-    // const data = await Taro.login();
-    // if(data.code) {
-    //   let params = {
-    //     code:data.code,
-    //     appid:'wx070d1456a4a9c0fb'
-    //   }
-    //   userLogin(params).then(res => {
-    //     console.log(res);
-
-
-    //   });
+  componentDidShow() {
     
-
-    // }
-
-
-
   }
   handleToLogin = () => {
     Taro.navigateTo({

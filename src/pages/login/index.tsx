@@ -1,6 +1,8 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View,Image, Button } from '@tarojs/components'
+import { userLogin } from '../../service/api'
+import { showModal,showLoading,hideLoading } from '../../utils/tools'
 import { connect } from '@tarojs/redux'
 import { add, minus, asyncAdd } from '../../actions/counter'
 
@@ -43,10 +45,10 @@ interface Index {
 }))
 class Index extends Component {
     state = {
-
+      isHide:false
     }
     config: Config = {
-    navigationBarTitleText: '我的'
+    navigationBarTitleText: '登录'
   }
 
   componentWillReceiveProps (nextProps) {
@@ -55,65 +57,62 @@ class Index extends Component {
 
   componentWillUnmount () { }
 
-  componentDidShow  = async() => { 
-
-    // const data = await Taro.login();
-    // if(data.code) {
-    //   let params = {
-    //     code:data.code,
-    //     appid:'wx070d1456a4a9c0fb'
-    //   }
-    //   userLogin(params).then(res => {
-    //     console.log(res);
-
-
-    //   });
-    
-
-    // }
-   
-
-
-
-
-
+  componentDidShow() {
 
   }
-  componentDidMount = async () =>  {
-  
-  }
-  bindGetUserInfo = async (e) => {
- 
-    let res =await Taro.getSetting();
-    if(!res.authSetting['scope.userInfo']) {
-        await Taro.authorize({scope: 'scope.userInfo'});
+  componentDidMount() {
+    let that = this;
+    Taro.getSetting().then(res => {
+      if(res.authSetting['scope.userInfo']) {
         Taro.getUserInfo().then(res => {
-            console.log(res);
-            
+          if(res.userInfo) {
+            let result  = res.userInfo;
+            let userInfo = JSON.stringify(result);
+            Taro.setStorageSync('userInfo', userInfo);
+            Taro.login().then(res => {
+              let params = {
+                code:res.code,
+                appid:'wx070d1456a4a9c0fb',
+              }
+              showLoading({title:'登录中'});
+              userLogin(params).then(res => {
+                  if(res.data.code == 200) {
+                    hideLoading();
+                    let result = res.data.data;
+                    let userInfoKey = JSON.stringify(result);
+                    Taro.setStorageSync('userInfoKey', userInfoKey);
+                    Taro.switchTab({
+                      url:'../my/index'
+                    })
+                  }
+              })
+            })
+          } else {
+            showModal({
+              title:'警告',
+              content:'您还没有授权，请重新授权!',
+              showCancel:false,
+              confirmText:'授权登录'
+            })
+          }
         })
-      
-
-
-    }
-    console.log(e.detail.userInfo)
+      } else {
+        that.setState({isHide:true});
+      }
+    })
   }
+
   componentDidHide () { }
 
   render () {
     return (
     <View className="login">
-        <Button openType="getUserInfo" onClick={this.bindGetUserInfo}>登录授权</Button>
+        <Button openType="getUserInfo" type="primary">登录授权</Button>
      
     </View>
     )
   }
 }
 
-// #region 导出注意
-//
-// 经过上面的声明后需要将导出的 Taro.Component 子类修改为子类本身的 props 属性
-// 这样在使用这个子类时 Ts 才不会提示缺少 JSX 类型参数错误
-//
-// #endregion
 
 export default Index as ComponentClass<PageOwnProps, PageState>

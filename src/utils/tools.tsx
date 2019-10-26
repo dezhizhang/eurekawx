@@ -21,3 +21,11 @@ export const showLoading = (params) => {
 export const hideLoading = () => {
     Taro.hideLoading()
 }
+export const showModal = (params) => {
+    Taro.showModal({
+        title: params.title || '',
+        content: params.content || '',
+        showCancel:params.showCancel ||  false,
+        confirmText:params.confirmText
+    })
+}
