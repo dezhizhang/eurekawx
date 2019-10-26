@@ -2,6 +2,7 @@ import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Input, Radio,ScrollView,Image } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
+import { getCartList } from '../../service/api'
 import { add, minus, asyncAdd } from '../../actions/counter'
 import arror from '../../images/icon/arrow.png'
 import { baseURL } from '../../utils/tools'
@@ -53,25 +54,28 @@ class Index extends Component {
   componentWillReceiveProps (nextProps) {
     console.log(this.props, nextProps)
   }
-  componentDidMount() {
-   
+  componentDidShow() {
+    let userInfoKey = Taro.getStorageSync('userInfoKey');
+    let userInfo = JSON.parse(userInfoKey);
+    if(userInfo) {
+      getCartList({...userInfo}).then(res=> {
+        let list = res.data;
+        if(list.code == 200) {
+          let cartList = list.data;
+          this.setState({cartList});
+        }
+      })
+    }
   }
 
   componentWillUnmount () { }
 
-  componentDidShow () { 
-    const cartList = Taro.getStorageSync('cartList');
-    this.setState({
-      cartList
-    })
-  }
+
 
   componentDidHide () { }
 
   render () {
     let { cartList } = this.state;
-    console.log(cartList);
-
     return (
       <ScrollView className='cart'
         scrollY

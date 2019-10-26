@@ -47,6 +47,10 @@ export async function userInfoCartSave(params) {
     body:params
   });
 }
+//获取购物车详情
+export async function getCartList(params) {
+  return request(`${Config.API_HOST}/api/userInfo/cartList?openid=${params.openid}`);
+}
 
 
 
