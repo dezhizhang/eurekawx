@@ -2,7 +2,7 @@ import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Input, Radio,ScrollView,Image } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
-import { getCartList,updateCartList } from '../../service/api'
+import { getCartList,updateCartList,userLogin } from '../../service/api'
 import { showToast,baseURL } from '../../utils/tools'
 import { add, minus, asyncAdd } from '../../actions/counter'
 import arror from '../../images/icon/arrow.png'
@@ -54,15 +54,20 @@ class Index extends Component {
   componentWillReceiveProps (nextProps) {
     console.log(this.props, nextProps)
   }
-  componentDidShow() {
-    let userInfoKey = Taro.getStorageSync('userInfoKey');
-    let userInfo = JSON.parse(userInfoKey);
-    if(userInfo) {
-      getCartList({...userInfo}).then(res=> {
-        let list = res.data;
-        if(list.code == 200) {
-          let cartList = list.data;
-          this.setState({cartList});
+  componentDidShow = async () =>  {
+    let that = this;
+    let login =await Taro.login();
+    let params = {
+      code:login.code,
+      appid:'wx070d1456a4a9c0fb'
+    }
+    let result =await userLogin(params);
+    if(result.data.code == 200) {
+      let userInfo = result.data.data;
+      getCartList(userInfo).then(res => {
+        if(res.data.code == 200) {
+          let cartList = res.data.data;
+          that.setState({cartList});
         }
       })
     }
