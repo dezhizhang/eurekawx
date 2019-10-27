@@ -2,7 +2,7 @@ import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Swiper, SwiperItem,Image, ScrollView, Button,Input} from '@tarojs/components'
 import { connect } from '@tarojs/redux'
-import { getDetailInfo,userInfoCartSave } from '../../service/api'
+import { getDetailInfo,userInfoCartSave,getPayInfo,userLogin } from '../../service/api'
 import { showLoading,hideLoading,baseURL,showToast } from '../../utils/tools'
 import { add, minus, asyncAdd } from '../../actions/counter'
 import detailStore from '../../images/icon/detail_store.png'
@@ -155,7 +155,7 @@ class Index extends Component {
     let price =  detailData[0].price;
     let goods_img = focus_img[0];
     let userInfoKey = Taro.getStorageSync('userInfoKey');
-    let userInfo = JSON.parse(userInfoKey)
+    let userInfo =userInfoKey ? JSON.parse(userInfoKey):''
     let params = {
       number,
       title,
@@ -165,22 +165,68 @@ class Index extends Component {
     }
     showLoading({title:'加入中'});
     userInfoCartSave(params).then(res => {
-      hideLoading();
-      let cart = res.data;
-      if(cart.code == 200) {
-        showToast({title:cart.msg});
-        that.handlehideModal();
-        Taro.switchTab({
-          url:'../cart/index'
-        })
-      }
-    });
+    hideLoading();
+    let cart = res.data;
+    if(cart.code == 200) {
+      showToast({title:cart.msg});
+      that.handlehideModal();
+      Taro.switchTab({
+        url:'../cart/index'
+      })
+    }
+  });
+  }
+  handlePayment = async() => {
+    let loginInfo = await Taro.login();
+    let userInfo = await userLogin({code:loginInfo.code,appid:'wx070d1456a4a9c0fb'});
+    if(userInfo.data.code == 200) {
+      let result = userInfo.data.data
+      let payInfo = await getPayInfo(result);
+      console.log(payInfo);
+
+    }
+    
+
+   
+
+    // Taro.login().then(res => {
+    //   let params = {
+    //     code:res.code,
+    //     appid:'wx070d1456a4a9c0fb',
+    //   }
+    //   userLogin(params).then(res => {
+    //       if(res.data.code == 200) {
+    //         let result = res.data.data;
+    //         let userInfoKey = JSON.stringify(result);
+    //         Taro.setStorageSync('userInfoKey', userInfoKey);
+    //       }
+    //   })
+    // })
+    // getPayInfo(params).then(res => {
+    //   console.log(res);
+
+    // })
+    // let params = {
+    //   timeStamp:'111',
+    //   nonceStr:'222',
+    //   package:'444',
+    //   paySign:'5555',
+    //   signType:'MD5'
+    // }
+    // Taro.requestPayment(params).then(res => {
+    //      console.log(res);
+
+    // })
+
+   
+
   }
   componentWillUnmount () { }
 
   componentDidShow () {
+
     let result = Taro.getStorageSync('userInfo');
-    let userInfo = JSON.parse(result);
+    let userInfo = result ? JSON.parse(result):''
     if(!userInfo) {
       Taro.switchTab({
         url: '../my/index'
@@ -284,7 +330,7 @@ class Index extends Component {
               </View>
             </View>
             <View onClick={this.handleShowModal} className="detail-bgitem item-cart">加入购物车</View>
-            <View className="detail-bgitem item-buy">立即购买</View>
+            <View className="detail-bgitem item-buy" onClick={this.handlePayment}>立即购买</View>
           </View>
         </View>
         <View className="detail-bg" style={{display:false?'block':'none'}}></View>

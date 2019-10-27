@@ -55,6 +55,13 @@ export async function getCartList(params) {
 export async function updateCartList(params) {
   return request(`${Config.API_HOST}/api/cart/update?id=${params.id}&number=${params.number}`);
 }
+//获取预支付信息
+export async function getPayInfo(params) {
+  return request(`${Config.API_HOST}/api/userInfo/pay`,{
+    method:'POST',
+    body:params
+  })
+}
 
 
 
