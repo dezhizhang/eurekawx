@@ -1,6 +1,6 @@
 const config = {
     development: {
-      API_HOST: 'http://192.168.0.140:7001',
+      API_HOST: 'https://www.eureka.net.cn',
       HOST_TITLE: '(开发环境)',
       QINIU_KEY: '',
       BAIDU_MAP_AK: '',
