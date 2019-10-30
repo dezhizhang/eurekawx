@@ -66,7 +66,10 @@ export async function getPayInfo(params) {
 export async function deleteCart(params) {
   return request(`${Config.API_HOST}/api/cart/delete?id=${params.id}`)
 }
-
+//更新购物车状态
+export async function updateCartStatus(params) {
+  return request(`${Config.API_HOST}/api/cart/status?id=${params.id}&checked=${params.checked}`);
+}
 
 
 

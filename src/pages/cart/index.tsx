@@ -2,7 +2,7 @@ import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Input, Radio,ScrollView,Image,Icon } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
-import { getCartList,updateCartList,userLogin,deleteCart } from '../../service/api'
+import { getCartList,updateCartList,userLogin,deleteCart,updateCartStatus } from '../../service/api'
 import { showToast,baseURL } from '../../utils/tools'
 import { add, minus, asyncAdd } from '../../actions/counter'
 import arror from '../../images/icon/arrow.png'
@@ -128,12 +128,18 @@ class Index extends Component {
       this.getListInfo()
     }
   }
-  handleRadio = (item) => {
+  handleRadio = async(item) => {
+    let checked = false;
     let { cartList } = this.state;
     for(let i=0;i<cartList.length;i++) {
       if(cartList[i]._id == item._id) {
-        cartList[i].checked  =   cartList[i].checked ? false:true
+        cartList[i].checked  = cartList[i].checked ? false:true;
+        checked = cartList[i].checked ? true:false;
       }
+    }
+    let res = await updateCartStatus({id:item._id,checked});
+    if(res.data.code == 200) {
+      console.log(res);
     }
     this.setState({cartList});
   }
