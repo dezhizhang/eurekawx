@@ -9,7 +9,6 @@ import category from '../../images/category.png'
 import facility from '../../images/facility.png'
 import stationery from '../../images/stationery.png'
 import evenmore from '../../images/evenmore.png'
-import cart from '../../images/icon/cart.png'
 import  './index.less'
 
 
@@ -127,7 +126,7 @@ class Index extends Component {
     }
   }
   handleAdvert = () => {
-    Taro.switchTab({
+    Taro.navigateTo({
       url: '../maintain/index'
     });
   }
