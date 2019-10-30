@@ -1,6 +1,6 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Input, Radio,ScrollView,Image } from '@tarojs/components'
+import { View, Input, Radio,ScrollView,Image,Icon } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import { getCartList,updateCartList,userLogin } from '../../service/api'
 import { showToast,baseURL } from '../../utils/tools'
@@ -151,7 +151,10 @@ class Index extends Component {
                   <Image src={`${baseURL}${item.goods_img}`} className="image"/>
                 </View>
                 <View className="item-right">
-                  <View className="right-top">{item.title}</View>
+                  <View className="right-title">
+                    <View className="title-left">{item.title}</View>
+                    <View className="title-right"><Icon size='20' type='clear'/></View>
+                  </View>
                   <View className="right-bottom">
                     <View className="bottom-left">￥{item.price}</View>
                     <View className="bottom-right">
