@@ -2,7 +2,7 @@ import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Input, Radio,ScrollView,Image,Icon } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
-import { getCartList,updateCartList,userLogin } from '../../service/api'
+import { getCartList,updateCartList,userLogin,deleteCart } from '../../service/api'
 import { showToast,baseURL } from '../../utils/tools'
 import { add, minus, asyncAdd } from '../../actions/counter'
 import arror from '../../images/icon/arrow.png'
@@ -54,7 +54,11 @@ class Index extends Component {
   componentWillReceiveProps (nextProps) {
     console.log(this.props, nextProps)
   }
-  componentDidShow = async () =>  {
+  componentDidShow(){
+    this.getListInfo();
+  }
+
+  getListInfo = async () => {
     let that = this;
     let login =await Taro.login();
     let params = {
@@ -117,6 +121,13 @@ class Index extends Component {
     }
     this.setState({cartList});
   }
+  handleDeleteCart = async(item) => {
+    let res = await deleteCart({id:item._id});
+    let data = res.data;
+    if(data.code == 200) {
+      this.getListInfo()
+    }
+  }
   componentDidHide () { }
 
   render () {
@@ -153,7 +164,7 @@ class Index extends Component {
                 <View className="item-right">
                   <View className="right-title">
                     <View className="title-left">{item.title}</View>
-                    <View className="title-right"><Icon size='20' type='clear'/></View>
+                    <View className="title-right" onClick={() => this.handleDeleteCart(item)}><Icon size='20' type='clear'/></View>
                   </View>
                   <View className="right-bottom">
                     <View className="bottom-left">￥{item.price}</View>

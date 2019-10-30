@@ -62,6 +62,10 @@ export async function getPayInfo(params) {
     body:params
   })
 }
+//删除购物车
+export async function deleteCart(params) {
+  return request(`${Config.API_HOST}/api/cart/delete?id=${params.id}`)
+}
 
 
 
