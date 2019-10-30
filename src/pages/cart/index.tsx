@@ -128,13 +128,24 @@ class Index extends Component {
       this.getListInfo()
     }
   }
+  handleRadio = (item) => {
+    let { cartList } = this.state;
+    for(let i=0;i<cartList.length;i++) {
+      if(cartList[i]._id == item._id) {
+        cartList[i].checked  =   cartList[i].checked ? false:true
+      }
+    }
+    this.setState({cartList});
+  }
   componentDidHide () { }
 
   render () {
     let { cartList } = this.state;
     let totalPrice = 0;
     for(let i=0;i<cartList.length;i++) {
-      totalPrice += cartList[i].number * cartList[i].price
+      if(cartList[i].checked) {
+        totalPrice += cartList[i].number * cartList[i].price
+      }
     }
     return (
       <ScrollView className='cart'
@@ -156,7 +167,7 @@ class Index extends Component {
             <View className="content-wrapper">
               <View className="content-item">
                 <View className="item-left">
-                  <Radio value='' checked className="radio"></Radio>
+                  <Radio value="" color="#735ff7" checked={item.checked} className="radio" onClick={() => this.handleRadio(item)}></Radio>
                 </View>
                 <View className="item-center">
                   <Image src={`${baseURL}${item.goods_img}`} className="image"/>
