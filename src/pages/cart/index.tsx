@@ -78,7 +78,7 @@ class Index extends Component {
   }
 
   componentWillUnmount () { }
-  handleDecrement = (item) => {
+  handleDecrement = async(item) => {
     let { cartList } = this.state;
     for(let i=0;i<cartList.length;i++) {
       if(item._id == cartList[i]._id) {
@@ -88,7 +88,11 @@ class Index extends Component {
           cartList[i].number = number;
           updateCartList({id:item._id,number:number});
         } else {
-          showToast({title:'数量不能小于1',icon:'none'})
+          let res = await deleteCart({id:item._id});
+          let data = res.data;
+          if(data.code == 200) {
+            this.getListInfo()
+          }
         }
       }
     }
@@ -120,13 +124,6 @@ class Index extends Component {
       }
     }
     this.setState({cartList});
-  }
-  handleDeleteCart = async(item) => {
-    let res = await deleteCart({id:item._id});
-    let data = res.data;
-    if(data.code == 200) {
-      this.getListInfo()
-    }
   }
   handleRadio = async(item) => {
     let checked = false;
@@ -181,7 +178,6 @@ class Index extends Component {
                 <View className="item-right">
                   <View className="right-title">
                     <View className="title-left">{item.title}</View>
-                    <View className="title-right" onClick={() => this.handleDeleteCart(item)}><Icon size='20' type='clear'/></View>
                   </View>
                   <View className="right-bottom">
                     <View className="bottom-left">￥{item.price}</View>
