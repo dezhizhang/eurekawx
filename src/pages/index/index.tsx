@@ -193,17 +193,17 @@ class Index extends Component {
               circular
               indicatorDots
               autoplay>
-              {focusData.length && focusData.map((item,index) => {
+              {focusData.length && focusData.map(item => {
                 return (
-                  <SwiperItem key={index}>
+                  <SwiperItem>
                     <View className="bannner"><Image className="banner_image" mode='aspectFill' src={`${baseURL}${item.focus_img}`}/></View>
                   </SwiperItem>)
                 })}
             </Swiper>
             <View className="category">
-               {classifyArr.map((item,index) => {
+               {classifyArr.map(item => {
                 return (
-                  <View key={index} className="item" onClick={() => this.handleToCateDetail(item)}>
+                  <View className="item" onClick={() => this.handleToCateDetail(item)}>
                     <View className="top">
                       <View className="image_wrapper">
                           <Image className="image" mode='aspectFill'  src={item.src}/>
@@ -214,8 +214,8 @@ class Index extends Component {
                 )})}
             </View>
             <View className="advert" onClick={this.handleAdvert}>
-              {advertData.length&&advertData.map((item,index) => {
-                return (<Image className="advert_image" key={index} mode='aspectFill' src={`${baseURL}${item.advert_img}`}></Image>)
+              {advertData.length&&advertData.map(item => {
+                return (<Image className="advert_image" mode='aspectFill' src={`${baseURL}${item.advert_img}`}></Image>)
               })}
             </View>
             <View className="hot">
@@ -228,11 +228,11 @@ class Index extends Component {
                   circular
                   autoplay
                   >
-                  {hotArr.map((item,index) => {
-                    return <SwiperItem key={index}>
+                  {hotArr.map(item => {
+                    return <SwiperItem >
                      <View className='swiper-item'>
-                       {item.map((list,number) => {
-                         return <View className='item' key={number} onClick={() => this.handleToDetail(list)}>
+                       {item.map(list => {
+                         return <View className='item' onClick={() => this.handleToDetail(list)}>
                          <View className="item-top">
                              <Image className="image" mode='aspectFill'  src={`${baseURL}${list.product_url}`}/>
                          </View>
@@ -256,8 +256,8 @@ class Index extends Component {
           </View>
           <View className='product_item'>
           <View className="product_wrapper">
-            {listData.map((item,index) => {
-              return  <View className="item" key={index} onClick={() =>this.handleToDetail(item)}>
+            {listData.map(item => {
+              return  <View className="item" onClick={() =>this.handleToDetail(item)}>
               <View className="item-top">
                 <Image className="image" mode='aspectFill'  src={`${baseURL}${item.product_url}`}/>
               </View>

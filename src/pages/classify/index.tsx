@@ -88,8 +88,8 @@ class Index extends Component {
       >
         <View className="wrapper">
             <View className="list">
-                {classifyArr&&classifyArr.map((item,index) => {
-                  return (<View key={index} onClick={() => this.handleToDetail(item)} className="list-item">
+                {classifyArr&&classifyArr.map(item => {
+                  return (<View  onClick={() => this.handleToDetail(item)} className="list-item">
                   <View className="item-top">
                       <Image src={`${baseURL}${item.main_img}`} className="image"/>
                   </View>
