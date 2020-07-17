@@ -22,7 +22,9 @@ type PageDispatchProps = {
 
 type PageOwnProps = {}
 
-type PageState = {}
+type PageState = {
+  classifyArr:any
+}
 
 type IProps = PageStateProps & PageDispatchProps & PageOwnProps
 
@@ -95,12 +97,12 @@ class Index extends Component {
                   </View>
                   <View className="item-bottom">
                      <View className="bottom-wrapper">
-                         <View className="wrapper-top">{item.title}</View>
+                        <View className="wrapper-top">{item.title}</View>
                          <View className="wrapper-bottom">
-                             <View className="bottom-left">￥{item.price}</View>
-                             <View className="bottom-right">
-                                 <Image src={bay} className="image"/>
-                             </View>
+                            <View className="bottom-left">￥{item.price}</View>
+                            <View className="bottom-right">
+                              <Image src={bay} className="image"/>
+                            </View>
                          </View>
                      </View>
                   </View>
