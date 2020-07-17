@@ -80,7 +80,7 @@ class Index extends Component {
     }
 
   config: Config = {
-    navigationBarTitleText: 'e瑞轻办公文具'
+    navigationBarTitleText: '贵彩办公'
   }
 
   componentWillReceiveProps (nextProps) {
