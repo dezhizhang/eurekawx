@@ -1,6 +1,6 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Input, Radio,ScrollView,Image,Icon } from '@tarojs/components'
+import { View, Input, Radio,ScrollView,Image,} from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import { getCartList,updateCartList,userLogin,deleteCart,updateCartStatus } from '../../service/api'
 import { showToast,baseURL } from '../../utils/tools'
