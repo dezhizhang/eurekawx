@@ -20,9 +20,9 @@ export async function getProductList(params) {
 export async function uploadInfo(params) {
   return uploadFile(`${Config.API_HOST}/api/maintain/upload`,params);
 } 
-//主打分类
+//商品分类
 export async function getMainList(params) {
-  return request(`${Config.API_HOST}/api/product/main?main_id=${params.main_id}`)
+  return request(`${Config.API_HOST}/api/product/main?cate_id=${params.cate_id}`)
 }
 //详情信息
 export async function getDetailInfo(params) {

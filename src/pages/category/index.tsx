@@ -58,7 +58,7 @@ class Index extends Component {
   }
   handleToDetail = (item) => {
     Taro.navigateTo({
-      url:`../detail/index?detail_id=${item._id}`
+      url:`../classify/index?cate_id=${item._id}`
     })
   }
   componentWillUnmount () { }

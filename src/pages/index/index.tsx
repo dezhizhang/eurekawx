@@ -232,12 +232,13 @@ class Index extends Component {
                     return <SwiperItem key={index + Math.random()}>
                      <View className='swiper-item'>
                        {item.map(list => {
+                         console.log(list);
                          return <View key={list._id} className='item' onClick={() => this.handleToDetail(list)}>
                          <View className="item-top">
-                             <Image className="image" mode='aspectFill'  src={`${config.API_HOST}${list.product_url}`}/>
+                             <Image className="image" mode='aspectFill'  src={list.url}/>
                          </View>
                          <View className="item-bottom">
-                          <View className="bottom-top">{list.description}</View>
+                          <View className="bottom-top">{list.title}</View>
                           <View className="bottom-bottom">
                             <View className="bottom-left">￥{list.price}</View>
                           </View>

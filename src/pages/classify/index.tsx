@@ -47,6 +47,7 @@ class Index extends Component {
     this.getClassifyList(params);
   }
   getClassifyList = async (params) => {
+      console.log("params",params);
       showLoading({title:'加载中...'});
       let list = await getMainList(params);
       if(list.data.code == 200) {
@@ -79,7 +80,7 @@ class Index extends Component {
                 {classifyArr&&classifyArr.map(item => {
                   return (<View  onClick={() => this.handleToDetail(item)} className="list-item">
                   <View className="item-top">
-                      <Image src={`${baseURL}${item.main_img}`} className="image"/>
+                      <Image src={item.url} className="image"/>
                   </View>
                   <View className="item-bottom">
                      <View className="bottom-wrapper">
