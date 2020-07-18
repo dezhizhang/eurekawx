@@ -1,14 +1,8 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View,  Image,ScrollView, } from '@tarojs/components'
-import { connect } from '@tarojs/redux'
-import { add, minus, asyncAdd } from '../../actions/counter'
-import { getCategoryList,getCategoryDetail } from '../../service/api'
-import { baseURL } from '../../utils/tools'
+import { getCategoryList } from '../../service/api'
 import  './index.less'
-import bay from '../../images/bay.png'
-
-
 
 type PageStateProps = {
   counter: {
@@ -31,20 +25,6 @@ type IProps = PageStateProps & PageDispatchProps & PageOwnProps
 interface Index {
   props: IProps;
 }
-
-@connect(({ counter }) => ({
-  counter
-}), (dispatch) => ({
-  add () {
-    dispatch(add())
-  },
-  dec () {
-    dispatch(minus())
-  },
-  asyncAdd () {
-    dispatch(asyncAdd())
-  }
-}))
 class Index extends Component {
   state = {
     categoryArr:[],
@@ -65,48 +45,36 @@ class Index extends Component {
     let list = await getCategoryList();
     if(list.data.code == 200) {
       let categoryArr = list.data.data;
-      this.categoryDetailData(categoryArr[0])
-      this.setState({categoryArr});
-    }
-  }
-  categoryDetailData = async(item) => {
-    let detail = await getCategoryDetail({'classify_id':item._id});
-    if(detail.data.code == 200) {
-      let detailArr = detail.data.data;
-      this.setState({detailArr});
+      let detailArr = categoryArr[0].items;
+      this.setState({categoryArr,detailArr});
     }
   }
   handleClickCategory = async(index,item) => {
-    this.setState({currentIndex:index});
-    let detail = await getCategoryDetail({'classify_id':item._id});
-    if(detail.data.code == 200) {
-      let detailArr = detail.data.data;
-      this.setState({detailArr});
-    }
+    let detailArr = item.items;
+    this.setState({
+      detailArr,
+      currentIndex:index,
+    });
   }
   handleToDetail = (item) => {
     Taro.navigateTo({
       url:`../detail/index?detail_id=${item._id}`
     })
   }
-
-
   componentWillUnmount () { }
-
   componentDidShow () { }
-
   componentDidHide () { }
-
   render () {
     let { categoryArr,currentIndex,detailArr } = this.state;
     return (
      <View className="category">
        <View className="left">
          {categoryArr&&categoryArr.map((item,index) => {
+           console.log(item);
            return(
-            <View key={index} className="left-item" onClick={() => this.handleClickCategory(index,item)}>
+            <View key={item._id} className="left-item" onClick={() => this.handleClickCategory(index,item)}>
               <View  style={{display:index == currentIndex ? 'block':'none'}} className="item-icon"></View>
-              <View className="item-text">{item.name}</View>
+              <View className="item-text">{item.title}</View>
             </View>
           )})}
        </View>
@@ -114,27 +82,21 @@ class Index extends Component {
         scrollY
         className="right"
       >
-        {detailArr&&detailArr.map((item,index) => {
-          return ( <View key={index} className="right-item" onClick={() => this.handleToDetail(item)}>
+        {detailArr&&detailArr.map(item => {
+          return ( <View key={item._id} className="right-item" onClick={() => this.handleToDetail(item)}>
           <View className="item-box">
             <View className="box-left">
-              <Image src={`${baseURL}${item.classify_img}`} className="image"/>
+              <Image src={item.url} className="image"/>
             </View>
             <View className="box-right">
               <View className="right-top">{item.title}</View>
               <View className="right-bottom">
                 <View className="bottom-left">￥{item.price} </View>
-                {/* <View className="bottom-right">
-                  <Image src={bay} className="image"/>
-                </View> */}
               </View>
             </View>
           </View>
         </View>)
         })}
-   
-    
-
       </ScrollView>
      </View>
     )
