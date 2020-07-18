@@ -215,7 +215,7 @@ class Index extends Component {
             </View>
             <View className="advert" onClick={this.handleAdvert}>
               {advertData.length&&advertData.map(item => {
-                return (<Image key={item._id} className="advert_image" mode='aspectFill' src={`${config.API_HOST}${item.advert_img}`}></Image>)
+                return (<Image key={item._id} className="advert_image" mode='aspectFill' src={item.url}></Image>)
               })}
             </View>
             <View className="hot">
