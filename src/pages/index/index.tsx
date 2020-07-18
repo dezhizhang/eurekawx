@@ -5,7 +5,6 @@ import { View, Swiper, SwiperItem,ScrollView,Image  } from '@tarojs/components'
 import { add, minus, asyncAdd } from '../../actions/counter'
 import { getFocusInfo,getAdvertInfo,getProductHot,getProductList } from '../../service/api'
 import { showLoading,hideLoading } from '../../utils/tools';
-import config from '../../common/config'
 import category from '../../images/category.png'
 import facility from '../../images/facility.png'
 import stationery from '../../images/stationery.png'
