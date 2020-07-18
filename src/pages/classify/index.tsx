@@ -1,8 +1,6 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View,ScrollView,Image } from '@tarojs/components'
-import { connect } from '@tarojs/redux'
-import { add, minus, asyncAdd } from '../../actions/counter'
 import { getMainList } from '../../service/api'
 import { showLoading,hideLoading,baseURL } from '../../utils/tools'
 import bay from '../../images/bay.png'
@@ -32,19 +30,7 @@ interface Index {
   props: IProps;
 }
 
-@connect(({ counter }) => ({
-  counter
-}), (dispatch) => ({
-  add () {
-    dispatch(add())
-  },
-  dec () {
-    dispatch(minus())
-  },
-  asyncAdd () {
-    dispatch(asyncAdd())
-  }
-}))
+
 class Index extends Component {
     state = {
       classifyArr:[],
