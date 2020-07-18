@@ -31,7 +31,6 @@ export const uploadFile  = (url,options) => {
      }
    }
    return Taro.uploadFile(params);
-
 }
 
 

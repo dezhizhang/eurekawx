@@ -4,13 +4,13 @@ import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Swiper, SwiperItem,ScrollView,Image  } from '@tarojs/components'
 import { add, minus, asyncAdd } from '../../actions/counter'
 import { getFocusInfo,getAdvertInfo,getProductHot,getProductList } from '../../service/api'
-import { baseURL,showLoading,hideLoading } from '../../utils/tools'
+import { showLoading,hideLoading } from '../../utils/tools';
+import config from '../../common/config'
 import category from '../../images/category.png'
 import facility from '../../images/facility.png'
 import stationery from '../../images/stationery.png'
 import evenmore from '../../images/evenmore.png'
 import  './index.less'
-
 
 type PageStateProps = {
   counter: {
@@ -195,15 +195,15 @@ class Index extends Component {
               autoplay>
               {focusData.length && focusData.map(item => {
                 return (
-                  <SwiperItem>
-                    <View className="bannner"><Image className="banner_image" mode='aspectFill' src={`${baseURL}${item.focus_img}`}/></View>
+                  <SwiperItem key={item._id}>
+                    <View className="bannner"><Image className="banner_image" mode='aspectFill' src={item.url}/></View>
                   </SwiperItem>)
                 })}
             </Swiper>
             <View className="category">
                {classifyArr.map(item => {
                 return (
-                  <View className="item" onClick={() => this.handleToCateDetail(item)}>
+                  <View key={item._id} className="item" onClick={() => this.handleToCateDetail(item)}>
                     <View className="top">
                       <View className="image_wrapper">
                           <Image className="image" mode='aspectFill'  src={item.src}/>
@@ -215,7 +215,7 @@ class Index extends Component {
             </View>
             <View className="advert" onClick={this.handleAdvert}>
               {advertData.length&&advertData.map(item => {
-                return (<Image className="advert_image" mode='aspectFill' src={`${baseURL}${item.advert_img}`}></Image>)
+                return (<Image key={item._id} className="advert_image" mode='aspectFill' src={`${config.API_HOST}${item.advert_img}`}></Image>)
               })}
             </View>
             <View className="hot">
@@ -228,13 +228,13 @@ class Index extends Component {
                   circular
                   autoplay
                   >
-                  {hotArr.map(item => {
-                    return <SwiperItem >
+                  {hotArr.map((item,index) => {
+                    return <SwiperItem key={index + Math.random()}>
                      <View className='swiper-item'>
                        {item.map(list => {
-                         return <View className='item' onClick={() => this.handleToDetail(list)}>
+                         return <View key={list._id} className='item' onClick={() => this.handleToDetail(list)}>
                          <View className="item-top">
-                             <Image className="image" mode='aspectFill'  src={`${baseURL}${list.product_url}`}/>
+                             <Image className="image" mode='aspectFill'  src={`${config.API_HOST}${list.product_url}`}/>
                          </View>
                          <View className="item-bottom">
                           <View className="bottom-top">{list.description}</View>
@@ -257,9 +257,9 @@ class Index extends Component {
           <View className='product_item'>
           <View className="product_wrapper">
             {listData.map(item => {
-              return  <View className="item" onClick={() =>this.handleToDetail(item)}>
+              return  <View className="item" key={item._id} onClick={() =>this.handleToDetail(item)}>
               <View className="item-top">
-                <Image className="image" mode='aspectFill'  src={`${baseURL}${item.product_url}`}/>
+                <Image className="image" mode='aspectFill'  src={`${config.API_HOST}${item.product_url}`}/>
               </View>
               <View className="item-bottom">
                 <View className="bottom-desc">{item.description}</View>
