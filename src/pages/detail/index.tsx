@@ -9,7 +9,7 @@ import close from '../../images/icon/close.png'
 import  './index.less'
 import { showLoading,hideLoading,baseURL,showToast } from '../../utils/tools'
 import { View, Swiper, SwiperItem,Image, ScrollView, Button,Input} from '@tarojs/components'
-import { getDetailInfo,userInfoCartSave,getPayInfo,userLogin,getProductPhoto } from '../../service/api'
+import { getDetailInfo,userInfoCartSave,getPayInfo,userLogin,getProductPhoto,getProductDetail } from '../../service/api'
 
 type PageStateProps = {
   counter: {
@@ -22,7 +22,8 @@ type PageOwnProps = {}
 
 type PageState = {
   baseData:any;
-  photoList:any
+  photoList:any;
+  detailList:any;
 }
 
 type IProps = PageStateProps  & PageOwnProps
@@ -36,7 +37,7 @@ class Index extends Component {
     state = {
       detailData:[],
       focus_img:[],
-      detail_img:[],
+      detailList:[],
       showModalStatus:false,
       animationData:'',
       number:1,
@@ -60,10 +61,11 @@ class Index extends Component {
   }
   componentWillMount () {
     let params = this.$router.params;
-    this.detailData(params);
+    this.baseData(params);
     this.photoDetail(params);
+    this.detailData(params);
   }
-  detailData = async (params) => {
+  baseData = async (params) => {
     showLoading({title:'加载中...'});
     let res = await getDetailInfo(params);
     if(res.data.code === 200) {
@@ -79,6 +81,13 @@ class Index extends Component {
     if(res.data.code === 200) {
       let photoList = res.data.data;
       this.setState({ photoList });
+    }
+  }
+  detailData = async(params) => {
+    let res = await getProductDetail(params);
+    if(res.data.code === 200) {
+      let detailList = res.data.data;
+      this.setState({ detailList })
     }
   }
   handleShowModal = () => {
@@ -238,7 +247,7 @@ class Index extends Component {
   componentDidHide () { }
 
   render () {
-    let { baseData,photoList,detail_img,animationData,showModalStatus,number } = this.state;
+    let { baseData,photoList,detailList,animationData,showModalStatus,number } = this.state;
    
     return (
      <ScrollView 
@@ -296,9 +305,9 @@ class Index extends Component {
             </View>
             <View className="content-bottom">
               <View className="bottom-title">图文详情</View>
-              {detail_img&&detail_img.map((item,index) => {
+              {detailList&&detailList.map((item,index) => {
                 return (<View key={index} className="bottom-item">
-                  <Image src={`${baseURL}${item}`} className="image"/>
+                  <Image src={`${item}`} className="image"/>
                 </View>
                 )})}
             </View>
@@ -334,7 +343,8 @@ class Index extends Component {
             <View className="detail-bgitem item-buy" onClick={this.handlePayment}>立即购买</View>
           </View>
         </View>
-        <View className="detail-bg" style={{display:false?'block':'none'}}></View>
+        
+        {/* <View className="detail-bg" style={{display:false?'block':'none'}}></View>
         <View animation={animationData} style={{display:showModalStatus?'block':'none'}} className="detail-modal">
           <View className="modal-wrapper">
              <View className="modal-box">
@@ -373,7 +383,7 @@ class Index extends Component {
                </View>
              </View>
           </View>
-        </View>
+        </View> */}
 
      </ScrollView>
     )
