@@ -26,7 +26,11 @@ export async function getMainList(params) {
 }
 //详情信息
 export async function getDetailInfo(params) {
-  return request(`${Config.API_HOST}/api/detail/info?detail_id=${params.detail_id}`)
+  return request(`${Config.API_HOST}/api/detail/info?id=${params.id}`)
+}
+//商品相册图
+export async function getProductPhoto(params) {
+  return request(`${Config.API_HOST}/api/detail/photo?id=${params.id}`)
 }
 //分类列表
 export async function getCategoryList() {

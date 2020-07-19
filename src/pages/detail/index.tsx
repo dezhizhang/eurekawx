@@ -1,10 +1,5 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Swiper, SwiperItem,Image, ScrollView, Button,Input} from '@tarojs/components'
-import { connect } from '@tarojs/redux'
-import { getDetailInfo,userInfoCartSave,getPayInfo,userLogin } from '../../service/api'
-import { showLoading,hideLoading,baseURL,showToast } from '../../utils/tools'
-import { add, minus, asyncAdd } from '../../actions/counter'
 import detailStore from '../../images/icon/detail_store.png'
 import detailCart from '../../images/icon/detail_cart.png'
 import detailService from '../../images/icon/detail_service.png'
@@ -12,6 +7,9 @@ import detailShare from '../../images/icon/detail_share.png'
 import arrow from '../../images/icon/arrow.png'
 import close from '../../images/icon/close.png'
 import  './index.less'
+import { showLoading,hideLoading,baseURL,showToast } from '../../utils/tools'
+import { View, Swiper, SwiperItem,Image, ScrollView, Button,Input} from '@tarojs/components'
+import { getDetailInfo,userInfoCartSave,getPayInfo,userLogin,getProductPhoto } from '../../service/api'
 
 type PageStateProps = {
   counter: {
@@ -19,35 +17,21 @@ type PageStateProps = {
   }
 }
 
-type PageDispatchProps = {
-  add: () => void
-  dec: () => void
-  asyncAdd: () => any
-}
 
 type PageOwnProps = {}
 
-type PageState = {}
+type PageState = {
+  baseData:any;
+  photoList:any
+}
 
-type IProps = PageStateProps & PageDispatchProps & PageOwnProps
+type IProps = PageStateProps  & PageOwnProps
 
 interface Index {
   props: IProps;
 }
 
-@connect(({ counter }) => ({
-  counter
-}), (dispatch) => ({
-  add () {
-    dispatch(add())
-  },
-  dec () {
-    dispatch(minus())
-  },
-  asyncAdd () {
-    dispatch(asyncAdd())
-  }
-}))
+
 class Index extends Component {
     state = {
       detailData:[],
@@ -57,6 +41,14 @@ class Index extends Component {
       animationData:'',
       number:1,
       cartList:[],
+      photoList:[],
+      baseData:{
+        title:'',
+        price:0,
+        freight:0,
+        sales:0,
+        inventory:0,
+      },
     }
     
     config: Config = {
@@ -69,15 +61,24 @@ class Index extends Component {
   componentWillMount () {
     let params = this.$router.params;
     this.detailData(params);
+    this.photoDetail(params);
   }
   detailData = async (params) => {
-    showLoading({title:'加载中...'})
-    let detail = await getDetailInfo(params);
-    if(detail.data.code == 200) {
-      let detailData = detail.data.data;
-      let { focus_img,detail_img } = detailData&&detailData[0];
-      this.setState({detailData,focus_img,detail_img});
+    showLoading({title:'加载中...'});
+    let res = await getDetailInfo(params);
+    if(res.data.code === 200) {
+      let result = res.data.data;
+      this.setState({
+        baseData:result[0],
+      });
       hideLoading()
+    }
+  }
+  photoDetail = async(params) => {
+    let res = await getProductPhoto(params);
+    if(res.data.code === 200) {
+      let photoList = res.data.data;
+      this.setState({ photoList });
     }
   }
   handleShowModal = () => {
@@ -237,7 +238,7 @@ class Index extends Component {
   componentDidHide () { }
 
   render () {
-    let { detailData,focus_img,detail_img,animationData,showModalStatus,number } = this.state;
+    let { baseData,photoList,detail_img,animationData,showModalStatus,number } = this.state;
    
     return (
      <ScrollView 
@@ -254,10 +255,10 @@ class Index extends Component {
             circular
             indicatorDots
             autoplay>
-            {focus_img&&focus_img.map((item,index) => {
+            {photoList&&photoList.map((item,index) => {
               return (<SwiperItem key={index}>
                 <View className='swiper-item'>
-                  <Image src={`${baseURL}${item}`}  className="image"/>
+                  <Image src={`${item}`}  className="image"/>
                 </View>
               </SwiperItem>)
             })}
@@ -266,7 +267,7 @@ class Index extends Component {
           <View className="detail-content">
             <View className="content-top">
               <View className="top-title">
-                <View className="title-left">{detailData[0].title}</View>
+                <View className="title-left">{baseData.title}</View>
                 <View className="title-right">
                   <View className="right-icon">
                     <Image src={detailShare} className="image"/>
@@ -274,12 +275,12 @@ class Index extends Component {
                   <View className="right-text">分享</View>
                 </View>
               </View>
-              <View className="top-price">￥{detailData[0].price}</View>
+              <View className="top-price">￥{baseData.price}</View>
               <View className="top-list">
                 <View className="list-wrapper">
-                  <View className="list-item">运费：￥{detailData&&detailData[0].freight}</View>
-                  <View className="list-item">销量：{detailData&&detailData[0].sales}</View>
-                  <View className="list-item">库存：{detailData&&detailData[0].inventory}</View>
+                  <View className="list-item">运费：￥{baseData.freight}</View>
+                  <View className="list-item">销量：{baseData.sales}</View>
+                  <View className="list-item">库存：{baseData.inventory}</View>
                 </View>
               </View>
             </View>
