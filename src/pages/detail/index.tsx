@@ -7,9 +7,16 @@ import detailShare from '../../images/icon/detail_share.png'
 import arrow from '../../images/icon/arrow.png'
 import close from '../../images/icon/close.png'
 import  './index.less'
-import { showLoading,hideLoading,baseURL,showToast } from '../../utils/tools'
+import { showLoading,hideLoading,showToast } from '../../utils/tools'
 import { View, Swiper, SwiperItem,Image, ScrollView, Button,Input} from '@tarojs/components'
-import { getDetailInfo,userInfoCartSave,getPayInfo,userLogin,getProductPhoto,getProductDetail } from '../../service/api'
+import { 
+  getPayInfo,
+  userLogin,
+  getDetailInfo,
+  userInfoCartSave,
+  getProductPhoto,
+  getProductDetail,
+ } from '../../service/api'
 
 type PageStateProps = {
   counter: {
@@ -21,6 +28,7 @@ type PageStateProps = {
 type PageOwnProps = {}
 
 type PageState = {
+  number:any;
   baseData:any;
   photoList:any;
   detailList:any;
@@ -44,7 +52,9 @@ class Index extends Component {
       cartList:[],
       photoList:[],
       baseData:{
+        url:'',
         title:'',
+
         price:0,
         freight:0,
         sales:0,
@@ -247,8 +257,7 @@ class Index extends Component {
   componentDidHide () { }
 
   render () {
-    let { baseData,photoList,detailList,animationData,showModalStatus,number } = this.state;
-   
+    let { baseData,photoList,detailList,animationData,showModalStatus,number } = this.state; 
     return (
      <ScrollView 
         scrollY
@@ -344,20 +353,20 @@ class Index extends Component {
           </View>
         </View>
         
-        {/* <View className="detail-bg" style={{display:false?'block':'none'}}></View>
+        <View className="detail-bg" style={{display:false?'block':'none'}}></View>
         <View animation={animationData} style={{display:showModalStatus?'block':'none'}} className="detail-modal">
           <View className="modal-wrapper">
              <View className="modal-box">
                <View className="box-top">
                  <View className="top-left">
-                   <Image src={`${baseURL}${detail_img&&detail_img[0]}`} className="image"/>
+                   <Image src={baseData.url} className="image"/>
                  </View>
                  <View className="top-right">
                    <View className="right-icon" onClick={this.handlehideModal}>
                      <Image src={close} className="image"/>
                    </View>
-                   <View className="right-text">{detailData[0].title}</View>
-                   <View className="right-price">￥{detailData[0].price}</View>
+                   <View className="right-text">{baseData.title}</View>
+                   <View className="right-price">￥{baseData.price}</View>
                  </View>
                </View>
                <View className="box-bottom">
@@ -383,7 +392,7 @@ class Index extends Component {
                </View>
              </View>
           </View>
-        </View> */}
+        </View>
 
      </ScrollView>
     )
