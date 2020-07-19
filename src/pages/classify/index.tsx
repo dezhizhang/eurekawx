@@ -47,7 +47,6 @@ class Index extends Component {
     this.getClassifyList(params);
   }
   getClassifyList = async (params) => {
-      console.log("params",params);
       showLoading({title:'加载中...'});
       let list = await getMainList(params);
       if(list.data.code == 200) {
@@ -58,7 +57,7 @@ class Index extends Component {
   }
   handleToDetail = (item) => {
     Taro.navigateTo({
-      url: `../detail/index?detail_id=${item._id}`
+      url: `../detail/index?id=${item._id}`
     });
   }
 
