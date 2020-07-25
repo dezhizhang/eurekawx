@@ -16,17 +16,11 @@ type PageStateProps = {
   }
 }
 
-type PageDispatchProps = {
-  add: () => void
-  dec: () => void
-  asyncAdd: () => any
-}
-
 type PageOwnProps = {}
 
 type PageState = {}
 
-type IProps = PageStateProps & PageDispatchProps & PageOwnProps
+type IProps = PageStateProps  & PageOwnProps
 
 interface Index {
   props: IProps;
