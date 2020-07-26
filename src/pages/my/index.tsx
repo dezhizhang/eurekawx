@@ -81,6 +81,18 @@ class Index extends Component {
       url:'../setting/index'
     })
   }
+  //消息
+  handleMessage = () => {
+    Taro.navigateTo({
+      url:'../message/index'
+    })
+  }
+  //收藏
+  handleCollection = () => {
+    Taro.navigateTo({
+      url:'../collection/index',
+    })
+  }
   componentDidHide () { }
 
   render () {
@@ -152,7 +164,7 @@ class Index extends Component {
       </View>
       </View>
       <View className="content">
-        <View className="content-item">
+        <View className="content-item" onClick={this.handleMessage}>
           <View className="item">
              <View className="icon-left">
                <Image className="image" src={msg}/>
@@ -166,7 +178,7 @@ class Index extends Component {
              </View>
           </View>
         </View>
-        <View className="content-item">
+        <View className="content-item" onClick={this.handleCollection}>
           <View className="item">
              <View className="icon-left">
                <Image className="image" src={msg}/>
