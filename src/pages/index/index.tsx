@@ -1,5 +1,4 @@
 import { ComponentClass } from 'react'
-import { connect } from '@tarojs/redux'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Swiper, SwiperItem,ScrollView,Image  } from '@tarojs/components'
 import { getFocusInfo,getAdvertInfo,getProductHot,getProductList } from '../../service/api'
