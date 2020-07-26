@@ -75,6 +75,12 @@ class Index extends Component {
       url:'../maintain/index'
     })
   }
+  //我的设置
+  handleSetting = () => {
+    Taro.navigateTo({
+      url:'../setting/index'
+    })
+  }
   componentDidHide () { }
 
   render () {
@@ -218,7 +224,7 @@ class Index extends Component {
         </View>
       </View>
       <View className="footer">
-        <View className="content-item">
+        <View className="content-item" onClick={this.handleSetting}>
             <View className="item">
               <View className="icon-left">
                 <Image className="image" src={msg}/>
