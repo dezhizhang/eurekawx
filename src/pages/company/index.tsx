@@ -1,6 +1,8 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config, } from '@tarojs/taro'
 import { View, Input,Text, Button,Image } from '@tarojs/components'
+import { connect } from '@tarojs/redux'
+import { add, minus, asyncAdd } from '../../actions/counter'
 import { uploadInfo } from '../../service/api'
 import { showToast,showLoading,hideLoading } from '../../utils/tools'
 import server from '../../images/server.png'
@@ -23,10 +25,10 @@ type PageDispatchProps = {
 type PageOwnProps = {}
 
 type PageState = {
-  username:String;
-  mobile:String;
-  address:String;
-  description:String;
+  username:String,
+  mobile:String,
+  address:String,
+  description:String
 }
 
 type IProps = PageStateProps & PageDispatchProps & PageOwnProps
@@ -35,6 +37,19 @@ interface Index {
   props: IProps;
 }
 
+@connect(({ counter }) => ({
+  counter
+}), (dispatch) => ({
+  add () {
+    dispatch(add())
+  },
+  dec () {
+    dispatch(minus())
+  },
+  asyncAdd () {
+    dispatch(asyncAdd())
+  }
+}))
 class Index extends Component {
   state = {
     username:'',
