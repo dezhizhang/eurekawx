@@ -93,6 +93,12 @@ class Index extends Component {
       url:'../collection/index',
     })
   }
+  //客服
+  handleCustomer = () => {
+    Taro.navigateTo({
+      url:'../customer/index'
+    })
+  }
   componentDidHide () { }
 
   render () {
@@ -250,7 +256,7 @@ class Index extends Component {
               </View>
             </View>
         </View>
-        <View className="content-item">
+        <View className="content-item" onClick={this.handleCustomer}>
             <View className="item">
               <View className="icon-left">
                 <Image className="image" src={msg}/>

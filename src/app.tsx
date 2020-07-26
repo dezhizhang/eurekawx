@@ -23,6 +23,7 @@ class App extends Component {
       "pages/setting/index",
       "pages/message/index",
       "pages/collection/index",
+      "pages/customer/index",
     ],
     window: {
       backgroundTextStyle: 'light',
