@@ -3,8 +3,6 @@ import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Button } from '@tarojs/components'
 import { userLogin } from '../../service/api'
 import { showModal,userInfoId } from '../../utils/tools'
-import { connect } from '@tarojs/redux'
-import { add, minus, asyncAdd } from '../../actions/counter'
 import  './index.less'
 
 type PageStateProps = {
@@ -12,36 +10,16 @@ type PageStateProps = {
     num: number
   }
 }
-
-type PageDispatchProps = {
-  add: () => void
-  dec: () => void
-  asyncAdd: () => any
-}
-
 type PageOwnProps = {}
 
 type PageState = {}
 
-type IProps = PageStateProps & PageDispatchProps & PageOwnProps
+type IProps = PageStateProps  & PageOwnProps
 
 interface Index {
   props: IProps;
 }
 
-@connect(({ counter }) => ({
-  counter
-}), (dispatch) => ({
-  add () {
-    dispatch(add())
-  },
-  dec () {
-    dispatch(minus())
-  },
-  asyncAdd () {
-    dispatch(asyncAdd())
-  }
-}))
 class Index extends Component {
     state = {
       isHide:false
@@ -116,7 +94,8 @@ class Index extends Component {
     return (
     <View className="login">
       <View className="login-weapper">
-        <Button openType="getUserInfo" className="btn" type="primary" onGetUserInfo={this.bindGetUserInfo}>微信一键登录</Button>
+        <Button openType="getUserInfo" className="btn" type="primary" onGetUserInfo={this.bindGetUserInfo}>个人登录</Button>
+        <Button className="btn" type="primary">企业登录</Button>
       </View>
     </View>
     )
