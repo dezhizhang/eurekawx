@@ -169,32 +169,32 @@ class Index extends Component {
     });
   }
   handleSubmit = () => {
-    let that = this;
-    let { number,detailData,focus_img } = this.state;
-    let title = detailData[0].title;
-    let price =  detailData[0].price;
-    let goods_img = focus_img[0];
-    let userInfoKey = Taro.getStorageSync('userInfoKey');
-    let userInfo =userInfoKey ? JSON.parse(userInfoKey):''
-    let params = {
-      number,
-      title,
-      price,
-      goods_img,
-      openid:userInfo.openid
-    }
-    showLoading({title:'加入中'});
-    userInfoCartSave(params).then(res => {
-    hideLoading();
-    let cart = res.data;
-    if(cart.code == 200) {
-      showToast({title:cart.msg});
-      that.handlehideModal();
-      Taro.switchTab({
-        url:'../cart/index'
-      })
-    }
-  });
+  //   let that = this;
+  //   let { number,detailData,focus_img } = this.state;
+  //   let title = detailData[0].title;
+  //   let price =  detailData[0].price;
+  //   let goods_img = focus_img[0];
+  //   let userInfoKey = Taro.getStorageSync('userInfoKey');
+  //   let userInfo =userInfoKey ? JSON.parse(userInfoKey):''
+  //   let params = {
+  //     number,
+  //     title,
+  //     price,
+  //     goods_img,
+  //     openid:userInfo.openid
+  //   }
+  //   showLoading({title:'加入中'});
+  //   userInfoCartSave(params).then(res => {
+  //   hideLoading();
+  //   let cart = res.data;
+  //   if(cart.code == 200) {
+  //     showToast({title:cart.msg});
+  //     that.handlehideModal();
+  //     Taro.switchTab({
+  //       url:'../cart/index'
+  //     })
+  //   }
+  // });
   }
   handlePayment = async() => {
     let loginInfo = await Taro.login();
