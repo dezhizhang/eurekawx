@@ -119,10 +119,7 @@ class Index extends Component {
             </View>
             <View className="header_right">
                <View className="right">
-                  <View className="icon">
-                    <Image src={gift} className="image"/>
-                  </View>
-                  <View className="text">推荐送礼</View>
+                  <View className="text">个人资料管理</View>
                </View>
             </View>
           </View>

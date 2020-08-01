@@ -12,18 +12,17 @@ class App extends Component {
   
   config: Config = {
     pages: [
+      'pages/my/index',
       'pages/index/index',
       'pages/maintain/index',
       'pages/cart/index',
       'pages/category/index',
-      'pages/my/index',
       'pages/detail/index',
       'pages/classify/index',
       'pages/login/index',
       "pages/setting/index",
       "pages/message/index",
-      "pages/collection/index",
-      "pages/customer/index",
+      "pages/collection/index"
     ],
     window: {
       backgroundTextStyle: 'light',
