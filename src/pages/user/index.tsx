@@ -70,9 +70,6 @@ class Index extends Component {
       <View className="content">
         <View className="content-item">
           <View className="item">
-             <View className="icon-left">
-               <Image className="image" src={msg}/>
-             </View>
              <View className="text-left">头像</View>
              <View className="text-right">
                <View className="text-number">16</View>
@@ -84,9 +81,7 @@ class Index extends Component {
         </View>
         <View className="content-item">
           <View className="item">
-             <View className="icon-left">
-               <Image className="image" src={msg}/>
-             </View>
+           
              <View className="text-left">呢称</View>
              <View className="text-right">
                <View className="text-right">不哭的小孩</View>
@@ -95,9 +90,7 @@ class Index extends Component {
         </View>
         <View className="content-item">
           <View className="item">
-             <View className="icon-left">
-               <Image className="image" src={msg}/>
-             </View>
+           
              <View className="text-left">手机</View>
              <View className="text-right">
               15083356190
@@ -106,9 +99,6 @@ class Index extends Component {
         </View>
         <View className="content-item" onClick={this.handleAddress}>
           <View className="item">
-             <View className="icon-left">
-               <Image className="image" src={msg}/>
-             </View>
              <View className="text-left">地址</View>
              <View className="text-right">
                  11111111111
@@ -121,9 +111,6 @@ class Index extends Component {
         </View>
         <View className="content-item">
           <View className="item">
-             <View className="icon-left">
-               <Image className="image" src={msg}/>
-             </View>
              <View className="text-left">邮箱</View>
              <View className="text-right">
                  1541609448@qq.com
