@@ -1,6 +1,6 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View,Image, Button, Input,} from '@tarojs/components'
+import { View,Image, Button, Input,Textarea } from '@tarojs/components'
 import arrow from '../../images/icon/arrow.png'
 import  './index.less'
 
@@ -12,11 +12,15 @@ type PageStateProps = {
 
 type PageOwnProps = {}
 
+type TextareaProps = {
+    value:any
+}
+
 type PageState = {
   userInfo:any;
 }
 
-type IProps = PageStateProps & PageOwnProps
+type IProps = PageStateProps & TextareaProps & PageOwnProps
 
 interface Index {
   props: IProps;
@@ -59,28 +63,9 @@ class Index extends Component {
       url:'../login/index'
     })
   }
-  handleOrder = () => {
-    Taro.navigateTo({
-      url:'../maintain/index'
-    })
-  }
-  //我的设置
-  handleSetting = () => {
-    Taro.navigateTo({
-      url:'../setting/index'
-    })
-  }
-  //客服
-  handleCustomer = () => {
-    Taro.navigateTo({
-      url:'../customer/index'
-    })
-  }
-  //个人信息
-  handleUserInfo = () => {
-    Taro.navigateTo({
-      url:'../user/index'
-    })
+  handleAddressSave = () => {
+     console.log('save');
+
   }
   componentDidHide () { }
 
@@ -91,7 +76,7 @@ class Index extends Component {
       <View className="content">
         <View className="content-item">
           <View className="item">
-             <View className="text-left">收 货 人</View>
+             <View className="text-left">收 货  人</View>
              <View className="text-right">
                 <Input className="input" placeholder="请输入收货人"/>
              </View>
@@ -121,16 +106,13 @@ class Index extends Component {
           <View className="item">
              <View className="text-left">详细地址</View>
              <View className="text-right">
-               {/* <View className="text-number">16</View> */}
-             </View>
-             <View className="icon-right">
-               <Image src={arrow} className="image"/>
+                <Input className="input" placeholder="请输入详细地址"/>
              </View>
           </View>
         </View>
       </View>
       <View className="footer">
-        <Button className="btn">提交</Button>
+        <Button className="btn" onClick={this.handleAddressSave}>保存</Button>
       </View>
     </View>
     )
