@@ -55,54 +55,20 @@ class Index extends Component {
       })
     }
   }
-  handleToLogin =() => {
-    Taro.navigateTo({
-      url:'../login/index'
-    })
-  }
-  handleOrder = () => {
-    Taro.navigateTo({
-      url:'../maintain/index'
-    })
-  }
-  //我的设置
-  handleSetting = () => {
-    Taro.navigateTo({
-      url:'../setting/index'
-    })
-  }
-  //消息
-  handleMessage = () => {
-    Taro.navigateTo({
-      url:'../message/index'
-    })
-  }
-  //收藏
-  handleCollection = () => {
-    Taro.navigateTo({
-      url:'../collection/index',
-    })
-  }
-  //客服
-  handleCustomer = () => {
-    Taro.navigateTo({
-      url:'../customer/index'
-    })
-  }
   //个人信息
-  handleUserInfo = () => {
+  handleAddress = () => {
     Taro.navigateTo({
-      url:'../user/index'
+        url:'../address/index'
     })
   }
+
   componentDidHide () { }
 
   render () {
-    let { userInfo } = this.state;
     return (
     <View className="user">
       <View className="content">
-        <View className="content-item" onClick={this.handleMessage}>
+        <View className="content-item">
           <View className="item">
              <View className="icon-left">
                <Image className="image" src={msg}/>
@@ -116,7 +82,7 @@ class Index extends Component {
              </View>
           </View>
         </View>
-        <View className="content-item" onClick={this.handleCollection}>
+        <View className="content-item">
           <View className="item">
              <View className="icon-left">
                <Image className="image" src={msg}/>
@@ -138,13 +104,14 @@ class Index extends Component {
              </View>
           </View>
         </View>
-        <View className="content-item">
+        <View className="content-item" onClick={this.handleAddress}>
           <View className="item">
              <View className="icon-left">
                <Image className="image" src={msg}/>
              </View>
              <View className="text-left">地址</View>
              <View className="text-right">
+                 11111111111
                {/* <View className="text-number">16</View> */}
              </View>
              <View className="icon-right">
@@ -152,7 +119,7 @@ class Index extends Component {
              </View>
           </View>
         </View>
-        <View className="content-item" onClick={this.handleOrder}>
+        <View className="content-item">
           <View className="item">
              <View className="icon-left">
                <Image className="image" src={msg}/>
