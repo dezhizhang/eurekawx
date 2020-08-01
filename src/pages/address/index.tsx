@@ -1,10 +1,6 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View,Image, Button, Input,} from '@tarojs/components'
-import myHeader from '../../images/my_header.png'
-import avatar from '../../images/avatar.png'
-import allOrder from '../../images/all_order.png'
-import msg from '../../images/icon/msg.png'
 import arrow from '../../images/icon/arrow.png'
 import  './index.less'
 
@@ -14,19 +10,13 @@ type PageStateProps = {
   }
 }
 
-type PageDispatchProps = {
-  add: () => void
-  dec: () => void
-  asyncAdd: () => any
-}
-
 type PageOwnProps = {}
 
 type PageState = {
   userInfo:any;
 }
 
-type IProps = PageStateProps & PageDispatchProps & PageOwnProps
+type IProps = PageStateProps & PageOwnProps
 
 interface Index {
   props: IProps;
