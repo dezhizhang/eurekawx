@@ -91,7 +91,7 @@ class Index extends Component {
       <View className="content">
         <View className="content-item">
           <View className="item">
-             <View className="text-left">收货人</View>
+             <View className="text-left">收 货 人</View>
              <View className="text-right">
                 <Input className="input" placeholder="请输入收货人"/>
              </View>
@@ -99,7 +99,7 @@ class Index extends Component {
         </View>
         <View className="content-item">
           <View className="item">
-             <View className="text-left">手机号</View>
+             <View className="text-left">手机号码</View>
              <View className="text-right">
                <Input className="input" placeholder="请输入手机号"/>
              </View>
@@ -107,7 +107,7 @@ class Index extends Component {
         </View>
         <View className="content-item">
           <View className="item">
-             <View className="text-left">我的卡券</View>
+             <View className="text-left">地区信息</View>
              <View className="text-right">
               你有3张优惠券待使用
                {/* <View className="text-number">16</View> */}
@@ -119,7 +119,7 @@ class Index extends Component {
         </View>
         <View className="content-item">
           <View className="item">
-             <View className="text-left">我的金币</View>
+             <View className="text-left">详细地址</View>
              <View className="text-right">
                {/* <View className="text-number">16</View> */}
              </View>
@@ -128,19 +128,9 @@ class Index extends Component {
              </View>
           </View>
         </View>
-        <View className="content-item" onClick={this.handleOrder}>
-          <View className="item">
-             <View className="text-left">我的预约</View>
-             <View className="text-right">
-             </View>
-             <View className="icon-right">
-               <Image src={arrow} className="image"/>
-             </View>
-          </View>
-        </View>
       </View>
       <View className="footer">
-        <Button >提交</Button>
+        <Button className="btn">提交</Button>
       </View>
     </View>
     )
