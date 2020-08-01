@@ -1,6 +1,6 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View,Image, Button, Input,Textarea } from '@tarojs/components'
+import { View,Image, Button, Input } from '@tarojs/components'
 import arrow from '../../images/icon/arrow.png'
 import  './index.less'
 
@@ -87,6 +87,14 @@ class Index extends Component {
              <View className="text-left">手机号码</View>
              <View className="text-right">
                <Input className="input" placeholder="请输入手机号"/>
+             </View>
+          </View>
+        </View>
+        <View className="content-item">
+          <View className="item">
+             <View className="text-left">邮箱地址</View>
+             <View className="text-right">
+               <Input className="input" placeholder="请输邮箱地址"/>
              </View>
           </View>
         </View>
