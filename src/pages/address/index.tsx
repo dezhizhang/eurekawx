@@ -70,12 +70,6 @@ class Index extends Component {
       url:'../setting/index'
     })
   }
-  //消息
-  handleMessage = () => {
-    Taro.navigateTo({
-      url:'../message/index'
-    })
-  }
   //客服
   handleCustomer = () => {
     Taro.navigateTo({
@@ -93,17 +87,13 @@ class Index extends Component {
   render () {
     let { userInfo } = this.state;
     return (
-    <View className="my">
-     
+    <View className="address">
       <View className="content">
-        <View className="content-item" onClick={this.handleMessage}>
+        <View className="content-item">
           <View className="item">
              <View className="text-left">收货人</View>
              <View className="text-right">
-               <View className="text-number">16</View>
-             </View>
-             <View className="icon-right">
-               <Image src={arrow} className="image"/>
+                <Input className="input" placeholder="请输入收货人"/>
              </View>
           </View>
         </View>
@@ -111,7 +101,7 @@ class Index extends Component {
           <View className="item">
              <View className="text-left">手机号</View>
              <View className="text-right">
-               <Input className="text-right-input" placeholder="请输入手机号"/>
+               <Input className="input" placeholder="请输入手机号"/>
              </View>
           </View>
         </View>
