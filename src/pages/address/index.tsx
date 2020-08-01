@@ -1,6 +1,6 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View,Image,} from '@tarojs/components'
+import { View,Image, Button, Input,} from '@tarojs/components'
 import myHeader from '../../images/my_header.png'
 import avatar from '../../images/avatar.png'
 import allOrder from '../../images/all_order.png'
@@ -37,7 +37,7 @@ class Index extends Component {
       userInfo:{},
     }
     config: Config = {
-    navigationBarTitleText: '我的'
+    navigationBarTitleText: '收货地址'
   }
 
   componentWillReceiveProps (nextProps) {
@@ -86,12 +86,6 @@ class Index extends Component {
       url:'../message/index'
     })
   }
-  //收藏
-  handleCollection = () => {
-    Taro.navigateTo({
-      url:'../collection/index',
-    })
-  }
   //客服
   handleCustomer = () => {
     Taro.navigateTo({
@@ -110,74 +104,11 @@ class Index extends Component {
     let { userInfo } = this.state;
     return (
     <View className="my">
-      <View className="header">
-          <View className="header_top">
-            <View className="header_image">
-              <Image className="image" src={myHeader}/>
-            </View>
-            <View className="header_avatar" onClick={this.handleToLogin}>
-              <Image src={userInfo&&userInfo.avatarUrl ? userInfo.avatarUrl:avatar} className="avatar"/>
-            </View>
-            <View className="header_user">
-              <View className="user_name">{userInfo&&userInfo.nickName}</View>
-              <View className="user_address">ID:{userInfo&&userInfo.userId}</View>
-            </View>
-            <View className="header_right">
-               <View className="right" onClick={this.handleUserInfo}>
-                  <View className="text">个人资料管理</View>
-               </View>
-            </View>
-          </View>
-          <View className="header_content">
-          <View className="content_card">
-            <View className="card_info">
-              <View className="info_box">
-                <View className="box_top">
-                  <View className="top_item">
-                    <View className="item_top">待付款</View>
-                    <View className="item_bottom">3</View>
-                  </View>
-                  <View className="top_item">
-                    <View className="item_top">待发货</View>
-                    <View className="item_bottom">3</View>
-                  </View>
-                  <View className="top_item">
-                    <View className="item_top">待收货</View>
-                    <View className="item_bottom">6</View>
-                  </View>
-                  <View className="top_item">
-                    <View className="item_top">待评价</View>
-                    <View className="item_bottom">12</View>
-                  </View>
-                </View>
-                <View className="box-bottom">
-                    <View className="bottom-wrapper">
-                      <View className="bottom-item">
-                        <View className="item-top">
-                           <Image src={allOrder} className="image"/>
-                        </View>
-                        <View className="item-bottom">所有订单</View>
-                      </View>
-                      <View className="bottom-item">
-                        <View className="item-top">
-                          <Image src={allOrder} className="image"/>
-                        </View>
-                        <View className="item-bottom">完成订单</View>
-                      </View>
-                    </View>
-                </View>
-              </View>
-            </View>
-          </View>
-      </View>
-      </View>
+     
       <View className="content">
         <View className="content-item" onClick={this.handleMessage}>
           <View className="item">
-             <View className="icon-left">
-               <Image className="image" src={msg}/>
-             </View>
-             <View className="text-left">我的消息</View>
+             <View className="text-left">收货人</View>
              <View className="text-right">
                <View className="text-number">16</View>
              </View>
@@ -186,25 +117,16 @@ class Index extends Component {
              </View>
           </View>
         </View>
-        <View className="content-item" onClick={this.handleCollection}>
+        <View className="content-item">
           <View className="item">
-             <View className="icon-left">
-               <Image className="image" src={msg}/>
-             </View>
-             <View className="text-left">我的收藏</View>
+             <View className="text-left">手机号</View>
              <View className="text-right">
-               {/* <View className="text-number">16</View> */}
-             </View>
-             <View className="icon-right">
-               <Image src={arrow} className="image"/>
+               <Input className="text-right-input" placeholder="请输入手机号"/>
              </View>
           </View>
         </View>
         <View className="content-item">
           <View className="item">
-             <View className="icon-left">
-               <Image className="image" src={msg}/>
-             </View>
              <View className="text-left">我的卡券</View>
              <View className="text-right">
               你有3张优惠券待使用
@@ -217,9 +139,6 @@ class Index extends Component {
         </View>
         <View className="content-item">
           <View className="item">
-             <View className="icon-left">
-               <Image className="image" src={msg}/>
-             </View>
              <View className="text-left">我的金币</View>
              <View className="text-right">
                {/* <View className="text-number">16</View> */}
@@ -231,9 +150,6 @@ class Index extends Component {
         </View>
         <View className="content-item" onClick={this.handleOrder}>
           <View className="item">
-             <View className="icon-left">
-               <Image className="image" src={msg}/>
-             </View>
              <View className="text-left">我的预约</View>
              <View className="text-right">
              </View>
@@ -244,34 +160,7 @@ class Index extends Component {
         </View>
       </View>
       <View className="footer">
-        <View className="content-item" onClick={this.handleSetting}>
-            <View className="item">
-              <View className="icon-left">
-                <Image className="image" src={msg}/>
-              </View>
-              <View className="text-left">我的设置</View>
-              <View className="text-right">
-                <View className="text-number">16</View>
-              </View>
-              <View className="icon-right">
-                <Image src={arrow} className="image"/>
-              </View>
-            </View>
-        </View>
-        <View className="content-item" onClick={this.handleCustomer}>
-            <View className="item">
-              <View className="icon-left">
-                <Image className="image" src={msg}/>
-              </View>
-              <View className="text-left">官方客服</View>
-              <View className="text-right">
-                <View className="text-number">16</View>
-              </View>
-              <View className="icon-right">
-                <Image src={arrow} className="image"/>
-              </View>
-            </View>
-        </View>
+        <Button >提交</Button>
       </View>
     </View>
     )
