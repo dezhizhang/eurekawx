@@ -99,6 +99,12 @@ class Index extends Component {
       url:'../customer/index'
     })
   }
+  //个人信息
+  handleUserInfo = () => {
+    Taro.navigateTo({
+      url:'../user/index'
+    })
+  }
   componentDidHide () { }
 
   render () {
@@ -118,7 +124,7 @@ class Index extends Component {
               <View className="user_address">ID:{userInfo&&userInfo.userId}</View>
             </View>
             <View className="header_right">
-               <View className="right">
+               <View className="right" onClick={this.handleUserInfo}>
                   <View className="text">个人资料管理</View>
                </View>
             </View>
