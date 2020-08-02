@@ -81,7 +81,6 @@ class Index extends Component {
       Taro.switchTab({
         url:'../my/index'
       });
-     
     } else {
       showModal({
         title:'警告',
@@ -90,7 +89,6 @@ class Index extends Component {
         confirmText:'授权登录'
       })
     }
-   
   }
 
   componentDidHide () { }
