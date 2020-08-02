@@ -44,7 +44,7 @@ class Index extends Component {
   }
   componentDidMount() {
     Taro.getSetting().then(res => {
-      if(res.authSetting['scope.userInfo']) {
+      if(res.authSetting['scope.userInfo'] && res.authSetting['scope.address']) {
         Taro.getUserInfo().then(res => {
           if(res.userInfo) {
             Taro.login().then(res => {

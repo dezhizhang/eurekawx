@@ -3,7 +3,6 @@ import Taro, { Component, Config } from '@tarojs/taro'
 import { View,Image,} from '@tarojs/components'
 import myHeader from '../../images/my_header.png'
 import avatar from '../../images/avatar.png'
-import gift from '../../images/gift.png'
 import allOrder from '../../images/all_order.png'
 import msg from '../../images/icon/msg.png'
 import arrow from '../../images/icon/arrow.png'
@@ -50,20 +49,7 @@ class Index extends Component {
   componentDidShow() {
     let result = Taro.getStorageSync('userInfo');
     let userInfo =result?JSON.parse(result):''
-    if(userInfo) {
-      this.setState({userInfo});
-    } else {
-      Taro.showModal({
-        title: '温馨提示',
-        content: '您还没有登录!',
-      }).then(res => {
-        if(res.confirm) {
-          Taro.navigateTo({
-            url:'../login/index'
-          })
-        }
-      })
-    }
+    this.setState({userInfo});
   }
   handleToLogin =() => {
     Taro.navigateTo({
@@ -116,12 +102,12 @@ class Index extends Component {
             <View className="header_image">
               <Image className="image" src={myHeader}/>
             </View>
-            <View className="header_avatar" onClick={this.handleToLogin}>
+            <View className="header_avatar">
               <Image src={userInfo&&userInfo.avatarUrl ? userInfo.avatarUrl:avatar} className="avatar"/>
             </View>
             <View className="header_user">
-              <View className="user_name">{userInfo&&userInfo.nickName}</View>
-              <View className="user_address">ID:{userInfo&&userInfo.userId}</View>
+            <View className="user_name" onClick={this.handleToLogin}>{userInfo.nickName ? userInfo.nickName:'点击登录'}</View>
+              <View className="user_address">类型:{userInfo&&userInfo.userId}</View>
             </View>
             <View className="header_right">
                <View className="right" onClick={this.handleUserInfo}>
