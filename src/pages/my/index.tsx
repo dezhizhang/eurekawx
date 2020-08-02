@@ -107,7 +107,7 @@ class Index extends Component {
             </View>
             <View className="header_user">
             <View className="user_name" onClick={this.handleToLogin}>{userInfo.nickName ? userInfo.nickName:'点击登录'}</View>
-              <View className="user_address">类型:{userInfo&&userInfo.userId}</View>
+              <View className="user_address">会员:{userInfo&&userInfo.userType}</View>
             </View>
             <View className="header_right">
                <View className="right" onClick={this.handleUserInfo}>

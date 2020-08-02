@@ -75,7 +75,7 @@ class Index extends Component {
   bindGetUserInfo = (ev) => {
     if(ev.detail.userInfo){
       let result  = ev.detail.userInfo;
-      result.userId = userInfoId(6);
+      result.userType = '普通会员';
       let userInfo = JSON.stringify(result);
       Taro.setStorageSync('userInfo', userInfo);
       Taro.switchTab({
