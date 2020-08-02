@@ -1,7 +1,6 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View,Image,} from '@tarojs/components'
-import msg from '../../images/icon/msg.png'
 import arrow from '../../images/icon/arrow.png'
 import  './index.less'
 

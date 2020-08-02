@@ -165,7 +165,7 @@ class Index extends Component {
           </View>
         </View>
           {/* 列表 */}
-          {cartList.map((item,index) => {
+          {cartList.map(item => {
             return <View key={item._id} className="content">
             <View className="content-wrapper">
               <View className="content-item">
