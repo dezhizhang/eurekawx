@@ -45,7 +45,7 @@ class Index extends Component {
   }
   componentDidMount() {
     Taro.getSetting().then(res => {
-      if(res.authSetting['scope.userInfo'] && res.authSetting['scope.address']) {
+      if(res.authSetting['scope.userInfo']) {
         Taro.getUserInfo().then(res => {
           if(res.userInfo) {
             Taro.login().then(res => {
@@ -73,10 +73,14 @@ class Index extends Component {
       } 
     })
   }
+  
   bindGetUserInfo = async(ev) => {
     if(ev.detail.userInfo){
       let result  = ev.detail.userInfo;
       result.userType = '普通会员';
+      let userInfoKey = Taro.getStorageSync('userInfoKey');
+      result.openid = JSON.parse(userInfoKey).openid;
+      result.url = result.avatarUrl; //转换字段
       let res = await userLoginSave(result);
       if(res.data.code === 200) {
         let userInfo = JSON.stringify(result);
