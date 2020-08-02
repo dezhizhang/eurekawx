@@ -130,38 +130,38 @@ class Index extends Component {
   render () {
     const { tempFilePaths } = this.state;
     return (
-     <View className="maintain">
+      <View className="maintain">
          {/* <View className="header">
             <View className="header-text">提示：为了给你提供更好的服务，请准确填写如下信息</View>
           </View> */}
-          <View className="content">
-                <View className="content-input">
-                    <Text className="text">公司名称：</Text>
-                    <Input className="input" placeholder='请输入公司名称' onChange={this.handleUserName}/>
+        <View className="content">
+          <View className="content-input">
+            <Text className="text">公司名称：</Text>
+            <Input className="input" placeholder='请输入公司名称' onChange={this.handleUserName}/>
+          </View>
+          <View className="content-input">
+            <Text className="text">信用代码：</Text>
+            <Input className="input" placeholder='请输入信用代码' onChange={this.handleMobile}/>
+          </View>
+          <View className="image">
+            <View onClick={this.handleChooseImage} className="image-flex">
+              <View className="image-top">营业执照</View>
+              <View className="image-bottom bottom-left">
+                <Image src={!tempFilePaths ? upload:tempFilePaths} mode='aspectFill' className="image"/>
+              </View>
+            </View> 
+            <View className="image-flex">
+            <View className="image-top">示例图片</View>
+              <View className="image-bottom">
+                <Image src={server} mode='aspectFill' className="image"/>
                 </View>
-                <View className="content-input">
-                  <Text className="text">信用代码：</Text>
-                  <Input className="input" placeholder='请输入信用代码' onChange={this.handleMobile}/>
                 </View>
-                <View className="image">
-                  <View onClick={this.handleChooseImage} className="image-flex">
-                    <View className="image-top">营业执照</View>
-                    <View className="image-bottom bottom-left">
-                      <Image src={!tempFilePaths ? upload:tempFilePaths} mode='aspectFill' className="image"/>
-                    </View>
-                  </View> 
-                  <View className="image-flex">
-                    <View className="image-top">示例图片</View>
-                    <View className="image-bottom">
-                      <Image src={server} mode='aspectFill' className="image"/>
-                    </View>
-                  </View>
-                </View>
+              </View>
           </View>
           <View className="bottom">
             <Button className="btn" onClick={this.handleSubmit}>提交</Button>
           </View>
-    </View>
+      </View>
      
     )
   }
