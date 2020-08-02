@@ -109,14 +109,14 @@ class Index extends Component {
              </View>
           </View>
         </View>
-        <View className="content-item">
+        {/* <View className="content-item">
           <View className="item">
              <View className="text-left">邮箱</View>
              <View className="text-right">
                  1541609448@qq.com
              </View>
           </View>
-        </View>
+        </View> */}
       </View>
     </View>
     )
