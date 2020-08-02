@@ -1,8 +1,8 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Button } from '@tarojs/components'
-import { userLogin } from '../../service/api'
-import { showModal,userInfoId } from '../../utils/tools'
+import { userLogin,userLoginSave } from '../../service/api'
+import { showModal } from '../../utils/tools'
 import  './index.less'
 
 type PageStateProps = {
@@ -72,15 +72,18 @@ class Index extends Component {
       } 
     })
   }
-  bindGetUserInfo = (ev) => {
+  bindGetUserInfo = async(ev) => {
     if(ev.detail.userInfo){
       let result  = ev.detail.userInfo;
       result.userType = '普通会员';
-      let userInfo = JSON.stringify(result);
-      Taro.setStorageSync('userInfo', userInfo);
-      Taro.switchTab({
-        url:'../my/index'
-      });
+      let res = await userLoginSave(result);
+      if(res.data.code === 200) {
+        let userInfo = JSON.stringify(result);
+        Taro.setStorageSync('userInfo', userInfo);
+        Taro.switchTab({
+          url:'../my/index'
+        });
+      }   
     } else {
       showModal({
         title:'警告',

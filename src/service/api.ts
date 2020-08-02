@@ -38,15 +38,22 @@ export async function getCategoryList() {
 }
 //获取分类详情
 export async function getCategoryDetail(params) {
-  return request(`${Config.API_HOST}/api/categoryDetail/list?classify_id=${params.classify_id}`)
+  return request(`${Config.API_HOST}/api/categoryDetail/list?classify_id=${params.classify_id}`,{})
 }
 //获取商品详情
 export async function getProductDetail(params){
-  return request(`${Config.API_HOST}/api/product/detail?id=${params.id}`)
+  return request(`${Config.API_HOST}/api/product/detail?id=${params.id}`,{})
 }
 //用户登录
 export async function userLogin(params) {
-  return request(`${Config.API_HOST}/api/userInfo/login?code=${params.code}&appid=${params.appid}`);
+  return request(`${Config.API_HOST}/api/userInfo/login?code=${params.code}&appid=${params.appid}`,{});
+}
+//用户信息保存
+export async function userLoginSave(params) {
+  return request(`${Config.API_HOST}/api/userInfo/save`,{
+    method:'POST',
+    body:params
+  })
 }
 //购物车
 export async function userInfoCartSave(params) {

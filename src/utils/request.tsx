@@ -1,5 +1,5 @@
 import Taro from '@tarojs/taro'
-export const  request = (url, options) => {
+export const  request = (url:string, options?:any) => {
   let newOptions = { ...options };
   if (newOptions.method === 'POST' || newOptions.method === 'PUT') {
     newOptions.header = {
@@ -14,6 +14,7 @@ export const  request = (url, options) => {
       ...newOptions.header
     }
   }
+  console.log('newOptions',newOptions)
   return Taro.request({url, ...newOptions})
 }
 
