@@ -1,8 +1,6 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config, } from '@tarojs/taro'
 import { View, Input,Text, Button,Image } from '@tarojs/components'
-import { connect } from '@tarojs/redux'
-import { add, minus, asyncAdd } from '../../actions/counter'
 import { uploadInfo } from '../../service/api'
 import { showToast,showLoading,hideLoading } from '../../utils/tools'
 import server from '../../images/server.png'
@@ -16,12 +14,6 @@ type PageStateProps = {
   }
 }
 
-type PageDispatchProps = {
-  add: () => void
-  dec: () => void
-  asyncAdd: () => any
-}
-
 type PageOwnProps = {}
 
 type PageState = {
@@ -31,25 +23,12 @@ type PageState = {
   description:String
 }
 
-type IProps = PageStateProps & PageDispatchProps & PageOwnProps
+type IProps = PageStateProps & PageOwnProps
 
 interface Index {
   props: IProps;
 }
 
-@connect(({ counter }) => ({
-  counter
-}), (dispatch) => ({
-  add () {
-    dispatch(add())
-  },
-  dec () {
-    dispatch(minus())
-  },
-  asyncAdd () {
-    dispatch(asyncAdd())
-  }
-}))
 class Index extends Component {
   state = {
     username:'',
@@ -152,38 +131,30 @@ class Index extends Component {
     const { tempFilePaths } = this.state;
     return (
      <View className="maintain">
-         <View className="header">
+         {/* <View className="header">
             <View className="header-text">提示：为了给你提供更好的服务，请准确填写如下信息</View>
-          </View>
+          </View> */}
           <View className="content">
                 <View className="content-input">
-                    <Text className="text">真实姓名：</Text>
-                    <Input className="input" placeholder='请输入您的真实姓名' onChange={this.handleUserName}/>
+                    <Text className="text">公司名称：</Text>
+                    <Input className="input" placeholder='请输入公司名称' onChange={this.handleUserName}/>
                 </View>
                 <View className="content-input">
-                    <Text className="text">联系电话：</Text>
-                    <Input className="input" placeholder='请输入您的联系电话' onChange={this.handleMobile}/>
-                </View>
-                <View className="content-input">
-                    <Text className="text">联系地址：</Text>
-                    <Input className="input" placeholder="请输入您的联系地址" onChange={this.handleAddress}/>
-                </View>
-                <View className="content-input">
-                    <Text className="text">问题描述：</Text>
-                    <Input className="input" placeholder="请输入您遇到的问题" onChange={this.handleDescription}/>
+                  <Text className="text">信用代码：</Text>
+                  <Input className="input" placeholder='请输入信用代码' onChange={this.handleMobile}/>
                 </View>
                 <View className="image">
                   <View onClick={this.handleChooseImage} className="image-flex">
-                    <View className="image-top">点击上传</View>
+                    <View className="image-top">营业执照</View>
                     <View className="image-bottom bottom-left">
                       <Image src={!tempFilePaths ? upload:tempFilePaths} mode='aspectFill' className="image"/>
                     </View>
                   </View> 
                   <View className="image-flex">
-                      <View className="image-top">示例图片</View>
-                      <View className="image-bottom">
-                        <Image src={server} mode='aspectFill' className="image"/>
-                      </View>
+                    <View className="image-top">示例图片</View>
+                    <View className="image-bottom">
+                      <Image src={server} mode='aspectFill' className="image"/>
+                    </View>
                   </View>
                 </View>
           </View>

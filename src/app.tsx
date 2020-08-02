@@ -23,6 +23,7 @@ class App extends Component {
       "pages/setting/index",
       "pages/message/index",
       "pages/collection/index",
+      "pages/company/index",
       "pages/user/index",
       "pages/address/index"
     ],

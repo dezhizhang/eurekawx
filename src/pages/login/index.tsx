@@ -38,8 +38,9 @@ class Index extends Component {
 
   }
   handleCompany = () => {
-    console.log('公司登录');
-    
+    Taro.navigateTo({
+      url:'../company/index'
+    });  
   }
   componentDidMount() {
     Taro.getSetting().then(res => {
