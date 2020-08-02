@@ -10,9 +10,7 @@ type PageStateProps = {
   }
 }
 
-
 type PageOwnProps = {}
-
 type PageState = {
   username:String,
   mobile:String,
