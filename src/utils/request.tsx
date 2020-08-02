@@ -14,7 +14,6 @@ export const  request = (url:string, options?:any) => {
       ...newOptions.header
     }
   }
-  console.log('newOptions',newOptions)
   return Taro.request({url, ...newOptions})
 }
 
