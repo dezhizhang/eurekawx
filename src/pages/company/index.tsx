@@ -38,7 +38,7 @@ class Index extends Component {
     tempFilePaths:''
   }
     config: Config = {
-    navigationBarTitleText: '预约登记'
+    navigationBarTitleText: '企业注册'
   }
 
   componentWillReceiveProps (nextProps) {
