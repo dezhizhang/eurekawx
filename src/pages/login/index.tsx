@@ -106,7 +106,7 @@ class Index extends Component {
     <View className="login">
       <View className="login-weapper">
         <Button openType="getUserInfo" className="btn" type="primary" onGetUserInfo={this.bindGetUserInfo}>个人登录</Button>
-        <Button className="btn" type="primary" >企业登录</Button>
+        <Button className="btn" type="primary" onClick={this.handle}>企业登录</Button>
         <Button className="btn" type="primary" onClick={this.handleCompany}>企业注册</Button>
       </View>
     </View>
