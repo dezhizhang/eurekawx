@@ -27,7 +27,8 @@ class App extends Component {
       "pages/user/index",
       "pages/address/index",
       "pages/perLogin/index",
-      "pages/comLogin/index"
+      "pages/comLogin/index",
+      "pages/comRegister/index",
     ],
     window: {
       backgroundTextStyle: 'light',
