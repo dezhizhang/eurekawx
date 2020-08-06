@@ -95,11 +95,13 @@ class Index extends Component {
   handlePerToLogin = () => {
     Taro.navigateTo({
       url:'../perLogin/index'
-    })
+    });
   }
   //企业登录
   handleComToLogin = () => {
-
+    Taro.navigateTo({
+      url:'../comLogin/index'
+    });
   }
   componentDidHide () { }
 

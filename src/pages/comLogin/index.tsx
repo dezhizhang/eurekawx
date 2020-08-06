@@ -103,6 +103,10 @@ class Index extends Component {
       })
     }
   }
+  //企业登录
+  handleLogin = () => {
+
+  }
 
   componentDidHide () { }
 
@@ -110,8 +114,7 @@ class Index extends Component {
     return (
     <View className="login">
       <View className="login-weapper">
-        <Button openType="getUserInfo" className="btn" type="primary" onGetUserInfo={this.bindGetUserInfo}>个人登录</Button>
-        <Button className="btn" type="primary" onClick={this.handle}>企业登录</Button>
+        <Button className="btn" type="primary" onClick={this.handleLogin}>企业登录</Button>
         <Button className="btn" type="primary" onClick={this.handleCompany}>企业注册</Button>
       </View>
     </View>
