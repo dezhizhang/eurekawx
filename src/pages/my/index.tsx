@@ -91,6 +91,16 @@ class Index extends Component {
       url:'../user/index'
     })
   }
+  //个人登录
+  handlePerToLogin = () => {
+    Taro.navigateTo({
+      url:'../perLogin/index'
+    })
+  }
+  //企业登录
+  handleComToLogin = () => {
+
+  }
   componentDidHide () { }
 
   render () {
@@ -106,8 +116,8 @@ class Index extends Component {
               <Image src={userInfo&&userInfo.avatarUrl ? userInfo.avatarUrl:avatar} className="avatar"/>
             </View>
             <View className="header_user">
-              <View className="user_name" onClick={this.handleToLogin}>{userInfo.nickName ? userInfo.nickName:'个人登录'}</View>
-              <View className="user_name" onClick={this.handleToLogin}>{userInfo.nickName ? userInfo.nickName:'企业登录'}</View>
+              <View className="user_name" onClick={this.handlePerToLogin}>{userInfo.nickName ? userInfo.nickName:'个人登录'}</View>
+              <View className="user_name" onClick={this.handleComToLogin}>{userInfo.nickName ? userInfo.nickName:'企业登录'}</View>
               <View className="user_address">会员:{userInfo&&userInfo.userType}</View>
             </View>
             <View className="header_right">
