@@ -30,6 +30,7 @@ type PageState = {
   countys:any;//区县
   county:string;
   value:any;
+  detailed:string; //详细地址
   moveY:number;
   time:number;
   animation:any;
@@ -47,6 +48,7 @@ class Index extends Component {
     username:'',
     mobile:'',
     address:'',
+    detailed:'',
     description:'',
     tempFilePaths:'',
     areaInfo:[],
@@ -225,15 +227,11 @@ class Index extends Component {
   bindChange = (ev) => {
     let val = ev.detail.value;
     let {index,areaInfo,provinces,citys,countys} = this.state;
-    
-    // console.log(e)
-    //判断滑动的是第几个column
     //若省份column做了滑动则定位到地级市和区县第一位
     if (index[0] != val[0]) {
       val[1] = 0;
       val[2] = 0;
-      this.getCityArr(val[0],areaInfo,provinces);
-      //this.getCityArr(val[0], this);//获取地级市数据
+      this.getCityArr(val[0],areaInfo,provinces);//获取地级市数据
       this.getCountyInfo(val[0],val[1],areaInfo,provinces,citys);
     } else {    //若省份column未做滑动，地级市做了滑动则定位区县第一位
       if (index[1] != val[1]) {
@@ -247,23 +245,10 @@ class Index extends Component {
       value: [val[0], val[1], val[2]],
       province: provinces[val[0]].name,
       city: citys[val[1]].name,
-      county: countys[val[2]].name
+      county: countys[val[2]].name,
     })
   }
-  animationEvents =(that,moveY,show) =>{
-    let animation = Taro.createAnimation({
-      transformOrigin: "50% 50%",
-      duration: 400,
-      timingFunction: "ease",
-      delay: 0
-    }
-    )
-    animation.translateY(moveY + 'vh').step()
-    that.setData({
-      animation: that.animation.export(),
-      show: true
-    })
-  }
+
   handleTranslate = () => {
    this.setState({
      show:true,
@@ -283,11 +268,17 @@ class Index extends Component {
   }
   handleOk = (ev) => {
     ev.stopPropagation();
-    let {province,city, county } = this.state;
+    let { province,city, county } = this.state;
     let address = `${province}${city}${county}`;
     this.setState({
       show:false,
       address
+    })
+  }
+  handleDetail = (ev) => {
+    let detailed = ev.target.value;
+    this.setState({
+      detailed
     })
   }
   render () {
@@ -334,7 +325,7 @@ class Index extends Component {
                 </View>
                 <View className="content-input">
                   <Text className="text">详细地址</Text>
-                  <Input className="input" placeholder="请输入您的联系地址" onChange={this.handleAddress}/>
+                  <Input className="input" placeholder="请输入您的联系地址" onChange={this.handleDetail}/>
                 </View>
                 <View className="image">
                   <View onClick={this.handleChooseImage} className="image-flex">
