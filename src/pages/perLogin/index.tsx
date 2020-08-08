@@ -84,7 +84,7 @@ class Index extends Component {
       let result  = ev.detail.userInfo;
       result.userType = '普通会员';
       let userInfoKey = Taro.getStorageSync('userInfoKey');
-      result.openid = JSON.parse(userInfoKey).openid;
+      result.openid = userInfoKey ? JSON.parse(userInfoKey).openid:'';
       result.url = result.avatarUrl; //转换字段
       let res = await userLoginSave(result);
       if(res.data.code === 200) {

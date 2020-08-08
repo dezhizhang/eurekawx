@@ -283,7 +283,7 @@ class Index extends Component {
   }
   handleOk = (ev) => {
     ev.stopPropagation();
-    let {province,city,county} = this.state;
+    let {province,city, county } = this.state;
     let address = `${province}${city}${county}`;
     this.setState({
       show:false,

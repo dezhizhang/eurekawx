@@ -34,7 +34,11 @@ interface Index {
 
 class Index extends Component {
     state = {
-      userInfo:{},
+      userInfo:{
+        nickName:'',
+        userType:'',
+        avatarUrl:'',
+      },
     }
     config: Config = {
     navigationBarTitleText: '我的'
@@ -118,8 +122,8 @@ class Index extends Component {
               <Image src={userInfo&&userInfo.avatarUrl ? userInfo.avatarUrl:avatar} className="avatar"/>
             </View>
             <View className="header_user">
-              <View className="user_name" onClick={this.handlePerToLogin}>{userInfo.nickName ? userInfo.nickName:'个人登录'}</View>
-              <View className="user_name" onClick={this.handleComToLogin}>{userInfo.nickName ? userInfo.nickName:'企业登录'}</View>
+              <View className="user_name" style={{display:userInfo.userType === '普通会员' || userInfo.userType === undefined ? 'block':'none'}} onClick={this.handlePerToLogin}>{userInfo.nickName ? userInfo.nickName:'个人登录'}</View>
+              <View className="user_name" style={{display:userInfo.userType === '普通会员' ? 'none':'block'}} onClick={this.handleComToLogin}>{userInfo.nickName ? userInfo.nickName:'企业登录'}</View>
               <View className="user_address">会员:{userInfo&&userInfo.userType}</View>
             </View>
             <View className="header_right">
