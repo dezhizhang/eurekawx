@@ -1,7 +1,7 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config, } from '@tarojs/taro'
 import { View, Input,Text, Button,Image,PickerView,PickerViewColumn } from '@tarojs/components'
-import { uploadInfo } from '../../service/api'
+import { uploadInfo,cityInfoList } from '../../service/api'
 import { showToast,showLoading,hideLoading } from '../../utils/tools'
 import server from '../../images/server.png'
 import upload from '../../images/upload.png'
@@ -22,6 +22,15 @@ type PageState = {
   address:String,
   description:String
   selector:any;
+  areaInfo:any; //所有城市县区数据
+  provinces:any//省
+  province:string;
+  citys:any//城市
+  city:string;
+  countys:any;//区县
+  county:string;
+  value:any;
+  animation:any;
   selectorChecked:string;
 }
 
@@ -31,6 +40,9 @@ interface Index {
   props: IProps;
 }
 
+const citys = [];
+
+
 class Index extends Component {
   state = {
     username:'',
@@ -38,8 +50,14 @@ class Index extends Component {
     address:'',
     description:'',
     tempFilePaths:'',
-    selectorChecked:'',
-    selector: ['美国', '中国', '巴西', '日本'],
+    areaInfo:[],
+    provinces:[],
+    citys:[],
+    countys:[],
+    show:true,
+    animation:undefined,
+    value: [0, 0, 0],
+    index:[0, 0, 0],
   }
     config: Config = {
     navigationBarTitleText: '企业注册'
@@ -76,6 +94,7 @@ class Index extends Component {
        that.setState({tempFilePaths});
     })
   }
+
   handleSubmit = () => {
     const { username,mobile,address,description,tempFilePaths } = this.state;
     const reg = /^1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]{8}$/
@@ -131,17 +150,126 @@ class Index extends Component {
       })
     } 
   }
+  componentDidMount() {
+    this.getCityData();
+    let animation = Taro.createAnimation({
+      transformOrigin: "50% 50%",
+      duration: 0,
+      timingFunction: "ease",
+      delay: 0
+    }
+    )
+    animation.translateY(200 + 'vh').step();
+    this.setState({
+      animation: animation.export(),
+      show: false
+    })
+  }
+  getCityData = async() => {
+    let res = await cityInfoList();
+    if(res.data.code === 200) {
+      let areaInfo = res.data.data;
+      this.setState({
+        areaInfo
+      });
+      this.getProvinceData(areaInfo); //获取省份数据
+    } 
+  }
+  getProvinceData = (areaInfo) => {
+    let s;
+    let provinces = [];
+    let num = 0;
+    for (let i = 0; i < areaInfo.length; i++) {
+      s = areaInfo[i];
+      if (s.di == "00" && s.xian == "00") {
+        provinces[num] = s;
+        num++;
+      }
+      
+    }
+    this.getCityArr(0,areaInfo,provinces)
+    this.setState({provinces});
+  }
+  getCityArr = (count,areaInfo,provinces) => {
+    let c;
+    let citys = [];
+    let num = 0;
+    for(let i=0;i < areaInfo.length;i++) {
+      c = areaInfo[i];
+      if(c.xian == "00" && c.sheng == provinces[count].sheng && c.di != "00") {
+        citys[num] = c;
+        num++;
+      }
+    }
+    this.getCountyInfo(0,0,areaInfo,provinces,citys)
+    this.setState({
+      city:'',
+      citys,
+      value:[count,0,0]
+    })
+  }
+  getCountyInfo = (column0,column1,areaInfo,provinces,citys) => {
+    let c;
+    let countys = [];
+    let num = 0;
+    for (var i = 0; i < areaInfo.length; i++) {
+      c = areaInfo[i];
+      if (c.xian != "00" && c.sheng == provinces[column0].sheng && c.di == citys[column1].di) {
+        countys[num] = c;
+        num++;
+      }
+    }
+    this.setState({
+      county:'',
+      countys,
+      value: [column0, column1, 0]
+    })
+  }
+
+  //公司名称
+  handleCompanyName = (ev:any) => {
+    let nickName = ev.target.value;
+    this.setState({
+      nickName
+    });
+  }
+  bindChange = (ev) => {
+    let val = ev.detail.value;
+    let {index,areaInfo,provinces,citys,countys} = this.state;
+    
+    // console.log(e)
+    //判断滑动的是第几个column
+    //若省份column做了滑动则定位到地级市和区县第一位
+    if (index[0] != val[0]) {
+      val[1] = 0;
+      val[2] = 0;
+      this.getCityArr(val[0],areaInfo,provinces);
+      //this.getCityArr(val[0], this);//获取地级市数据
+      this.getCountyInfo(val[0],val[1],areaInfo,provinces,citys);
+    } else {    //若省份column未做滑动，地级市做了滑动则定位区县第一位
+      if (index[1] != val[1]) {
+        val[2] = 0;
+        this.getCountyInfo(val[0],val[1],areaInfo,provinces,citys);
+      }
+    }
+    index = val;
+    //更新数据
+    this.setState({
+      value: [val[0], val[1], val[2]],
+      province: provinces[val[0]].name,
+      city: citys[val[1]].name,
+      county: countys[val[2]].name
+    })
+  }
   render () {
-    const { tempFilePaths } = this.state;
+    const { tempFilePaths,provinces,value,citys,countys,show,animation} = this.state;
+
     return (
      <View className="maintain">
-         {/* <View className="header">
-            <View className="header-text">提示：为了给你提供更好的服务，请准确填写如下信息</View>
-          </View> */}
           <View className="content">
                 <View className="content-input">
                     <Text className="text">公司名称</Text>
-                    <Input className="input" placeholder='请输入公司名称' onChange={this.handleUserName}/>
+                    <Input className="input" placeholder='请输入公司名称' onChange={this.handleCompanyName}/>
                 </View>
                 <View className="content-input">
                   <Text className="text">信用代码</Text>
@@ -149,31 +277,30 @@ class Index extends Component {
                 </View>
                 <View className="content-input">
                   <Text className="text">地区信息</Text>
-                  <View>{this.state.year}年{this.state.month}月{this.state.day}日</View>
-                  <PickerView indicatorStyle='height: 50px;' style='width: 100%; height: 300px;' value={this.state.value} onChange={this.onChange}>
+                  <View className="animation-element-wrapper" style={{visibility:show ? 'visible':'hidden'}} animation={animation}>
+                  <View className="animation-element">
+                    <Text className="left-btn">取消</Text>
+                    <Text className="right-bt">确定</Text>
+                  </View>
+                  <PickerView className="picker-view" indicatorStyle='height: 50px;' style='width: 100%; height: 300px;' value={value} onChange={this.bindChange}>
+                    <PickerViewColumn className="picker-view-column">
+                      {provinces.map((item,index) => {
+                        return <View key={index}>{item.name}</View>
+                      })}
+                     
+                    </PickerViewColumn>
                     <PickerViewColumn>
-                      {this.state.years.map(item => {
-                        return (
-                          <View>{item}年</View>
-                        );
+                      {citys.map((item,index) => {
+                        return <View key={index}>{item.name}</View>
                       })}
                     </PickerViewColumn>
                     <PickerViewColumn>
-                      {this.state.months.map(item => {
-                        return (
-                          <View>{item}月</View>
-                        )
-                      })}
-                    </PickerViewColumn>
-                    <PickerViewColumn>
-                      {this.state.days.map(item => {
-                        return (
-                          <View>{item}日</View>
-                        )
+                      {countys.map((item,index) => {
+                        return <View key={index}>{item.name}</View>
                       })}
                     </PickerViewColumn>
                   </PickerView>
-                  {/* <Input className="input" placeholder="请输入您的联系地址" onChange={this.handleAddress}/> */}
+                </View>
                 </View>
                 <View className="content-input">
                   <Text className="text">详细地址</Text>

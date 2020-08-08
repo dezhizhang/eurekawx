@@ -79,11 +79,15 @@ export async function getPayInfo(params) {
 }
 //删除购物车
 export async function deleteCart(params) {
-  return request(`${Config.API_HOST}/api/cart/delete?id=${params.id}`)
+  return request(`${Config.API_HOST}/api/cart/delete?id=${params.id}`);
 }
 //更新购物车状态
 export async function updateCartStatus(params) {
   return request(`${Config.API_HOST}/api/cart/status?id=${params.id}&checked=${params.checked}`);
+}
+//城市接口
+export async function cityInfoList() {
+  return request(`${Config.API_HOST}/api/city/info`);
 }
 
 
