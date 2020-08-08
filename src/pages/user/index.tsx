@@ -2,6 +2,9 @@ import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View,Image,} from '@tarojs/components'
 import arrow from '../../images/icon/arrow.png'
+import { getStorageSync } from '../../utils/tools'
+import { companyInfo } from '../../service/api';
+import avatar from '../../images/avatar.png'
 import  './index.less'
 
 type PageStateProps = {
@@ -24,7 +27,13 @@ interface Index {
 
 class Index extends Component {
     state = {
-      userInfo:{},
+      userInfo:{
+        nickName:'',
+        url:'',
+        avatarUrl:'',
+        address:'',
+        mobile:'',
+      },
     }
     config: Config = {
     navigationBarTitleText: '个人信息'
@@ -37,21 +46,22 @@ class Index extends Component {
   componentWillUnmount () { }
 
   componentDidShow() {
-    let result = Taro.getStorageSync('userInfo');
-    let userInfo =result?JSON.parse(result):''
-    if(userInfo) {
-      this.setState({userInfo});
+    let creditCode = getStorageSync("creditCode");
+    if(creditCode) {
+      this.getCompanyInfo(creditCode)
     } else {
-      Taro.showModal({
-        title: '温馨提示',
-        content: '您还没有登录!',
-      }).then(res => {
-        if(res.confirm) {
-          Taro.navigateTo({
-            url:'../login/index'
-          })
-        }
+      let result = getStorageSync('userInfo');
+      let userInfo =result?JSON.parse(result):{};
+      this.setState({
+        userInfo
       })
+    }
+  }
+  getCompanyInfo = async(creditCode) => {
+    let res = await companyInfo({creditCode});
+    if(res.data.code === 200) {
+      let userInfo = res.data.data;
+      this.setState({userInfo});
     }
   }
   //个人信息
@@ -64,6 +74,7 @@ class Index extends Component {
   componentDidHide () { }
 
   render () {
+    const { userInfo } = this.state;
     return (
     <View className="user">
       <View className="content">
@@ -71,10 +82,9 @@ class Index extends Component {
           <View className="item">
              <View className="text-left">头像</View>
              <View className="text-right">
-               <View className="text-number">16</View>
-             </View>
-             <View className="icon-right">
-               <Image src={arrow} className="image"/>
+                <View className="header_avatar">
+                  <Image src={userInfo&&userInfo.avatarUrl ? userInfo.avatarUrl:userInfo.url ? userInfo.url:avatar} className="avatar"/>
+                </View>
              </View>
           </View>
         </View>
@@ -83,7 +93,7 @@ class Index extends Component {
            
              <View className="text-left">呢称</View>
              <View className="text-right">
-               <View className="text-right">不哭的小孩</View>
+               <View className="text-right">{userInfo.nickName}</View>
              </View>
           </View>
         </View>
@@ -92,7 +102,7 @@ class Index extends Component {
            
              <View className="text-left">手机</View>
              <View className="text-right">
-              15083356190
+                {userInfo.mobile ? userInfo.mobile:'填写手机号获取积分' }
              </View>
           </View>
         </View>
@@ -100,8 +110,7 @@ class Index extends Component {
           <View className="item">
              <View className="text-left">地址</View>
              <View className="text-right">
-                 11111111111
-               {/* <View className="text-number">16</View> */}
+                {userInfo.address}
              </View>
              <View className="icon-right">
                <Image src={arrow} className="image"/>

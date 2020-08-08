@@ -28,7 +28,7 @@ export const showModal = (params) => {
     })
 }
 //获取缓存数据
-export const getStorageInfoSync = (key) => {
+export const getStorageSync = (key) => {
     try {
         const res = Taro.getStorageSync(key);
         return res

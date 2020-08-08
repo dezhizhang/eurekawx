@@ -1,7 +1,7 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View,Image,} from '@tarojs/components'
-import { getStorageInfoSync } from '../../utils/tools'
+import { getStorageSync } from '../../utils/tools'
 import { companyInfo } from '../../service/api';
 import myHeader from '../../images/my_header.png'
 import avatar from '../../images/avatar.png'
@@ -48,11 +48,11 @@ class Index extends Component {
     console.log(this.props, nextProps)
   }
   componentDidShow() {
-    let creditCode =  getStorageInfoSync('creditCode');
+    let creditCode =  getStorageSync('creditCode');
     if(creditCode) { //证明企业用户
       this.getCompanyInfo(creditCode);
     } else {
-      let result = getStorageInfoSync('userInfo');
+      let result = getStorageSync('userInfo');
       let userInfo =result?JSON.parse(result):{};//不存在时就是一个空对像
       if(Object.keys(userInfo).length > 0) {
         userInfo.isLogin = true;
