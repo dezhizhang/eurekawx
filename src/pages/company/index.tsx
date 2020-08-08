@@ -162,7 +162,7 @@ class Index extends Component {
     animation.translateY(200 + 'vh').step();
     this.setState({
       animation: animation.export(),
-      show: false
+      show: true
     })
   }
   getCityData = async() => {
@@ -263,6 +263,8 @@ class Index extends Component {
   }
   render () {
     const { tempFilePaths,provinces,value,citys,countys,show,animation} = this.state;
+    console.log("show",show);
+
 
     return (
      <View className="maintain">
@@ -277,7 +279,7 @@ class Index extends Component {
                 </View>
                 <View className="content-input">
                   <Text className="text">地区信息</Text>
-                  <View className="animation-element-wrapper" style={{visibility:show ? 'visible':'hidden'}} animation={animation}>
+                  <View className="animation-element-wrapper" animation={animation}>
                   <View className="animation-element">
                     <Text className="left-btn">取消</Text>
                     <Text className="right-bt">确定</Text>
