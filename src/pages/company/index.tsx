@@ -1,7 +1,7 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config, } from '@tarojs/taro'
 import { View, Input,Text, Button,Image,PickerView,PickerViewColumn } from '@tarojs/components'
-import { uploadInfo,cityInfoList } from '../../service/api'
+import { companyLogin,cityInfoList } from '../../service/api'
 import { showToast,showLoading,hideLoading } from '../../utils/tools'
 import server from '../../images/server.png'
 import upload from '../../images/upload.png'
@@ -17,8 +17,8 @@ type PageStateProps = {
 type PageOwnProps = {}
 
 type PageState = {
-  username:String,
-  mobile:String,
+  nickName:String,
+  creditCode:String,
   address:String,
   description:String
   selector:any;
@@ -30,6 +30,7 @@ type PageState = {
   countys:any;//区县
   county:string;
   value:any;
+  cityInfo:string;
   detailed:string; //详细地址
   moveY:number;
   time:number;
@@ -45,16 +46,19 @@ interface Index {
 
 class Index extends Component {
   state = {
-    username:'',
-    mobile:'',
+    nickName:'',
+    creditCode:'',
     address:'',
     detailed:'',
-    description:'',
+    cityInfo:'',
     tempFilePaths:'',
     areaInfo:[],
     provinces:[],
+    province:'',
     citys:[],
+    city:'',
     countys:[],
+    county:'',
     show:false,
     time:0,
     moveY:200,
@@ -68,22 +72,6 @@ class Index extends Component {
 
   componentWillReceiveProps (nextProps) {
     console.log(this.props, nextProps)
-  }
-  handleUserName = (event:any) => {
-     const username = event.target.value;
-     this.setState({username})
-  }
-  handleMobile = (event:any) => {
-    const mobile = event.target.value;
-    this.setState({mobile});
-  }
-  handleAddress = (event:any) => {
-    let address = event.target.value;
-    this.setState({address})
-  }
-  handleDescription = (event:any) => {
-    let description = event.target.value;
-    this.setState({description})
   }
   handleChooseImage = () => {
     let that = this;
@@ -99,24 +87,24 @@ class Index extends Component {
   }
 
   handleSubmit = () => {
-    const { username,mobile,address,description,tempFilePaths } = this.state;
-    const reg = /^1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]{8}$/
-    if(username && mobile && address && tempFilePaths) {
-      if(!reg.test(mobile)) {
+    const { nickName,creditCode,detailed,tempFilePaths,cityInfo } = this.state;
+    const reg = /[^_IOZSVa-z\W]{2}\d{6}[^_IOZSVa-z\W]{10}/g;
+    const address = `${cityInfo}${detailed}`
+    if(nickName && creditCode && address && tempFilePaths) {
+      if(!reg.test(creditCode)) {
         showToast({
-          title:'手机号不合法',
+          title:'社会信用代码不合法',
           icon:'none'
         })
       } else {//提交数据
         const params = {
-          username,
-          mobile,
+          nickName,
+          creditCode,
           address,
-          description,
           tempFilePaths
         }
         showLoading({title:'信息上传中'});
-        uploadInfo(params).then(res => {
+        companyLogin(params).then(res => {
           let data = JSON.parse(res.data);
           if(data.code == 200) {
             hideLoading();
@@ -125,30 +113,30 @@ class Index extends Component {
               icon:'success'
             });
             Taro.switchTab({
-              url: '../index/index'
+              url: '../my/index'
             });
           }
         })
       }
      
-    } else if(!username){
+    } else if(!nickName){
       showToast({
-        title:'用户名不能为空',
+        title:'公司名称不能为空',
         icon:'none',
       });
-    } else if(!mobile) {
+    } else if(!creditCode) {
       showToast({
-        title:'联系电话不能为空',
+        title:'信用代码不能为空',
         icon:'none'
       });
     } else if(!address){
        showToast({
-         title:'联系地址不能为空',
+         title:'地址不能为空',
          icon:'none'
        })
     } else if(!tempFilePaths) {
       showToast({
-        title:'请上传维修图片',
+        title:'请上传营业执照',
         icon:'none'
       })
     } 
@@ -269,20 +257,28 @@ class Index extends Component {
   handleOk = (ev) => {
     ev.stopPropagation();
     let { province,city, county } = this.state;
-    let address = `${province}${city}${county}`;
+    let cityInfo = `${province}${city}${county}`;
     this.setState({
       show:false,
-      address
+      cityInfo
     })
   }
+  //详细地址
   handleDetail = (ev) => {
     let detailed = ev.target.value;
     this.setState({
       detailed
     })
   }
+  //信用代码
+  handleCreditCode = (ev) => {
+    let creditCode = ev.target.value;
+    this.setState({
+      creditCode
+    });
+  }
   render () {
-    const { tempFilePaths,provinces,value,citys,countys,show,address} = this.state;
+    const { tempFilePaths,provinces,value,citys,countys,show,cityInfo} = this.state;
     return (
      <View className="maintain">
           <View className="content">
@@ -292,11 +288,11 @@ class Index extends Component {
                 </View>
                 <View className="content-input">
                   <Text className="text">信用代码</Text>
-                  <Input className="input" placeholder='请输入信用代码' onChange={this.handleMobile}/>
+                  <Input className="input" placeholder='请输入信用代码' onChange={this.handleCreditCode}/>
                 </View>
                 <View className="content-input" onClick={this.handleTranslate}>
                   <Text className="text">地区信息</Text>
-                  <Input className="input" value={address} placeholder="请选择地区信息"/>
+                  <Input className="input" value={cityInfo} placeholder="请选择地区信息"/>
                   <View className="animation-element-wrapper" style={{visibility:show ? 'visible':'hidden'}}>
                   <View className="animation-element">
                     <Text className="left-btn" onClick={this.handleCancel}>取消</Text>
