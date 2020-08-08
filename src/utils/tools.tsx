@@ -1,4 +1,3 @@
-export const baseURL = 'https://www.guicaioa.com'
 import Taro from '@tarojs/taro'
 
 //提示
@@ -28,7 +27,20 @@ export const showModal = (params) => {
         confirmText:params.confirmText
     })
 }
-//生成用户唯一id
-export const userInfoId =(number) => {
-   return Number(Math.random().toString().substr(3,number) + Date.now()).toString(36)
-} 
+//获取缓存数据
+export const getStorageInfoSync = (key) => {
+    try {
+        const res = Taro.getStorageSync(key);
+        return res
+      } catch (e) {
+       console.log(e);
+    }
+}
+//存储缓存
+export const setStorageSync = (params) => {
+    try {
+        Taro.setStorageSync(params.key, params.value);
+    } catch (e) {
+        console.log(e);
+    }
+}

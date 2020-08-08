@@ -100,6 +100,10 @@ export async function companyLogin(params) {
     body:params
   })
 }
+//获取企业信息
+export async function companyInfo(params) {
+  return request(`${Config.API_HOST}/api/company/info?creditCode=${params.creditCode}`)
+}
 
 
 

@@ -1,6 +1,8 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View,Image,} from '@tarojs/components'
+import { getStorageInfoSync } from '../../utils/tools'
+import { companyInfo } from '../../service/api';
 import myHeader from '../../images/my_header.png'
 import avatar from '../../images/avatar.png'
 import allOrder from '../../images/all_order.png'
@@ -14,19 +16,15 @@ type PageStateProps = {
   }
 }
 
-type PageDispatchProps = {
-  add: () => void
-  dec: () => void
-  asyncAdd: () => any
+type PageOwnProps = {
+ 
 }
-
-type PageOwnProps = {}
 
 type PageState = {
   userInfo:any;
 }
 
-type IProps = PageStateProps & PageDispatchProps & PageOwnProps
+type IProps = PageStateProps  & PageOwnProps
 
 interface Index {
   props: IProps;
@@ -38,6 +36,8 @@ class Index extends Component {
         nickName:'',
         userType:'',
         avatarUrl:'',
+        url:'',
+        isLogin:false, //当削是否登录过
       },
     }
     config: Config = {
@@ -47,13 +47,27 @@ class Index extends Component {
   componentWillReceiveProps (nextProps) {
     console.log(this.props, nextProps)
   }
-
-  componentWillUnmount () { }
-
   componentDidShow() {
-    let result = Taro.getStorageSync('userInfo');
-    let userInfo =result?JSON.parse(result):''
-    this.setState({userInfo});
+    let creditCode =  getStorageInfoSync('creditCode');
+    if(creditCode) { //证明企业用户
+      this.getCompanyInfo(creditCode);
+    } else {
+      let result = getStorageInfoSync('userInfo');
+      let userInfo =result?JSON.parse(result):{};//不存在时就是一个空对像
+      if(Object.keys(userInfo).length > 0) {
+        userInfo.isLogin = true;
+      }
+      this.setState({userInfo});
+    }
+  }
+  //获取公司信息
+  getCompanyInfo = async(creditCode) => {
+    let res = await companyInfo({creditCode});
+    if(res.data.code === 200) {
+      let userInfo = res.data.data;
+      userInfo.isLogin = true; //当前以登录
+      this.setState({userInfo});
+    }
   }
   handleToLogin =() => {
     Taro.navigateTo({
@@ -111,6 +125,8 @@ class Index extends Component {
 
   render () {
     let { userInfo } = this.state;
+    console.log("userInfo",userInfo);
+
     return (
     <View className="my">
       <View className="header">
@@ -119,11 +135,15 @@ class Index extends Component {
               <Image className="image" src={myHeader}/>
             </View>
             <View className="header_avatar">
-              <Image src={userInfo&&userInfo.avatarUrl ? userInfo.avatarUrl:avatar} className="avatar"/>
+              <Image src={userInfo&&userInfo.avatarUrl ? userInfo.avatarUrl:userInfo.url ? userInfo.url:avatar} className="avatar"/>
             </View>
-            <View className="header_user">
-              <View className="user_name" style={{display:userInfo.userType === '普通会员' || userInfo.userType === undefined ? 'block':'none'}} onClick={this.handlePerToLogin}>{userInfo.nickName ? userInfo.nickName:'个人登录'}</View>
-              <View className="user_name" style={{display:userInfo.userType === '普通会员' ? 'none':'block'}} onClick={this.handleComToLogin}>{userInfo.nickName ? userInfo.nickName:'企业登录'}</View>
+            <View className="header_user" style={{display:userInfo.isLogin ? 'none':'block'}}>
+              <View className="user_name" onClick={this.handlePerToLogin}>{userInfo.nickName ? userInfo.nickName:'个人登录'}</View>
+              <View className="user_name" onClick={this.handleComToLogin}>{userInfo.nickName ? userInfo.nickName:'企业登录'}</View>
+              <View className="user_address">会员:{userInfo&&userInfo.userType}</View>
+            </View>
+            <View className="header_user" style={{display:userInfo.isLogin ? 'block':'none'}}>
+              <View className="user-info">{userInfo.nickName}</View>
               <View className="user_address">会员:{userInfo&&userInfo.userType}</View>
             </View>
             <View className="header_right">

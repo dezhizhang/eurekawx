@@ -2,7 +2,7 @@ import { ComponentClass } from 'react'
 import Taro, { Component, Config, } from '@tarojs/taro'
 import { View, Input,Text, Button } from '@tarojs/components'
 import { companyLogin } from '../../service/api'
-import { showToast,showLoading,hideLoading } from '../../utils/tools'
+import { showToast,setStorageSync } from '../../utils/tools'
 import  './index.less'
 
 
@@ -69,8 +69,10 @@ class Index extends Component {
             icon:'success'
           });
           Taro.switchTab({
-            url: '../my/index'
+            url: `../my/index`
           });
+          //把社会信用码存在缓存中，实现数据的共享
+          setStorageSync({key:'creditCode',value:creditCode});
         } else{ //还没有注册
           showToast({
             title:'您还没有注册',

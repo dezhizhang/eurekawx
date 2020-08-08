@@ -101,6 +101,7 @@ class Index extends Component {
           nickName,
           creditCode,
           address,
+          userType:"高级会员",
           tempFilePaths
         }
         showLoading({title:'信息上传中'});
