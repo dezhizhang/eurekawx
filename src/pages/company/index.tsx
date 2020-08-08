@@ -279,7 +279,7 @@ class Index extends Component {
                 </View>
                 <View className="content-input">
                   <Text className="text">地区信息</Text>
-                  <View className="animation-element-wrapper" animation={animation}>
+                  <View className="animation-element-wrapper">
                   <View className="animation-element">
                     <Text className="left-btn">取消</Text>
                     <Text className="right-bt">确定</Text>
