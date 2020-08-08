@@ -89,9 +89,16 @@ export async function updateCartStatus(params) {
 export async function cityInfoList() {
   return request(`${Config.API_HOST}/api/city/info`);
 }
+//企业注册
+export async function companyRegister(params) {
+  return uploadFile(`${Config.API_HOST}/api/company/register`,params);
+}
 //企业登录
 export async function companyLogin(params) {
-  return uploadFile(`${Config.API_HOST}/api/company/login`,params);
+  return request(`${Config.API_HOST}/api/company/login`,{
+    method:'POST',
+    body:params
+  })
 }
 
 

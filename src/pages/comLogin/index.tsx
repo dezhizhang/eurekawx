@@ -1,7 +1,7 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config, } from '@tarojs/taro'
-import { View, Input,Text, Button,Image } from '@tarojs/components'
-import { uploadInfo } from '../../service/api'
+import { View, Input,Text, Button } from '@tarojs/components'
+import { companyLogin } from '../../service/api'
 import { showToast,showLoading,hideLoading } from '../../utils/tools'
 import  './index.less'
 
@@ -48,7 +48,7 @@ class Index extends Component {
       nickName
     });
   }
-  handleSubmit = () => {
+  handleSubmit = async() => {
     const { nickName,creditCode,} = this.state;
     const reg =/[^_IOZSVa-z\W]{2}\d{6}[^_IOZSVa-z\W]{10}/g
     if(nickName && creditCode ) {
@@ -62,20 +62,24 @@ class Index extends Component {
           nickName,
           creditCode,
         }
-        showLoading({title:'信息上传中'});
-        uploadInfo(params).then(res => {
-          let data = JSON.parse(res.data);
-          if(data.code == 200) {
-            hideLoading();
-            showToast({
-              title:'上传成功',
-              icon:'success'
-            });
-            Taro.switchTab({
-              url: '../index/index'
-            });
-          }
-        })
+        let res = await companyLogin(params);
+        if(res.data.code === 200 && res.data.success) { //登录成功
+          showToast({
+            title:'登录成功',
+            icon:'success'
+          });
+          Taro.switchTab({
+            url: '../my/index'
+          });
+        } else{ //还没有注册
+          showToast({
+            title:'您还没有注册',
+            icon:'none'
+          });
+          Taro.navigateTo({
+            url:'../company/index'
+          })
+        }
       }
      
     } else if(!nickName){

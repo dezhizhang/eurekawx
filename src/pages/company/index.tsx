@@ -1,7 +1,7 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config, } from '@tarojs/taro'
 import { View, Input,Text, Button,Image,PickerView,PickerViewColumn } from '@tarojs/components'
-import { companyLogin,cityInfoList } from '../../service/api'
+import { companyRegister,cityInfoList } from '../../service/api'
 import { showToast,showLoading,hideLoading } from '../../utils/tools'
 import server from '../../images/server.png'
 import upload from '../../images/upload.png'
@@ -104,16 +104,16 @@ class Index extends Component {
           tempFilePaths
         }
         showLoading({title:'信息上传中'});
-        companyLogin(params).then(res => {
+        companyRegister(params).then(res => {
           let data = JSON.parse(res.data);
           if(data.code == 200) {
             hideLoading();
             showToast({
-              title:'上传成功',
+              title:'注册成功',
               icon:'success'
             });
             Taro.switchTab({
-              url: '../my/index'
+              url: '../my/comLogin'
             });
           }
         })
