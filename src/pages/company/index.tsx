@@ -274,10 +274,24 @@ class Index extends Component {
       show:false
     })
   }
+  handleCancel = (ev) => {
+    ev.stopPropagation();
+    ev.preventDefault();
+    this.setState({
+      show:false
+    })
+  }
+  handleOk = (ev) => {
+    ev.stopPropagation();
+    let {province,city,county} = this.state;
+    let address = `${province}${city}${county}`;
+    this.setState({
+      show:false,
+      address
+    })
+  }
   render () {
-    const { tempFilePaths,provinces,value,citys,countys,show,animation} = this.state;
-    console.log("animation",animation);
-
+    const { tempFilePaths,provinces,value,citys,countys,show,address} = this.state;
     return (
      <View className="maintain">
           <View className="content">
@@ -291,11 +305,11 @@ class Index extends Component {
                 </View>
                 <View className="content-input" onClick={this.handleTranslate}>
                   <Text className="text">地区信息</Text>
-                  <Input className="input" placeholder="请选择地区信息"/>
+                  <Input className="input" value={address} placeholder="请选择地区信息"/>
                   <View className="animation-element-wrapper" style={{visibility:show ? 'visible':'hidden'}}>
                   <View className="animation-element">
-                    <Text className="left-btn">取消</Text>
-                    <Text className="right-btn">确定</Text>
+                    <Text className="left-btn" onClick={this.handleCancel}>取消</Text>
+                    <Text className="right-btn" onClick={this.handleOk}>确定</Text>
                     <View className="line"></View>
                     <PickerView className="picker-view" indicatorStyle='height: 50px;' style='width: 100%; height: 380px;' value={value} onChange={this.bindChange}>
                       <PickerViewColumn className="picker-view-column">
