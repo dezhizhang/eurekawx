@@ -1,6 +1,6 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config, } from '@tarojs/taro'
-import { View, Input,Text, Button,Image } from '@tarojs/components'
+import { View, Input,Text, Button,Image,PickerView,PickerViewColumn } from '@tarojs/components'
 import { uploadInfo } from '../../service/api'
 import { showToast,showLoading,hideLoading } from '../../utils/tools'
 import server from '../../images/server.png'
@@ -21,6 +21,8 @@ type PageState = {
   mobile:String,
   address:String,
   description:String
+  selector:any;
+  selectorChecked:string;
 }
 
 type IProps = PageStateProps & PageOwnProps
@@ -35,7 +37,9 @@ class Index extends Component {
     mobile:'',
     address:'',
     description:'',
-    tempFilePaths:''
+    tempFilePaths:'',
+    selectorChecked:'',
+    selector: ['美国', '中国', '巴西', '日本'],
   }
     config: Config = {
     navigationBarTitleText: '企业注册'
@@ -145,7 +149,31 @@ class Index extends Component {
                 </View>
                 <View className="content-input">
                   <Text className="text">地区信息</Text>
-                  <Input className="input" placeholder="请输入您的联系地址" onChange={this.handleAddress}/>
+                  <View>{this.state.year}年{this.state.month}月{this.state.day}日</View>
+                  <PickerView indicatorStyle='height: 50px;' style='width: 100%; height: 300px;' value={this.state.value} onChange={this.onChange}>
+                    <PickerViewColumn>
+                      {this.state.years.map(item => {
+                        return (
+                          <View>{item}年</View>
+                        );
+                      })}
+                    </PickerViewColumn>
+                    <PickerViewColumn>
+                      {this.state.months.map(item => {
+                        return (
+                          <View>{item}月</View>
+                        )
+                      })}
+                    </PickerViewColumn>
+                    <PickerViewColumn>
+                      {this.state.days.map(item => {
+                        return (
+                          <View>{item}日</View>
+                        )
+                      })}
+                    </PickerViewColumn>
+                  </PickerView>
+                  {/* <Input className="input" placeholder="请输入您的联系地址" onChange={this.handleAddress}/> */}
                 </View>
                 <View className="content-input">
                   <Text className="text">详细地址</Text>
