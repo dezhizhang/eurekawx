@@ -12,8 +12,8 @@ class App extends Component {
   
   config: Config = {
     pages: [
-      'pages/my/index',
       'pages/index/index',
+      'pages/my/index',
       'pages/maintain/index',
       'pages/cart/index',
       'pages/category/index',
@@ -28,7 +28,6 @@ class App extends Component {
       "pages/address/index",
       "pages/perLogin/index",
       "pages/comLogin/index",
-      "pages/comRegister/index",
     ],
     window: {
       backgroundTextStyle: 'light',
