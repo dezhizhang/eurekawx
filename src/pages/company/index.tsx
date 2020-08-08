@@ -30,6 +30,8 @@ type PageState = {
   countys:any;//区县
   county:string;
   value:any;
+  moveY:number;
+  time:number;
   animation:any;
   selectorChecked:string;
 }
@@ -39,9 +41,6 @@ type IProps = PageStateProps & PageOwnProps
 interface Index {
   props: IProps;
 }
-
-const citys = [];
-
 
 class Index extends Component {
   state = {
@@ -54,7 +53,9 @@ class Index extends Component {
     provinces:[],
     citys:[],
     countys:[],
-    show:true,
+    show:false,
+    time:0,
+    moveY:200,
     animation:undefined,
     value: [0, 0, 0],
     index:[0, 0, 0],
@@ -152,18 +153,6 @@ class Index extends Component {
   }
   componentDidMount() {
     this.getCityData();
-    let animation = Taro.createAnimation({
-      transformOrigin: "50% 50%",
-      duration: 0,
-      timingFunction: "ease",
-      delay: 0
-    }
-    )
-    animation.translateY(200 + 'vh').step();
-    this.setState({
-      animation: animation.export(),
-      show: true
-    })
   }
   getCityData = async() => {
     let res = await cityInfoList();
@@ -261,6 +250,30 @@ class Index extends Component {
       county: countys[val[2]].name
     })
   }
+  animationEvents =(that,moveY,show) =>{
+    let animation = Taro.createAnimation({
+      transformOrigin: "50% 50%",
+      duration: 400,
+      timingFunction: "ease",
+      delay: 0
+    }
+    )
+    animation.translateY(moveY + 'vh').step()
+    that.setData({
+      animation: that.animation.export(),
+      show: true
+    })
+  }
+  handleTranslate = () => {
+   this.setState({
+     show:true,
+   })
+  }
+  hiddenFloatView = () => {
+    this.setState({
+      show:false
+    })
+  }
   render () {
     const { tempFilePaths,provinces,value,citys,countys,show,animation} = this.state;
     console.log("animation",animation);
@@ -276,32 +289,33 @@ class Index extends Component {
                   <Text className="text">信用代码</Text>
                   <Input className="input" placeholder='请输入信用代码' onChange={this.handleMobile}/>
                 </View>
-                <View className="content-input">
+                <View className="content-input" onClick={this.handleTranslate}>
                   <Text className="text">地区信息</Text>
-                  <View className="animation-element-wrapper">
+                  <Input className="input" placeholder="请选择地区信息"/>
+                  <View className="animation-element-wrapper" style={{visibility:show ? 'visible':'hidden'}}>
                   <View className="animation-element">
                     <Text className="left-btn">取消</Text>
-                    <Text className="right-bt">确定</Text>
+                    <Text className="right-btn">确定</Text>
+                    <View className="line"></View>
+                    <PickerView className="picker-view" indicatorStyle='height: 50px;' style='width: 100%; height: 380px;' value={value} onChange={this.bindChange}>
+                      <PickerViewColumn className="picker-view-column">
+                        {provinces.map((item,index) => {
+                          return <View key={index}>{item.name}</View>
+                        })}
+                      </PickerViewColumn>
+                      <PickerViewColumn>
+                        {citys.map((item,index) => {
+                          return <View key={index}>{item.name}</View>
+                        })}
+                      </PickerViewColumn>
+                      <PickerViewColumn>
+                        {countys.map((item,index) => {
+                          return <View key={index}>{item.name}</View>
+                        })}
+                      </PickerViewColumn>
+                    </PickerView>
                   </View>
-                  <View className="line"></View>
-                  <PickerView className="picker-view" indicatorStyle='height: 50px;' style='width: 100%; height: 380px;' value={value} onChange={this.bindChange}>
-                    <PickerViewColumn className="picker-view-column">
-                      {provinces.map((item,index) => {
-                        return <View key={index}>{item.name}</View>
-                      })}
-                     
-                    </PickerViewColumn>
-                    <PickerViewColumn>
-                      {citys.map((item,index) => {
-                        return <View key={index}>{item.name}</View>
-                      })}
-                    </PickerViewColumn>
-                    <PickerViewColumn>
-                      {countys.map((item,index) => {
-                        return <View key={index}>{item.name}</View>
-                      })}
-                    </PickerViewColumn>
-                  </PickerView>
+                 
                 </View>
                 </View>
                 <View className="content-input">
@@ -323,7 +337,7 @@ class Index extends Component {
                   </View>
                 </View>
           </View>
-          <View className="bottom">
+          <View className="bottom" style={{display:show ? 'none':'block'}}>
             <Button className="btn" onClick={this.handleSubmit}>提交</Button>
           </View>
     </View>
