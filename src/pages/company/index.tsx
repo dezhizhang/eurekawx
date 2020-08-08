@@ -206,7 +206,7 @@ class Index extends Component {
   }
 
   //公司名称
-  handleCompanyName = (ev:any) => {
+  handleCompanyName = (ev) => {
     let nickName = ev.target.value;
     this.setState({
       nickName
