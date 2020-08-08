@@ -113,8 +113,8 @@ class Index extends Component {
               title:'注册成功',
               icon:'success'
             });
-            Taro.switchTab({
-              url: '../my/comLogin'
+            Taro.navigateTo({
+              url: '../comLogin/index'
             });
           }
         })
