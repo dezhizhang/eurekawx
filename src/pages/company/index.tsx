@@ -263,8 +263,7 @@ class Index extends Component {
   }
   render () {
     const { tempFilePaths,provinces,value,citys,countys,show,animation} = this.state;
-    console.log("show",show);
-
+    console.log("animation",animation);
 
     return (
      <View className="maintain">
@@ -284,7 +283,8 @@ class Index extends Component {
                     <Text className="left-btn">取消</Text>
                     <Text className="right-bt">确定</Text>
                   </View>
-                  <PickerView className="picker-view" indicatorStyle='height: 50px;' style='width: 100%; height: 300px;' value={value} onChange={this.bindChange}>
+                  <View className="line"></View>
+                  <PickerView className="picker-view" indicatorStyle='height: 50px;' style='width: 100%; height: 380px;' value={value} onChange={this.bindChange}>
                     <PickerViewColumn className="picker-view-column">
                       {provinces.map((item,index) => {
                         return <View key={index}>{item.name}</View>

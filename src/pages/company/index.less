@@ -23,27 +23,7 @@
                 border-bottom: 1px solid #eee;
                 padding: 0px 30px;
                 display: flex;
-                .picker-view{
-                    background-color: white;
-                    padding: 0;
-                    width: 100%; 
-                    height: 380rpx;
-                    bottom: 0;
-                    position: fixed;
-                  }
-                  .picker-view-column view{
-                    vertical-align:middle; 
-                    font-size: 28rpx;
-                    line-height: 28rpx;
-                    height: 100%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                  }
-                  
-                  /* ----------------------------------------- */
-                  
-                  .animation-element-wrapper {
+                .animation-element-wrapper {
                     display: flex;  
                     position: fixed;
                     left: 0;
@@ -51,39 +31,75 @@
                     height: 100%;
                     width: 100%;
                     background-color: rgba(0, 0, 0, 0.6);
+                    .animation-element {
+                        display: flex;
+                        position: fixed;
+                        width: 100%;
+                        height: 470px;
+                        bottom: 0;
+                        background: red;
+                        background-color: rgba(255, 255, 255, 1);
+                        .left-btn{
+                            left: 30px;
+                            color: #999999;
+                            display: inline-flex;  
+                            position: fixed;
+                            margin-top: 20px;
+                            height: 50px;
+                            text-align: center;
+                            line-height: 50px;
+                            font-size: 34px;
+                            z-index: 10;
+                            font-family: '微软雅黑';
+                          }
+                        .right-btn {
+                            right: 30px;
+                            color: #999999;
+                            display: inline-flex;  
+                            position: fixed;
+                            margin-top: 20px;
+                            height: 50px;
+                            text-align: center;
+                            line-height: 50px;
+                            font-size: 34px;
+                            font-family: '微软雅黑';
+                        }
+                      }
+                    .picker-view{
+                        background-color: white;
+                        padding: 0;
+                        width: 100%; 
+                        height: 380px;
+                        bottom: 0;
+                        position: fixed;
+                      }
+                    .picker-view-column view{
+                        vertical-align:middle; 
+                        font-size: 28rpx;
+                        line-height: 28rpx;
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                    .line{
+                        display: block;
+                        position: fixed;
+                        height: 1px;
+                        width: 100%;
+                        margin-top: 89px; 
+                        background-color: #eeeeee;
+                    }
                   }
-                  .animation-element {
-                    display: flex;
-                    position: fixed;
-                    width: 100%;
-                    height: 470rpx;
-                    bottom: 0;
-                    background-color: rgba(255, 255, 255, 1);
-                  }
-                  
+                 
                   .animation-button {
-                    margin-top: 20rpx;
-                    top:20rpx;
-                    width: 400rpx;
-                    height: 100rpx; 
-                    line-height: 100rpx; 
+                    margin-top: 20px;
+                    top:20px;
+                    width: 400px;
+                    height: 100px; 
+                    line-height: 100px; 
                     align-items:center;
                   }          
-                  .left-btn{
-                    left: 30rpx;
-                  }
-                  .right-btn {
-                    right: 30rpx;
-                  }
-                  
-                  .line{
-                    display: block;
-                    position: fixed;
-                    height: 1rpx;
-                    width: 100%;
-                    margin-top: 89rpx; 
-                    background-color: #eeeeee;
-                  }
                 .text{
                     width: 160px;
                     font-size: 30px;
@@ -129,6 +145,7 @@
            height: 86px;
            cursor: pointer;
            background: #fff;
+           z-index: 0;
            .btn{
                font-size: 30px;
                line-height: 86px;
