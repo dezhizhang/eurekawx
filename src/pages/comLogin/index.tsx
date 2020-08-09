@@ -27,8 +27,6 @@ interface Index {
 class Index extends Component {
   state = {
     email:"",
-    nickName:'',
-    creditCode:'',
   }
     config: Config = {
     navigationBarTitleText: '企业登录'
@@ -46,51 +44,44 @@ class Index extends Component {
   }
   handleSubmit = async() => {
     const { email } = this.state;
-    const reg = /^[a-zA-Z0-9]+([-_.][a-zA-Z0-9]+)*@[a-zA-Z0-9]+([-_.][a-zA-Z0-9]+)*\.[a-z]{2,}$/g
-    if(email) {
-      if(!reg.test(email)) {
-        showToast({
-          title:'企业邮箱不合法',
-          icon:'none'
-        })
-      } else {//提交数据
-        const params = {
-          email
-        }
-        let res = await companyLogin(params);
-        if(res.data.code === 200 && res.data.success) { //登录成功
-          showToast({
-            title:'登录成功',
-            icon:'success'
-          });
-          Taro.switchTab({
-            url: `../my/index`
-          });
-          //把社会信用码存在缓存中，实现数据的共享
-          setStorageSync({key:'email',value:email});
-        } else{ //还没有注册
-          showToast({
-            title:'您还没有注册',
-            icon:'none'
-          });
-          Taro.navigateTo({
-            url:'../company/index'
-          })
-        }
-      }
-     
-    } else if(!email){
+    const reg = /^[a-zA-Z0-9]+([-_.][a-zA-Z0-9]+)*@[a-zA-Z0-9]+([-_.][a-zA-Z0-9]+)*\.[a-z]{2,}$/g;
+    //当前企业邮箱为空
+    if(!email) {
       showToast({
         title:'企业邮箱不能为空',
         icon:'none',
       });
+      return;
     }
-  }
-  handleCreditCode = (ev) => {
-    let creditCode = ev.target.value;
-    this.setState({
-      creditCode
-    });
+    //当前企业邮箱不合法
+    if(!reg.test(email)) {
+      showToast({
+        title:'企业邮箱不合法',
+        icon:'none'
+      });
+      return;
+    }
+    //执行登录
+    let res = await companyLogin({email});
+    if(res.data.code === 200 && res.data.success) { //登录成功
+      showToast({
+        title:'登录成功',
+        icon:'success'
+      });
+      Taro.switchTab({
+        url: `../my/index`
+      });
+      //把社会信用码存在缓存中，实现数据的共享
+      setStorageSync({key:'email',value:email});
+     } else{ //还没有注册
+      showToast({
+        title:'您还没有注册',
+        icon:'none'
+      });
+      Taro.navigateTo({
+        url:'../company/index'
+      })
+    }
   }
   render () {
     return (
