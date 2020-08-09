@@ -15,8 +15,7 @@ type PageStateProps = {
 type PageOwnProps = {}
 
 type PageState = {
-  nickName:String,
-  creditCode:String,
+  email:string;
 }
 
 type IProps = PageStateProps & PageOwnProps
@@ -27,6 +26,7 @@ interface Index {
 
 class Index extends Component {
   state = {
+    email:"",
     nickName:'',
     creditCode:'',
   }
@@ -37,30 +37,25 @@ class Index extends Component {
   componentWillReceiveProps (nextProps) {
     console.log(this.props, nextProps)
   }
-  handleUserName = (event:any) => {
-     const username = event.target.value;
-     this.setState({username})
-  }
   //公司名称
-  handleCompanyName = (ev) => {
-    let nickName = ev.target.value;
+  handleCompanyEmail = (ev) => {
+    let email = ev.target.value;
     this.setState({
-      nickName
+      email
     });
   }
   handleSubmit = async() => {
-    const { nickName,creditCode,} = this.state;
-    const reg =/[^_IOZSVa-z\W]{2}\d{6}[^_IOZSVa-z\W]{10}/g
-    if(nickName && creditCode ) {
-      if(!reg.test(creditCode)) {
+    const { email } = this.state;
+    const reg = /^[a-zA-Z0-9]+([-_.][a-zA-Z0-9]+)*@[a-zA-Z0-9]+([-_.][a-zA-Z0-9]+)*\.[a-z]{2,}$/g
+    if(email) {
+      if(!reg.test(email)) {
         showToast({
-          title:'信用代码不合法',
+          title:'企业邮箱不合法',
           icon:'none'
         })
       } else {//提交数据
         const params = {
-          nickName,
-          creditCode,
+          email
         }
         let res = await companyLogin(params);
         if(res.data.code === 200 && res.data.success) { //登录成功
@@ -72,7 +67,7 @@ class Index extends Component {
             url: `../my/index`
           });
           //把社会信用码存在缓存中，实现数据的共享
-          setStorageSync({key:'creditCode',value:creditCode});
+          setStorageSync({key:'email',value:email});
         } else{ //还没有注册
           showToast({
             title:'您还没有注册',
@@ -84,15 +79,10 @@ class Index extends Component {
         }
       }
      
-    } else if(!nickName){
+    } else if(!email){
       showToast({
-        title:'公司名称不能为空',
+        title:'企业邮箱不能为空',
         icon:'none',
-      });
-    } else if(!creditCode) {
-      showToast({
-        title:'信用代码不能为空',
-        icon:'none'
       });
     }
   }
@@ -107,12 +97,8 @@ class Index extends Component {
      <View className="maintain">
         <View className="content">
           <View className="content-input">
-            <Text className="text">公司名称</Text>
-            <Input className="input" placeholder='请输入公司名称' onChange={this.handleCompanyName}/>
-          </View>
-          <View className="content-input">
-            <Text className="text">信用代码</Text>
-            <Input className="input" placeholder='请输入信用代码' onChange={this.handleCreditCode}/>
+            <Text className="text">企业邮箱</Text>
+            <Input className="input" placeholder='请输入企业邮箱' onChange={this.handleCompanyEmail}/>
           </View>
         </View>
       <View className="bottom">
