@@ -15,7 +15,8 @@ type PageStateProps = {
 type PageOwnProps = {}
 
 type PageState = {
-  email:string;
+  mobile:string;
+  password:string;
 }
 
 type IProps = PageStateProps & PageOwnProps
@@ -26,7 +27,8 @@ interface Index {
 
 class Index extends Component {
   state = {
-    email:"",
+    mobile:"",
+    password:'',
   }
     config: Config = {
     navigationBarTitleText: '企业登录'
@@ -36,33 +38,47 @@ class Index extends Component {
     console.log(this.props, nextProps)
   }
   //公司名称
-  handleCompanyEmail = (ev) => {
-    let email = ev.target.value;
+  handlePhone = (ev) => {
+    let mobile = ev.target.value;
     this.setState({
-      email
+      mobile
     });
   }
+  //密码
+  handlePassword = (ev) => {
+    let password = ev.target.value;
+    this.setState({
+      password
+    })
+  }
   handleSubmit = async() => {
-    const { email } = this.state;
-    const reg = /^[a-zA-Z0-9]+([-_.][a-zA-Z0-9]+)*@[a-zA-Z0-9]+([-_.][a-zA-Z0-9]+)*\.[a-z]{2,}$/g;
+    const { mobile,password } = this.state;
+    const reg = /^[1][3,4,5,7,8][0-9]{9}$/g;
     //当前企业邮箱为空
-    if(!email) {
+    if(!mobile) {
       showToast({
-        title:'企业邮箱不能为空',
+        title:'手机号不能为空',
         icon:'none',
       });
       return;
     }
-    //当前企业邮箱不合法
-    if(!reg.test(email)) {
+    if(!password) {
       showToast({
-        title:'企业邮箱不合法',
+        title:'密码不能为空',
+        icon:'none'
+      });
+      return;
+    }
+    //当前企业邮箱不合法
+    if(!reg.test(mobile)) {
+      showToast({
+        title:'手机号不合法！',
         icon:'none'
       });
       return;
     }
     //执行登录
-    let res = await companyLogin({email});
+    let res = await companyLogin({mobile});
     if(res.data.code === 200 && res.data.success) { //登录成功
       showToast({
         title:'登录成功',
@@ -72,10 +88,10 @@ class Index extends Component {
         url: `../my/index`
       });
       //把社会信用码存在缓存中，实现数据的共享
-      setStorageSync({key:'email',value:email});
+      setStorageSync({key:'email',value:mobile});
      } else{ //还没有注册
       showToast({
-        title:'您还没有注册',
+        title:'您还没有注册！',
         icon:'none'
       });
       Taro.navigateTo({
@@ -88,8 +104,12 @@ class Index extends Component {
      <View className="maintain">
         <View className="content">
           <View className="content-input">
-            <Text className="text">企业邮箱</Text>
-            <Input className="input" placeholder='请输入企业邮箱' onChange={this.handleCompanyEmail}/>
+            <Text className="text">帐号</Text>
+            <Input className="input" placeholder='请输入手机号' onChange={this.handlePhone}/>
+          </View>
+          <View className="content-input">
+            <Text className="text">密码</Text>
+            <Input className="input" placeholder='请输入密码' onChange={this.handlePassword}/>
           </View>
         </View>
       <View className="bottom">
