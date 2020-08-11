@@ -29,7 +29,7 @@ type PageState = {
   city:string;
   countys:any;//区县
   county:string;
-  email:string;
+  mobile:string;
   value:any;
   cityInfo:string;
   detailed:string; //详细地址
@@ -58,7 +58,7 @@ class Index extends Component {
     province:'',
     citys:[],
     city:'',
-    email:'',
+    mobile:'',
     countys:[],
     county:'',
     show:false,
@@ -69,7 +69,7 @@ class Index extends Component {
     index:[0, 0, 0],
   }
     config: Config = {
-    navigationBarTitleText: '企业注册'
+    navigationBarTitleText: '企业认证'
   }
 
   componentWillReceiveProps (nextProps) {
@@ -89,10 +89,10 @@ class Index extends Component {
   }
 
   handleSubmit = () => {
-    const { nickName,creditCode,detailed,tempFilePaths,cityInfo,email } = this.state;
+    const { nickName,creditCode,detailed,tempFilePaths,cityInfo,mobile } = this.state;
     const reg = /[^_IOZSVa-z\W]{2}\d{6}[^_IOZSVa-z\W]{10}/g;
     const address = `${cityInfo}${detailed}`
-    if(nickName && creditCode && address && tempFilePaths && email) {
+    if(nickName && creditCode && address && tempFilePaths && mobile) {
       if(!reg.test(creditCode)) {
         showToast({
           title:'社会信用代码不合法',
@@ -287,33 +287,29 @@ class Index extends Component {
   }
   //企业邮箱
   handleCompanyEmail = (ev) => {
-    let email = ev.target.email;
+    let mobile = ev.target.email;
     this.setState({
-      email
+      mobile
     })
   }
   render () {
     const { tempFilePaths,provinces,value,citys,countys,show,cityInfo} = this.state;
     return (
      <View className="maintain">
-          <View className="content">
-                <View className="content-input">
-                    <Text className="text">公司名称</Text>
-                    <Input className="input" placeholder='请输入公司名称' onChange={this.handleCompanyName}/>
-                </View>
-                <View className="content-input">
-                    <Text className="text">企业邮箱</Text>
-                    <Input className="input" placeholder='请输入企业邮箱' onChange={this.handleCompanyEmail}/>
-                </View>
-                <View className="content-input">
-                  <Text className="text">信用代码</Text>
-                  <Input className="input" placeholder='请输入信用代码' onChange={this.handleCreditCode}/>
-                </View>
-                <View className="content-input" onClick={this.handleTranslate}>
-                  <Text className="text">地区信息</Text>
-                  <Input className="input" value={cityInfo} placeholder="请选择地区信息"/>
-                  <View className="animation-element-wrapper" style={{visibility:show ? 'visible':'hidden'}}>
-                  <View className="animation-element">
+      <View className="content">
+        <View className="content-input">
+          <Text className="text">公司名称</Text>
+                <Input className="input" placeholder='请输入公司名称' onChange={this.handleCompanyName}/>
+              </View> 
+              <View className="content-input">
+                <Text className="text">信用代码</Text>
+                <Input className="input" placeholder='请输入信用代码' onChange={this.handleCreditCode}/>
+              </View>
+              <View className="content-input" onClick={this.handleTranslate}>
+                <Text className="text">地区信息</Text>
+                <Input className="input" value={cityInfo} placeholder="请选择地区信息"/>
+              <View className="animation-element-wrapper" style={{visibility:show ? 'visible':'hidden'}}>
+          <View className="animation-element">
                     <Text className="left-btn" onClick={this.handleCancel}>取消</Text>
                     <Text className="right-btn" onClick={this.handleOk}>确定</Text>
                     <View className="line"></View>
@@ -335,7 +331,6 @@ class Index extends Component {
                       </PickerViewColumn>
                     </PickerView>
                   </View>
-                 
                 </View>
                 </View>
                 <View className="content-input">
@@ -357,9 +352,7 @@ class Index extends Component {
                   </View>
                 </View>
           </View>
-          <View className="bottom" style={{display:show ? 'none':'block'}}>
-            <Button className="btn" onClick={this.handleSubmit}>提交</Button>
-          </View>
+          <Button className="btn" style={{display:show ? 'none':'block'}} onClick={this.handleSubmit}>保存</Button>
     </View>
      
     )

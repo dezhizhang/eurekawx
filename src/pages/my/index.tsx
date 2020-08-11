@@ -138,8 +138,7 @@ class Index extends Component {
               <Image src={userInfo&&userInfo.avatarUrl ? userInfo.avatarUrl:userInfo.url ? userInfo.url:avatar} className="avatar"/>
             </View>
             <View className="header_user" style={{display:userInfo.isLogin ? 'none':'block'}}>
-              <View className="user_name" onClick={this.handlePerToLogin}>{userInfo.nickName ? userInfo.nickName:'个人登录'}</View>
-              <View className="user_name" onClick={this.handleComToLogin}>{userInfo.nickName ? userInfo.nickName:'企业登录'}</View>
+              <View className="user_name" onClick={this.handlePerToLogin}>{userInfo.nickName ? userInfo.nickName:'马上登录'}</View>
               <View className="user_address">会员:{userInfo&&userInfo.userType}</View>
             </View>
             <View className="header_user" style={{display:userInfo.isLogin ? 'block':'none'}}>
@@ -244,7 +243,7 @@ class Index extends Component {
              <View className="icon-left">
                <Image className="image" src={msg}/>
              </View>
-             <View className="text-left">我的金币</View>
+             <View className="text-left">企业认证</View>
              <View className="text-right">
                {/* <View className="text-number">16</View> */}
              </View>
