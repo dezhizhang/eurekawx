@@ -51,7 +51,8 @@ class Index extends Component {
       password
     })
   }
-  handleSubmit = async() => {
+  handleSubmit = async(ev) => {
+    ev.preventDefault();
     const { mobile,password } = this.state;
     const reg = /^[1][3,4,5,7,8][0-9]{9}$/g;
     //当前企业邮箱为空
@@ -78,7 +79,7 @@ class Index extends Component {
       return;
     }
     //执行登录
-    let res = await companyLogin({mobile});
+    let res = await companyLogin({mobile,password});
     if(res.data.code === 200 && res.data.success) { //登录成功
       showToast({
         title:'登录成功',
@@ -112,9 +113,7 @@ class Index extends Component {
             <Input className="input" placeholder='请输入密码' onChange={this.handlePassword}/>
           </View>
         </View>
-      <View className="bottom">
         <Button className="btn" onClick={this.handleSubmit}>提交</Button>
-      </View>
     </View>
      
     )
