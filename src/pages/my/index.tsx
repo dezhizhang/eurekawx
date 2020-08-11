@@ -121,6 +121,12 @@ class Index extends Component {
       url:'../comLogin/index'
     });
   }
+  //企业认证
+  handleCompany = () => {
+    Taro.navigateTo({
+      url:'../company/index'
+    })
+  }
   componentDidHide () { }
 
   render () {
@@ -238,7 +244,7 @@ class Index extends Component {
              </View>
           </View>
         </View>
-        <View className="content-item">
+        <View className="content-item" onClick={this.handleCompany}>
           <View className="item">
              <View className="icon-left">
                <Image className="image" src={msg}/>
