@@ -2,7 +2,7 @@ import { ComponentClass } from 'react'
 import Taro, { Component, Config, } from '@tarojs/taro'
 import { View, Input,Text, Button,Image,PickerView,PickerViewColumn } from '@tarojs/components'
 import { companyRegister,cityInfoList } from '../../service/api'
-import { showToast,showLoading,hideLoading } from '../../utils/tools'
+import { showToast,showLoading,hideLoading, getStorageSync,setStorageSync} from '../../utils/tools'
 import server from '../../images/server.png'
 import upload from '../../images/upload.png'
 import  './index.less'
@@ -92,6 +92,9 @@ class Index extends Component {
     const { nickName,creditCode,detailed,tempFilePaths,cityInfo,mobile } = this.state;
     const reg = /[^_IOZSVa-z\W]{2}\d{6}[^_IOZSVa-z\W]{10}/g;
     const address = `${cityInfo}${detailed}`
+  
+    
+
     if(nickName && creditCode && address && tempFilePaths && mobile) {
       if(!reg.test(creditCode)) {
         showToast({
@@ -115,6 +118,11 @@ class Index extends Component {
               title:'注册成功',
               icon:'success'
             });
+            //认证成功修改用户级别
+            const userInfo = JSON.parse(getStorageSync("userInfo"));
+            userInfo.userType = "高级会员"
+            let userInfoStr = JSON.stringify(userInfo)
+            setStorageSync({key:'userInfo',value:userInfoStr});
             Taro.navigateTo({
               url: '../comLogin/index'
             });
@@ -140,11 +148,6 @@ class Index extends Component {
     } else if(!tempFilePaths) {
       showToast({
         title:'请上传营业执照',
-        icon:'none'
-      })
-    }else if(!email) {
-      showToast({
-        title:'企业邮箱不能为空',
         icon:'none'
       })
     }
