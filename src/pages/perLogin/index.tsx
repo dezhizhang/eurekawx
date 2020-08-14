@@ -86,24 +86,12 @@ class Index extends Component {
       let userInfoKey = Taro.getStorageSync('userInfoKey');
       result.openid = userInfoKey ? JSON.parse(userInfoKey).openid:'';
       result.url = result.avatarUrl; //转换字段
-      let res = await userLoginSave(result);
-      if(res.data.code === 200) {
-        let userInfo = JSON.stringify(result);
-        Taro.setStorageSync('userInfo', userInfo);
-        Taro.switchTab({
-          url:'../my/index'
-        });
-      }   
-    } else {
-      showModal({
-        title:'警告',
-        content:'您还没有授权，请重新授权!',
-        showCancel:false,
-        confirmText:'授权登录'
-      })
+      Taro.setStorageSync('userInfo', JSON.stringify(result));
+      Taro.switchTab({
+        url:'../my/index'
+      });
     }
   }
-
   componentDidHide () { }
 
   render () {
