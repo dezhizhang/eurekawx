@@ -29,7 +29,6 @@ type PageState = {
   city:string;
   countys:any;//区县
   county:string;
-  mobile:string;
   value:any;
   cityInfo:string;
   detailed:string; //详细地址
@@ -58,7 +57,6 @@ class Index extends Component {
     province:'',
     citys:[],
     city:'',
-    mobile:'',
     countys:[],
     county:'',
     show:false,
@@ -89,13 +87,10 @@ class Index extends Component {
   }
 
   handleSubmit = () => {
-    const { nickName,creditCode,detailed,tempFilePaths,cityInfo,mobile } = this.state;
+    const { nickName,creditCode,detailed,tempFilePaths,cityInfo } = this.state;
     const reg = /[^_IOZSVa-z\W]{2}\d{6}[^_IOZSVa-z\W]{10}/g;
-    const address = `${cityInfo}${detailed}`
-  
-    
-
-    if(nickName && creditCode && address && tempFilePaths && mobile) {
+    const address = `${cityInfo}${detailed}`;
+    if(nickName && creditCode && address && tempFilePaths) {
       if(!reg.test(creditCode)) {
         showToast({
           title:'社会信用代码不合法',
@@ -115,7 +110,7 @@ class Index extends Component {
           if(data.code == 200) {
             hideLoading();
             showToast({
-              title:'注册成功',
+              title:`${data.msg}`,
               icon:'success'
             });
             //认证成功修改用户级别
@@ -123,8 +118,8 @@ class Index extends Component {
             userInfo.userType = "高级会员"
             let userInfoStr = JSON.stringify(userInfo)
             setStorageSync({key:'userInfo',value:userInfoStr});
-            Taro.navigateTo({
-              url: '../comLogin/index'
+            Taro.switchTab({
+              url: '../my/index'
             });
           }
         })
