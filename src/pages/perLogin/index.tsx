@@ -7,7 +7,7 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Button } from '@tarojs/components'
-import { userLogin,userLoginSave, } from '../../service/api'
+import { userLogin } from '../../service/api'
 import { showModal } from '../../utils/tools'
 import  './index.less'
 

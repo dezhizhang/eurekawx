@@ -298,63 +298,62 @@ class Index extends Component {
      <View className="maintain">
       <View className="content">
         <View className="content-input">
-          <Text className="text">公司名称</Text>
-                <Input className="input" placeholder='请输入公司名称' onChange={this.handleCompanyName}/>
-              </View> 
-              <View className="content-input">
-                <Text className="text">信用代码</Text>
-                <Input className="input" placeholder='请输入信用代码' onChange={this.handleCreditCode}/>
-              </View>
-              <View className="content-input" onClick={this.handleTranslate}>
-                <Text className="text">地区信息</Text>
-                <Input className="input" value={cityInfo} placeholder="请选择地区信息"/>
-              <View className="animation-element-wrapper" style={{visibility:show ? 'visible':'hidden'}}>
-          <View className="animation-element">
-                    <Text className="left-btn" onClick={this.handleCancel}>取消</Text>
-                    <Text className="right-btn" onClick={this.handleOk}>确定</Text>
-                    <View className="line"></View>
-                    <PickerView className="picker-view" indicatorStyle='height: 50px;' style='width: 100%; height: 380px;' value={value} onChange={this.bindChange}>
-                      <PickerViewColumn className="picker-view-column">
-                        {provinces.map((item,index) => {
-                          return <View key={index}>{item.name}</View>
-                        })}
-                      </PickerViewColumn>
-                      <PickerViewColumn>
-                        {citys.map((item,index) => {
-                          return <View key={index}>{item.name}</View>
-                        })}
-                      </PickerViewColumn>
-                      <PickerViewColumn>
-                        {countys.map((item,index) => {
-                          return <View key={index}>{item.name}</View>
-                        })}
-                      </PickerViewColumn>
-                    </PickerView>
-                  </View>
-                </View>
-                </View>
-                <View className="content-input">
-                  <Text className="text">详细地址</Text>
-                  <Input className="input" placeholder="请输入您的联系地址" onChange={this.handleDetail}/>
-                </View>
-                <View className="image">
-                  <View onClick={this.handleChooseImage} className="image-flex">
-                    <View className="image-top">营业执照</View>
-                    <View className="image-bottom bottom-left">
-                      <Image src={!tempFilePaths ? upload:tempFilePaths} mode='aspectFill' className="image"/>
-                    </View>
-                  </View> 
-                  <View className="image-flex">
-                    <View className="image-top">示例图片</View>
-                    <View className="image-bottom">
-                      <Image src={server} mode='aspectFill' className="image"/>
-                    </View>
-                  </View>
-                </View>
+          <Text className="text"><Text style={{color:'red'}}>*</Text>公司名称</Text>
+          <Input className="input" placeholder='请输入公司名称' onChange={this.handleCompanyName}/>
+        </View> 
+        <View className="content-input">
+          <Text className="text"><Text style={{color:'red'}}>*</Text>信用代码</Text>
+          <Input className="input" placeholder='请输入信用代码' onChange={this.handleCreditCode}/>
+        </View>
+        <View className="content-input" onClick={this.handleTranslate}>
+          <Text className="text"><Text style={{color:'red'}}>*</Text>地区信息</Text>
+          <Input className="input" value={cityInfo} placeholder="请选择地区信息"/>
+        <View className="animation-element-wrapper" style={{visibility:show ? 'visible':'hidden'}}>
+        <View className="animation-element">
+          <Text className="left-btn" onClick={this.handleCancel}>取消</Text>
+          <Text className="right-btn" onClick={this.handleOk}>确定</Text>
+        <View className="line"></View>
+          <PickerView className="picker-view" indicatorStyle='height: 50px;' style='width: 100%; height: 380px;' value={value} onChange={this.bindChange}>
+            <PickerViewColumn className="picker-view-column">
+              {provinces.map((item,index) => {
+                return <View key={index}>{item.name}</View>
+              })}
+            </PickerViewColumn>
+            <PickerViewColumn>
+            {citys.map((item,index) => {
+              return <View key={index}>{item.name}</View>
+            })}
+            </PickerViewColumn>
+            <PickerViewColumn>
+            {countys.map((item,index) => {
+              return <View key={index}>{item.name}</View>
+            })}
+            </PickerViewColumn>
+          </PickerView>
           </View>
-          <Button className="btn" style={{display:show ? 'none':'block'}} onClick={this.handleSubmit}>保存</Button>
+          </View>
+        </View>
+        <View className="content-input">
+          <Text className="text"><Text style={{color:'red'}}>*</Text>详细地址</Text>
+          <Input className="input" placeholder="请输入您的联系地址" onChange={this.handleDetail}/>
+        </View>
+        <View className="image">
+          <View onClick={this.handleChooseImage} className="image-flex">
+            <View className="image-top">营业执照</View>
+            <View className="image-bottom bottom-left">
+              <Image src={!tempFilePaths ? upload:tempFilePaths} mode='aspectFill' className="image"/>
+            </View>
+          </View> 
+        <View className="image-flex">
+          <View className="image-top">示例图片</View>
+          <View className="image-bottom">
+            <Image src={server} mode='aspectFill' className="image"/>
+          </View>
+        </View>
+        </View>
+        </View>
+        <Button className="btn" style={{display:show ? 'none':'block'}} onClick={this.handleSubmit}>保存</Button>
     </View>
-     
     )
   }
 }
