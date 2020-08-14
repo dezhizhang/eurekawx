@@ -17,7 +17,7 @@ type PageStateProps = {
 type PageOwnProps = {}
 
 type PageState = {
-  nickName:string,
+  compamyName:string,
   creditCode:string,
   address:string,
   description:string
@@ -46,7 +46,7 @@ interface Index {
 
 class Index extends Component {
   state = {
-    nickName:'',
+    compamyName:'',
     creditCode:'',
     address:'',
     detailed:'',
@@ -87,10 +87,46 @@ class Index extends Component {
   }
 
   handleSubmit = () => {
-    const { nickName,creditCode,detailed,tempFilePaths,cityInfo } = this.state;
+    const { compamyName,creditCode,detailed,tempFilePaths,cityInfo } = this.state;
     const reg = /[^_IOZSVa-z\W]{2}\d{6}[^_IOZSVa-z\W]{10}/g;
     const address = `${cityInfo}${detailed}`;
-    if(nickName && creditCode && address && tempFilePaths) {
+    const userInfo = JSON.parse(getStorageSync("userInfo"));
+    const { url,nickName,} = userInfo;
+    if(!compamyName) {
+      showToast({
+        title:'公司名称不能为空',
+        icon:'none',
+      });
+      return
+    }
+    if(!creditCode) {
+      showToast({
+        title:'信用代码不能为空',
+        icon:'none'
+      });
+      return
+    }
+    if(!address) {
+      showToast({
+        title:'地址不能为空',
+        icon:'none'
+      })
+      return;
+    }
+    if(!tempFilePaths) {
+      showToast({
+        title:'请上传营业执照',
+        icon:'none'
+      })
+      return;
+    }
+    if(!userInfo.nickName) {
+      showToast({
+        title:'没有登录的用户不能进行企业认证',
+        icon:'none'
+      })
+    }
+    if(compamyName && creditCode && address && tempFilePaths && userInfo.nickName) {
       if(!reg.test(creditCode)) {
         showToast({
           title:'社会信用代码不合法',
@@ -98,9 +134,11 @@ class Index extends Component {
         })
       } else {//提交数据
         const params = {
+          url,
           nickName,
-          creditCode,
           address,
+          compamyName,
+          creditCode,
           userType:"高级会员",
           tempFilePaths
         }
@@ -114,37 +152,12 @@ class Index extends Component {
               icon:'success'
             });
             //认证成功修改用户级别
-            const userInfo = JSON.parse(getStorageSync("userInfo"));
-            userInfo.userType = "高级会员"
-            let userInfoStr = JSON.stringify(userInfo)
-            setStorageSync({key:'userInfo',value:userInfoStr});
             Taro.switchTab({
               url: '../my/index'
             });
           }
         })
       }
-     
-    } else if(!nickName){
-      showToast({
-        title:'公司名称不能为空',
-        icon:'none',
-      });
-    } else if(!creditCode) {
-      showToast({
-        title:'信用代码不能为空',
-        icon:'none'
-      });
-    } else if(!address){
-       showToast({
-         title:'地址不能为空',
-         icon:'none'
-       })
-    } else if(!tempFilePaths) {
-      showToast({
-        title:'请上传营业执照',
-        icon:'none'
-      })
     }
   }
   componentDidMount() {
@@ -213,9 +226,9 @@ class Index extends Component {
 
   //公司名称
   handleCompanyName = (ev) => {
-    let nickName = ev.target.value;
+    let compamyName = ev.target.value;
     this.setState({
-      nickName
+      compamyName
     });
   }
   bindChange = (ev) => {
