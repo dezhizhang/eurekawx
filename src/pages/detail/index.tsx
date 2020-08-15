@@ -248,9 +248,10 @@ class Index extends Component {
   }
   handleAddCar = async() => {
     const that = this;
-    const { number,detailData,focus_img,defaultColor,defaultSize } = this.state;
-    const title = detailData[0].title;
-    const price =  detailData[0].price;
+    const { number,baseData,focus_img,defaultColor,defaultSize } = this.state;
+    console.log("detailData",baseData);
+    const title = baseData.title;
+    const price =  baseData.price;
     const { color } = defaultColor;
     const { size } = defaultSize;
     const url = focus_img[0];
