@@ -75,9 +75,23 @@ class Index extends Component {
     Taro.showActionSheet({
       itemList:['微信支付', '现下支付']
     }).then(res => {
-      console.log(res);
+      switch(res.tapIndex) {
+        case 0:
+          this.handleWayPay()
+          break;
+        case 1:
+          this.handleNowpay();
+          break
+      }
     })
   }
+  handleWayPay = () => {
+
+  }
+  handleNowpay = () => {
+    
+  }
+
   componentDidHide () { }
 
   render () {
