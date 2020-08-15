@@ -103,7 +103,8 @@ class Index extends Component {
             <View className="box-right">
               <View className="right-top">{item.title}</View>
               <View className="right-bottom">
-                <View className="bottom-left">{item.description} </View>
+                <View className="bottom-left">{item.price} </View>
+                <View className="bottom-left">{item.number}</View>
               </View>
             </View>
         </View>)
