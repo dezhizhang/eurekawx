@@ -2,11 +2,12 @@ import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View,Image,ScrollView,Text} from '@tarojs/components'
 import arrow from '../../images/icon/arrow.png'
+import { payInfoList } from '../../service/api';
 import  './index.less'
 
 type PageStateProps = {
   counter: {
-    num: number
+    num: number 
   }
 }
 
@@ -59,12 +60,16 @@ class Index extends Component {
 
   componentWillMount () {
     let params = this.$router.params;
-    console.log("params",params);
-
-   
+    this.getPayList(params);
   }
-
-
+  //获取预支付列表
+  getPayList = async(params) => {
+    let res = await payInfoList(params);
+    if(res.data.code === 200) {
+      let payArr = res.data.data;
+      this.setState({ payArr });
+    }
+  }
   componentDidHide () { }
 
   render () {
@@ -87,11 +92,13 @@ class Index extends Component {
              </View>
           </View>
         </View>
-        {payArr&&payArr.map(item => {
-          return (<View key={item._id} className="right-item" onClick={() => this.handleToDetail(item)}>
-          <View className="item-box">
-            <View className="box-left">
-              <Image src={item.url} className="image"/>
+        {/*列表*/}
+        <View className="content-list">
+        {payArr&&payArr.map((item,index) => {
+          return (
+          <View key={index} className="list-wrapper">
+             <View className="box-left">
+              <Image style={{width:'100%',height:'100%'}} src={item.url} className="image"/>
             </View>
             <View className="box-right">
               <View className="right-top">{item.title}</View>
@@ -99,9 +106,9 @@ class Index extends Component {
                 <View className="bottom-left">{item.description} </View>
               </View>
             </View>
-          </View>
         </View>)
         })}
+        </View>
         <View className="content-item">
           <View className="item">
              <View className="text-left">总计</View>
