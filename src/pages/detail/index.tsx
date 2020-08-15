@@ -221,15 +221,8 @@ class Index extends Component {
       'cart':this.handleAddCar(),
       'pay':this.handlePayment()
     }
-    return goType[currentType]
-    // switch(currentType) {
-    //   case 'cart':
-    //     this.handleAddCar();
-    //     break;
-    // }
-    // console.log("currentType",currentType);
-
-
+    return goType[currentType];
+    
   //   let that = this;
   //   let { number,detailData,focus_img } = this.state;
   //   let title = detailData[0].title;
