@@ -28,6 +28,7 @@ class App extends Component {
       "pages/address/index",
       "pages/perLogin/index",
       "pages/comLogin/index",
+      "pages/payment/index",
     ],
     window: {
       backgroundTextStyle: 'light',

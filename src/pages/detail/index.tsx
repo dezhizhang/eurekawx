@@ -7,8 +7,8 @@ import detailShare from '../../images/icon/detail_share.png'
 import arrow from '../../images/icon/arrow.png'
 import close from '../../images/icon/close.png'
 import  './index.less'
-import { showLoading,hideLoading,showToast,getStorageSync } from '../../utils/tools'
-import { View, Swiper, SwiperItem,Image, ScrollView, Button,Input, Switch} from '@tarojs/components'
+import { showLoading,hideLoading,showToast,getStorageSync,setStorageSync } from '../../utils/tools'
+import { View, Swiper, SwiperItem,Image, ScrollView, Button,Input } from '@tarojs/components'
 import { 
   getPayInfo,
   userLogin,
@@ -249,7 +249,6 @@ class Index extends Component {
   handleAddCar = async() => {
     const that = this;
     const { number,baseData,focus_img,defaultColor,defaultSize } = this.state;
-    console.log("detailData",baseData);
     const title = baseData.title;
     const price =  baseData.price;
     const { color } = defaultColor;
@@ -279,7 +278,26 @@ class Index extends Component {
     }
   }
   handlePayment = async() => {
-    console.log("2");
+    const { number,baseData,photoList,defaultColor,defaultSize } = this.state;
+    const title = baseData.title;
+    const price =  baseData.price;
+    const { color } = defaultColor;
+    const { size } = defaultSize;
+    const url = photoList[0];
+    let params = {
+      url,
+      color,
+      size,
+      number,
+      title,
+      price,
+    }
+    setStorageSync({key:'payInfo',value:JSON.stringify(params)});
+    Taro.navigateTo({
+      url:'../payment/index'
+    });
+    
+    //console.log("2");
 
     // let loginInfo = await Taro.login();
     // let userInfo = await userLogin({code:loginInfo.code,appid:'wx070d1456a4a9c0fb'});

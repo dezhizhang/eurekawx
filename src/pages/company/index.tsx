@@ -7,7 +7,6 @@ import server from '../../images/server.png'
 import upload from '../../images/upload.png'
 import  './index.less'
 
-
 type PageStateProps = {
   counter: {
     num: number
