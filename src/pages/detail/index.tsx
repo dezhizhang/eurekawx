@@ -7,7 +7,7 @@ import detailShare from '../../images/icon/detail_share.png'
 import arrow from '../../images/icon/arrow.png'
 import close from '../../images/icon/close.png'
 import  './index.less'
-import { showLoading,hideLoading,showToast } from '../../utils/tools'
+import { showLoading,hideLoading,showToast,getStorageSync } from '../../utils/tools'
 import { View, Swiper, SwiperItem,Image, ScrollView, Button,Input} from '@tarojs/components'
 import { 
   getPayInfo,
@@ -145,27 +145,43 @@ class Index extends Component {
     }
   }
   handleShowModal = (currentType) => {
-    let that = this;
-    let animation  = Taro.createAnimation({
-        duration: 200,
-        timingFunction: "linear",
-        delay: 0
-    });
-    this.state.animation = animation
-    animation.translateY(300).step();
-    this.setState({
-      animationData:animation.export(),
-      showModalStatus:true
-    });
-    setTimeout(function () {
-      animation.translateY(0).step()
-      that.setState({
-        animationData: animation.export()
+    const userInfoKey = getStorageSync("userInfoKey");
+    const userInfo = userInfoKey ? JSON.parse(userInfoKey):{}
+    if(Object.keys(userInfo).length > 0) { //表示当前处于一个登录
+      let that = this;
+      let animation  = Taro.createAnimation({
+          duration: 200,
+          timingFunction: "linear",
+          delay: 0
+      });
+      this.state.animation = animation
+      animation.translateY(300).step();
+      this.setState({
+        animationData:animation.export(),
+        showModalStatus:true
+      });
+      setTimeout(function () {
+        animation.translateY(0).step()
+        that.setState({
+          animationData: animation.export()
+        })
+      }.bind(this), 200);
+      this.setState({
+        currentType
       })
-    }.bind(this), 200);
-    this.setState({
-      currentType
-    })
+    } else {
+      showToast({
+        title:'您当前还没有登录',
+        icon:'none'
+      });
+      setTimeout(() =>{
+        Taro.switchTab({
+          url:'../my/index',
+        })
+      } ,1000)
+    }
+    console.log("userInfoKey",!userInfoKey);
+
   }
   handlehideModal = () => {
     let that = this;
@@ -222,7 +238,7 @@ class Index extends Component {
       'pay':this.handlePayment()
     }
     return goType[currentType];
-    
+
   //   let that = this;
   //   let { number,detailData,focus_img } = this.state;
   //   let title = detailData[0].title;
@@ -303,13 +319,13 @@ class Index extends Component {
 
   componentDidShow () {
 
-    let result = Taro.getStorageSync('userInfo');
-    let userInfo = result ? JSON.parse(result):''
-    if(!userInfo) {
-      Taro.switchTab({
-        url: '../my/index'
-      })
-    }
+    // let result = Taro.getStorageSync('userInfo');
+    // let userInfo = result ? JSON.parse(result):''
+    // if(!userInfo) {
+    //   Taro.switchTab({
+    //     url: '../my/index'
+    //   })
+    // }
    }
   //改变大小
   handleCheckSize = (item) => {
