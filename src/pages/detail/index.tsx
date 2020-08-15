@@ -34,9 +34,9 @@ type PageState = {
   detailList:any;
   colorArr:any;
   sizeArr:any;
-  defaultColor:any;
-  defaultSize:any;
-
+  defaultColor:any; //默认选中扩颜色
+  defaultSize:any; //默认选中的大小
+  currentType:string;
 }
 
 type IProps = PageStateProps  & PageOwnProps
@@ -103,9 +103,9 @@ class Index extends Component {
       defaultSize:{
         key:'1',
         title:'37'
-      }
+      },
+      currentType:'cart'
     }
-    
     config: Config = {
     navigationBarTitleText: '商品详情'
   }
@@ -144,7 +144,7 @@ class Index extends Component {
       this.setState({ detailList })
     }
   }
-  handleShowModal = () => {
+  handleShowModal = (currentType) => {
     let that = this;
     let animation  = Taro.createAnimation({
         duration: 200,
@@ -162,7 +162,10 @@ class Index extends Component {
       that.setState({
         animationData: animation.export()
       })
-    }.bind(this), 200)
+    }.bind(this), 200);
+    this.setState({
+      currentType
+    })
   }
   handlehideModal = () => {
     let that = this;
@@ -211,7 +214,22 @@ class Index extends Component {
       number:value
     });
   }
+  //跳不同的入口 
   handleSubmit = () => {
+    const { currentType } = this.state;
+    let goType = {
+      'cart':this.handleAddCar(),
+      'pay':this.handlePayment()
+    }
+    return goType[currentType]
+    // switch(currentType) {
+    //   case 'cart':
+    //     this.handleAddCar();
+    //     break;
+    // }
+    // console.log("currentType",currentType);
+
+
   //   let that = this;
   //   let { number,detailData,focus_img } = this.state;
   //   let title = detailData[0].title;
@@ -238,6 +256,10 @@ class Index extends Component {
   //     })
   //   }
   // });
+  }
+  handleAddCar = () => {
+    console.log("22222");
+
   }
   handlePayment = async() => {
     let loginInfo = await Taro.login();
@@ -308,7 +330,7 @@ class Index extends Component {
       defaultColor:item
     })
   }
-  
+
   componentDidHide () { }
 
   render () {
@@ -403,8 +425,8 @@ class Index extends Component {
                 <View className="store-text">购物车</View>
               </View>
             </View>
-            <View onClick={this.handleShowModal} className="detail-bgitem item-cart">加入购物车</View>
-            <View className="detail-bgitem item-buy" onClick={this.handlePayment}>立即购买</View>
+            <View onClick={() => this.handleShowModal('cart')} className="detail-bgitem item-cart">加入购物车</View>
+            <View onClick={() => this.handleShowModal('pay')} className="detail-bgitem item-buy" >立即购买</View>
           </View>
         </View>
         
