@@ -3,7 +3,7 @@ import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Button } from '@tarojs/components'
 import { userLogin,userLoginSave } from '../../service/api'
-import { showModal } from '../../utils/tools'
+import { showModal,appid } from '../../utils/tools'
 import  './index.less'
 
 type PageStateProps = {
@@ -51,8 +51,10 @@ class Index extends Component {
             Taro.login().then(res => {
               let params = {
                 code:res.code,
-                appid:'wx070d1456a4a9c0fb',
+                appid:appid,
               }
+              console.log("params",params);
+              
               userLogin(params).then(res => {
                   if(res.data.code == 200) {
                     let result = res.data.data;
