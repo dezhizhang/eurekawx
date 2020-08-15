@@ -1,9 +1,9 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View,Image,ScrollView,Text} from '@tarojs/components'
-import { showToast } from '../../utils/tools';
+import { showToast,appid } from '../../utils/tools';
 import arrow from '../../images/icon/arrow.png'
-import { payInfoList } from '../../service/api';
+import { payInfoList,userLogin } from '../../service/api';
 import  './index.less'
 
 type PageStateProps = {
@@ -88,6 +88,20 @@ class Index extends Component {
   }
   handleWayPay = async() => {
     let res = await Taro.login();
+    if(res.code) { //用户授权登录
+      let params = {
+        cdoe:res.code,
+        appid:appid
+      }
+      let user = await userLogin(params);
+      if(user.data.code === 200) {
+        let result = user.data.data;
+        console.log("result",result);
+        
+      }
+      // if((await user).data.)
+
+    }
     console.log('res',res);
     
     //  Taro.login().then(res => {
