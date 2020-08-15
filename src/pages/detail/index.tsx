@@ -32,7 +32,10 @@ type PageState = {
   baseData:any;
   photoList:any;
   detailList:any;
-  colorArr:[],
+  colorArr:any;
+  sizeArr:any;
+  defaultColor:any;
+  defaultSize:any;
 
 }
 
@@ -77,7 +80,30 @@ class Index extends Component {
           title:'深蓝色',
           background:'#0000CD'
         }
-      ]
+      ],
+      defaultColor:{
+        key:'1',
+        title:'浅粉红',
+        background:"#FFB6C1"
+      },
+      sizeArr:[
+       {
+         key:'1',
+         title:'37'
+       },
+       {
+         key:'2',
+         title:'38'
+       },
+       {
+         key:'3',
+         title:'39'
+       }
+      ],
+      defaultSize:{
+        key:'1',
+        title:'37'
+      }
     }
     
     config: Config = {
@@ -137,7 +163,6 @@ class Index extends Component {
         animationData: animation.export()
       })
     }.bind(this), 200)
-
   }
   handlehideModal = () => {
     let that = this;
@@ -271,11 +296,23 @@ class Index extends Component {
       })
     }
    }
-
+  //改变大小
+  handleCheckSize = (item) => {
+    this.setState({
+      defaultSize:item
+    })
+  }
+  //改变颜色
+  handleCheckColor = (item) => {
+    this.setState({
+      defaultColor:item
+    })
+  }
+  
   componentDidHide () { }
 
   render () {
-    let { baseData,photoList,detailList,animationData,showModalStatus,number,colorArr } = this.state; 
+    let { baseData,photoList,detailList,animationData,showModalStatus,number,colorArr,sizeArr,defaultColor,defaultSize } = this.state; 
     return (
      <ScrollView 
         scrollY
@@ -392,14 +429,33 @@ class Index extends Component {
                  <View className="bottom-item">
                   {
                     colorArr.map((item,index)=>{
-                      return  <View className="item-list" key={item.key} style={{marginLeft:index > 0 ? '6px':'0px'}}>{item.title}</View>
+                      return (
+                      <View 
+                      key={item.key} 
+                      className="item-list" 
+                      onClick={() => this.handleCheckColor(item)}
+                      style={{marginLeft:index > 0 ? '6px':'0px',background:item.key === defaultColor.key ? '#735ff7':'#eee'}}
+                    >
+                      {item.title}
+                    </View>)
                     })
                   }
                  </View>
                  <View className="bottom-title">尺码</View>
                  <View className="bottom-item">
-
-                   {/* <View className="item-list">标色</View> */}
+                  {
+                    sizeArr.map((item,index) => {
+                     return  (
+                     <View 
+                      key={item.key}
+                      className="item-list" 
+                      onClick={() => this.handleCheckSize(item)} 
+                      style={{marginLeft:index > 0 ? '6px':'0px',background:item.key === defaultSize.key ? '#735ff7':'#eee'}}
+                     >
+                       {item.title}
+                    </View>)
+                    })
+                  }
                  </View>
                  <View className="right-bottom">
                   <View className="bottom-left"></View>
