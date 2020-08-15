@@ -83,13 +83,13 @@ class Index extends Component {
           this.handleNowpay();
           break
       }
-    })
+    });
   }
   handleWayPay = () => {
-
+    console.log("1111");
   }
   handleNowpay = () => {
-    
+    console.log("2222");
   }
 
   componentDidHide () { }
