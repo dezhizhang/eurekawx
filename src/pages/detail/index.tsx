@@ -284,6 +284,8 @@ class Index extends Component {
     const { color } = defaultColor;
     const { size } = defaultSize;
     const url = photoList[0];
+    const userInfoKey = getStorageSync("userInfoKey");
+    const userInfo = userInfoKey ? JSON.parse(userInfoKey):{}
     let params = {
       url,
       color,
@@ -294,9 +296,9 @@ class Index extends Component {
     }
     setStorageSync({key:'payInfo',value:JSON.stringify(params)});
     Taro.navigateTo({
-      url:'../payment/index'
+      url:'../payment/index?op'
     });
-    
+
     //console.log("2");
 
     // let loginInfo = await Taro.login();
