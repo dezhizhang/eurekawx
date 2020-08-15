@@ -1,6 +1,6 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View,Image,ScrollView} from '@tarojs/components'
+import { View,Image,ScrollView, Button,Text} from '@tarojs/components'
 import { getStorageSync } from '../../utils/tools'
 import { companyInfo } from '../../service/api';
 import msg from '../../images/icon/msg.png'
@@ -147,8 +147,10 @@ class Index extends Component {
       </View>
       
       <View className="footer">
-      
-       
+        <View className="left">
+          实付金额：<Text className="left-text">1111</Text>
+        </View>
+        <View className="right">提交订单</View>
       </View>
     </ScrollView>
     )
