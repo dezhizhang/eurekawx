@@ -59,11 +59,11 @@ class Index extends Component {
                 appid:appid,
               }
               userLogin(params).then(res => {
-                  if(res.data.code == 200) {
-                    let result = res.data.data;
-                    let userInfoKey = JSON.stringify(result);
-                    Taro.setStorageSync('userInfoKey', userInfoKey);
-                  }
+                if(res.data.code == 200) {
+                  let result = res.data.data;
+                  let userInfoKey = JSON.stringify(result);
+                  Taro.setStorageSync('userInfoKey', userInfoKey);
+                }
               })
             })
           } else {
