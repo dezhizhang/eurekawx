@@ -32,6 +32,8 @@ type PageState = {
   baseData:any;
   photoList:any;
   detailList:any;
+  colorArr:[],
+
 }
 
 type IProps = PageStateProps  & PageOwnProps
@@ -54,12 +56,28 @@ class Index extends Component {
       baseData:{
         url:'',
         title:'',
-
         price:0,
         freight:0,
         sales:0,
         inventory:0,
       },
+      colorArr:[
+        {
+          key:'1',
+          title:'浅粉红',
+          background:"#FFB6C1"
+        },
+        {
+          key:'2',
+          title:'紫罗兰',
+          background:'#EE82EE'
+        },
+        {
+          key:'3',
+          title:'深蓝色',
+          background:'#0000CD'
+        }
+      ]
     }
     
     config: Config = {
@@ -257,7 +275,7 @@ class Index extends Component {
   componentDidHide () { }
 
   render () {
-    let { baseData,photoList,detailList,animationData,showModalStatus,number } = this.state; 
+    let { baseData,photoList,detailList,animationData,showModalStatus,number,colorArr } = this.state; 
     return (
      <ScrollView 
         scrollY
@@ -370,13 +388,18 @@ class Index extends Component {
                  </View>
                </View>
                <View className="box-bottom">
-                 <View className="bottom-title">尺码</View>
-                 <View className="bottom-item">
-                   <View className="item-list">标码</View>
-                 </View>
                  <View className="bottom-title">颜色</View>
                  <View className="bottom-item">
-                   <View className="item-list">标色</View>
+                  {
+                    colorArr.map((item,index)=>{
+                      return  <View className="item-list" key={item.key} style={{marginLeft:index > 0 ? '6px':'0px'}}>{item.title}</View>
+                    })
+                  }
+                 </View>
+                 <View className="bottom-title">尺码</View>
+                 <View className="bottom-item">
+
+                   {/* <View className="item-list">标色</View> */}
                  </View>
                  <View className="right-bottom">
                   <View className="bottom-left"></View>
