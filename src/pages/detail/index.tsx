@@ -12,10 +12,12 @@ import { View, Swiper, SwiperItem,Image, ScrollView, Button,Input } from '@taroj
 import { 
   getPayInfo,
   userLogin,
+  userPrepaid,
   getDetailInfo,
   userInfoCartSave,
   getProductPhoto,
   getProductDetail,
+
  } from '../../service/api'
 
 type PageStateProps = {
@@ -286,6 +288,7 @@ class Index extends Component {
     const url = photoList[0];
     const userInfoKey = getStorageSync("userInfoKey");
     const userInfo = userInfoKey ? JSON.parse(userInfoKey):{}
+    const { openid } = userInfo;
     let params = {
       url,
       color,
@@ -293,11 +296,17 @@ class Index extends Component {
       number,
       title,
       price,
+      openid
     }
-    setStorageSync({key:'payInfo',value:JSON.stringify(params)});
-    Taro.navigateTo({
-      url:'../payment/index?op'
-    });
+    let res = await userPrepaid(params);
+    if(res.data.code === 200) {
+      Taro.navigateTo({
+        url:`../payment/index?openid=${openid}`
+      });
+    }
+
+    // setStorageSync({key:'payInfo',value:JSON.stringify(params)});
+  
 
     //console.log("2");
 

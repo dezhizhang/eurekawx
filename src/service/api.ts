@@ -104,6 +104,13 @@ export async function companyLogin(params) {
 export async function companyInfo(params) {
   return request(`${Config.API_HOST}/api/company/info?creditCode=${params.creditCode}`)
 }
+//用户发起预支付
+export async function userPrepaid(params) {
+  return request(`${Config.API_HOST}/api/userInfo/prepaid`,{
+    method:'POST',
+    body:params
+  })
+}
 
 
 
