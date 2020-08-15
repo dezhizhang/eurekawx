@@ -1,9 +1,6 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View,Image,ScrollView, Button,Text} from '@tarojs/components'
-import { getStorageSync } from '../../utils/tools'
-import { companyInfo } from '../../service/api';
-import msg from '../../images/icon/msg.png'
+import { View,Image,ScrollView,Text} from '@tarojs/components'
 import arrow from '../../images/icon/arrow.png'
 import  './index.less'
 
