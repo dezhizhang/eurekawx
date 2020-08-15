@@ -1,6 +1,7 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View,Image,ScrollView,Text} from '@tarojs/components'
+import { showToast } from '../../utils/tools';
 import arrow from '../../images/icon/arrow.png'
 import { payInfoList } from '../../service/api';
 import  './index.less'
@@ -88,16 +89,16 @@ class Index extends Component {
   handleWayPay = () => {
     console.log("1111");
   }
+  //现下支付
   handleNowpay = () => {
-    console.log("2222");
+    showToast({
+      title:'现下支付成功',
+      icon:'success'
+    });
   }
-
   componentDidHide () { }
-
   render () {
-    let { userInfo,payArr } = this.state;
-    console.log("userInfo",userInfo);
-
+    let { payArr } = this.state;
     return (
       <ScrollView className='payment'
       scrollY
@@ -159,7 +160,6 @@ class Index extends Component {
           </View>
         </View>
       </View>
-      
       <View className="footer">
         <View className="left">
           实付金额：<Text className="left-text">1111</Text>
