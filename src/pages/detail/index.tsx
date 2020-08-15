@@ -296,7 +296,8 @@ class Index extends Component {
       number,
       title,
       price,
-      openid
+      openid,
+      status:1
     }
     let res = await userPrepaid(params);
     if(res.data.code === 200) {
