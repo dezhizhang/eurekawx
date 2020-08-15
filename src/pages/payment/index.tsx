@@ -70,6 +70,14 @@ class Index extends Component {
       this.setState({ payArr });
     }
   }
+  //提交表单
+  handleSubmit = async() => {
+    Taro.showActionSheet({
+      itemList:['微信支付', '现下支付']
+    }).then(res => {
+      console.log(res);
+    })
+  }
   componentDidHide () { }
 
   render () {
@@ -142,7 +150,7 @@ class Index extends Component {
         <View className="left">
           实付金额：<Text className="left-text">1111</Text>
         </View>
-        <View className="right">提交订单</View>
+        <View className="right" onClick={this.handleSubmit}>提交订单</View>
       </View>
     </ScrollView>
     )
