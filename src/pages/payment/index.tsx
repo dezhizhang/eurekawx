@@ -134,72 +134,7 @@ class Index extends Component {
     console.log("userInfo",userInfo);
 
     return (
-    <View className="my">
-      <View className="header">
-          <View className="header_top">
-            <View className="header_image">
-              <Image className="image" src={myHeader}/>
-            </View>
-            <View className="header_avatar">
-              <Image src={userInfo&&userInfo.avatarUrl ? userInfo.avatarUrl:userInfo.url ? userInfo.url:avatar} className="avatar"/>
-            </View>
-            <View className="header_user" style={{display:userInfo.isLogin ? 'none':'block'}}>
-              <View className="user_name" onClick={this.handlePerToLogin}>{userInfo.nickName ? userInfo.nickName:'马上登录'}</View>
-              <View className="user_address">会员:{userInfo&&userInfo.userType}</View>
-            </View>
-            <View className="header_user" style={{display:userInfo.isLogin ? 'block':'none'}}>
-              <View className="user-info">{userInfo.nickName}</View>
-              <View className="user_address">会员:{userInfo&&userInfo.userType}</View>
-            </View>
-            <View className="header_right">
-               <View className="right" onClick={this.handleUserInfo}>
-                  <View className="text">个人资料管理</View>
-               </View>
-            </View>
-          </View>
-          <View className="header_content">
-          <View className="content_card">
-            <View className="card_info">
-              <View className="info_box">
-                <View className="box_top">
-                  <View className="top_item">
-                    <View className="item_top">待付款</View>
-                    <View className="item_bottom">3</View>
-                  </View>
-                  <View className="top_item">
-                    <View className="item_top">待发货</View>
-                    <View className="item_bottom">3</View>
-                  </View>
-                  <View className="top_item">
-                    <View className="item_top">待收货</View>
-                    <View className="item_bottom">6</View>
-                  </View>
-                  <View className="top_item">
-                    <View className="item_top">待评价</View>
-                    <View className="item_bottom">12</View>
-                  </View>
-                </View>
-                <View className="box-bottom">
-                    <View className="bottom-wrapper">
-                      <View className="bottom-item">
-                        <View className="item-top">
-                           <Image src={allOrder} className="image"/>
-                        </View>
-                        <View className="item-bottom">所有订单</View>
-                      </View>
-                      <View className="bottom-item">
-                        <View className="item-top">
-                          <Image src={allOrder} className="image"/>
-                        </View>
-                        <View className="item-bottom">完成订单</View>
-                      </View>
-                    </View>
-                </View>
-              </View>
-            </View>
-          </View>
-      </View>
-      </View>
+    <View className="payment">
       <View className="content">
         <View className="content-item" onClick={this.handleMessage}>
           <View className="item">
