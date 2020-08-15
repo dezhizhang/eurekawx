@@ -3,9 +3,6 @@ import Taro, { Component, Config } from '@tarojs/taro'
 import { View,Image,} from '@tarojs/components'
 import { getStorageSync } from '../../utils/tools'
 import { companyInfo } from '../../service/api';
-import myHeader from '../../images/my_header.png'
-import avatar from '../../images/avatar.png'
-import allOrder from '../../images/all_order.png'
 import msg from '../../images/icon/msg.png'
 import arrow from '../../images/icon/arrow.png'
 import  './index.less'
@@ -41,7 +38,7 @@ class Index extends Component {
       },
     }
     config: Config = {
-    navigationBarTitleText: '我的'
+    navigationBarTitleText: '订单确认'
   }
 
   componentWillReceiveProps (nextProps) {

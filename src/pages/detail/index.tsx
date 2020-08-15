@@ -7,7 +7,7 @@ import detailShare from '../../images/icon/detail_share.png'
 import arrow from '../../images/icon/arrow.png'
 import close from '../../images/icon/close.png'
 import  './index.less'
-import { showLoading,hideLoading,showToast,getStorageSync,setStorageSync } from '../../utils/tools'
+import { showLoading,hideLoading,showToast,getStorageSync } from '../../utils/tools'
 import { View, Swiper, SwiperItem,Image, ScrollView, Button,Input } from '@tarojs/components'
 import { 
   getPayInfo,
@@ -300,9 +300,12 @@ class Index extends Component {
     }
     let res = await userPrepaid(params);
     if(res.data.code === 200) {
-      Taro.navigateTo({
-        url:`../payment/index?openid=${openid}`
-      });
+      this.handlehideModal();
+      setTimeout(() =>{
+        Taro.navigateTo({
+          url:`../payment/index?openid=${openid}`
+        });
+      },1000)
     }
 
     // setStorageSync({key:'payInfo',value:JSON.stringify(params)});
