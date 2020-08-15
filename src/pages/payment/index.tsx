@@ -35,7 +35,7 @@ class Index extends Component {
         url:'',
         isLogin:false, //当削是否登录过
       },
-      payArr:[]
+      payArr:[{url:'',title:'',price:'',number:0,color:'',size:''}]
     }
     config: Config = {
     navigationBarTitleText: '订单确认'
@@ -94,17 +94,19 @@ class Index extends Component {
         </View>
         {/*列表*/}
         <View className="content-list">
-        {payArr&&payArr.map((item,index) => {
+        {payArr&&payArr.map(item => {
           return (
-          <View key={index} className="list-wrapper">
+          <View key={item._id} className="list-wrapper">
              <View className="box-left">
-              <Image style={{width:'100%',height:'100%'}} src={item.url} className="image"/>
+              <Image style={{width:'100%',height:'100%',borderRadius:10}} src={item.url} className="image"/>
             </View>
             <View className="box-right">
               <View className="right-top">{item.title}</View>
               <View className="right-bottom">
-                <View className="bottom-left">{item.price} </View>
-                <View className="bottom-left">{item.number}</View>
+                <View className="bottom-text">价格：<Text style={{color:'red'}}>￥{item.price}</Text> </View>
+                <View className="bottom-text">数量：<Text>{item.number}</Text></View>
+                <View className="bottom-text">颜色：<Text style={{color:item.color}}>{item.color}</Text></View>
+                <View className="bottom-text">尺码：<Text>{item.size}</Text></View>
               </View>
             </View>
         </View>)
