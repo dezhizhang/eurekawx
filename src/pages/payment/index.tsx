@@ -87,6 +87,7 @@ class Index extends Component {
     });
   }
   handleWayPay = () => {
+    
     console.log("1111");
   }
   //现下支付
