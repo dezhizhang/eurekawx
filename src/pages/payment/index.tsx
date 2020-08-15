@@ -19,6 +19,7 @@ type PageOwnProps = {
 
 type PageState = {
   userInfo:any;
+  payArr:any
 }
 
 type IProps = PageStateProps  & PageOwnProps
@@ -36,6 +37,7 @@ class Index extends Component {
         url:'',
         isLogin:false, //当削是否登录过
       },
+      payArr:[]
     }
     config: Config = {
     navigationBarTitleText: '订单确认'
@@ -69,7 +71,7 @@ class Index extends Component {
   componentDidHide () { }
 
   render () {
-    let { userInfo } = this.state;
+    let { userInfo,payArr } = this.state;
     console.log("userInfo",userInfo);
 
     return (
@@ -88,38 +90,21 @@ class Index extends Component {
              </View>
           </View>
         </View>
-        {/*订单列表*/}
-        <View className="content-list">
-          <View className="item">
-             <View className="icon-left">
-               <Image className="image" src={msg}/>
-             </View>
-             <View className="text-left">我的收藏</View>
-             <View className="text-right">
-               {/* <View className="text-number">16</View> */}
-             </View>
-             <View className="icon-right">
-               <Image src={arrow} className="image"/>
-             </View>
+        {payArr&&payArr.map(item => {
+          return (<View key={item._id} className="right-item" onClick={() => this.handleToDetail(item)}>
+          <View className="item-box">
+            <View className="box-left">
+              <Image src={item.url} className="image"/>
+            </View>
+            <View className="box-right">
+              <View className="right-top">{item.title}</View>
+              <View className="right-bottom">
+                <View className="bottom-left">{item.description} </View>
+              </View>
+            </View>
           </View>
-        </View>
-
-        <View className="content-item">
-          <View className="item">
-             <View className="icon-left">
-               <Image className="image" src={msg}/>
-             </View>
-             <View className="text-left">我的卡券</View>
-             <View className="text-right">
-              你有3张优惠券待使用
-               {/* <View className="text-number">16</View> */}
-             </View>
-             <View className="icon-right">
-               <Image src={arrow} className="image"/>
-             </View>
-          </View>
-        </View>
-      
+        </View>)
+        })}
         <View className="content-item">
           <View className="item">
              <View className="text-left">总计</View>

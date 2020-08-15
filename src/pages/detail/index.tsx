@@ -10,8 +10,6 @@ import  './index.less'
 import { showLoading,hideLoading,showToast,getStorageSync } from '../../utils/tools'
 import { View, Swiper, SwiperItem,Image, ScrollView, Button,Input } from '@tarojs/components'
 import { 
-  getPayInfo,
-  userLogin,
   userPrepaid,
   getDetailInfo,
   userInfoCartSave,
@@ -297,7 +295,7 @@ class Index extends Component {
       title,
       price,
       openid,
-      status:1
+      status:1,
     }
     let res = await userPrepaid(params);
     if(res.data.code === 200) {
@@ -306,7 +304,7 @@ class Index extends Component {
         Taro.navigateTo({
           url:`../payment/index?openid=${openid}`
         });
-      },1000)
+      },1000);
     }
 
     // setStorageSync({key:'payInfo',value:JSON.stringify(params)});
