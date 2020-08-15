@@ -8,7 +8,7 @@ import arrow from '../../images/icon/arrow.png'
 import close from '../../images/icon/close.png'
 import  './index.less'
 import { showLoading,hideLoading,showToast,getStorageSync } from '../../utils/tools'
-import { View, Swiper, SwiperItem,Image, ScrollView, Button,Input} from '@tarojs/components'
+import { View, Swiper, SwiperItem,Image, ScrollView, Button,Input, Switch} from '@tarojs/components'
 import { 
   getPayInfo,
   userLogin,
@@ -68,41 +68,45 @@ class Index extends Component {
         {
           key:'1',
           title:'浅粉红',
-          background:"#FFB6C1"
+          color:"#FFB6C1"
         },
         {
           key:'2',
           title:'紫罗兰',
-          background:'#EE82EE'
+          color:'#EE82EE'
         },
         {
           key:'3',
           title:'深蓝色',
-          background:'#0000CD'
+          color:'#0000CD'
         }
       ],
       defaultColor:{
         key:'1',
         title:'浅粉红',
-        background:"#FFB6C1"
+        color:"#FFB6C1"
       },
       sizeArr:[
        {
          key:'1',
-         title:'37'
+         title:'37',
+         size:'37'
        },
        {
          key:'2',
-         title:'38'
+         title:'38',
+         size:'38',
        },
        {
          key:'3',
-         title:'39'
+         title:'39',
+         size:'39',
        }
       ],
       defaultSize:{
         key:'1',
-        title:'37'
+        title:'37',
+        size:'37'
       },
       currentType:'cart'
     }
@@ -233,56 +237,57 @@ class Index extends Component {
   //跳不同的入口 
   handleSubmit = () => {
     const { currentType } = this.state;
-    let goType = {
-      'cart':this.handleAddCar(),
-      'pay':this.handlePayment()
+    switch(currentType) {
+      case 'cart':
+        this.handleAddCar();
+        break;
+      case 'pay':
+        this.handlePayment();
+       break;
     }
-    return goType[currentType];
-
-  //   let that = this;
-  //   let { number,detailData,focus_img } = this.state;
-  //   let title = detailData[0].title;
-  //   let price =  detailData[0].price;
-  //   let goods_img = focus_img[0];
-  //   let userInfoKey = Taro.getStorageSync('userInfoKey');
-  //   let userInfo =userInfoKey ? JSON.parse(userInfoKey):''
-  //   let params = {
-  //     number,
-  //     title,
-  //     price,
-  //     goods_img,
-  //     openid:userInfo.openid
-  //   }
-  //   showLoading({title:'加入中'});
-  //   userInfoCartSave(params).then(res => {
-  //   hideLoading();
-  //   let cart = res.data;
-  //   if(cart.code == 200) {
-  //     showToast({title:cart.msg});
-  //     that.handlehideModal();
-  //     Taro.switchTab({
-  //       url:'../cart/index'
-  //     })
-  //   }
-  // });
   }
-  handleAddCar = () => {
-    console.log("22222");
-
+  handleAddCar = async() => {
+    const that = this;
+    const { number,detailData,focus_img,defaultColor,defaultSize } = this.state;
+    const title = detailData[0].title;
+    const price =  detailData[0].price;
+    const { color } = defaultColor;
+    const { size } = defaultSize;
+    const url = focus_img[0];
+    const userInfoKey = getStorageSync("userInfoKey");
+    const userInfo = userInfoKey ? JSON.parse(userInfoKey):{}
+    const { openid } = userInfo;
+    let params = {
+      number,
+      title,
+      price,
+      url,
+      color,
+      size,
+      openid,
+    }
+    showLoading({title:'加入中'});
+    let res = await userInfoCartSave(params);
+    if(res.data.code === 200) {
+      hideLoading();
+      showToast({title:res.data.msg});
+      that.handlehideModal();
+      Taro.switchTab({
+        url:'../cart/index'
+      });
+    }
   }
   handlePayment = async() => {
-    let loginInfo = await Taro.login();
-    let userInfo = await userLogin({code:loginInfo.code,appid:'wx070d1456a4a9c0fb'});
-    if(userInfo.data.code == 200) {
-      let result = userInfo.data.data
-      let payInfo = await getPayInfo(result);
-      console.log(payInfo);
+    console.log("2");
 
-    }
-    
+    // let loginInfo = await Taro.login();
+    // let userInfo = await userLogin({code:loginInfo.code,appid:'wx070d1456a4a9c0fb'});
+    // if(userInfo.data.code == 200) {
+    //   let result = userInfo.data.data
+    //   let payInfo = await getPayInfo(result);
+    //   console.log(payInfo);
 
-   
-
+    // }
     // Taro.login().then(res => {
     //   let params = {
     //     code:res.code,
