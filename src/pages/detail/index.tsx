@@ -306,12 +306,7 @@ class Index extends Component {
         });
       },1000);
     }
-
-    // setStorageSync({key:'payInfo',value:JSON.stringify(params)});
-  
-
-    //console.log("2");
-
+    
     // let loginInfo = await Taro.login();
     // let userInfo = await userLogin({code:loginInfo.code,appid:'wx070d1456a4a9c0fb'});
     // if(userInfo.data.code == 200) {

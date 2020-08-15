@@ -86,9 +86,25 @@ class Index extends Component {
       }
     });
   }
-  handleWayPay = () => {
+  handleWayPay = async() => {
+    let res = await Taro.login();
+    console.log('res',res);
     
-    console.log("1111");
+    //  Taro.login().then(res => {
+    //   let params = {
+    //     code:res.code,
+    //     appid:'wx070d1456a4a9c0fb',
+    //   }
+    //   // userLogin(params).then(res => {
+    //   //     if(res.data.code == 200) {
+    //   //       let result = res.data.data;
+    //   //       let userInfoKey = JSON.stringify(result);
+    //   //       Taro.setStorageSync('userInfoKey', userInfoKey);
+    //   //     }
+    //   // })
+    // })
+
+  
   }
   //现下支付
   handleNowpay = () => {
