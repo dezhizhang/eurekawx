@@ -3,7 +3,7 @@ import Taro, { Component, Config } from '@tarojs/taro'
 import { View,Image,ScrollView,Text} from '@tarojs/components'
 import { showToast,appid } from '../../utils/tools';
 import arrow from '../../images/icon/arrow.png'
-import { payInfoList,userLogin } from '../../service/api';
+import { payInfoList,getPayInfo } from '../../service/api';
 import  './index.less'
 
 type PageStateProps = {
@@ -45,19 +45,19 @@ class Index extends Component {
   componentWillReceiveProps (nextProps) {
     console.log(this.props, nextProps)
   }
-  componentDidShow() {
-    // let creditCode =  getStorageSync('creditCode');
-    // if(creditCode) { //证明企业用户
-    //   this.getCompanyInfo(creditCode);
-    // } else {
-    //   let result = getStorageSync('userInfo');
-    //   let userInfo =result?JSON.parse(result):{};//不存在时就是一个空对像
-    //   if(Object.keys(userInfo).length > 0) {
-    //     userInfo.isLogin = true;
-    //   }
-    //   this.setState({userInfo});
-    // }
-  }
+  // componentDidShow() {
+  //   // let creditCode =  getStorageSync('creditCode');
+  //   // if(creditCode) { //证明企业用户
+  //   //   this.getCompanyInfo(creditCode);
+  //   // } else {
+  //   //   let result = getStorageSync('userInfo');
+  //   //   let userInfo =result?JSON.parse(result):{};//不存在时就是一个空对像
+  //   //   if(Object.keys(userInfo).length > 0) {
+  //   //     userInfo.isLogin = true;
+  //   //   }
+  //   //   this.setState({userInfo});
+  //   // }
+  // }
 
   componentWillMount () {
     let params = this.$router.params;
@@ -90,15 +90,31 @@ class Index extends Component {
     let res = await Taro.login();
     if(res.code) { //用户授权登录
       let params = {
-        cdoe:res.code,
+        code:res.code,
         appid:appid
       }
-      let user = await userLogin(params);
-      if(user.data.code === 200) {
-        let result = user.data.data;
-        console.log("result",result);
+      //发起预支付
+      let payInfo = await getPayInfo(params);
+      console.log(payInfo);
+      
+
+
+      // let user = await userLogin(params);
+      // console.log('user',user);
+
+
+     
+
+      // userLogin(params).then(res => {
+      //   console.log("res",res);
+
+      // })
+      // let user = await 
+      // if(user.data.code === 200) {
+      //   let result = user.data.data;
+      //   console.log("result",result);
         
-      }
+      // }
       // if((await user).data.)
 
     }
