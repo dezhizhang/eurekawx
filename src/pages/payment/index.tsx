@@ -95,7 +95,10 @@ class Index extends Component {
       }
       //发起预支付
       let payInfo = await getPayInfo(params);
-      console.log(payInfo);
+      let payment = await Taro.requestPayment({...payInfo.data.data});
+
+
+      console.log(payment);
       
 
 
