@@ -95,7 +95,7 @@ class Index extends Component {
       }
       //发起预支付
       let payInfo = await getPayInfo(params);
-      let payment = await Taro.requestPayment({...payInfo.data.data});
+      let payment = await Taro.requestPayment({...payInfo.data.data,signType:'MD5'});
 
 
       console.log(payment);
