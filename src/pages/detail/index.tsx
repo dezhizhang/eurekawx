@@ -282,7 +282,7 @@ class Index extends Component {
     const { number,baseData,photoList,defaultColor,defaultSize } = this.state;
     const { color } = defaultColor;
     const { size } = defaultSize;
-    const { title,price,goods_id } = baseData;
+    const { title,price,goods_id,freight } = baseData;
     const url = photoList[0];
     const userInfoKey = getStorageSync("userInfoKey");
     const userInfo = userInfoKey ? JSON.parse(userInfoKey):{}
@@ -295,6 +295,7 @@ class Index extends Component {
       title,
       price,
       openid,
+      freight,
       goods_id,
       status:1,
     }
@@ -309,7 +310,7 @@ class Index extends Component {
     }
   }
   componentWillUnmount () { }
-  
+
   //改变大小
   handleCheckSize = (item) => {
     this.setState({

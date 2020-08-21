@@ -20,6 +20,7 @@ type PageState = {
   userInfo:any;
   payArr:any;
   totalPrice:number;
+  totalFreight:number;
 }
 
 type IProps = PageStateProps  & PageOwnProps
@@ -38,7 +39,8 @@ class Index extends Component {
         isLogin:false, //当削是否登录过
       },
       totalPrice:0,
-      payArr:[{url:'',title:'',price:'',number:0,color:'',size:''}]
+      totalFreight:0, //总共的运费
+      payArr:[{url:'',title:'',price:'',number:0,color:'',size:'',goods_id:''}]
     }
     config: Config = {
     navigationBarTitleText: '订单确认'
@@ -71,10 +73,12 @@ class Index extends Component {
     if(res.data.code === 200) {
       let payArr = res.data.data;
       let totalPrice = 0; 
+      let totalFreight = 0;
       for(let i=0;i < payArr.length;i++) {
         totalPrice += Number(payArr[i].price); //计算多个商品的总价钱
+        totalFreight += Number(payArr[i].freight)
       }
-      this.setState({ payArr,totalPrice });
+      this.setState({ payArr,totalPrice,totalFreight });
     }
   }
   //提交表单
@@ -154,7 +158,7 @@ class Index extends Component {
   }
   componentDidHide () { }
   render () {
-    let { payArr,totalPrice } = this.state;
+    let { payArr,totalPrice,totalFreight } = this.state;
     return (
       <ScrollView className='payment'
       scrollY
@@ -182,6 +186,7 @@ class Index extends Component {
             <View className="box-right">
               <View className="right-top">{item.title}</View>
               <View className="right-bottom">
+                <View className="bottom-text">订单号:<Text>{item.goods_id}</Text></View>
                 <View className="bottom-text">价格：<Text style={{color:'red'}}>￥{item.price}</Text> </View>
                 <View className="bottom-text">数量：<Text>{item.number}</Text></View>
                 <View className="bottom-text">颜色：<Text style={{color:item.color}}>{item.color}</Text></View>
@@ -195,7 +200,7 @@ class Index extends Component {
           <View className="item">
              <View className="text-left">总计</View>
              <View className="text-right">
-               {totalPrice}
+               ￥{totalPrice.toFixed(2)}
              </View>
           </View>
         </View>
@@ -203,22 +208,22 @@ class Index extends Component {
           <View className="item">
              <View className="text-left">运费</View>
              <View className="text-right">
-               1000
+               ￥{totalFreight.toFixed(2)}
              </View>
           </View>
         </View>
-        <View className="content-item">
+        {/* <View className="content-item">
           <View className="item">
              <View className="text-left">共优惠金额</View>
              <View className="text-right">
                1000
              </View>
           </View>
-        </View>
+        </View> */}
       </View>
       <View className="footer">
         <View className="left">
-        实付金额：<Text className="left-text">{totalPrice}</Text>
+        实付金额：<Text className="left-text">￥{(totalPrice+totalFreight).toFixed(2)}</Text>
         </View>
         <View className="right" onClick={this.handleSubmit}>提交订单</View>
       </View>
