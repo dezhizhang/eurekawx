@@ -18,7 +18,8 @@ type PageOwnProps = {
 
 type PageState = {
   userInfo:any;
-  payArr:any
+  payArr:any;
+  totalPrice:number;
 }
 
 type IProps = PageStateProps  & PageOwnProps
@@ -36,6 +37,7 @@ class Index extends Component {
         url:'',
         isLogin:false, //当削是否登录过
       },
+      totalPrice:0,
       payArr:[{url:'',title:'',price:'',number:0,color:'',size:''}]
     }
     config: Config = {
@@ -68,7 +70,11 @@ class Index extends Component {
     let res = await payInfoList(params);
     if(res.data.code === 200) {
       let payArr = res.data.data;
-      this.setState({ payArr });
+      let totalPrice = 0; 
+      for(let i=0;i < payArr.length;i++) {
+        totalPrice += Number(payArr[i].price); //计算多个商品的总价钱
+      }
+      this.setState({ payArr,totalPrice });
     }
   }
   //提交表单
@@ -148,7 +154,7 @@ class Index extends Component {
   }
   componentDidHide () { }
   render () {
-    let { payArr } = this.state;
+    let { payArr,totalPrice } = this.state;
     return (
       <ScrollView className='payment'
       scrollY
@@ -189,7 +195,7 @@ class Index extends Component {
           <View className="item">
              <View className="text-left">总计</View>
              <View className="text-right">
-               1000
+               {totalPrice}
              </View>
           </View>
         </View>
@@ -212,7 +218,7 @@ class Index extends Component {
       </View>
       <View className="footer">
         <View className="left">
-          实付金额：<Text className="left-text">1111</Text>
+        实付金额：<Text className="left-text">{totalPrice}</Text>
         </View>
         <View className="right" onClick={this.handleSubmit}>提交订单</View>
       </View>
