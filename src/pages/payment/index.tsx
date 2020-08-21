@@ -1,7 +1,7 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View,Image,ScrollView,Text} from '@tarojs/components'
-import { showToast,appid } from '../../utils/tools';
+import { showToast,appid,orderNumber } from '../../utils/tools';
 import arrow from '../../images/icon/arrow.png'
 import { payInfoList,getPayInfo } from '../../service/api';
 import  './index.less'
@@ -40,7 +40,7 @@ class Index extends Component {
       },
       totalPrice:0,
       totalFreight:0, //总共的运费
-      payArr:[{url:'',title:'',price:'',number:0,color:'',size:'',goods_id:''}]
+      payArr:[{url:'',title:'',price:'',number:0,color:'',size:'',goods_id:'',out_trade_no:''}]
     }
     config: Config = {
     navigationBarTitleText: '订单确认'
@@ -97,11 +97,22 @@ class Index extends Component {
     });
   }
   handleWayPay = async() => {
+    let { payArr,totalPrice,totalFreight } = this.state;
+    let total = totalPrice + totalFreight;
+    let out_trade_no = "";
+    if(payArr.length > 1) { //有个多订单
+      out_trade_no = orderNumber();
+    }else {
+      payArr[0].out_trade_no = payArr[0].goods_id
+    }
     let res = await Taro.login();
     if(res.code) { //用户授权登录
       let params = {
         code:res.code,
-        appid:appid
+        appid:appid,
+        total:total,
+        out_trade_no,
+        ...payArr[0]
       }
       //发起预支付
       let payInfo = await getPayInfo(params);
