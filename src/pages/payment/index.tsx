@@ -1,7 +1,7 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View,Image,ScrollView,Text} from '@tarojs/components'
-import { showToast,appid,orderNumber } from '../../utils/tools';
+import { showToast,appid,orderNumber,updateStatus } from '../../utils/tools';
 import arrow from '../../images/icon/arrow.png'
 import { payInfoList,getPayInfo } from '../../service/api';
 import  './index.less'
@@ -117,48 +117,17 @@ class Index extends Component {
       //发起预支付
       let payInfo = await getPayInfo(params);
       let payment = await Taro.requestPayment({...payInfo.data.data,signType:'MD5'});
-
-
-      console.log(payment);
-      
-
-
-      // let user = await userLogin(params);
-      // console.log('user',user);
-
-
-     
-
-      // userLogin(params).then(res => {
-      //   console.log("res",res);
-
-      // })
-      // let user = await 
-      // if(user.data.code === 200) {
-      //   let result = user.data.data;
-      //   console.log("result",result);
-        
-      // }
-      // if((await user).data.)
-
-    }
-    console.log('res',res);
-    
-    //  Taro.login().then(res => {
-    //   let params = {
-    //     code:res.code,
-    //     appid:'wx070d1456a4a9c0fb',
-    //   }
-    //   // userLogin(params).then(res => {
-    //   //     if(res.data.code == 200) {
-    //   //       let result = res.data.data;
-    //   //       let userInfoKey = JSON.stringify(result);
-    //   //       Taro.setStorageSync('userInfoKey', userInfoKey);
-    //   //     }
-    //   // })
-    // })
-
-  
+      if(payment.errMsg === 'equestPayment:ok') { //支付成功
+        let status = await updateStatus({appid:appid,status:2});
+        if(status.data.code === 200) { //表示更新状态成功
+          setTimeout(()=> {
+            Taro.navigateTo({
+              url:'../order/index?status=2'
+            })
+          },2000);
+        }
+      }
+    }  
   }
   //现下支付
   handleNowpay = () => {

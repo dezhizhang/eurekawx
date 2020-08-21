@@ -102,7 +102,7 @@ export async function companyLogin(params) {
 }
 //获取企业信息
 export async function companyInfo(params) {
-  return request(`${Config.API_HOST}/api/company/info?creditCode=${params.creditCode}`)
+  return request(`${Config.API_HOST}/api/company/info?creditCode=${params.creditCode}`);
 }
 //用户发起预支付
 export async function userPrepaid(params) {
@@ -113,7 +113,11 @@ export async function userPrepaid(params) {
 }
 //获取支付列表
 export async function payInfoList(params){
-  return request(`${Config.API_HOST}/api/userInfo/pay/list?openid=${params.openid}`)
+  return request(`${Config.API_HOST}/api/userInfo/pay/list?openid=${params.openid}`);
+}
+//更新订单状态
+export async function updateStatus(params) {
+  return request(`${Config.API_HOST}/api/userInfo/update/order?openid=${params.openid}`);
 }
 
 
