@@ -1,9 +1,9 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View,Image,ScrollView,Text} from '@tarojs/components'
-import { showToast,appid,orderNumber,updateStatus } from '../../utils/tools';
+import { showToast,appid,orderNumber, } from '../../utils/tools';
 import arrow from '../../images/icon/arrow.png'
-import { payInfoList,getPayInfo } from '../../service/api';
+import { payInfoList,getPayInfo,updateStatus } from '../../service/api';
 import  './index.less'
 
 type PageStateProps = {
@@ -117,7 +117,7 @@ class Index extends Component {
       //发起预支付
       let payInfo = await getPayInfo(params);
       let payment = await Taro.requestPayment({...payInfo.data.data,signType:'MD5'});
-      if(payment.errMsg === 'equestPayment:ok') { //支付成功
+      if(payment.errMsg === 'requestPayment:ok') { //支付成功更新订单状态
         let status = await updateStatus({appid:appid,status:2});
         if(status.data.code === 200) { //表示更新状态成功
           setTimeout(()=> {

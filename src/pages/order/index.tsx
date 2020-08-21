@@ -6,9 +6,7 @@
 */
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Button } from '@tarojs/components'
-import { userLogin } from '../../service/api'
-import { showModal,appid } from '../../utils/tools'
+import { View, } from '@tarojs/components'
 import  './index.less'
 
 type PageStateProps = {
@@ -31,7 +29,7 @@ class Index extends Component {
       isHide:false
     }
     config: Config = {
-    navigationBarTitleText: '登录'
+    navigationBarTitleText: '订单列表'
   }
 
   componentWillReceiveProps (nextProps) {
@@ -49,56 +47,17 @@ class Index extends Component {
     });  
   }
   componentDidMount() {
-    Taro.getSetting().then(res => {
-      if(res.authSetting['scope.userInfo']) {
-        Taro.getUserInfo().then(res => {
-          if(res.userInfo) {
-            Taro.login().then(res => {
-              let params = {
-                code:res.code,
-                appid:appid,
-              }
-              userLogin(params).then(res => {
-                if(res.data.code == 200) {
-                  let result = res.data.data;
-                  let userInfoKey = JSON.stringify(result);
-                  Taro.setStorageSync('userInfoKey', userInfoKey);
-                }
-              })
-            })
-          } else {
-            showModal({
-              title:'警告',
-              content:'您还没有授权，请重新授权!',
-              showCancel:false,
-              confirmText:'授权登录'
-            })
-          }
-        })
-      } 
-    })
+   
   }
   
-  bindGetUserInfo = async(ev) => {
-    if(ev.detail.userInfo){
-      let result  = ev.detail.userInfo;
-      result.userType = '普通会员';
-      let userInfoKey = Taro.getStorageSync('userInfoKey');
-      result.openid = userInfoKey ? JSON.parse(userInfoKey).openid:'';
-      result.url = result.avatarUrl; //转换字段
-      Taro.setStorageSync('userInfo', JSON.stringify(result));
-      Taro.switchTab({
-        url:'../my/index'
-      });
-    }
-  }
+
   componentDidHide () { }
 
   render () {
     return (
     <View className="order">
       <View className="order-wrapper">
-          订音列表
+        订单列表
       </View>
     </View>
     )
