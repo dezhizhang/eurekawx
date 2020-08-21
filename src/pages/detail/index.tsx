@@ -63,6 +63,7 @@ class Index extends Component {
         freight:0,
         sales:0,
         inventory:0,
+        goods_id:0,
       },
       colorArr:[
         {
@@ -279,10 +280,9 @@ class Index extends Component {
   }
   handlePayment = async() => {
     const { number,baseData,photoList,defaultColor,defaultSize } = this.state;
-    const title = baseData.title;
-    const price =  baseData.price;
     const { color } = defaultColor;
     const { size } = defaultSize;
+    const { title,price,goods_id } = baseData;
     const url = photoList[0];
     const userInfoKey = getStorageSync("userInfoKey");
     const userInfo = userInfoKey ? JSON.parse(userInfoKey):{}
@@ -295,6 +295,7 @@ class Index extends Component {
       title,
       price,
       openid,
+      goods_id,
       status:1,
     }
     let res = await userPrepaid(params);
@@ -306,59 +307,9 @@ class Index extends Component {
         });
       },1000);
     }
-    
-    // let loginInfo = await Taro.login();
-    // let userInfo = await userLogin({code:loginInfo.code,appid:'wx070d1456a4a9c0fb'});
-    // if(userInfo.data.code == 200) {
-    //   let result = userInfo.data.data
-    //   let payInfo = await getPayInfo(result);
-    //   console.log(payInfo);
-
-    // }
-    // Taro.login().then(res => {
-    //   let params = {
-    //     code:res.code,
-    //     appid:'wx070d1456a4a9c0fb',
-    //   }
-    //   userLogin(params).then(res => {
-    //       if(res.data.code == 200) {
-    //         let result = res.data.data;
-    //         let userInfoKey = JSON.stringify(result);
-    //         Taro.setStorageSync('userInfoKey', userInfoKey);
-    //       }
-    //   })
-    // })
-    // getPayInfo(params).then(res => {
-    //   console.log(res);
-
-    // })
-    // let params = {
-    //   timeStamp:'111',
-    //   nonceStr:'222',
-    //   package:'444',
-    //   paySign:'5555',
-    //   signType:'MD5'
-    // }
-    // Taro.requestPayment(params).then(res => {
-    //      console.log(res);
-
-    // })
-
-   
-
   }
   componentWillUnmount () { }
-
-  componentDidShow () {
-
-    // let result = Taro.getStorageSync('userInfo');
-    // let userInfo = result ? JSON.parse(result):''
-    // if(!userInfo) {
-    //   Taro.switchTab({
-    //     url: '../my/index'
-    //   })
-    // }
-   }
+  
   //改变大小
   handleCheckSize = (item) => {
     this.setState({
