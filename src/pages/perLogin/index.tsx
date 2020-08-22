@@ -48,7 +48,11 @@ class Index extends Component {
       url:'../company/index'
     });  
   }
-  componentDidMount() {
+  componentWillmount() {
+   
+  }
+  bindGetUserInfo = async(ev) => {
+    let userInfo = ev.detail.userInfo;
     Taro.getSetting().then(res => {
       if(res.authSetting['scope.userInfo']) {
         Taro.getUserInfo().then(res => {
@@ -62,7 +66,13 @@ class Index extends Component {
                 if(res.data.code == 200) {
                   let result = res.data.data;
                   let userInfoKey = JSON.stringify(result);
+                  userInfo.userType = '普通会员';
+                  userInfo.url = userInfo.avatarUrl;
                   Taro.setStorageSync('userInfoKey', userInfoKey);
+                  Taro.setStorageSync('userInfo', JSON.stringify(userInfo));
+                  Taro.switchTab({
+                    url:'../my/index'
+                  });
                 }
               })
             })
@@ -76,21 +86,7 @@ class Index extends Component {
           }
         })
       } 
-    })
-  }
-  
-  bindGetUserInfo = async(ev) => {
-    if(ev.detail.userInfo){
-      let result  = ev.detail.userInfo;
-      result.userType = '普通会员';
-      let userInfoKey = Taro.getStorageSync('userInfoKey');
-      result.openid = userInfoKey ? JSON.parse(userInfoKey).openid:'';
-      result.url = result.avatarUrl; //转换字段
-      Taro.setStorageSync('userInfo', JSON.stringify(result));
-      Taro.switchTab({
-        url:'../my/index'
-      });
-    }
+    });
   }
   componentDidHide () { }
 
