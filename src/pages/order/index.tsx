@@ -21,6 +21,7 @@ type PageOwnProps = {}
 type PageState = {
   status:string;
   orderList:any;
+  tabArr:any;
 }
 
 type IProps = PageStateProps  & PageOwnProps
@@ -34,6 +35,32 @@ class Index extends Component {
       isHide:false,
       status:'',
       orderList:[],
+      tabArr:[
+        {
+          key:'0',
+          value:'全部',
+        },
+        {
+          key:'1',
+          value:'待发货',
+        },
+        {
+          key:'2',
+          value:'待配送',
+        },
+        {
+          key:'3',
+          value:'已签收'
+        },
+        {
+          key:'4',
+          value:'待评价'
+        },
+        {
+          key:'5',
+          value:'已退货'
+        }
+      ]
     }
     config: Config = {
     navigationBarTitleText: '订单列表'
@@ -91,9 +118,18 @@ class Index extends Component {
   componentDidHide () { }
 
   render () {
+    const { tabArr } = this.state;
     return (
     <View className="order">
+      <View className="order-tabs">
+        {
+          tabArr.map(item => {
+            return <View className="tabs-item" key={item.key}>{item.value}</View>
+          })
+        }
+      </View>
       <View className="order-wrapper">
+     
         订单列表
       </View>
     </View>

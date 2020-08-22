@@ -192,11 +192,11 @@ class Index extends Component {
                     <View className="item_bottom">{orderInfo.stayPayment}</View>
                   </View>
                   <View className="top_item" onClick={() => this.handleToOrder(2)}>
-                    <View className="item_top">待发货</View>
+                    <View className="item_top">待配送</View>
                     <View className="item_bottom">{orderInfo.stayDelivery}</View>
                   </View>
                   <View className="top_item" onClick={() => this.handleToOrder(3)}>
-                    <View className="item_top">待配送</View>
+                    <View className="item_top">己完成</View>
                     <View className="item_bottom">{orderInfo.stayDistribution}</View>
                   </View>
                   <View className="top_item" onClick={() => this.handleToOrder(4)}>
