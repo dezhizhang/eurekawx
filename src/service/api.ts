@@ -119,6 +119,10 @@ export async function payInfoList(params){
 export async function updateStatus(params) {
   return request(`${Config.API_HOST}/api/userInfo/update/order?openid=${params.openid}`);
 }
+//订单列表
+export async function getOrderList(params) {
+  return request(`${Config.API_HOST}/api/userInfo/order/list?openid=${params.openid}&status=${params.status}`);
+}
 
 
 
