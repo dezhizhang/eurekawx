@@ -6,9 +6,10 @@
 */
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, } from '@tarojs/components'
+import { View,ScrollView,Image,Text } from '@tarojs/components'
 import { getStorageSync,showToast } from '../../utils/tools'
 import { getOrderList } from '../../service/api';
+import arrow from '../../images/icon/arrow.png'
 import  './index.less'
 
 type PageStateProps = {
@@ -43,7 +44,7 @@ class Index extends Component {
         },
         {
           key:'1',
-          value:'待发货',
+          value:'待付款',
         },
         {
           key:'2',
@@ -142,10 +143,31 @@ class Index extends Component {
           })
         }
       </View>
-      <View className="order-wrapper">
+      <ScrollView className="order-wrapper">
+        <View className="order-list">
+          <View className="order-header">
+            <View className="header-title">情侣衬衫</View>
+            <View className="header-status">交易成功</View>
+            <View className="header-icon">
+              <Image src={arrow} className="image"/>
+            </View>
+          </View>
+          <View className="order-content">
+            <View className="content-wrapper">
+              <View className="content-left">
+                <Image className="left-image" src={'http://img.xiaozhi.shop/public/admin/upload/2020-05-01/1588309530260.jpeg'}/>
+              </View>
+              <View className="content-right">
+                <View className="right-desc">2018早秋装ins古着新款韩版条纹衬衫情侣装chic…</View>
+                <View className="right-color">颜色：<Text className="color-text">粉色</Text></View>
+                <View className="right-color">尺码：<Text className="color-text">37</Text></View>
+              </View>
+            </View>
+          </View>
+        </View>
      
         订单列表
-      </View>
+      </ScrollView>
     </View>
     )
   }
