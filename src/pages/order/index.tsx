@@ -22,6 +22,7 @@ type PageState = {
   status:string;
   orderList:any;
   tabArr:any;
+  activeTab:any;
 }
 
 type IProps = PageStateProps  & PageOwnProps
@@ -60,7 +61,8 @@ class Index extends Component {
           key:'5',
           value:'已退货'
         }
-      ]
+      ],
+      activeTab:'0',
     }
     config: Config = {
     navigationBarTitleText: '订单列表'
@@ -113,18 +115,30 @@ class Index extends Component {
   componentDidMount() {
    
   }
-  
-
+  //订单
+  handleTabs = (item) => {
+    this.setState({
+      activeTab:item.key
+    });
+  }
   componentDidHide () { }
 
   render () {
-    const { tabArr } = this.state;
+    const { tabArr,activeTab } = this.state;
     return (
     <View className="order">
       <View className="order-tabs">
         {
           tabArr.map(item => {
-            return <View className="tabs-item" key={item.key}>{item.value}</View>
+            return (
+            <View
+              key={item.key}
+              className="tabs-item"
+              style={{color:item.key === activeTab ? '#735ff7':'',borderBottom:item.key === activeTab ? '2px solid #735ff7':''}}
+              onClick={() => this.handleTabs(item)}
+              >
+                {item.value}
+            </View>)
           })
         }
       </View>
