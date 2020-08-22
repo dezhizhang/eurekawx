@@ -6,7 +6,7 @@
 */
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View,ScrollView,Image,Text } from '@tarojs/components'
+import { View,ScrollView,Image,Text, Button } from '@tarojs/components'
 import { getStorageSync,showToast } from '../../utils/tools'
 import { getOrderList } from '../../service/api';
 import arrow from '../../images/icon/arrow.png'
@@ -23,6 +23,7 @@ type PageState = {
   status:string;
   orderList:any;
   tabArr:any;
+  btnArr:any;
   activeTab:any;
 }
 
@@ -63,7 +64,26 @@ class Index extends Component {
           value:'已退货'
         }
       ],
+      btnArr:[
+        {
+          key:'1',
+          value:'删除订单',
+        },
+        {
+          key:'2',
+          value:'再来一单',
+        },
+        {
+          key:'3',
+          value:'联系商家'
+        },
+        {
+          key:'4',
+          value:'评价'
+        }
+    ],
       activeTab:'0',
+      activeBtn:'1',
     }
     config: Config = {
     navigationBarTitleText: '订单列表'
@@ -122,10 +142,16 @@ class Index extends Component {
       activeTab:item.key
     });
   }
+  //按钮操作
+  handleBtns = (item) => {
+    this.setState({
+      activeBtn:item.key
+    })
+  }
   componentDidHide () { }
 
   render () {
-    const { tabArr,activeTab } = this.state;
+    const { tabArr,activeTab,btnArr,activeBtn } = this.state;
     return (
     <View className="order">
       <View className="order-tabs">
@@ -164,9 +190,32 @@ class Index extends Component {
               </View>
             </View>
           </View>
+          <View className="order-bottom">
+            <View className="bottom-wrapper">
+              <View className="bottom-left"></View>
+              <View className="bottom-right">
+                共1件商品  实付款：￥18.90
+              </View>
+            </View>
+          </View>
+          <View className="bottom-btn">
+            <View className="btn-wrapper">
+              {
+                btnArr.map(item => {
+                  return (
+                  <View 
+                    className="btn-item"
+                    onClick={() => this.handleBtns(item)}
+                    style={{marginLeft:Number(item.key) > 0 ? '10px':'',color:item.key=== activeBtn ? '#735ff7':''}}
+                    >
+                      {item.value}
+                  </View>
+                  )
+                })
+              }
+            </View>
+          </View>
         </View>
-     
-        订单列表
       </ScrollView>
     </View>
     )
