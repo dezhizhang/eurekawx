@@ -127,6 +127,12 @@ class Index extends Component {
       url:'../company/index'
     })
   }
+  //跳转到订单页
+  handleToOrder = (status) => {
+    Taro.navigateTo({
+      url:`../order/index?status=${status}`
+    })
+  }
   componentDidHide () { }
 
   render () {
@@ -162,38 +168,38 @@ class Index extends Component {
             <View className="card_info">
               <View className="info_box">
                 <View className="box_top">
-                  <View className="top_item">
+                  <View className="top_item" onClick={() => this.handleToOrder(1)}>
                     <View className="item_top">待付款</View>
                     <View className="item_bottom">3</View>
                   </View>
-                  <View className="top_item">
+                  <View className="top_item" onClick={() => this.handleToOrder(2)}>
                     <View className="item_top">待发货</View>
                     <View className="item_bottom">3</View>
                   </View>
-                  <View className="top_item">
-                    <View className="item_top">待收货</View>
+                  <View className="top_item" onClick={() => this.handleToOrder(3)}>
+                    <View className="item_top">待配送</View>
                     <View className="item_bottom">6</View>
                   </View>
-                  <View className="top_item">
+                  <View className="top_item" onClick={() => this.handleToOrder(4)}>
                     <View className="item_top">待评价</View>
                     <View className="item_bottom">12</View>
                   </View>
                 </View>
                 <View className="box-bottom">
-                    <View className="bottom-wrapper">
-                      <View className="bottom-item">
-                        <View className="item-top">
-                           <Image src={allOrder} className="image"/>
-                        </View>
-                        <View className="item-bottom">所有订单</View>
-                      </View>
-                      <View className="bottom-item">
-                        <View className="item-top">
+                  <View className="bottom-wrapper">
+                    <View className="bottom-item" onClick={() => this.handleToOrder(5)}>
+                      <View className="item-top">
                           <Image src={allOrder} className="image"/>
-                        </View>
-                        <View className="item-bottom">完成订单</View>
                       </View>
+                      <View className="item-bottom">所有订单</View>
                     </View>
+                    <View className="bottom-item" onClick={() => this.handleToOrder(6)}>
+                      <View className="item-top">
+                        <Image src={allOrder} className="image"/>
+                      </View>
+                      <View className="item-bottom">完成订单</View>
+                    </View>
+                  </View>
                 </View>
               </View>
             </View>
