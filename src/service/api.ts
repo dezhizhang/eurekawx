@@ -123,6 +123,10 @@ export async function updateStatus(params) {
 export async function getOrderList(params) {
   return request(`${Config.API_HOST}/api/userInfo/order/list?openid=${params.openid}&status=${params.status}`);
 }
+//统计订单数量
+export async function getOrderContent(params) {
+  return request(`${Config.API_HOST}/api/userInfo/order/count?openid=${params.openid}`);
+}
 
 
 

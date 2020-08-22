@@ -2,7 +2,7 @@ import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View,Image,} from '@tarojs/components'
 import { getStorageSync } from '../../utils/tools'
-import { companyInfo } from '../../service/api';
+import { companyInfo,getOrderContent } from '../../service/api';
 import myHeader from '../../images/my_header.png'
 import avatar from '../../images/avatar.png'
 import allOrder from '../../images/all_order.png'
@@ -22,6 +22,7 @@ type PageOwnProps = {
 
 type PageState = {
   userInfo:any;
+  orderInfo:any;
 }
 
 type IProps = PageStateProps  & PageOwnProps
@@ -39,6 +40,12 @@ class Index extends Component {
         url:'',
         isLogin:false, //当削是否登录过
       },
+      orderInfo:{
+        stayDelivery: 0,
+        stayDistribution: 0,
+        stayEvaluation: 0,
+        stayPayment: 0,
+      }
     }
     config: Config = {
     navigationBarTitleText: '我的'
@@ -46,6 +53,18 @@ class Index extends Component {
 
   componentWillReceiveProps (nextProps) {
     console.log(this.props, nextProps)
+  }
+  componentWillMount() {
+    this.orderCount() //统计订单数量
+  }
+  orderCount = async() => {
+    let userInfoKey = getStorageSync('userInfoKey');
+    let userInfo = userInfoKey ? JSON.parse(userInfoKey):{};
+    let res = await getOrderContent({'openid':userInfo.openid});
+    if(res.data.code === 200) {
+      let orderInfo = res.data.data;
+      this.setState({ orderInfo });
+    }
   }
   componentDidShow() {
     let creditCode =  getStorageSync('creditCode');
@@ -136,7 +155,7 @@ class Index extends Component {
   componentDidHide () { }
 
   render () {
-    let { userInfo } = this.state;
+    let { userInfo,orderInfo } = this.state;
     console.log("userInfo",userInfo);
 
     return (
@@ -170,19 +189,19 @@ class Index extends Component {
                 <View className="box_top">
                   <View className="top_item" onClick={() => this.handleToOrder(1)}>
                     <View className="item_top">待付款</View>
-                    <View className="item_bottom">3</View>
+                    <View className="item_bottom">{orderInfo.stayPayment}</View>
                   </View>
                   <View className="top_item" onClick={() => this.handleToOrder(2)}>
                     <View className="item_top">待发货</View>
-                    <View className="item_bottom">3</View>
+                    <View className="item_bottom">{orderInfo.stayDelivery}</View>
                   </View>
                   <View className="top_item" onClick={() => this.handleToOrder(3)}>
                     <View className="item_top">待配送</View>
-                    <View className="item_bottom">6</View>
+                    <View className="item_bottom">{orderInfo.stayDistribution}</View>
                   </View>
                   <View className="top_item" onClick={() => this.handleToOrder(4)}>
                     <View className="item_top">待评价</View>
-                    <View className="item_bottom">12</View>
+                    <View className="item_bottom">{orderInfo.stayEvaluation}</View>
                   </View>
                 </View>
                 <View className="box-bottom">
