@@ -77,10 +77,10 @@ class Index extends Component {
           key:'3',
           value:'联系商家'
         },
-        {
-          key:'4',
-          value:'评价'
-        }
+        // {
+        //   key:'4',
+        //   value:'评价'
+        // }
     ],
       activeTab:'0',
       activeBtn:'1',
@@ -161,8 +161,6 @@ class Index extends Component {
 
   render () {
     const { tabArr,activeTab,btnArr,activeBtn,orderList } = this.state;
-    console.log('orderList',orderList);
-
     return (
     <View className="order">
       <View className="order-tabs">
