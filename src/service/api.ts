@@ -127,6 +127,10 @@ export async function getOrderList(params) {
 export async function getOrderContent(params) {
   return request(`${Config.API_HOST}/api/userInfo/order/count?openid=${params.openid}`);
 }
+//删除订单
+export async function deleteOrder(params) {
+  return request(`${Config.API_HOST}/api/userInfo/order/delete?openid=${params.openid}&id=${params.id}`);
+}
 
 
 

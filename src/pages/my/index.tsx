@@ -55,7 +55,7 @@ class Index extends Component {
     console.log(this.props, nextProps)
   }
   componentWillMount() {
-    this.orderCount() //统计订单数量
+   
   }
   orderCount = async() => {
     let userInfoKey = getStorageSync('userInfoKey');
@@ -67,6 +67,7 @@ class Index extends Component {
     }
   }
   componentDidShow() {
+    this.orderCount() //统计订单数量
     let creditCode =  getStorageSync('creditCode');
     if(creditCode) { //证明企业用户
       this.getCompanyInfo(creditCode);

@@ -6,9 +6,9 @@
 */
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View,ScrollView,Image,Text, Button } from '@tarojs/components'
+import { View,ScrollView,Image,Text, } from '@tarojs/components'
 import { getStorageSync,showToast } from '../../utils/tools'
-import { getOrderList } from '../../service/api';
+import { getOrderList,deleteOrder } from '../../service/api';
 import arrow from '../../images/icon/arrow.png'
 import  './index.less'
 
@@ -152,11 +152,46 @@ class Index extends Component {
     });
   }
   //按钮操作
-  handleBtns = (item) => {
-    this.setState({
-      activeBtn:item.key
+  handleBtns = (list,item) => {
+    switch(item.key) {
+      case '1':
+        this.handleDeleteOrder(list);
+        break;
+      case '2':
+        this.handleOrderBuy();
+        break
+      case '3':
+        this.handleConnect()
+    }
+  }
+  //删除当前订单
+  handleDeleteOrder = async(list) => {
+    let { activeTab } = this.state;
+    let params = {
+      id:list._id,
+      openid:list.openid,
+    }
+    let res = await deleteOrder(params);
+    if(res.data.code === 200) {
+      showToast({
+        title:`${res.data.msg}`,
+        icon:'success'
+      });
+      //删除完成后重新调用
+      this.getOrderList({'openid':list.openid,'status':activeTab});
+    }
+  }
+  //再来一单
+  handleOrderBuy = () => {
+    Taro.switchTab({
+      url:'../index/index'
     })
   }
+  //联系商家
+  handleConnect = () => {
+
+  }
+
   componentDidHide () { }
 
   render () {
@@ -216,7 +251,7 @@ class Index extends Component {
                     return (
                     <View 
                       className="btn-item"
-                      onClick={() => this.handleBtns(item)}
+                      onClick={() => this.handleBtns(list,item)}
                       style={{marginLeft:Number(item.key) > 0 ? '10px':'',color:item.key=== activeBtn ? '#735ff7':''}}
                       >
                         {item.value}
