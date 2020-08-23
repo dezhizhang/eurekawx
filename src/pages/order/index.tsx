@@ -113,8 +113,10 @@ class Index extends Component {
     }
     params.openid = userInfo.openid;
     this.getOrderList(params);
+    console.log("status",status);
+    
     this.setState({
-      status
+      activeTab:status
     });
   }
   //订单列表
