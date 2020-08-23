@@ -37,7 +37,7 @@ class Index extends Component {
     state = {
       isHide:false,
       status:'',
-      orderList:[],
+      orderList:[{title:'',_id:'',color:'',size:'',price:'',url:''}],
       tabArr:[
         {
           key:'0',
@@ -113,8 +113,6 @@ class Index extends Component {
     }
     params.openid = userInfo.openid;
     this.getOrderList(params);
-    console.log("status",status);
-    
     this.setState({
       activeTab:status
     });
@@ -153,7 +151,9 @@ class Index extends Component {
   componentDidHide () { }
 
   render () {
-    const { tabArr,activeTab,btnArr,activeBtn } = this.state;
+    const { tabArr,activeTab,btnArr,activeBtn,orderList } = this.state;
+    console.log('orderList',orderList);
+
     return (
     <View className="order">
       <View className="order-tabs">
@@ -172,52 +172,56 @@ class Index extends Component {
         }
       </View>
       <ScrollView className="order-wrapper">
-        <View className="order-list">
-          <View className="order-header">
-            <View className="header-title">情侣衬衫</View>
-            <View className="header-status">交易成功</View>
-            <View className="header-icon">
-              <Image src={arrow} className="image"/>
-            </View>
-          </View>
-          <View className="order-content">
-            <View className="content-wrapper">
-              <View className="content-left">
-                <Image className="left-image" src={'http://img.xiaozhi.shop/public/admin/upload/2020-05-01/1588309530260.jpeg'}/>
-              </View>
-              <View className="content-right">
-                <View className="right-desc">2018早秋装ins古着新款韩版条纹衬衫情侣装chic…</View>
-                <View className="right-color">颜色：<Text className="color-text">粉色</Text></View>
-                <View className="right-color">尺码：<Text className="color-text">37</Text></View>
+        {
+          orderList.map(list => {
+            return  <View key={list._id} className="order-list">
+            <View className="order-header">
+          <View className="header-title">{list.title}</View>
+              <View className="header-status">交易成功</View>
+              <View className="header-icon">
+                <Image src={arrow} className="image"/>
               </View>
             </View>
-          </View>
-          <View className="order-bottom">
-            <View className="bottom-wrapper">
-              <View className="bottom-left"></View>
-              <View className="bottom-right">
-                共1件商品  实付款：￥18.90
+            <View className="order-content">
+              <View className="content-wrapper">
+                <View className="content-left">
+                  <Image className="left-image" src={list.url}/>
+                </View>
+                <View className="content-right">
+                  <View className="right-desc">2018早秋装ins古着新款韩版条纹衬衫情侣装chic…</View>
+                  <View className="right-color">颜色：<Text className="color-text">{list.color}</Text></View>
+                  <View className="right-color">尺码：<Text className="color-text">{list.size}</Text></View>
+                </View>
+              </View>
+            </View>
+            <View className="order-bottom">
+              <View className="bottom-wrapper">
+                <View className="bottom-left"></View>
+                <View className="bottom-right">
+                  共1件商品  实付款：￥{(list.price)}
+                </View>
+              </View>
+            </View>
+            <View className="bottom-btn">
+              <View className="btn-wrapper">
+                {
+                  btnArr.map(item => {
+                    return (
+                    <View 
+                      className="btn-item"
+                      onClick={() => this.handleBtns(item)}
+                      style={{marginLeft:Number(item.key) > 0 ? '10px':'',color:item.key=== activeBtn ? '#735ff7':''}}
+                      >
+                        {item.value}
+                    </View>
+                    )
+                  })
+                }
               </View>
             </View>
           </View>
-          <View className="bottom-btn">
-            <View className="btn-wrapper">
-              {
-                btnArr.map(item => {
-                  return (
-                  <View 
-                    className="btn-item"
-                    onClick={() => this.handleBtns(item)}
-                    style={{marginLeft:Number(item.key) > 0 ? '10px':'',color:item.key=== activeBtn ? '#735ff7':''}}
-                    >
-                      {item.value}
-                  </View>
-                  )
-                })
-              }
-            </View>
-          </View>
-        </View>
+          })
+        }
       </ScrollView>
     </View>
     )
