@@ -138,6 +138,15 @@ class Index extends Component {
   }
   //订单
   handleTabs = (item) => {
+    let params = {
+      openid:'',
+      status:''
+    }
+    let userInfoKey = getStorageSync('userInfoKey');
+    let userInfo = userInfoKey ? JSON.parse(userInfoKey):{};
+    params.openid = userInfo.openid;
+    params.status = item.key;
+    this.getOrderList(params); //切换时调用订单列表
     this.setState({
       activeTab:item.key
     });
