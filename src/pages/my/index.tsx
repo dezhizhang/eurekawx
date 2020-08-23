@@ -212,7 +212,7 @@ class Index extends Component {
                       </View>
                       <View className="item-bottom">所有订单</View>
                     </View>
-                    <View className="bottom-item" onClick={() => this.handleToOrder(0)}>
+                    <View className="bottom-item" onClick={() => this.handleToOrder(3)}>
                       <View className="item-top">
                         <Image src={allOrder} className="image"/>
                       </View>
