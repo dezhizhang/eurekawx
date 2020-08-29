@@ -138,6 +138,13 @@ export async function cartPrepaid(params) {
     body:params
   })
 }
+//保存用户信息
+export async function userInfoSave(params) {
+  return request(`${Config.API_HOST}/api/userInfo/save`,{
+    method:'POST',
+    body:params
+  })
+}
 
 
 

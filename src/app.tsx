@@ -12,7 +12,7 @@ class App extends Component {
   
   config: Config = {
     pages: [
-      "pages/payment/index",
+     
       'pages/index/index',
       'pages/my/index',
       'pages/maintain/index',
@@ -30,6 +30,7 @@ class App extends Component {
       "pages/perLogin/index",
       "pages/comLogin/index",
       "pages/order/index",
+      "pages/payment/index",
     ],
     window: {
       backgroundTextStyle: 'light',

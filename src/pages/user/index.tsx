@@ -67,7 +67,7 @@ class Index extends Component {
   //个人信息
   handleAddress = () => {
     Taro.navigateTo({
-        url:'../address/index'
+        url:'../address/index?current=1'
     })
   }
 

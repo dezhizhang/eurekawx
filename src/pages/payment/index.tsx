@@ -125,7 +125,7 @@ class Index extends Component {
   }
   handleMessage = () => {
     Taro.redirectTo({
-      url:'../address/index'
+      url:'../address/index?current=2'
     })
   } 
   componentDidHide () { }
