@@ -12,7 +12,7 @@ class App extends Component {
   
   config: Config = {
     pages: [
-      "pages/payment/index",
+     
       'pages/index/index',
       'pages/my/index',
       'pages/maintain/index',
@@ -29,7 +29,7 @@ class App extends Component {
       "pages/address/index",
       "pages/perLogin/index",
       "pages/comLogin/index",
-    
+      "pages/payment/index",
       "pages/order/index",
     ],
     window: {

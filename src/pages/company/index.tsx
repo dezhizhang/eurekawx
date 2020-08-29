@@ -5,6 +5,7 @@ import { companyRegister,cityInfoList } from '../../service/api'
 import { showToast,showLoading,hideLoading, getStorageSync } from '../../utils/tools'
 import server from '../../images/server.png'
 import upload from '../../images/upload.png'
+import Address from '../../components/address';
 import  './index.less'
 
 type PageStateProps = {
@@ -320,30 +321,40 @@ class Index extends Component {
         <View className="content-input" onClick={this.handleTranslate}>
           <Text className="text"><Text style={{color:'red'}}>*</Text>地区信息</Text>
           <Input className="input" value={cityInfo} placeholder="请选择地区信息"/>
-        <View className="animation-element-wrapper" style={{visibility:show ? 'visible':'hidden'}}>
-        <View className="animation-element">
-          <Text className="left-btn" onClick={this.handleCancel}>取消</Text>
-          <Text className="right-btn" onClick={this.handleOk}>确定</Text>
-        <View className="line"></View>
-          <PickerView className="picker-view" indicatorStyle='height: 50px;' style='width: 100%; height: 380px;' value={value} onChange={this.bindChange}>
-            <PickerViewColumn className="picker-view-column">
-              {provinces.map((item,index) => {
+          <Address 
+            show={show}
+            value={value}
+            citys={citys}
+            countys={countys}
+            provinces={provinces} 
+            handleOk={this.handleOk} 
+            handleCancel={this.handleCancel} 
+            bindChange={this.bindChange}
+          />
+          {/* <View className="animation-element-wrapper" style={{visibility:show ? 'visible':'hidden'}}>
+          <View className="animation-element">
+            <Text className="left-btn" onClick={this.handleCancel}>取消</Text>
+            <Text className="right-btn" onClick={this.handleOk}>确定</Text>
+          <View className="line"></View>
+            <PickerView className="picker-view" indicatorStyle='height: 50px;' style='width: 100%; height: 380px;' value={value} onChange={this.bindChange}>
+              <PickerViewColumn className="picker-view-column">
+                {provinces.map((item,index) => {
+                  return <View key={index}>{item.name}</View>
+                })}
+              </PickerViewColumn>
+              <PickerViewColumn>
+              {citys.map((item,index) => {
                 return <View key={index}>{item.name}</View>
               })}
-            </PickerViewColumn>
-            <PickerViewColumn>
-            {citys.map((item,index) => {
-              return <View key={index}>{item.name}</View>
-            })}
-            </PickerViewColumn>
-            <PickerViewColumn>
-            {countys.map((item,index) => {
-              return <View key={index}>{item.name}</View>
-            })}
-            </PickerViewColumn>
-          </PickerView>
-          </View>
-          </View>
+              </PickerViewColumn>
+              <PickerViewColumn>
+              {countys.map((item,index) => {
+                return <View key={index}>{item.name}</View>
+              })}
+              </PickerViewColumn>
+            </PickerView>
+            </View>
+          </View> */}
         </View>
         <View className="content-input">
           <Text className="text"><Text style={{color:'red'}}>*</Text>详细地址</Text>
