@@ -1,8 +1,8 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config, } from '@tarojs/taro'
-import { View, Input,Text, Button,Image } from '@tarojs/components'
-import { uploadInfo } from '../../service/api'
-import { showToast,showLoading,hideLoading } from '../../utils/tools'
+import { View, Textarea, Button,Image } from '@tarojs/components'
+import { uploadInfo,getUserInfo } from '../../service/api'
+import { showLoading,hideLoading,getStorageSync } from '../../utils/tools'
 import server from '../../images/server.png'
 import upload from '../../images/upload.png'
 import  './index.less'
@@ -14,11 +14,7 @@ type PageStateProps = {
   }
 }
 
-type PageDispatchProps = {
-  add: () => void
-  dec: () => void
-  asyncAdd: () => any
-}
+
 
 type PageOwnProps = {}
 
@@ -27,9 +23,10 @@ type PageState = {
   mobile:String;
   address:String;
   description:String;
+  userInfo:any;
 }
 
-type IProps = PageStateProps & PageDispatchProps & PageOwnProps
+type IProps = PageStateProps  & PageOwnProps
 
 interface Index {
   props: IProps;
@@ -41,7 +38,12 @@ class Index extends Component {
     mobile:'',
     address:'',
     description:'',
-    tempFilePaths:''
+    tempFilePaths:'',
+    userInfo:{
+      userName:'',
+      mobile:'',
+      address:'',
+    },
   }
     config: Config = {
     navigationBarTitleText: '预约登记'
@@ -78,84 +80,77 @@ class Index extends Component {
        that.setState({tempFilePaths});
     })
   }
-  handleSubmit = () => {
-    const { username,mobile,address,description,tempFilePaths } = this.state;
-    const reg = /^1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]{8}$/
-    if(username && mobile && address && tempFilePaths) {
-      if(!reg.test(mobile)) {
-        showToast({
-          title:'手机号不合法',
-          icon:'none'
-        })
-      } else {//提交数据
-        const params = {
-          username,
-          mobile,
-          address,
-          description,
-          tempFilePaths
-        }
-        showLoading({title:'信息上传中'});
-        uploadInfo(params).then(res => {
-          let data = JSON.parse(res.data);
-          if(data.code == 200) {
-            hideLoading();
-            showToast({
-              title:'上传成功',
-              icon:'success'
-            });
-            Taro.switchTab({
-              url: '../index/index'
-            });
-          }
-        })
-      }
-     
-    } else if(!username){
-      showToast({
-        title:'用户名不能为空',
-        icon:'none',
-      });
-    } else if(!mobile) {
-      showToast({
-        title:'联系电话不能为空',
-        icon:'none'
-      });
-    } else if(!address){
-       showToast({
-         title:'联系地址不能为空',
-         icon:'none'
-       })
-    } else if(!tempFilePaths) {
-      showToast({
-        title:'请上传维修图片',
-        icon:'none'
+  componentDidMount() {
+    this.userInfo();
+  }
+  //获取用户信息
+  userInfo = async() => {
+    const userInfoKey = getStorageSync("userInfoKey"); //用户key
+    const userInfo = userInfoKey ? JSON.parse(userInfoKey):{}
+    const { openid } = userInfo;
+    let res = await getUserInfo({openid});
+    if(res.data.code === 200) {
+      let userInfo = res.data.data;
+      this.setState({
+        userInfo
       })
-    } 
+    }
+  }
+  handleSubmit = () => {
+    const { description,tempFilePaths,userInfo } = this.state;
+    const { userName,mobile,address } = userInfo;
+    const params = {
+      userName,
+      mobile,
+      address,
+      description,
+      tempFilePaths
+    }
+    if(!description) {
+      Taro.showToast({
+        title:'为您更好服务请填写问题描述',
+        icon:'none'
+      });
+      return
+    }
+    if(!tempFilePaths) {
+      Taro.showToast({
+        title:'请按示例上传图片',
+        icon:'none'
+      });
+    }
+    if(tempFilePaths && description) {
+      showLoading({title:'信息上传中'});
+      uploadInfo(params).then(res => {
+        let data = JSON.parse(res.data);
+        if(data.code == 200) {
+          hideLoading();
+          Taro.showModal({
+            title:'温馨提示',
+            content:'您的问题以提交我们会尽快联系你',
+            cancelText:'继续提交',
+            confirmText:'返回首页',
+            success:function() {
+              Taro.switchTab({
+                url: '../index/index'
+              });
+            },
+            fail:function() {
+
+            }
+          })
+        }
+      });
+    }
+    
   }
   render () {
-    const { tempFilePaths } = this.state;
+    const { tempFilePaths,description } = this.state;
     return (
      <View className="maintain">
-         <View className="header">
-            <View className="header-text">提示：为了给你提供更好的服务，请准确填写如下信息</View>
-          </View>
           <View className="content">
                 <View className="content-input">
-                    <Text className="text">真实姓名：</Text>
-                    <Input className="input" placeholder='请输入您的真实姓名' onChange={this.handleUserName}/>
-                </View>
-                <View className="content-input">
-                    <Text className="text">联系电话：</Text>
-                    <Input className="input" placeholder='请输入您的联系电话' onChange={this.handleMobile}/>
-                </View>
-                <View className="content-input">
-                    <Text className="text">联系地址：</Text>
-                    <Input className="input" placeholder="请输入您的联系地址" onChange={this.handleAddress}/>
-                </View>
-                <View className="content-input">
-                    <Text className="text">问题描述：</Text>
-                    <Input className="input" placeholder="请输入您遇到的问题" onChange={this.handleDescription}/>
+                  <Textarea value={description} className="text-area" placeholder="请填写问题描述"  autoFocus onInput={this.handleDescription}></Textarea>                
                 </View>
                 <View className="image">
                   <View onClick={this.handleChooseImage} className="image-flex">
@@ -172,9 +167,7 @@ class Index extends Component {
                   </View>
                 </View>
           </View>
-          <View className="bottom">
-            <Button className="btn" onClick={this.handleSubmit}>提交</Button>
-          </View>
+          <Button className="btn" onClick={this.handleSubmit}>提交</Button>
     </View>
      
     )
