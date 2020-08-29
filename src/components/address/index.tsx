@@ -29,7 +29,15 @@ type PageState = {
     // countys:any;//区县
     // county:string;
     // value:any;
-    // cityInfo:string;
+    cityInfo:string;
+    areaInfo:any;
+    provinces:any;
+    province:string;
+    citys:any;
+    city:string;
+    countys:any;
+    county:string;
+
 }
 
 type IProps = PageStateProps  & PageOwnProps
@@ -40,19 +48,17 @@ interface Index {
 
 class Index extends Component {
     state = {
-        areaInfo:[],
-        provinces:[],
-        province:'',
-        citys:[],
-        city:'',
-        countys:[],
-        county:'',
-        show:false,
-        time:0,
-        moveY:200,
-        animation:undefined,
-        value: [0, 0, 0],
-        index:[0, 0, 0],
+      cityInfo:'',
+      areaInfo:[],
+      provinces:[{name:''}],
+      province:'',
+      citys:[{name:''}],
+      city:'',
+      countys:[{name:''}],
+      county:'',
+      animation:undefined,
+      value: [0, 0, 0],
+      index:[0, 0, 0],
     }
     config: Config = {
     navigationBarTitleText: ''
@@ -121,13 +127,6 @@ class Index extends Component {
     })
   }
 
-  //公司名称
-  handleCompanyName = (ev) => {
-    let compamyName = ev.target.value;
-    this.setState({
-      compamyName
-    });
-  }
   bindChange = (ev) => {
     let val = ev.detail.value;
     let {index,areaInfo,provinces,citys,countys} = this.state;
@@ -173,14 +172,14 @@ class Index extends Component {
 
   render () {
     const { provinces,citys,countys,value} = this.state;
-    const { bindChange,visible } = this.props;
+    const { visible } = this.props;
     return (
         <View className="animation-element-wrapper" style={{visibility:visible ? 'visible':'hidden'}}>
             <View className="animation-element">
             <Text className="left-btn" onClick={this.handleCancel}>取消</Text>
             <Text className="right-btn" onClick={this.handleOk}>确定</Text>
             <View className="line"></View>
-            <PickerView className="picker-view" indicatorStyle='height: 50px;' style='width: 100%; height: 380px;' value={value} onChange={bindChange}>
+            <PickerView className="picker-view" indicatorStyle='height: 50px;' style='width: 100%; height: 380px;' value={value} onChange={this.bindChange}>
                 <PickerViewColumn className="picker-view-column">
                 {provinces.map((item,index) => {
                     return <View key={index}>{item.name}</View>

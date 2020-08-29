@@ -118,9 +118,9 @@ class Index extends Component {
           </View>
         </View>
       </View>
-      <View className="footer">
+      {/* <View className="footer">
         <Button className="btn" onClick={this.handleAddressSave}>保存</Button>
-      </View>
+      </View> */}
     </View>
     )
   }
