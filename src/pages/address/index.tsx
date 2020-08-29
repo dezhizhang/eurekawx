@@ -2,6 +2,7 @@ import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View,Image, Button, Input } from '@tarojs/components'
 import arrow from '../../images/icon/arrow.png'
+import Address from '../../components/address'
 import  './index.less'
 
 type PageStateProps = {
@@ -100,14 +101,12 @@ class Index extends Component {
         </View>
         <View className="content-item">
           <View className="item">
-             <View className="text-left">地区信息</View>
-             <View className="text-right">
+            <View className="text-left">地区信息</View>
+            <View className="text-right">
               你有3张优惠券待使用
                {/* <View className="text-number">16</View> */}
-             </View>
-             <View className="icon-right">
-               <Image src={arrow} className="image"/>
-             </View>
+            </View>
+            <Address visible={true}/>
           </View>
         </View>
         <View className="content-item">

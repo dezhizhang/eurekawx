@@ -9,15 +9,15 @@ type PageStateProps = {
 }
 
 type PageOwnProps = {
-    provinces:any;
-    citys:any;
-    countys:any;
+    provinces?:any;
+    citys?:any;
+    countys?:any;
     show?:any;
-    value:any;
-    visible?:boolean;
+    value?:any;
+    visible:boolean;
     handleCancel?:any;
     handleOk?:any;
-    bindChange:any;
+    bindChange?:any;
 }
 
 type PageState = {
