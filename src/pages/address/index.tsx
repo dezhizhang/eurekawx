@@ -1,6 +1,6 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View,Button, Input } from '@tarojs/components'
+import { View,Button, Input,Text } from '@tarojs/components'
 import { getStorageSync } from '../../utils/tools'
 import { userInfoSave } from '../../service/api';
 import Address from '../../components/address'
@@ -195,7 +195,7 @@ class Index extends Component {
           <View className="item" onClick={this.handleAddressOpen}>
             <View className="text-left">地区信息</View>
             <View className="text-right">
-              {cityInfo}
+              {cityInfo ? cityInfo:<Text style={{fontSize:'30rpx'}} >请选择地区信息</Text>}
             </View>
           </View>
         </View>
