@@ -248,22 +248,24 @@ class Index extends Component {
   handleAddCar = async() => {
     const that = this;
     const { number,baseData,focus_img,defaultColor,defaultSize } = this.state;
-    const title = baseData.title;
-    const price =  baseData.price;
     const { color } = defaultColor;
     const { size } = defaultSize;
     const url = focus_img[0];
+    const { title,price,goods_id,freight } = baseData;
     const userInfoKey = getStorageSync("userInfoKey");
     const userInfo = userInfoKey ? JSON.parse(userInfoKey):{}
     const { openid } = userInfo;
     let params = {
-      number,
-      title,
-      price,
       url,
       color,
       size,
+      number,
+      title,
+      price,
       openid,
+      freight,
+      goods_id,
+      status:1,
     }
     showLoading({title:'加入中'});
     let res = await userInfoCartSave(params);
