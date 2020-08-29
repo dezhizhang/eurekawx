@@ -162,7 +162,7 @@ class Index extends Component {
             <View className="content-wrapper">
               <View className="content-item">
                 <View className="item-left">
-                  <Checkbox value="" color="#735ff7" checked={item.checked} className="radio" onClick={() => this.handleRadio(item)}></Checkbox>
+                  <Radio value="" color="#735ff7" checked={item.checked} className="radio" onClick={() => this.handleRadio(item)}></Radio>
                 </View>
                 <View className="item-center">
                   <Image src={item.url} className="image"/>
