@@ -1,7 +1,7 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Input, Radio,ScrollView,Image } from '@tarojs/components'
-import { getCartList,updateCartList,deleteCart,updateCartStatus } from '../../service/api'
+import { getCartList,updateCartList,deleteCart,updateCartStatus,cartPrepaid } from '../../service/api'
 import { showToast,getStorageSync } from '../../utils/tools'
 import arror from '../../images/icon/arrow.png'
 import  './index.less'
@@ -17,6 +17,7 @@ type PageOwnProps = {}
 type PageState = {
   cartList:any;
   allChecked:boolean;
+  openid:string;
 }
 
 type IProps = PageStateProps  & PageOwnProps
@@ -38,6 +39,7 @@ class Index extends Component {
         _id:'',
       }
     ],
+    openid:"",
     allChecked:true
   }
   config: Config = {
@@ -70,7 +72,7 @@ class Index extends Component {
     let res =await getCartList({openid});
     if(res.data.code == 200) {
       let cartList = res.data.data;
-      this.setState({ cartList });
+      this.setState({ cartList,openid });
     }
   }
 
@@ -149,6 +151,24 @@ class Index extends Component {
       allChecked: checked
     })
   }
+  //去支付
+  handlePayMent = async() => {
+    let { cartList,openid } = this.state;
+    let cartArr = [];
+    let length = cartList.length;
+    for(let i=0;i < length;i++) {
+      if(cartList[i].checked) {
+        delete cartList[i]._id
+        cartArr.push(cartList[i]);
+      }
+    }
+    let res = await cartPrepaid({openid,list:cartArr});
+    if(res.data.code === 200) {
+      Taro.navigateTo({
+        url:`../payment/index?openid=${openid}`
+      });
+    } 
+  }
   componentDidHide () { }
 
   render () {
@@ -207,8 +227,8 @@ class Index extends Component {
             </View>
             <View className="item-two">全选</View>
             <View className="item-three">合计(不含运费)</View>
-            <View className="item-four">￥{totalPrice}</View>
-            <View className="item-six">去支付</View>
+            <View className="item-four">￥{Number(totalPrice).toFixed(2)}</View>
+            <View className="item-six" onClick={this.handlePayMent}>去支付</View>
           </View>
         </View>
       </ScrollView>

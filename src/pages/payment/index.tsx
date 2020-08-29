@@ -49,20 +49,7 @@ class Index extends Component {
   componentWillReceiveProps (nextProps) {
     console.log(this.props, nextProps)
   }
-  // componentDidShow() {
-  //   // let creditCode =  getStorageSync('creditCode');
-  //   // if(creditCode) { //证明企业用户
-  //   //   this.getCompanyInfo(creditCode);
-  //   // } else {
-  //   //   let result = getStorageSync('userInfo');
-  //   //   let userInfo =result?JSON.parse(result):{};//不存在时就是一个空对像
-  //   //   if(Object.keys(userInfo).length > 0) {
-  //   //     userInfo.isLogin = true;
-  //   //   }
-  //   //   this.setState({userInfo});
-  //   // }
-  // }
-
+  
   componentWillMount () {
     let params = this.$router.params;
     this.getPayList(params);

@@ -131,6 +131,13 @@ export async function getOrderContent(params) {
 export async function deleteOrder(params) {
   return request(`${Config.API_HOST}/api/userInfo/order/delete?openid=${params.openid}&id=${params.id}`);
 }
+//购物车预支付订单
+export async function cartPrepaid(params) {
+  return request(`${Config.API_HOST}/api/cart/prepaid`,{
+    method:'POST',
+    body:params
+  })
+}
 
 
 
