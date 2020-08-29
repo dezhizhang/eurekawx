@@ -123,6 +123,11 @@ class Index extends Component {
       icon:'success'
     });
   }
+  handleMessage = () => {
+    Taro.redirectTo({
+      url:'../address/index'
+    })
+  } 
   componentDidHide () { }
   render () {
     let { payArr,totalPrice,totalFreight } = this.state;
