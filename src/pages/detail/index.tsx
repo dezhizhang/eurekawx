@@ -15,7 +15,6 @@ import {
   userInfoCartSave,
   getProductPhoto,
   getProductDetail,
-
  } from '../../service/api'
 
 type PageStateProps = {
@@ -247,10 +246,10 @@ class Index extends Component {
   }
   handleAddCar = async() => {
     const that = this;
-    const { number,baseData,focus_img,defaultColor,defaultSize } = this.state;
+    const { number,baseData,photoList,defaultColor,defaultSize } = this.state;
     const { color } = defaultColor;
     const { size } = defaultSize;
-    const url = focus_img[0];
+    const url = photoList[0];
     const { title,price,goods_id,freight } = baseData;
     const userInfoKey = getStorageSync("userInfoKey");
     const userInfo = userInfoKey ? JSON.parse(userInfoKey):{}

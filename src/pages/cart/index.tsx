@@ -1,10 +1,8 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Input, Radio,ScrollView,Image,} from '@tarojs/components'
-import { connect } from '@tarojs/redux'
-import { getCartList,updateCartList,userLogin,deleteCart,updateCartStatus } from '../../service/api'
-import { showToast,baseURL } from '../../utils/tools'
-import { add, minus, asyncAdd } from '../../actions/counter'
+import { View, Input, Radio,ScrollView,Image,Checkbox} from '@tarojs/components'
+import { getCartList,updateCartList,deleteCart,updateCartStatus } from '../../service/api'
+import { showToast,getStorageSync } from '../../utils/tools'
 import arror from '../../images/icon/arrow.png'
 import  './index.less'
 
@@ -14,38 +12,29 @@ type PageStateProps = {
   }
 }
 
-type PageDispatchProps = {
-  add: () => void
-  dec: () => void
-  asyncAdd: () => any
-}
-
 type PageOwnProps = {}
 
 type PageState = {}
 
-type IProps = PageStateProps & PageDispatchProps & PageOwnProps
+type IProps = PageStateProps  & PageOwnProps
 
 interface Index {
   props: IProps;
 }
 
-@connect(({ counter }) => ({
-  counter
-}), (dispatch) => ({
-  add () {
-    dispatch(add())
-  },
-  dec () {
-    dispatch(minus())
-  },
-  asyncAdd () {
-    dispatch(asyncAdd())
-  }
-}))
+
 class Index extends Component {
   state = {
-    cartList:[]
+    cartList:[
+      {
+        url:'',
+        checked:'',
+        number:0,
+        title:'',
+        price:0,
+        _id:'',
+      }
+    ]
   }
   config: Config = {
     navigationBarTitleText: '购物车'
@@ -59,21 +48,25 @@ class Index extends Component {
   }
 
   getListInfo = async () => {
-    let that = this;
-    let login =await Taro.login();
-    let params = {
-      code:login.code,
-      appid:'wx070d1456a4a9c0fb'
+    const userInfoKey = getStorageSync("userInfoKey");
+    const userInfo = userInfoKey ? JSON.parse(userInfoKey):{};
+    if(Object.keys(userInfo).length <= 0) { //当前还没有登录
+      showToast({
+        title:'您当前还没有登录',
+        icon:'none'
+      });
+      setTimeout(() =>{
+        Taro.switchTab({
+          url:'../my/index',
+        })
+      } ,1000);
+      return
     }
-    let result =await userLogin(params);
-    if(result.data.code == 200) {
-      let userInfo = result.data.data;
-      getCartList(userInfo).then(res => {
-        if(res.data.code == 200) {
-          let cartList = res.data.data;
-          that.setState({cartList});
-        }
-      })
+    const { openid } = userInfo;
+    let res =await getCartList({openid});
+    if(res.data.code == 200) {
+      let cartList = res.data.data;
+      this.setState({ cartList });
     }
   }
 
@@ -164,18 +157,15 @@ class Index extends Component {
             </View>
           </View>
         </View>
-          {/* 列表 */}
-          {cartList.map(item => {
-            console.log(item);
-            
+          {cartList.map(item => { 
             return <View key={item._id} className="content">
             <View className="content-wrapper">
               <View className="content-item">
                 <View className="item-left">
-                  <Radio value="" color="#735ff7" checked={item.checked} className="radio" onClick={() => this.handleRadio(item)}></Radio>
+                  <Checkbox value="" color="#735ff7" checked={item.checked} className="radio" onClick={() => this.handleRadio(item)}></Checkbox>
                 </View>
                 <View className="item-center">
-                  <Image src={`${baseURL}${item.goods_img}`} className="image"/>
+                  <Image src={item.url} className="image"/>
                 </View>
                 <View className="item-right">
                   <View className="right-title">
@@ -185,7 +175,7 @@ class Index extends Component {
                     <View className="bottom-left">￥{item.price}</View>
                     <View className="bottom-right">
                       <View className="number-left" onClick={() => this.handleDecrement(item)}>-</View>
-                      <View className="number-center"><Input className="input" disabled={true} onInput={(event) => this.handleNumberChange(event,item)} value={item.number} type="number"/></View>
+                      <View className="number-center"><Input className="input" disabled={true} onInput={(event) => this.handleNumberChange(event,item)} value={(item.number)} type="number"/></View>
                       <View className="number-right" onClick={() => this.handleIncrement(item)}>+</View>
                     </View>
                   </View>
