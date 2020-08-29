@@ -172,7 +172,7 @@ class Index extends Component {
                     <View className="title-left">{item.title}</View>
                   </View>
                   <View className="right-bottom">
-                    <View className="bottom-left">￥{item.price}</View>
+                    <View className="bottom-left">￥{Number((item.price)).toFixed(2)}</View>
                     <View className="bottom-right">
                       <View className="number-left" onClick={() => this.handleDecrement(item)}>-</View>
                       <View className="number-center"><Input className="input" disabled={true} onInput={(event) => this.handleNumberChange(event,item)} value={(item.number)} type="number"/></View>
