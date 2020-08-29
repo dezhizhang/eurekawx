@@ -1,6 +1,6 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Input, Radio,ScrollView,Image,Checkbox} from '@tarojs/components'
+import { View, Input, Radio,ScrollView,Image } from '@tarojs/components'
 import { getCartList,updateCartList,deleteCart,updateCartStatus } from '../../service/api'
 import { showToast,getStorageSync } from '../../utils/tools'
 import arror from '../../images/icon/arrow.png'
@@ -14,7 +14,10 @@ type PageStateProps = {
 
 type PageOwnProps = {}
 
-type PageState = {}
+type PageState = {
+  cartList:any;
+  allChecked:boolean;
+}
 
 type IProps = PageStateProps  & PageOwnProps
 
@@ -34,7 +37,8 @@ class Index extends Component {
         price:0,
         _id:'',
       }
-    ]
+    ],
+    allChecked:true
   }
   config: Config = {
     navigationBarTitleText: '购物车'
@@ -133,10 +137,22 @@ class Index extends Component {
     }
     this.setState({cartList});
   }
+  handleAllChecked = () => {
+    let { allChecked,cartList } = this.state 
+    let checked = !allChecked
+    const length = cartList.length;
+    for(let i=0;i < length;i++) {
+      cartList[i].checked = checked;
+    }
+    this.setState({
+      cartList,
+      allChecked: checked
+    })
+  }
   componentDidHide () { }
 
   render () {
-    let { cartList } = this.state;
+    let { cartList,allChecked } = this.state;
     let totalPrice = 0;
     for(let i=0;i<cartList.length;i++) {
       if(cartList[i].checked) {
@@ -187,7 +203,7 @@ class Index extends Component {
         <View className="bottom">
           <View className="bottom-wrapper">
             <View className="item-one">
-              <Radio value='' className="radio"></Radio>
+              <Radio value={'allButton'} onClick={this.handleAllChecked} checked={allChecked} color="#735ff7" className="radio"></Radio>
             </View>
             <View className="item-two">全选</View>
             <View className="item-three">合计(不含运费)</View>
