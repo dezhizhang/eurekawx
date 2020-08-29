@@ -150,6 +150,9 @@ class Index extends Component {
     }
   }
   handleShowModal = (currentType) => {
+    this.setState({
+      currentType
+    })
     const userInfoKey = getStorageSync("userInfoKey");
     const userInfo = userInfoKey ? JSON.parse(userInfoKey):{}
     if(Object.keys(userInfo).length > 0) { //表示当前处于一个登录
@@ -171,9 +174,6 @@ class Index extends Component {
           animationData: animation.export()
         })
       }.bind(this), 200);
-      this.setState({
-        currentType
-      })
     } else {
       showToast({
         title:'您当前还没有登录',
@@ -185,8 +185,6 @@ class Index extends Component {
         })
       } ,1000)
     }
-    console.log("userInfoKey",!userInfoKey);
-
   }
   handlehideModal = () => {
     let that = this;
