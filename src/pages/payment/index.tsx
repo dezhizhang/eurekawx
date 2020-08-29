@@ -40,7 +40,7 @@ class Index extends Component {
       },
       totalPrice:0,
       totalFreight:0, //总共的运费
-      payArr:[{url:'',title:'',price:'',number:0,color:'',size:'',goods_id:'',out_trade_no:''}]
+      payArr:[{url:'',title:'',price:'',number:0,color:'',size:'',goods_id:'',out_trade_no:'',_id:''}]
     }
     config: Config = {
     navigationBarTitleText: '订单确认'

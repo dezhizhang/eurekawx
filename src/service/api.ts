@@ -145,6 +145,10 @@ export async function userInfoSave(params) {
     body:params
   })
 }
+//获取用户信息
+export async function getUserInfo(params) {
+  return request(`${Config.API_HOST}/api/user/info?openid=${params.openid}`)
+}
 
 
 

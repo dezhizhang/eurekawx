@@ -3,7 +3,7 @@ import Taro, { Component, Config } from '@tarojs/taro'
 import { View,Image,} from '@tarojs/components'
 import arrow from '../../images/icon/arrow.png'
 import { getStorageSync } from '../../utils/tools'
-import { companyInfo } from '../../service/api';
+import { companyInfo,getUserInfo } from '../../service/api';
 import avatar from '../../images/avatar.png'
 import  './index.less'
 
@@ -48,13 +48,28 @@ class Index extends Component {
   componentDidShow() {
     let creditCode = getStorageSync("creditCode");
     if(creditCode) {
-      this.getCompanyInfo(creditCode)
+      this.getCompanyInfo(creditCode);
     } else {
-      let result = getStorageSync('userInfo');
-      let userInfo =result?JSON.parse(result):{};
+      this.userInfo();
+    } 
+  }
+  userInfo = async() => {
+    const userInfoKey = getStorageSync("userInfoKey");
+    const userInfo = userInfoKey ? JSON.parse(userInfoKey):{}
+    if(Object.keys(userInfo).length < 0) {
+      Taro.showToast({
+        title:'您还没有登录不能查看信息',
+        icon:'none'
+      });
+      return
+    }
+    const { openid } = userInfo;
+    let res = await getUserInfo({openid});
+    if(res.data.code === 200) {
+      let userInfo = res.data.data;
       this.setState({
         userInfo
-      })
+      });
     }
   }
   getCompanyInfo = async(creditCode) => {
@@ -75,6 +90,8 @@ class Index extends Component {
 
   render () {
     const { userInfo } = this.state;
+    console.log("userInfo",userInfo);
+
     return (
     <View className="user">
       <View className="content">
@@ -83,7 +100,7 @@ class Index extends Component {
              <View className="text-left">头像</View>
              <View className="text-right">
                 <View className="header_avatar">
-                  <Image src={userInfo&&userInfo.avatarUrl ? userInfo.avatarUrl:userInfo.url ? userInfo.url:avatar} className="avatar"/>
+                  <Image src={userInfo.url ? userInfo.url:avatar} className="avatar"/>
                 </View>
              </View>
           </View>
