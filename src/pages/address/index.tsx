@@ -19,6 +19,8 @@ type TextareaProps = {
 
 type PageState = {
   userInfo:any;
+  visible:boolean;
+  cityInfo:string;
 }
 
 type IProps = PageStateProps & TextareaProps & PageOwnProps
@@ -30,6 +32,8 @@ interface Index {
 class Index extends Component {
     state = {
       userInfo:{},
+      visible:false,
+      cityInfo:''
     }
     config: Config = {
     navigationBarTitleText: '收货地址'
@@ -64,14 +68,32 @@ class Index extends Component {
       url:'../login/index'
     })
   }
-  handleAddressSave = () => {
-     console.log('save');
+  //打开地址选择
+  handleAddressOpen = () => {
+    this.setState({
+      visible:true
+    })
+  }
+  //地区选择取消
+  handleCancel = (ev) => {
+    ev.stopPropagation();
+    this.setState({
+      visible:false,
+    })
+  }
+  handleAddress = (cityInfo) => {
+    this.setState({
+      cityInfo,
+      visible:false,
+    });
+  }
+  handleSubmit = () => {
 
   }
   componentDidHide () { }
 
   render () {
-    let { userInfo } = this.state;
+    let { userInfo,visible,cityInfo } = this.state;
     return (
     <View className="address">
       <View className="content">
@@ -100,13 +122,11 @@ class Index extends Component {
           </View>
         </View>
         <View className="content-item">
-          <View className="item">
+          <View className="item" onClick={this.handleAddressOpen}>
             <View className="text-left">地区信息</View>
             <View className="text-right">
-              你有3张优惠券待使用
-               {/* <View className="text-number">16</View> */}
+              {cityInfo}
             </View>
-            <Address visible={true}/>
           </View>
         </View>
         <View className="content-item">
@@ -118,9 +138,12 @@ class Index extends Component {
           </View>
         </View>
       </View>
-      {/* <View className="footer">
-        <Button className="btn" onClick={this.handleAddressSave}>保存</Button>
-      </View> */}
+      <Button className="btn" onClick={this.handleSubmit}>保存</Button>
+      <Address 
+        visible={visible}
+        handleCancel={this.handleCancel}
+        handleAddress={this.handleAddress}
+      />
     </View>
     )
   }

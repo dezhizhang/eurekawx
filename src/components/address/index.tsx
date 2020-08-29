@@ -15,8 +15,8 @@ type PageOwnProps = {
     show?:any;
     value?:any;
     visible:boolean;
-    handleCancel?:any;
-    handleOk?:any;
+    handleCancel:any;
+    handleAddress:(value:any) => void;
     bindChange?:any;
 }
 
@@ -153,51 +153,44 @@ class Index extends Component {
       county: countys[val[2]].name,
     })
   }
-  handleCancel = (ev) => {
-    ev.stopPropagation();
-    ev.preventDefault();
-    this.setState({
-      show:false
-    })
-  }
+  //点击确定
   handleOk = (ev) => {
     ev.stopPropagation();
     let { province,city, county } = this.state;
     let cityInfo = `${province}${city}${county}`;
-    this.setState({
-      show:false,
-      cityInfo
-    })
+    this.props.handleAddress(cityInfo)
   }
-
   render () {
     const { provinces,citys,countys,value} = this.state;
-    const { visible } = this.props;
+    const { visible,handleCancel } = this.props;
+    console.log("visible",visible);
+
     return (
-        <View className="animation-element-wrapper" style={{visibility:visible ? 'visible':'hidden'}}>
-            <View className="animation-element">
-            <Text className="left-btn" onClick={this.handleCancel}>取消</Text>
-            <Text className="right-btn" onClick={this.handleOk}>确定</Text>
-            <View className="line"></View>
-            <PickerView className="picker-view" indicatorStyle='height: 50px;' style='width: 100%; height: 380px;' value={value} onChange={this.bindChange}>
-                <PickerViewColumn className="picker-view-column">
-                {provinces.map((item,index) => {
-                    return <View key={index}>{item.name}</View>
-                })}
-                </PickerViewColumn>
-                <PickerViewColumn>
-                {citys.map((item,index) => {
+      <View className="animation-element-wrapper" style={{visibility:visible ? 'visible':'hidden'}}>
+        <View className="animation-element">
+        <Text className="left-btn" onClick={handleCancel}>取消</Text>
+        <Text className="right-btn" onClick={this.handleOk}>确定</Text>
+        <View className="line"></View>
+        <PickerView className="picker-view" indicatorStyle='height: 50px;' style='width: 100%; height: 380px;' value={value} onChange={this.bindChange}>
+            <PickerViewColumn className="picker-view-column">
+            {provinces.map((item,index) => {
                 return <View key={index}>{item.name}</View>
-                })}
-                </PickerViewColumn>
-                <PickerViewColumn>
-                {countys.map((item,index) => {
-                return <View key={index}>{item.name}</View>
-                })}
-                </PickerViewColumn>
-            </PickerView>
-          </View>
-        </View>
+            })}
+            </PickerViewColumn>
+            <PickerViewColumn>
+            {citys.map((item,index) => {
+            return <View key={index}>{item.name}</View>
+            })}
+            </PickerViewColumn>
+            <PickerViewColumn>
+            {countys.map((item,index) => {
+            return <View key={index}>{item.name}</View>
+            })}
+            </PickerViewColumn>
+        </PickerView>
+      </View>
+    </View>
+        
     )
   }
 }
