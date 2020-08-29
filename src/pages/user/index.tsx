@@ -33,6 +33,7 @@ class Index extends Component {
         avatarUrl:'',
         address:'',
         mobile:'',
+        userName:'',
       },
     }
     config: Config = {
@@ -108,10 +109,10 @@ class Index extends Component {
         <View className="content-item">
           <View className="item">
            
-             <View className="text-left">呢称</View>
-             <View className="text-right">
-               <View className="text-right">{userInfo.nickName}</View>
-             </View>
+            <View className="text-left">{userInfo.userName ? '姓名':'呢称'}</View>
+            <View className="text-right">
+               <View className="text-right">{userInfo.userName ? userInfo.userName:userInfo.nickName}</View>
+            </View>
           </View>
         </View>
         <View className="content-item">

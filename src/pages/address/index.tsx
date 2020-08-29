@@ -121,10 +121,11 @@ class Index extends Component {
         title:'填写手机号不合法',
         icon:'none'
       });
+      this.setState({
+        mobile:''
+      })
     }
-    this.setState({
-      mobile:''
-    })
+   
   }
   //详细地址
   handleDetail = (ev) => {
@@ -135,15 +136,29 @@ class Index extends Component {
   }
   handleSubmit = async() => {
     const {detail,userName,mobile,cityInfo,current} = this.state;
-    const userInfoKey = getStorageSync("userInfoKey");
+    const userInfoKey = getStorageSync("userInfoKey"); //用户key
+    const userinfoItem = getStorageSync("userInfo")
     const userInfo = userInfoKey ? JSON.parse(userInfoKey):{}
+    const userItem = userinfoItem ? JSON.parse(userinfoItem):{}
     const { openid } = userInfo;
+    const { nickName,avatarUrl,gender } = userItem
+    
     let address = `${cityInfo}${detail}`;
     let params = {
       mobile,
       openid,
       userName,
       address,
+      nickName,
+      url:avatarUrl,
+      gender
+    }
+    if(!mobile) {
+      Taro.showToast({
+        title:'手机号不能为空',
+        icon:'none'
+      });
+      return
     }
     let res = await userInfoSave(params);
     if(res.data.code === 200) {

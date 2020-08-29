@@ -3,7 +3,7 @@ import Taro, { Component, Config } from '@tarojs/taro'
 import { View,Image,ScrollView,Text} from '@tarojs/components'
 import { showToast,appid,orderNumber, } from '../../utils/tools';
 import arrow from '../../images/icon/arrow.png'
-import { payInfoList,getPayInfo,updateStatus } from '../../service/api';
+import { payInfoList,getPayInfo,updateStatus,getUserInfo } from '../../service/api';
 import  './index.less'
 
 type PageStateProps = {
@@ -32,6 +32,7 @@ interface Index {
 class Index extends Component {
     state = {
       userInfo:{
+        userName:'',
         nickName:'',
         userType:'',
         avatarUrl:'',
@@ -84,9 +85,16 @@ class Index extends Component {
     });
   }
   handleWayPay = async() => {
-    let { payArr,totalPrice,totalFreight } = this.state;
+    let { payArr,totalPrice,totalFreight,userInfo } = this.state;
     let total = totalPrice + totalFreight;
     let out_trade_no = "";
+    if(!userInfo.userName) {
+      Taro.showToast({
+        title:'请填写收货人',
+        icon:'none'
+      });
+      return
+    }
     if(payArr.length > 1) { //有个多订单
       out_trade_no = orderNumber();
     }else {
@@ -128,9 +136,20 @@ class Index extends Component {
       url:'../address/index?current=2'
     })
   } 
+  componentDidShow() {
+    let params = this.$router.params;
+    this.userInfo(params);
+  }
+  userInfo = async(params) => {
+    let res = await getUserInfo(params);
+    if(res.data.code === 200) {
+      let userInfo = res.data.data;
+      this.setState({userInfo});
+    }
+  }
   componentDidHide () { }
   render () {
-    let { payArr,totalPrice,totalFreight } = this.state;
+    let { payArr,totalPrice,totalFreight,userInfo } = this.state;
     return (
       <ScrollView className='payment'
       scrollY
@@ -141,6 +160,7 @@ class Index extends Component {
           <View className="item">
              <View className="text-left">收货人</View>
              <View className="text-right">
+               {userInfo.userName ? userInfo.userName:'请填写收货人'}
              </View>
              <View className="icon-right">
                <Image src={arrow} className="image"/>
