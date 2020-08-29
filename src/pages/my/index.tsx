@@ -2,7 +2,7 @@ import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View,Image,} from '@tarojs/components'
 import { getStorageSync } from '../../utils/tools'
-import { companyInfo,getOrderContent } from '../../service/api';
+import { companyInfo,getOrderContent,getUserInfo} from '../../service/api';
 import myHeader from '../../images/my_header.png'
 import avatar from '../../images/avatar.png'
 import allOrder from '../../images/all_order.png'
@@ -72,13 +72,26 @@ class Index extends Component {
     if(creditCode) { //证明企业用户
       this.getCompanyInfo(creditCode);
     } else {
-      let result = getStorageSync('userInfo');
-      let userInfo =result?JSON.parse(result):{};//不存在时就是一个空对像
-      if(Object.keys(userInfo).length > 0) {
-        userInfo.isLogin = true;
-      }
+      this.userInfo()
+      // let result = getStorageSync('userInfo');
+      // let userInfo =result?JSON.parse(result):{};//不存在时就是一个空对像
+      // if(Object.keys(userInfo).length > 0) {
+      //   userInfo.isLogin = true;
+      // }
+      // this.setState({userInfo});
+    }
+  }
+  userInfo = async() => {
+    const userInfoKey = getStorageSync("userInfoKey");
+    const userInfo = userInfoKey ? JSON.parse(userInfoKey):{}
+    const { openid } = userInfo;
+    let res = await getUserInfo({openid});
+    if(res.data.code === 200) {
+      let userInfo = res.data.data;
       this.setState({userInfo});
     }
+
+
   }
   //获取公司信息
   getCompanyInfo = async(creditCode) => {
@@ -169,12 +182,8 @@ class Index extends Component {
             <View className="header_avatar">
               <Image src={userInfo&&userInfo.avatarUrl ? userInfo.avatarUrl:userInfo.url ? userInfo.url:avatar} className="avatar"/>
             </View>
-            <View className="header_user" style={{display:userInfo.isLogin ? 'none':'block'}}>
+            <View className="header_user">
               <View className="user_name" onClick={this.handlePerToLogin}>{userInfo.nickName ? userInfo.nickName:'马上登录'}</View>
-              <View className="user_address">会员:{userInfo&&userInfo.userType}</View>
-            </View>
-            <View className="header_user" style={{display:userInfo.isLogin ? 'block':'none'}}>
-              <View className="user-info">{userInfo.nickName}</View>
               <View className="user_address">会员:{userInfo&&userInfo.userType}</View>
             </View>
             <View className="header_right">

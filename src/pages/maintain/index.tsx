@@ -2,7 +2,7 @@ import { ComponentClass } from 'react'
 import Taro, { Component, Config, } from '@tarojs/taro'
 import { View, Textarea, Button,Image } from '@tarojs/components'
 import { uploadInfo,getUserInfo } from '../../service/api'
-import { showLoading,hideLoading,getStorageSync } from '../../utils/tools'
+import { showLoading,hideLoading,getStorageSync,showToast } from '../../utils/tools'
 import server from '../../images/server.png'
 import upload from '../../images/upload.png'
 import  './index.less'
@@ -125,20 +125,15 @@ class Index extends Component {
         let data = JSON.parse(res.data);
         if(data.code == 200) {
           hideLoading();
-          Taro.showModal({
-            title:'温馨提示',
-            content:'您的问题以提交我们会尽快联系你',
-            cancelText:'继续提交',
-            confirmText:'返回首页',
-            success:function() {
-              Taro.switchTab({
-                url: '../index/index'
-              });
-            },
-            fail:function() {
-
-            }
-          })
+          showToast({
+            title:"您的问题以提交我们会尽快联系你",
+            icon:'success'
+          });
+          setTimeout(() => {
+            Taro.switchTab({
+              url: '../index/index'
+            });
+          },2000);
         }
       });
     }

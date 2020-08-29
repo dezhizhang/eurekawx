@@ -9,11 +9,6 @@ type PageStateProps = {
 }
 
 type PageOwnProps = {
-    provinces?:any;
-    citys?:any;
-    countys?:any;
-    show?:any;
-    value?:any;
     visible:boolean;
     handleCancel:any;
     handleAddress:(value:any) => void;
@@ -21,14 +16,7 @@ type PageOwnProps = {
 }
 
 type PageState = {
-    // areaInfo:any; //所有城市县区数据
-    // provinces:any//省
-    // province:string;
-    // citys:any//城市
-    // city:string;
-    // countys:any;//区县
-    // county:string;
-    // value:any;
+    value:any;
     cityInfo:string;
     areaInfo:any;
     provinces:any;

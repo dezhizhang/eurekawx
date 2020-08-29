@@ -22,20 +22,7 @@ type PageState = {
   address:string,
   description:string
   selector:any;
-  areaInfo:any; //所有城市县区数据
-  provinces:any//省
-  province:string;
-  citys:any//城市
-  city:string;
-  countys:any;//区县
-  county:string;
-  value:any;
-  cityInfo:string;
-  detailed:string; //详细地址
-  moveY:number;
-  time:number;
-  animation:any;
-  selectorChecked:string;
+  visible:boolean;
 }
 
 type IProps = PageStateProps & PageOwnProps
@@ -52,19 +39,7 @@ class Index extends Component {
     detailed:'',
     cityInfo:'',
     tempFilePaths:'',
-    areaInfo:[],
-    provinces:[],
-    province:'',
-    citys:[],
-    city:'',
-    countys:[],
-    county:'',
-    show:false,
-    time:0,
-    moveY:200,
-    animation:undefined,
-    value: [0, 0, 0],
-    index:[0, 0, 0],
+    visible:false
   }
     config: Config = {
     navigationBarTitleText: '企业认证'
@@ -91,7 +66,10 @@ class Index extends Component {
     const reg = /[^_IOZSVa-z\W]{2}\d{6}[^_IOZSVa-z\W]{10}/g;
     const address = `${cityInfo}${detailed}`;
     const userInfo = JSON.parse(getStorageSync("userInfo"));
+    const userInfoKey = getStorageSync("userInfoKey");
+    const userInfoItem = userInfoKey ? JSON.parse(userInfoKey):{}
     const { url,nickName,} = userInfo;
+    const { openid } = userInfoItem
     if(!compamyName) {
       showToast({
         title:'公司名称不能为空',
@@ -135,6 +113,7 @@ class Index extends Component {
       } else {//提交数据
         const params = {
           url,
+          openid,
           nickName,
           address,
           compamyName,
@@ -152,78 +131,17 @@ class Index extends Component {
               icon:'success'
             });
             //认证成功修改用户级别
-            Taro.switchTab({
-              url: '../my/index'
-            });
+            setTimeout(() => {
+              Taro.switchTab({
+                url: '../my/index'
+              });
+            },2000)
+           
           }
         })
       }
     }
   }
-  componentDidMount() {
-    this.getCityData();
-  }
-  getCityData = async() => {
-    let res = await cityInfoList();
-    if(res.data.code === 200) {
-      let areaInfo = res.data.data;
-      this.setState({
-        areaInfo
-      });
-      this.getProvinceData(areaInfo); //获取省份数据
-    } 
-  }
-  getProvinceData = (areaInfo) => {
-    let s;
-    let provinces = [];
-    let num = 0;
-    for (let i = 0; i < areaInfo.length; i++) {
-      s = areaInfo[i];
-      if (s.di == "00" && s.xian == "00") {
-        provinces[num] = s;
-        num++;
-      }
-      
-    }
-    this.getCityArr(0,areaInfo,provinces)
-    this.setState({provinces});
-  }
-  getCityArr = (count,areaInfo,provinces) => {
-    let c;
-    let citys = [];
-    let num = 0;
-    for(let i=0;i < areaInfo.length;i++) {
-      c = areaInfo[i];
-      if(c.xian == "00" && c.sheng == provinces[count].sheng && c.di != "00") {
-        citys[num] = c;
-        num++;
-      }
-    }
-    this.getCountyInfo(0,0,areaInfo,provinces,citys)
-    this.setState({
-      city:'',
-      citys,
-      value:[count,0,0]
-    })
-  }
-  getCountyInfo = (column0,column1,areaInfo,provinces,citys) => {
-    let c;
-    let countys = [];
-    let num = 0;
-    for (var i = 0; i < areaInfo.length; i++) {
-      c = areaInfo[i];
-      if (c.xian != "00" && c.sheng == provinces[column0].sheng && c.di == citys[column1].di) {
-        countys[num] = c;
-        num++;
-      }
-    }
-    this.setState({
-      county:'',
-      countys,
-      value: [column0, column1, 0]
-    })
-  }
-
   //公司名称
   handleCompanyName = (ev) => {
     let compamyName = ev.target.value;
@@ -231,58 +149,30 @@ class Index extends Component {
       compamyName
     });
   }
-  bindChange = (ev) => {
-    let val = ev.detail.value;
-    let {index,areaInfo,provinces,citys,countys} = this.state;
-    //若省份column做了滑动则定位到地级市和区县第一位
-    if (index[0] != val[0]) {
-      val[1] = 0;
-      val[2] = 0;
-      this.getCityArr(val[0],areaInfo,provinces);//获取地级市数据
-      this.getCountyInfo(val[0],val[1],areaInfo,provinces,citys);
-    } else {//若省份column未做滑动，地级市做了滑动则定位区县第一位
-      if (index[1] != val[1]) {
-        val[2] = 0;
-        this.getCountyInfo(val[0],val[1],areaInfo,provinces,citys);
-      }
-    }
-    index = val;
-    
-    //更新数据
-    this.setState({
-      index:index,
-      value: [val[0], val[1], val[2]],
-      province: provinces[val[0]].name,
-      city: citys[val[1]].name,
-      county: countys[val[2]].name,
-    })
-  }
+
 
   handleTranslate = () => {
    this.setState({
-     show:true,
+     visible:true,
    })
   }
   hiddenFloatView = () => {
     this.setState({
-      show:false
+      visible:false
     })
   }
-  handleCancel = (ev) => {
-    ev.stopPropagation();
-    ev.preventDefault();
+  //地址取消
+  handleCancel = () => {
     this.setState({
-      show:false
+      visible:false
     })
   }
-  handleOk = (ev) => {
-    ev.stopPropagation();
-    let { province,city, county } = this.state;
-    let cityInfo = `${province}${city}${county}`;
+  //地址提交
+  handleAddress = (cityInfo) => {
     this.setState({
-      show:false,
-      cityInfo
-    })
+      cityInfo,
+      visible:false
+    });
   }
   //详细地址
   handleDetail = (ev) => {
@@ -306,60 +196,26 @@ class Index extends Component {
     })
   }
   render () {
-    const { tempFilePaths,provinces,value,citys,countys,show,cityInfo} = this.state;
+    const { tempFilePaths,visible,cityInfo} = this.state;
     return (
      <View className="maintain">
       <View className="content">
         <View className="content-input">
           <Text className="text"><Text style={{color:'red'}}>*</Text>公司名称</Text>
-          <Input className="input" placeholder='请输入公司名称' onChange={this.handleCompanyName}/>
+          <Input className="input" placeholder='请输入公司名称' onInput={this.handleCompanyName}/>
         </View> 
         <View className="content-input">
           <Text className="text"><Text style={{color:'red'}}>*</Text>信用代码</Text>
-          <Input className="input" placeholder='请输入信用代码' onChange={this.handleCreditCode}/>
+          <Input className="input" placeholder='请输入信用代码' onInput={this.handleCreditCode}/>
         </View>
         <View className="content-input" onClick={this.handleTranslate}>
           <Text className="text"><Text style={{color:'red'}}>*</Text>地区信息</Text>
           <Input className="input" value={cityInfo} placeholder="请选择地区信息"/>
-          <Address 
-            visible={show}
-            value={value}
-            citys={citys}
-            countys={countys}
-            provinces={provinces} 
-            handleOk={this.handleOk} 
-            bindChange={this.bindChange}
-            handleCancel={this.handleCancel} 
-           
-          />
-          {/* <View className="animation-element-wrapper" style={{visibility:show ? 'visible':'hidden'}}>
-          <View className="animation-element">
-            <Text className="left-btn" onClick={this.handleCancel}>取消</Text>
-            <Text className="right-btn" onClick={this.handleOk}>确定</Text>
-          <View className="line"></View>
-            <PickerView className="picker-view" indicatorStyle='height: 50px;' style='width: 100%; height: 380px;' value={value} onChange={this.bindChange}>
-              <PickerViewColumn className="picker-view-column">
-                {provinces.map((item,index) => {
-                  return <View key={index}>{item.name}</View>
-                })}
-              </PickerViewColumn>
-              <PickerViewColumn>
-              {citys.map((item,index) => {
-                return <View key={index}>{item.name}</View>
-              })}
-              </PickerViewColumn>
-              <PickerViewColumn>
-              {countys.map((item,index) => {
-                return <View key={index}>{item.name}</View>
-              })}
-              </PickerViewColumn>
-            </PickerView>
-            </View>
-          </View> */}
+         
         </View>
         <View className="content-input">
           <Text className="text"><Text style={{color:'red'}}>*</Text>详细地址</Text>
-          <Input className="input" placeholder="请输入您的联系地址" onChange={this.handleDetail}/>
+          <Input className="input" placeholder="请输入您的联系地址" onInput={this.handleDetail}/>
         </View>
         <View className="image">
           <View onClick={this.handleChooseImage} className="image-flex">
@@ -376,7 +232,12 @@ class Index extends Component {
         </View>
         </View>
         </View>
-        <Button className="btn" style={{display:show ? 'none':'block'}} onClick={this.handleSubmit}>保存</Button>
+        <Button className="btn" style={{display:visible ? 'none':'block'}} onClick={this.handleSubmit}>保存</Button>
+        <Address 
+          visible={visible}
+          handleAddress={this.handleAddress} 
+          handleCancel={this.handleCancel} 
+        />  
     </View>
     )
   }
