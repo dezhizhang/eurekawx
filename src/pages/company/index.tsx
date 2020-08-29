@@ -1,6 +1,6 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config, } from '@tarojs/taro'
-import { View, Input,Text, Button,Image,PickerView,PickerViewColumn } from '@tarojs/components'
+import { View, Input,Text, Button,Image,} from '@tarojs/components'
 import { companyRegister,cityInfoList } from '../../service/api'
 import { showToast,showLoading,hideLoading, getStorageSync } from '../../utils/tools'
 import server from '../../images/server.png'
@@ -322,14 +322,15 @@ class Index extends Component {
           <Text className="text"><Text style={{color:'red'}}>*</Text>地区信息</Text>
           <Input className="input" value={cityInfo} placeholder="请选择地区信息"/>
           <Address 
-            show={show}
+            visible={show}
             value={value}
             citys={citys}
             countys={countys}
             provinces={provinces} 
             handleOk={this.handleOk} 
-            handleCancel={this.handleCancel} 
             bindChange={this.bindChange}
+            handleCancel={this.handleCancel} 
+           
           />
           {/* <View className="animation-element-wrapper" style={{visibility:show ? 'visible':'hidden'}}>
           <View className="animation-element">
