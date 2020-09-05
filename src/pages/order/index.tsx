@@ -24,6 +24,7 @@ type PageState = {
   orderList:any;
   tabArr:any;
   btnArr:any;
+  bottomBtn:any;
   activeTab:any;
 }
 
@@ -64,24 +65,75 @@ class Index extends Component {
           value:'已退货'
         }
       ],
-      btnArr:[
-        {
-          key:'1',
-          value:'删除订单',
-        },
-        {
-          key:'2',
-          value:'再来一单',
-        },
-        {
-          key:'3',
-          value:'联系商家'
-        },
-        {
-          key:'4',
-          value:'支付订单'
-        }
-    ],
+      bottomBtn:{
+        '1':[
+          {
+            key:'1',
+            value:'删除订单'
+          },
+          {
+            key:'2',
+            value:'再来一单'
+          },
+          {
+            key:'3',
+            value:'联系商家'
+          },
+          {
+            key:'4',
+            value:'支付订单'
+          }
+        ],//待支付
+        '2':[
+          {
+            key:'2',
+            value:'再来一单'
+          },
+          {
+            key:'3',
+            value:'联系商家'
+          }
+        ],//待配送
+        '3':[
+          {
+            key:'2',
+            value:'再来一单'
+          },
+          {
+            key:'3',
+            value:'联系商家'
+          },
+          {
+            key:'5',
+            value:'确认签收'
+          }
+        ], //已签收
+        '4':[
+          {
+            key:'2',
+            value:'再来一单'
+          },
+          {
+            key:'3',
+            value:'联系商家'
+          },
+          {
+            key:'6',
+            value:'去评价'
+          }
+        ],//待评价
+        '5':[
+          {
+            key:'2',
+            value:'再来一单'
+          },
+          {
+            key:'3',
+            value:'联系商家'
+          }
+        ]
+
+      },
       activeTab:'0',
       activeBtn:'1',
     }
@@ -195,7 +247,7 @@ class Index extends Component {
   componentDidHide () { }
 
   render () {
-    const { tabArr,activeTab,btnArr,activeBtn,orderList } = this.state;
+    const { tabArr,activeTab,bottomBtn,activeBtn,orderList } = this.state;
     return (
     <View className="order">
       <View className="order-tabs">
@@ -248,7 +300,7 @@ class Index extends Component {
             <View className="bottom-btn">
               <View className="btn-wrapper">
                 {
-                  btnArr.map(item => {
+                  bottomBtn[list.status].map(item => {
                     return (
                     <View 
                       className="btn-item"
