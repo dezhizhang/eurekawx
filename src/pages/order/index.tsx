@@ -215,13 +215,10 @@ class Index extends Component {
     return params[item.key](list);
   }
   //支付订单
-  handlePayMent = async() => {
+  handlePayMent = async(list) => {
     Taro.navigateTo({
-      url:`../payment/index`
-    })
-    console.log("++++++")
-    console.log('支付订单')
-    console.log("++++++")
+      url:`../payment/index?openid=${list.openid}&goods_id=${list.goods_id}`
+    });
   }
   //删除当前订单
   handleDeleteOrder = async(list) => {
