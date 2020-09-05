@@ -32,7 +32,7 @@ class Index extends Component {
     cartList:[
       {
         url:'',
-        checked:'',
+        checked:false,
         number:0,
         title:'',
         price:0,
@@ -40,7 +40,7 @@ class Index extends Component {
       }
     ],
     openid:"",
-    allChecked:true
+    allChecked:false
   }
   config: Config = {
     navigationBarTitleText: '购物车'
@@ -72,7 +72,8 @@ class Index extends Component {
     let res =await getCartList({openid});
     if(res.data.code == 200) {
       let cartList = res.data.data;
-      this.setState({ cartList,openid });
+    
+      this.setState({ cartList,openid,});
     }
   }
 
@@ -125,7 +126,9 @@ class Index extends Component {
     this.setState({cartList});
   }
   handleRadio = async(item) => {
+    let number = 0;
     let checked = false;
+    let allChecked = true;
     let { cartList } = this.state;
     for(let i=0;i<cartList.length;i++) {
       if(cartList[i]._id == item._id) {
@@ -137,7 +140,17 @@ class Index extends Component {
     if(res.data.code == 200) {
       console.log(res);
     }
-    this.setState({cartList});
+    //当所有没有选中时下面的也不选中
+    for(let i=0;i < cartList.length;i++) {
+      if(!cartList[i].checked) {
+        number++;
+      }
+    }
+    //当完全没有选中时最下面的也不需选中
+    if(number === cartList.length) {
+      allChecked = false;
+    }
+    this.setState({cartList,allChecked});
   }
   handleAllChecked = () => {
     let { allChecked,cartList } = this.state 
@@ -195,7 +208,7 @@ class Index extends Component {
         scrollY
         scrollWithAnimation
       >
-        <View className="header">
+        {/* <View className="header">
           <View className="header-wrapper">
             <View className="item-left">全场满99元包邮，还差44.03元包邮</View>
             <View className="item-center">去凑单</View>
@@ -203,7 +216,7 @@ class Index extends Component {
               <Image src={arror} className="image"/>
             </View>
           </View>
-        </View>
+        </View> */}
           {cartList.map(item => { 
             console.log("item",item);
             return <View key={item._id} className="content">
