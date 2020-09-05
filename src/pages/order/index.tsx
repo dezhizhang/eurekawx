@@ -23,7 +23,6 @@ type PageState = {
   status:string;
   orderList:any;
   tabArr:any;
-  btnArr:any;
   bottomBtn:any;
   activeTab:any;
 }
