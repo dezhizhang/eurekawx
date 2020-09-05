@@ -61,3 +61,14 @@ export const random =(n) => {
     }
     return res;
 } 
+//订单类型转换
+export const orderType = (key) => {
+    let params = {
+        '1':'待付款',
+        '2':'待付款',
+        '3':'已签收',
+        '4':'待评价',
+        '5':'已退货'
+    }
+    return params[key];
+}

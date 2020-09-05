@@ -7,7 +7,7 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View,ScrollView,Image,Text, } from '@tarojs/components'
-import { getStorageSync,showToast } from '../../utils/tools'
+import { getStorageSync,showToast,orderType } from '../../utils/tools'
 import { getOrderList,deleteOrder } from '../../service/api';
 import arrow from '../../images/icon/arrow.png'
 import  './index.less'
@@ -37,7 +37,7 @@ class Index extends Component {
     state = {
       isHide:false,
       status:'',
-      orderList:[{title:'',_id:'',color:'',size:'',price:'',url:''}],
+      orderList:[{title:'',_id:'',color:'',size:'',price:'',url:'',status:''}],
       tabArr:[
         {
           key:'0',
@@ -216,10 +216,11 @@ class Index extends Component {
       <ScrollView className="order-wrapper">
         {
           orderList.map(list => {
+            console.log('list',list);
             return  <View key={list._id} className="order-list">
             <View className="order-header">
-          <View className="header-title">{list.title}</View>
-              <View className="header-status">交易成功</View>
+            <View className="header-title">{list.title}</View>
+              <View className="header-status">{orderType(list.status)}</View>
               <View className="header-icon">
                 <Image src={arrow} className="image"/>
               </View>
