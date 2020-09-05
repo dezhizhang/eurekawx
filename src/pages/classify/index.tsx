@@ -2,7 +2,7 @@ import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View,ScrollView,Image } from '@tarojs/components'
 import { getMainList } from '../../service/api'
-import { showLoading,hideLoading,baseURL } from '../../utils/tools'
+import { showLoading,hideLoading,} from '../../utils/tools'
 import bay from '../../images/bay.png'
 import  './index.less'
 
