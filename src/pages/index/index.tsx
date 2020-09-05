@@ -218,7 +218,7 @@ class Index extends Component {
                          <View className="item-bottom">
                           <View className="bottom-top">{list.title}</View>
                           <View className="bottom-bottom">
-                            <View className="bottom-left">￥{list.price}</View>
+                            <View className="bottom-left">￥{Number(list.price).toFixed(2)}</View>
                           </View>
                          </View>
                       </View>
@@ -243,7 +243,7 @@ class Index extends Component {
               <View className="item-bottom">
                 <View className="bottom-desc">{item.title}</View>
                 <View className="bottom-text">
-                    <View className="text-left">￥{item.price}</View>
+                    <View className="text-left">￥{Number(item.price).toFixed(2)}</View>
                 </View>
               </View>
             </View>
