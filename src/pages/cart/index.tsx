@@ -142,13 +142,15 @@ class Index extends Component {
     }
     //当所有没有选中时下面的也不选中
     for(let i=0;i < cartList.length;i++) {
-      if(!cartList[i].checked) {
+      if(cartList[i].checked) {
         number++;
       }
     }
     //当完全没有选中时最下面的也不需选中
-    if(number === cartList.length) {
-      allChecked = false;
+    if(number == cartList.length) {
+      allChecked = true;
+    } else {
+      allChecked = false
     }
     this.setState({cartList,allChecked});
   }
