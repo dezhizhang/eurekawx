@@ -1,6 +1,6 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Input, Radio,ScrollView,Image } from '@tarojs/components'
+import { View, Input, Radio,ScrollView,Image, Icon } from '@tarojs/components'
 import { getCartList,updateCartList,deleteCart,updateCartStatus,cartPrepaid } from '../../service/api'
 import { showToast,getStorageSync } from '../../utils/tools'
 import arror from '../../images/icon/arrow.png'
@@ -170,7 +170,18 @@ class Index extends Component {
     } 
   }
   componentDidHide () { }
-
+  //删除商品
+  handleDelete = async(item) => {
+    let res = await deleteCart({id:item._id});
+    let data = res.data;
+    if(data.code == 200) {
+      showToast({
+        title:'删除商品成功',
+        icon:'success',
+      });
+      this.getListInfo()
+    }
+  }
   render () {
     let { cartList,allChecked } = this.state;
     let totalPrice = 0;
@@ -207,7 +218,7 @@ class Index extends Component {
                 <View className="item-right">
                   <View className="right-title">
                     <View className="title-left">{item.title}</View>
-                    <View className="title-sub"></View>
+                    <View className="title-sub" onClick={() => this.handleDelete(item)}><Icon type="cancel"/></View>
                   </View>
                   <View className="right-bottom">
                     <View className="bottom-left">￥{Number((item.price)).toFixed(2)}</View>
