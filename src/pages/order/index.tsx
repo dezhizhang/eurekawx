@@ -37,7 +37,7 @@ class Index extends Component {
     state = {
       isHide:false,
       status:'',
-      orderList:[{title:'',_id:'',color:'',size:'',price:'',url:'',status:''}],
+      orderList:[{title:'',_id:'',color:'',size:'',price:'',url:'',status:'',number:''}],
       tabArr:[
         {
           key:'0',
@@ -77,10 +77,10 @@ class Index extends Component {
           key:'3',
           value:'联系商家'
         },
-        // {
-        //   key:'4',
-        //   value:'评价'
-        // }
+        {
+          key:'4',
+          value:'支付订单'
+        }
     ],
       activeTab:'0',
       activeBtn:'1',
@@ -241,7 +241,7 @@ class Index extends Component {
               <View className="bottom-wrapper">
                 <View className="bottom-left"></View>
                 <View className="bottom-right">
-                  共1件商品  实付款：￥{(list.price)}
+                共{list.number}件商品  实付款：￥{Number(list.price).toFixed(2)}
                 </View>
               </View>
             </View>
