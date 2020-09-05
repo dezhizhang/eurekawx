@@ -53,9 +53,6 @@ class Index extends Component {
   
   componentWillMount () {
     let params = this.$router.params;
-    console.log("payment",params)
-    console.log('++++++++')
-
     this.getPayList(params);
   }
   //获取预支付列表
@@ -142,6 +139,7 @@ class Index extends Component {
   componentDidShow() {
     let params = this.$router.params;
     this.userInfo(params);
+    this.getPayList(params);
   }
   userInfo = async(params) => {
     let res = await getUserInfo(params);

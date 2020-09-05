@@ -113,7 +113,7 @@ export async function userPrepaid(params) {
 }
 //获取支付列表
 export async function payInfoList(params){
-  return request(`${Config.API_HOST}/api/userInfo/pay/list?openid=${params.openid}`);
+  return request(`${Config.API_HOST}/api/userInfo/pay/list?openid=${params.openid}&goods_id=${params.goods_id}`);
 }
 //更新订单状态
 export async function updateStatus(params) {
