@@ -33,7 +33,7 @@ interface Index {
 
 class Index extends Component {
     state = {
-      classifyArr:[],
+      classifyArr:[{url:'',title:'',price:''}],
     }
     config: Config = {
     navigationBarTitleText: '商品分类'
@@ -85,7 +85,7 @@ class Index extends Component {
                      <View className="bottom-wrapper">
                         <View className="wrapper-top">{item.title}</View>
                          <View className="wrapper-bottom">
-                            <View className="bottom-left">￥{item.price}</View>
+                            <View className="bottom-left">￥{Number(item.price).toFixed(2)}</View>
                             <View className="bottom-right">
                               <Image src={bay} className="image"/>
                             </View>

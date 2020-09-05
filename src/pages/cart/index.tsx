@@ -194,6 +194,7 @@ class Index extends Component {
           </View>
         </View>
           {cartList.map(item => { 
+            console.log("item",item);
             return <View key={item._id} className="content">
             <View className="content-wrapper">
               <View className="content-item">
@@ -206,6 +207,7 @@ class Index extends Component {
                 <View className="item-right">
                   <View className="right-title">
                     <View className="title-left">{item.title}</View>
+                    <View className="title-sub"></View>
                   </View>
                   <View className="right-bottom">
                     <View className="bottom-left">￥{Number((item.price)).toFixed(2)}</View>

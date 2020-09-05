@@ -362,10 +362,10 @@ class Index extends Component {
                   <View className="right-text">分享</View>
                 </View>
               </View>
-              <View className="top-price">￥{baseData.price}</View>
+              <View className="top-price">￥{Number(baseData.price).toFixed(2)}</View>
               <View className="top-list">
                 <View className="list-wrapper">
-                  <View className="list-item">运费：￥{baseData.freight}</View>
+                  <View className="list-item">运费：￥{Number(baseData.freight).toFixed(2)}</View>
                   <View className="list-item">销量：{baseData.sales}</View>
                   <View className="list-item">库存：{baseData.inventory}</View>
                 </View>
