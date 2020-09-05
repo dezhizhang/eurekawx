@@ -219,8 +219,8 @@ class Index extends Component {
             </View>
           </View>
         </View> */}
+          <View className="scroll-box">
           {cartList.map(item => { 
-            console.log("item",item);
             return <View key={item._id} className="content">
             <View className="content-wrapper">
               <View className="content-item">
@@ -248,6 +248,8 @@ class Index extends Component {
             </View>
           </View>
           })}
+          </View>
+        
         <View className="bottom">
           <View className="bottom-wrapper">
             <View className="item-one">
@@ -260,6 +262,7 @@ class Index extends Component {
           </View>
         </View>
       </ScrollView>
+      
     )
   }
 }

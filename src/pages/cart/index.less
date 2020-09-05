@@ -40,120 +40,124 @@
         }
 
     }
-    .content{
-        .content-wrapper{
-            height: 200px;
-            border-bottom: 1px solid #F4F4F4;
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-            .content-item{
-                width: 94%;
+    .scroll-box{
+        margin-bottom: 100px;
+        .content{
+            .content-wrapper{
                 height: 200px;
+                border-bottom: 1px solid #F4F4F4;
                 display: flex;
                 align-items: center;
-                .item-left{
-                    width: 43px;
-                    height: 43px;
-                    .radio{
-                        width: 100%;
-                        height: 100%;
-                        display: block;
-                    }
-                }
-                .item-center{
-                    width: 149px;
-                    height: 149px;
-                    background: yellow;
-                    margin-left: 26px;
-                    .image{
-                        width: 100%;
-                        height: 100%;
-                        display: block;
-                    }
-
-                }
-                .item-right{
-                    flex: 1;
+                flex-direction: column;
+                .content-item{
+                    width: 94%;
+                    height: 200px;
                     display: flex;
-                    margin-left: 24px;
-                    flex-direction: column;
-                    .right-title{
-                        height: 90px;
-                        overflow: hidden;
-                        margin-bottom: 24px;
-                        font-size: 30px;
-                        color: #333;
-                        font-weight: 400;
-                        font-family: 'Microsoft YaHei';
-                        text-overflow: ellipsis;   
-                        display: flex;
-                        .title-left{
-                            flex: 1;
-                        }
-                        .itle-right{
-                            width: 30px;
-                            height: 30px;
+                    align-items: center;
+                    .item-left{
+                        width: 43px;
+                        height: 43px;
+                        .radio{
+                            width: 100%;
+                            height: 100%;
+                            display: block;
                         }
                     }
-                    .right-bottom{
-                        height: 70px;
-                        display: flex;
-                        .bottom-left{
-                            flex: 1;
-                            font-size: 36px;
-                            font-family: 'Microsoft YaHei';
-                            font-weight: 500px;
-                            color: #FF4E6C;
-
+                    .item-center{
+                        width: 149px;
+                        height: 149px;
+                        background: yellow;
+                        margin-left: 26px;
+                        .image{
+                            width: 100%;
+                            height: 100%;
+                            display: block;
                         }
-                        .bottom-right{
-                            width: 210px;
-                            height: 60px;
-                            border: 1px solid #F4F4F4;
+    
+                    }
+                    .item-right{
+                        flex: 1;
+                        display: flex;
+                        margin-left: 24px;
+                        flex-direction: column;
+                        .right-title{
+                            height: 90px;
+                            overflow: hidden;
+                            margin-bottom: 24px;
+                            font-size: 30px;
+                            color: #333;
+                            font-weight: 400;
+                            font-family: 'Microsoft YaHei';
+                            text-overflow: ellipsis;   
                             display: flex;
-                            .number-left{
-                                width: 60px;
-                                height: 100%;
-                                text-align: center;
-                                line-height: 60px;
-                                border-right: 1px solid #F4F4F4;
-                                color: #999;
-                                font-size: 40px;
-                            }
-                            .number-center{
+                            .title-left{
                                 flex: 1;
-                                height: 100%;
-                                .input{
-                                    width: 100%;
-                                    height: 60px;
-                                    line-height: 60px;
+                            }
+                            .itle-right{
+                                width: 30px;
+                                height: 30px;
+                            }
+                        }
+                        .right-bottom{
+                            height: 70px;
+                            display: flex;
+                            .bottom-left{
+                                flex: 1;
+                                font-size: 36px;
+                                font-family: 'Microsoft YaHei';
+                                font-weight: 500px;
+                                color: #FF4E6C;
+    
+                            }
+                            .bottom-right{
+                                width: 210px;
+                                height: 60px;
+                                border: 1px solid #F4F4F4;
+                                display: flex;
+                                .number-left{
+                                    width: 60px;
+                                    height: 100%;
                                     text-align: center;
-                                    font-size: 36px;
-                                    color: #4B4B4B;
+                                    line-height: 60px;
+                                    border-right: 1px solid #F4F4F4;
+                                    color: #999;
+                                    font-size: 40px;
                                 }
-                                
+                                .number-center{
+                                    flex: 1;
+                                    height: 100%;
+                                    .input{
+                                        width: 100%;
+                                        height: 60px;
+                                        line-height: 60px;
+                                        text-align: center;
+                                        font-size: 36px;
+                                        color: #4B4B4B;
+                                    }
+                                    
+                                }
+                                .number-right{
+                                    width: 60px;
+                                    height: 100%;
+                                    text-align: center;
+                                    line-height: 60px;
+                                    border-left: 1px solid #F4F4F4;
+                                    font-size: 30px;
+                                    color: #999;
+    
+                                }
+    
                             }
-                            .number-right{
-                                width: 60px;
-                                height: 100%;
-                                text-align: center;
-                                line-height: 60px;
-                                border-left: 1px solid #F4F4F4;
-                                font-size: 30px;
-                                color: #999;
-
-                            }
-
                         }
                     }
                 }
+    
+                
+    
             }
-
-            
-
         }
     }
+  
     .bottom{
         height: 100px;
         width: 100%;
@@ -180,7 +184,7 @@
             .item-two{
                 width: 58px;
                 font-size: 29px;
-                font-family: 'Microsoft YaHei';
+                font-family: '微软雅黑';
                 color: #727272;
                 margin-left: 24px;
             }
@@ -188,7 +192,7 @@
                 font-size: 26px;
                 font-weight: 400;
                 color: #909090;
-                margin-left: 46px;
+                margin-left: 40px;
             }
             .item-four{
                 width: 122px;
@@ -196,7 +200,7 @@
                 font-size: 31px;
                 color: #FF4E6C;
                 font-weight: 500;
-                margin-left: 64px;
+                margin-left: 40px;
             }
             .item-six{
                 flex: 1;
