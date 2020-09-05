@@ -180,7 +180,7 @@ class Index extends Component {
               <View className="right-top">{item.title}</View>
               <View className="right-bottom">
                 <View className="bottom-text">订单号:<Text>{item.goods_id}</Text></View>
-                <View className="bottom-text">价格：<Text style={{color:'red'}}>￥{item.price}</Text> </View>
+                <View className="bottom-text">价格：<Text style={{color:'red'}}>￥{Number(item.price).toFixed(2)}</Text> </View>
                 <View className="bottom-text">数量：<Text>{item.number}</Text></View>
                 <View className="bottom-text">颜色：<Text style={{color:item.color}}>{item.color}</Text></View>
                 <View className="bottom-text">尺码：<Text>{item.size}</Text></View>

@@ -303,7 +303,7 @@ class Index extends Component {
       this.handlehideModal();
       setTimeout(() =>{
         Taro.navigateTo({
-          url:`../payment/index?openid=${openid}`
+          url:`../payment/index?openid=${openid}&goods_id=${goods_id}`
         });
       },1000);
     }
