@@ -204,16 +204,24 @@ class Index extends Component {
   }
   //按钮操作
   handleBtns = (list,item) => {
-    switch(item.key) {
-      case '1':
-        this.handleDeleteOrder(list);
-        break;
-      case '2':
-        this.handleOrderBuy();
-        break
-      case '3':
-        this.handleConnect()
+    let params = {
+      '1':this.handleDeleteOrder,
+      '2':this.handleOrderBuy,
+      '3':this.handleConnect,
+      '4':this.handlePayMent,
+      '5':this.handleSignOk,
+      '6':this.handleEvaluation
     }
+    return params[item.key](list);
+  }
+  //支付订单
+  handlePayMent = async() => {
+    Taro.navigateTo({
+      url:`../payment/index`
+    })
+    console.log("++++++")
+    console.log('支付订单')
+    console.log("++++++")
   }
   //删除当前订单
   handleDeleteOrder = async(list) => {
@@ -240,7 +248,15 @@ class Index extends Component {
   }
   //联系商家
   handleConnect = () => {
-
+    console.log('联')
+  }
+  //确认签收
+  handleSignOk = () => {
+    console.log("确认签收");
+  }
+  //去评价
+  handleEvaluation = () => {
+    console.log('去评价')
   }
 
   componentDidHide () { }
@@ -299,7 +315,7 @@ class Index extends Component {
             <View className="bottom-btn">
               <View className="btn-wrapper">
                 {
-                  bottomBtn[list.status].map(item => {
+                  bottomBtn[list.status] && bottomBtn[list.status].map(item => {
                     return (
                     <View 
                       className="btn-item"
