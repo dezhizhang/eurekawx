@@ -137,7 +137,7 @@ class Index extends Component {
       activeBtn:'1',
     }
     config: Config = {
-    navigationBarTitleText: '订单列表'
+    navigationBarTitleText: '我的预约'
   }
 
   componentWillReceiveProps (nextProps) {
