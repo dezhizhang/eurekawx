@@ -9,6 +9,7 @@ import Taro, { Component, Config } from '@tarojs/taro'
 import { View,ScrollView,Image,Text, } from '@tarojs/components'
 import { getStorageSync,showToast,orderType } from '../../utils/tools'
 import { getOrderList,deleteOrder } from '../../service/api';
+import maintain from '../../components/maintain';
 import arrow from '../../images/icon/arrow.png'
 import  './index.less'
 
