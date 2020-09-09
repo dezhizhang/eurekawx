@@ -9,7 +9,7 @@ import Taro, { Component, Config } from '@tarojs/taro'
 import { View,ScrollView,Image,Text, } from '@tarojs/components'
 import { getStorageSync,showToast,orderType } from '../../utils/tools'
 import { getOrderList,deleteOrder } from '../../service/api';
-import maintain from '../../components/maintain';
+import Maintain from '../../components/maintain';
 import arrow from '../../images/icon/arrow.png'
 import  './index.less'
 
@@ -280,8 +280,8 @@ class Index extends Component {
       </View>
       <ScrollView className="order-wrapper">
         {
+          activeTab === '0' ? <Maintain/>:
           orderList.map(list => {
-            console.log('list',list);
             return  <View key={list._id} className="order-list">
             <View className="order-header">
             <View className="header-title">{list.title}</View>
