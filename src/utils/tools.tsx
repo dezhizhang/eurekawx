@@ -72,3 +72,13 @@ export const orderType = (key) => {
     }
     return params[key];
 }
+//预约类型转换
+export const maintainType = (key) => {
+    let params = {
+        '1':'新建预约',
+        '2':'待处理',
+        '3':'已完成',
+        '4':'待评价'
+    }
+    return params[key];
+}
