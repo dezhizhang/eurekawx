@@ -6,9 +6,9 @@
 */
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View,ScrollView,Image,Text, } from '@tarojs/components'
-import { getStorageSync,showToast,orderType } from '../../utils/tools'
-import { getOrderList,deleteOrder } from '../../service/api';
+import { View,ScrollView,Image  } from '@tarojs/components'
+import { getStorageSync,showToast,maintainType } from '../../utils/tools'
+import { deleteOrder,maintainList } from '../../service/api';
 import Maintain from '../../components/maintain';
 import arrow from '../../images/icon/arrow.png'
 import  './index.less'
@@ -38,32 +38,24 @@ class Index extends Component {
     state = {
       isHide:false,
       status:'',
-      orderList:[{title:'',_id:'',color:'',size:'',price:'',url:'',status:'',number:''}],
+      orderList:[{title:'',_id:'',description:'',size:'',price:'',url:'',status:'',number:''}],
       tabArr:[
         {
-          key:'0',
+          key:'1',
           value:'新建预约',
         },
         {
-          key:'1',
+          key:'2',
           value:'待处理',
         },
         {
-          key:'2',
+          key:'3',
           value:'已完成',
         },
         {
-          key:'3',
+          key:'4',
           value:'待评价'
         },
-        // {
-        //   key:'4',
-        //   value:'待评价'
-        // },
-        // {
-        //   key:'5',
-        //   value:'已退货'
-        // }
       ],
       bottomBtn:{
         '1':[
@@ -87,7 +79,7 @@ class Index extends Component {
         '2':[
           {
             key:'2',
-            value:'再来一单'
+            value:'删除预约'
           },
           {
             key:'3',
@@ -95,10 +87,6 @@ class Index extends Component {
           }
         ],//待配送
         '3':[
-          {
-            key:'2',
-            value:'再来一单'
-          },
           {
             key:'3',
             value:'联系商家'
@@ -110,26 +98,12 @@ class Index extends Component {
         ], //已签收
         '4':[
           {
-            key:'2',
-            value:'再来一单'
-          },
-          {
             key:'3',
             value:'联系商家'
           },
           {
             key:'6',
             value:'去评价'
-          }
-        ],//待评价
-        '5':[
-          {
-            key:'2',
-            value:'再来一单'
-          },
-          {
-            key:'3',
-            value:'联系商家'
           }
         ]
 
@@ -164,14 +138,13 @@ class Index extends Component {
       return;
     }
     params.openid = userInfo.openid;
-    this.getOrderList(params);
     this.setState({
       activeTab:status
     });
   }
   //订单列表
   getOrderList = async(params) => {
-    let res = await getOrderList(params);
+    let res = await maintainList(params);
     if(res.data.code === 200) {
       let orderList = res.data.data;
       this.setState({orderList});
@@ -205,15 +178,18 @@ class Index extends Component {
   }
   //按钮操作
   handleBtns = (list,item) => {
-    let params = {
-      '1':this.handleDeleteOrder,
-      '2':this.handleOrderBuy,
-      '3':this.handleConnect,
-      '4':this.handlePayMent,
-      '5':this.handleSignOk,
-      '6':this.handleEvaluation
-    }
-    return params[item.key](list);
+    console.log("list",list);
+    console.log("item",item);
+
+    // let params = {
+    //   '1':this.handleDeleteOrder,
+    //   '2':this.handleOrderBuy,
+    //   '3':this.handleConnect,
+    //   '4':this.handlePayMent,
+    //   '5':this.handleSignOk,
+    //   '6':this.handleEvaluation
+    // }
+    // return params[item.key](list);
   }
   //支付订单
   handlePayMent = async(list) => {
@@ -285,7 +261,7 @@ class Index extends Component {
             return  <View key={list._id} className="order-list">
             <View className="order-header">
             <View className="header-title">{list.title}</View>
-              <View className="header-status">{orderType(list.status)}</View>
+              <View className="header-status">{maintainType(list.status)}</View>
               <View className="header-icon">
                 <Image src={arrow} className="image"/>
               </View>
@@ -296,17 +272,7 @@ class Index extends Component {
                   <Image className="left-image" src={list.url}/>
                 </View>
                 <View className="content-right">
-                  <View className="right-desc">2018早秋装ins古着新款韩版条纹衬衫情侣装chic…</View>
-                  <View className="right-color">颜色：<Text className="color-text">{list.color}</Text></View>
-                  <View className="right-color">尺码：<Text className="color-text">{list.size}</Text></View>
-                </View>
-              </View>
-            </View>
-            <View className="order-bottom">
-              <View className="bottom-wrapper">
-                <View className="bottom-left"></View>
-                <View className="bottom-right">
-                共{list.number}件商品  实付款：￥{Number(list.price).toFixed(2)}
+                  <View className="right-desc">{list.description}</View>
                 </View>
               </View>
             </View>

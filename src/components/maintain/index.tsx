@@ -19,9 +19,6 @@ type PageStateProps = {
 type PageOwnProps = {}
 
 type PageState = {
-  username:String;
-  mobile:String;
-  address:String;
   description:String;
   userInfo:any;
 }
@@ -34,15 +31,14 @@ interface Index {
 
 class Index extends Component {
   state = {
-    username:'',
-    mobile:'',
-    address:'',
+
     description:'',
     tempFilePaths:'',
     userInfo:{
       userName:'',
       mobile:'',
       address:'',
+      openid:'',
     },
   }
     config: Config = {
@@ -52,18 +48,7 @@ class Index extends Component {
   componentWillReceiveProps (nextProps) {
     console.log(this.props, nextProps)
   }
-  handleUserName = (event:any) => {
-     const username = event.target.value;
-     this.setState({username})
-  }
-  handleMobile = (event:any) => {
-    const mobile = event.target.value;
-    this.setState({mobile});
-  }
-  handleAddress = (event:any) => {
-    let address = event.target.value;
-    this.setState({address})
-  }
+
   handleDescription = (event:any) => {
     let description = event.target.value;
     this.setState({description})
@@ -98,11 +83,12 @@ class Index extends Component {
   }
   handleSubmit = () => {
     const { description,tempFilePaths,userInfo } = this.state;
-    const { userName,mobile,address } = userInfo;
+    const { mobile,address,openid,userName } = userInfo;
     const params = {
-      userName,
+      openid,
       mobile,
       address,
+      userName,
       description,
       tempFilePaths
     }
