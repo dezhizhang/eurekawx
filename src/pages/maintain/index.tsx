@@ -8,7 +8,7 @@ import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View,ScrollView,Image,Text, } from '@tarojs/components'
 import { getStorageSync,showToast,orderType } from '../../utils/tools'
-import { getOrderList,deleteOrder } from '../../service/api';
+import { getOrderList,deleteOrder,maintainList } from '../../service/api';
 import Maintain from '../../components/maintain';
 import arrow from '../../images/icon/arrow.png'
 import  './index.less'
@@ -41,29 +41,21 @@ class Index extends Component {
       orderList:[{title:'',_id:'',color:'',size:'',price:'',url:'',status:'',number:''}],
       tabArr:[
         {
-          key:'0',
+          key:'1',
           value:'新建预约',
         },
         {
-          key:'1',
+          key:'2',
           value:'待处理',
         },
         {
-          key:'2',
+          key:'3',
           value:'已完成',
         },
         {
-          key:'3',
+          key:'4',
           value:'待评价'
         },
-        // {
-        //   key:'4',
-        //   value:'待评价'
-        // },
-        // {
-        //   key:'5',
-        //   value:'已退货'
-        // }
       ],
       bottomBtn:{
         '1':[
@@ -164,14 +156,13 @@ class Index extends Component {
       return;
     }
     params.openid = userInfo.openid;
-    this.getOrderList(params);
     this.setState({
       activeTab:status
     });
   }
   //订单列表
   getOrderList = async(params) => {
-    let res = await getOrderList(params);
+    let res = await maintainList(params);
     if(res.data.code === 200) {
       let orderList = res.data.data;
       this.setState({orderList});
@@ -205,15 +196,18 @@ class Index extends Component {
   }
   //按钮操作
   handleBtns = (list,item) => {
-    let params = {
-      '1':this.handleDeleteOrder,
-      '2':this.handleOrderBuy,
-      '3':this.handleConnect,
-      '4':this.handlePayMent,
-      '5':this.handleSignOk,
-      '6':this.handleEvaluation
-    }
-    return params[item.key](list);
+    console.log("list",list);
+    console.log("item",item);
+
+    // let params = {
+    //   '1':this.handleDeleteOrder,
+    //   '2':this.handleOrderBuy,
+    //   '3':this.handleConnect,
+    //   '4':this.handlePayMent,
+    //   '5':this.handleSignOk,
+    //   '6':this.handleEvaluation
+    // }
+    // return params[item.key](list);
   }
   //支付订单
   handlePayMent = async(list) => {

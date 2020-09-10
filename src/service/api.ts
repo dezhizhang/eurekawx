@@ -149,6 +149,10 @@ export async function userInfoSave(params) {
 export async function getUserInfo(params) {
   return request(`${Config.API_HOST}/api/user/info?openid=${params.openid}`)
 }
+//获取预约列表
+export async function maintainList(params) {
+  return request(`${Config.API_HOST}/api/maintain/list?openid=${params.openid}&status=${params.status}`);
+}
 
 
 
