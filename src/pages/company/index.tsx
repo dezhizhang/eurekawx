@@ -118,7 +118,7 @@ class Index extends Component {
           address,
           compamyName,
           creditCode,
-          userType:"高级会员",
+          userType:"企业",
           tempFilePaths
         }
         showLoading({title:'信息上传中'});

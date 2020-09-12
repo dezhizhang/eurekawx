@@ -79,7 +79,7 @@ class Index extends Component {
   bindGetUserInfo = async(ev) => {
     if(ev.detail.userInfo){
       let result  = ev.detail.userInfo;
-      result.userType = '普通会员';
+      result.userType = '普通用户';
       let userInfoKey = Taro.getStorageSync('userInfoKey');
       result.openid = JSON.parse(userInfoKey).openid;
       result.url = result.avatarUrl; //转换字段

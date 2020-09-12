@@ -66,7 +66,7 @@ class Index extends Component {
                 if(res.data.code == 200) {
                   let result = res.data.data;
                   let userInfoKey = JSON.stringify(result);
-                  userInfo.userType = '普通会员';
+                  userInfo.userType = '普通用户';
                   userInfo.url = userInfo.avatarUrl;
                   Taro.setStorageSync('userInfoKey', userInfoKey);
                   Taro.setStorageSync('userInfo', JSON.stringify(userInfo));
