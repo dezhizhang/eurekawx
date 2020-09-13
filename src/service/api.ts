@@ -153,6 +153,10 @@ export async function getUserInfo(params) {
 export async function maintainList(params) {
   return request(`${Config.API_HOST}/api/maintain/list?openid=${params.openid}&status=${params.status}`);
 }
+//预约删除
+export async function maintainDelete(params) {
+  return request(`${Config.API_HOST}/api/maintain/delete?id=${params.id}&openid=${params.openid}`);
+}
 
 
 
