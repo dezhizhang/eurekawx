@@ -46,7 +46,7 @@ const config = {
   };
   
   export default {
-    //...config.development,
+    // ...config.development,
     ...config.production,
     ...config.common
   };

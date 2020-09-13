@@ -1,6 +1,6 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config, } from '@tarojs/taro'
-import { View, Textarea, Button,Image } from '@tarojs/components'
+import { View, Textarea, Button,Image,Text } from '@tarojs/components'
 import { uploadInfo,getUserInfo } from '../../service/api'
 import { showLoading,hideLoading,getStorageSync,showToast } from '../../utils/tools'
 import server from '../../images/server.png'
@@ -123,7 +123,11 @@ class Index extends Component {
         }
       });
     }
-    
+  }
+  //打电话
+  handlePhoneCall = async() => {
+    let res = await Taro.makePhoneCall({phoneNumber:'13025376666'});
+    console.log("res",res);
   }
   render () {
     const { tempFilePaths,description } = this.state;
@@ -149,6 +153,9 @@ class Index extends Component {
                 </View>
           </View>
           <Button className="btn" onClick={this.handleSubmit}>提交</Button>
+          <View style={{textAlign:'center',color:'#ccc'}} onClick={this.handlePhoneCall}>
+            <Text>电话联系客服:13025376666</Text>
+          </View>
     </View>
      
     )
