@@ -8,7 +8,7 @@ import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View,ScrollView,Image  } from '@tarojs/components'
 import { getStorageSync,showToast,maintainType } from '../../utils/tools'
-import { deleteOrder,maintainList } from '../../service/api';
+import { maintainDelete,maintainList, } from '../../service/api';
 import Maintain from '../../components/maintain';
 import arrow from '../../images/icon/arrow.png'
 import  './index.less'
@@ -178,24 +178,11 @@ class Index extends Component {
   }
   //按钮操作
   handleBtns = (list,item) => {
-    console.log("list",list);
-    console.log("item",item);
-
-    // let params = {
-    //   '1':this.handleDeleteOrder,
-    //   '2':this.handleOrderBuy,
-    //   '3':this.handleConnect,
-    //   '4':this.handlePayMent,
-    //   '5':this.handleSignOk,
-    //   '6':this.handleEvaluation
-    // }
-    // return params[item.key](list);
-  }
-  //支付订单
-  handlePayMent = async(list) => {
-    Taro.navigateTo({
-      url:`../payment/index?openid=${list.openid}&goods_id=${list.goods_id}`
-    });
+    let params = {
+      '2':this.handleDeleteOrder,
+      '3':this.handleConnect,
+    }
+    return params[item.key](list);
   }
   //删除当前订单
   handleDeleteOrder = async(list) => {
@@ -204,7 +191,7 @@ class Index extends Component {
       id:list._id,
       openid:list.openid,
     }
-    let res = await deleteOrder(params);
+    let res = await maintainDelete(params);
     if(res.data.code === 200) {
       showToast({
         title:`${res.data.msg}`,
@@ -214,15 +201,9 @@ class Index extends Component {
       this.getOrderList({'openid':list.openid,'status':activeTab});
     }
   }
-  //再来一单
-  handleOrderBuy = () => {
-    Taro.switchTab({
-      url:'../index/index'
-    })
-  }
   //联系商家
   handleConnect = () => {
-    console.log('联')
+    console.log('联系商家')
   }
   //确认签收
   handleSignOk = () => {

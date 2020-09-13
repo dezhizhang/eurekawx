@@ -7,7 +7,7 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Button } from '@tarojs/components'
-import { userLogin } from '../../service/api'
+import { userLogin,userInfoSave } from '../../service/api'
 import { showModal,appid } from '../../utils/tools'
 import  './index.less'
 
@@ -70,9 +70,13 @@ class Index extends Component {
                   userInfo.url = userInfo.avatarUrl;
                   Taro.setStorageSync('userInfoKey', userInfoKey);
                   Taro.setStorageSync('userInfo', JSON.stringify(userInfo));
-                  Taro.switchTab({
-                    url:'../my/index'
-                  });
+                  userInfoSave({'openid':result.openid,...userInfo}).then(res => {
+                    if(res.data.code === 200) {
+                      Taro.switchTab({
+                        url:'../my/index'
+                      });
+                    }
+                  })
                 }
               })
             })
