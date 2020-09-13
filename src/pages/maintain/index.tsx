@@ -42,15 +42,15 @@ class Index extends Component {
       tabArr:[
         {
           key:'1',
-          value:'新建预约',
+          value:'预约工单',
         },
         {
           key:'2',
-          value:'待处理',
+          value:'处理中',
         },
         {
           key:'3',
-          value:'已完成',
+          value:'已完结',
         },
         {
           key:'4',
@@ -108,7 +108,7 @@ class Index extends Component {
         ]
 
       },
-      activeTab:'0',
+      activeTab:'1',
       activeBtn:'1',
     }
     config: Config = {
@@ -237,7 +237,7 @@ class Index extends Component {
       </View>
       <ScrollView className="order-wrapper">
         {
-          activeTab === '0' ? <Maintain/>:
+          activeTab === '1' ? <Maintain/>:
           orderList.map(list => {
             return  <View key={list._id} className="order-list">
             <View className="order-header">
