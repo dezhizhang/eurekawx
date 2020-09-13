@@ -4,6 +4,7 @@ import Taro, { Component, Config } from '@tarojs/taro'
 import { userLogin } from '../../service/api'
 import { showModal,appid } from '../../utils/tools'
 import  './index.less'
+import { View } from '@tarojs/components'
 
 type PageStateProps = {
   counter: {
@@ -80,7 +81,7 @@ class Index extends Component {
   componentDidHide () { }
 
   render () {
-    return (<></>)
+    return (<View></View>)
   }
 }
 
