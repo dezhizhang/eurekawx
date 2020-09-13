@@ -48,13 +48,7 @@ export async function getProductDetail(params){
 export async function userLogin(params) {
   return request(`${Config.API_HOST}/api/userInfo/login?code=${params.code}&appid=${params.appid}`,{});
 }
-//用户信息保存
-export async function userLoginSave(params) {
-  return request(`${Config.API_HOST}/api/userInfo/save`,{
-    method:'POST',
-    body:params
-  })
-}
+
 //购物车
 export async function userInfoCartSave(params) {
   return request(`${Config.API_HOST}/api/cart/save`,{

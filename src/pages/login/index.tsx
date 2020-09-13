@@ -1,8 +1,7 @@
 
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Button } from '@tarojs/components'
-import { userLogin,userLoginSave } from '../../service/api'
+import { userLogin } from '../../service/api'
 import { showModal,appid } from '../../utils/tools'
 import  './index.less'
 
@@ -76,43 +75,12 @@ class Index extends Component {
     })
   }
   
-  bindGetUserInfo = async(ev) => {
-    if(ev.detail.userInfo){
-      let result  = ev.detail.userInfo;
-      result.userType = '普通会员';
-      let userInfoKey = Taro.getStorageSync('userInfoKey');
-      result.openid = JSON.parse(userInfoKey).openid;
-      result.url = result.avatarUrl; //转换字段
-      let res = await userLoginSave(result);
-      if(res.data.code === 200) {
-        let userInfo = JSON.stringify(result);
-        Taro.setStorageSync('userInfo', userInfo);
-        Taro.switchTab({
-          url:'../my/index'
-        });
-      }   
-    } else {
-      showModal({
-        title:'警告',
-        content:'您还没有授权，请重新授权!',
-        showCancel:false,
-        confirmText:'授权登录'
-      })
-    }
-  }
+
 
   componentDidHide () { }
 
   render () {
-    return (
-    <View className="login">
-      <View className="login-weapper">
-        <Button openType="getUserInfo" className="btn" type="primary" onGetUserInfo={this.bindGetUserInfo}>个人登录</Button>
-        <Button className="btn" type="primary" onClick={this.handle}>企业登录</Button>
-        <Button className="btn" type="primary" onClick={this.handleCompany}>企业注册</Button>
-      </View>
-    </View>
-    )
+    return (<></>)
   }
 }
 
