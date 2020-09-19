@@ -212,11 +212,12 @@
           .item{
             margin-left: 30px;
             flex: 1;
-            height: 440px;
+            height:auto;
             min-width: 330px;
-            max-height: 440px;
+            max-height: 520px;
             border-radius: 10px;
             background: #fff;
+            
             margin-bottom: 20px;
             .item-top{
               height: 330px;
@@ -233,14 +234,26 @@
                 color: #333;
                 font-family: '微软雅黑';
                 margin-left: 20px;
-                margin-bottom: 12px;
+                margin-bottom: 8px;
                 white-space:nowrap;
                 overflow:hidden;
+                text-overflow : ellipsis;
+              }
+              .bottom-sub{
+                font-size: 20px;
+                color: #333;
+                font-family: '微软雅黑';
+                margin-left: 20px;
+                white-space:pre-wrap;
+                overflow:hidden;
+                margin-bottom: 10px;
+                max-height: 60px;
                 text-overflow : ellipsis;
               }
               .bottom-text{
                 display: flex;
                 line-height: 34px;
+                margin-bottom: 10px;
                 .text-left{
                    flex: 1;
                    margin-left: 20px;

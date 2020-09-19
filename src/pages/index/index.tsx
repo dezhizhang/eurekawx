@@ -31,7 +31,7 @@ class Index extends Component {
       focusData:[],
       advertData:[],
       hotData:[],
-      listData:[],
+      listData:[{'_id':'',url:'',title:'',sub_title:'',price:'',}],
       listArr:[],
       page:1,
       classifyArr:[
@@ -236,12 +236,14 @@ class Index extends Component {
           <View className='product_item'>
           <View className="product_wrapper">
             {listData.map(item => {
+              console.log("item",item);
               return  <View className="item" key={item._id} onClick={() =>this.handleToDetail(item)}>
               <View className="item-top">
                 <Image className="image" mode='aspectFill'  src={item.url}/>
               </View>
               <View className="item-bottom">
                 <View className="bottom-desc">{item.title}</View>
+                <View className="bottom-sub">{item.sub_title}</View>
                 <View className="bottom-text">
                     <View className="text-left">￥{Number(item.price).toFixed(2)}</View>
                 </View>
