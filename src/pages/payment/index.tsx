@@ -41,7 +41,7 @@ class Index extends Component {
       },
       totalPrice:0,
       totalFreight:0, //总共的运费
-      payArr:[{url:'',title:'',price:'',number:0,color:'',size:'',goods_id:'',out_trade_no:'',_id:''}]
+      payArr:[{url:'',title:'',price:'',number:0,color:'',size:'',goods_id:'',out_trade_no:'',_id:'',color_title:''}]
     }
     config: Config = {
     navigationBarTitleText: '订单确认'
@@ -63,7 +63,7 @@ class Index extends Component {
       let totalPrice = 0; 
       let totalFreight = 0;
       for(let i=0;i < payArr.length;i++) {
-        totalPrice += Number(payArr[i].price); //计算多个商品的总价钱
+        totalPrice += Number(payArr[i].price) * Number(payArr[i].number); //计算多个商品的总价钱
         totalFreight += Number(payArr[i].freight)
       }
       this.setState({ payArr,totalPrice,totalFreight });
@@ -182,6 +182,8 @@ class Index extends Component {
         {/*列表*/}
         <View className="content-list">
         {payArr&&payArr.map(item => {
+          console.log("item",item);
+
           return (
           <View key={item._id} className="list-wrapper">
              <View className="box-left">
@@ -193,7 +195,7 @@ class Index extends Component {
                 <View className="bottom-text">订单号:<Text>{item.goods_id}</Text></View>
                 <View className="bottom-text">价格：<Text style={{color:'red'}}>￥{Number(item.price).toFixed(2)}</Text> </View>
                 <View className="bottom-text">数量：<Text>{item.number}</Text></View>
-                <View className="bottom-text">颜色：<Text style={{color:item.color}}>{item.color}</Text></View>
+                <View className="bottom-text">颜色：<Text style={{color:item.color}}>{item.color_title}</Text></View>
                 <View className="bottom-text">尺码：<Text>{item.size}</Text></View>
               </View>
             </View>

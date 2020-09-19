@@ -236,7 +236,6 @@ class Index extends Component {
           <View className='product_item'>
           <View className="product_wrapper">
             {listData.map(item => {
-              console.log("item",item);
               return  <View className="item" key={item._id} onClick={() =>this.handleToDetail(item)}>
               <View className="item-top">
                 <Image className="image" mode='aspectFill'  src={item.url}/>

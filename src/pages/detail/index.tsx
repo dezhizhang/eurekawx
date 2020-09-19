@@ -248,9 +248,10 @@ class Index extends Component {
     const that = this;
     const { number,baseData,photoList,defaultColor,defaultSize } = this.state;
     const { color } = defaultColor;
+    const color_title = defaultColor.title;
     const { size } = defaultSize;
     const url = photoList[0];
-    const { title,price,goods_id,freight } = baseData;
+    const { title,price,goods_id,freight, } = baseData;
     const userInfoKey = getStorageSync("userInfoKey");
     const userInfo = userInfoKey ? JSON.parse(userInfoKey):{}
     const { openid } = userInfo;
@@ -264,6 +265,7 @@ class Index extends Component {
       openid,
       freight,
       goods_id,
+      color_title,
       status:1,
     }
     showLoading({title:'加入中'});
@@ -279,9 +281,10 @@ class Index extends Component {
   }
   handlePayment = async() => {
     const { number,baseData,photoList,defaultColor,defaultSize } = this.state;
-    const { color } = defaultColor;
     const { size } = defaultSize;
-    const { title,price,goods_id,freight } = baseData;
+    const { color } = defaultColor;
+    const color_title = defaultColor.title;
+    const { title,price,goods_id,freight,sub_title } = baseData;
     const url = photoList[0];
     const userInfoKey = getStorageSync("userInfoKey");
     const userInfo = userInfoKey ? JSON.parse(userInfoKey):{}
@@ -295,7 +298,9 @@ class Index extends Component {
       price,
       openid,
       freight,
+      sub_title,
       goods_id,
+      color_title,
       status:1,
     }
     let res = await userPrepaid(params);
@@ -368,7 +373,7 @@ class Index extends Component {
                 </View>
               </View>
             </View>
-            <View className="content-center">
+            {/* <View className="content-center">
               <View className="center-wrapper">
                 <View className="item-one center-item">优惠</View>
                 <View className="item-two center-item">领券后至少可减￥10</View>
@@ -377,7 +382,7 @@ class Index extends Component {
                   <Image className="image" src={arrow}/>
                 </View>
               </View>
-            </View>
+            </View> */}
             <View className="content-bottom">
               <View className="bottom-title">图文详情</View>
               {detailList&&detailList.map((item,index) => {

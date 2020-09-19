@@ -37,7 +37,7 @@ class Index extends Component {
     state = {
       isHide:false,
       status:'',
-      orderList:[{title:'',_id:'',color:'',size:'',price:'',url:'',status:'',number:''}],
+      orderList:[{title:'',_id:'',color:'',size:'',price:'',url:'',status:'',number:'',sub_title:''}],
       tabArr:[
         {
           key:'0',
@@ -280,6 +280,7 @@ class Index extends Component {
       <ScrollView className="order-wrapper">
         {
           orderList.map(list => {
+            console.log('list',list);
             return  <View key={list._id} className="order-list">
             <View className="order-header">
             <View className="header-title">{list.title}</View>
@@ -294,7 +295,7 @@ class Index extends Component {
                   <Image className="left-image" src={list.url}/>
                 </View>
                 <View className="content-right">
-                  <View className="right-desc">2018早秋装ins古着新款韩版条纹衬衫情侣装chic…</View>
+                  <View className="right-desc">{list.sub_title}</View>
                   <View className="right-color">颜色：<Text className="color-text">{list.color}</Text></View>
                   <View className="right-color">尺码：<Text className="color-text">{list.size}</Text></View>
                 </View>

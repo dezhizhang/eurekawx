@@ -65,7 +65,7 @@ export const random =(n) => {
 export const orderType = (key) => {
     let params = {
         '1':'待付款',
-        '2':'待付款',
+        '2':'待配送',
         '3':'已签收',
         '4':'待评价',
         '5':'已退货'
