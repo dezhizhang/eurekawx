@@ -2,6 +2,7 @@ import { ComponentClass } from 'react'
 import Taro, { Component, Config, } from '@tarojs/taro'
 import { View, Button,Checkbox,Text } from '@tarojs/components'
 import { showToast } from '../../utils/tools'
+import { userPrepaid } from '../../service/api'
 import  './index.less'
 
 
@@ -26,7 +27,9 @@ interface Index {
 class Index extends Component {
   state = {
     checked:false,
-    goodsJson:{},
+    goodsJson:{
+        status:1
+    },
   }
     config: Config = {
     navigationBarTitleText: '用户协议'
@@ -47,7 +50,7 @@ class Index extends Component {
     });
   }
   //线下支付
-  handleSubmit = () => {
+  handleSubmit = async() => {
     let { checked,goodsJson } = this.state;
     if(!checked) {
         showToast({
@@ -56,11 +59,13 @@ class Index extends Component {
         });
         return;
     }
-    console.log(goodsJson);
-    
-    Taro.redirectTo({
-        url:'../order/index?status=2'
-    });
+    goodsJson.status = 2;
+    let res =await userPrepaid(goodsJson);
+    if(res.data.code === 200) {
+        Taro.redirectTo({
+            url:'../order/index?status=2'
+        });
+    }
   }
   render () {
         const { checked } = this.state;
