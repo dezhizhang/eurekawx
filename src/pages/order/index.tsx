@@ -280,7 +280,6 @@ class Index extends Component {
       <ScrollView className="order-wrapper">
         {
           orderList.map(list => {
-            console.log('list',list);
             return  <View key={list._id} className="order-list">
             <View className="order-header">
             <View className="header-title">{list.title}</View>
