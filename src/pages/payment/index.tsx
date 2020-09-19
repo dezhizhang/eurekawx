@@ -37,6 +37,7 @@ class Index extends Component {
         userType:'',
         avatarUrl:'',
         url:'',
+        address:'',
         isLogin:false, //当削是否登录过
       },
       totalPrice:0,
@@ -143,9 +144,9 @@ class Index extends Component {
     });
   }
   handleMessage = () => {
-    Taro.redirectTo({
+    Taro.navigateTo({
       url:'../address/index?current=2'
-    })
+    });
   } 
   componentDidShow() {
     let params = this.$router.params;
@@ -162,6 +163,7 @@ class Index extends Component {
   componentDidHide () { }
   render () {
     let { payArr,totalPrice,totalFreight,userInfo } = this.state;
+    console.log("userInfo",userInfo);
     return (
       <ScrollView className='payment'
       scrollY
@@ -176,6 +178,14 @@ class Index extends Component {
              </View>
              <View className="icon-right">
                <Image src={arrow} className="image"/>
+             </View>
+          </View>
+        </View>
+        <View className="content-item">
+          <View className="item">
+             <View className="text-left">收货地址</View>
+             <View className="text-right">
+               {userInfo.address ? userInfo.address:''}
              </View>
           </View>
         </View>
