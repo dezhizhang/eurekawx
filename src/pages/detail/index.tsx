@@ -327,6 +327,12 @@ class Index extends Component {
       defaultColor:item
     })
   }
+  onShareAppMessage() {
+    return {
+      title: '贵彩办公',
+      path: '/pages/detail/index'
+    }
+  }
 
   componentDidHide () { }
 

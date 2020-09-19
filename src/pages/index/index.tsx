@@ -146,6 +146,12 @@ class Index extends Component {
       url: `../classify/index?main_id=${item.main_id}`
     })
   }
+  onShareAppMessage() {
+    return {
+      title: '贵彩办公',
+      path: '/pages/index/index'
+    }
+  }
 
   componentWillUnmount () { }
 

@@ -160,6 +160,12 @@ class Index extends Component {
       this.setState({userInfo});
     }
   }
+  onShareAppMessage() {
+    return {
+      title: '贵彩办公',
+      path: '/pages/payment/index'
+    }
+  }
   componentDidHide () { }
   render () {
     let { payArr,totalPrice,totalFreight,userInfo } = this.state;

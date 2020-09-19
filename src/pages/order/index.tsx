@@ -255,6 +255,12 @@ class Index extends Component {
   handleEvaluation = () => {
     console.log('去评价')
   }
+  onShareAppMessage() {
+    return {
+      title: '贵彩办公',
+      path: '/pages/order/index'
+    }
+  }
 
   componentDidHide () { }
 
