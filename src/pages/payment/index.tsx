@@ -126,9 +126,8 @@ class Index extends Component {
   }
   //现下支付
   handleNowpay = () => {
-    showToast({
-      title:'现下支付成功',
-      icon:'success'
+    Taro.redirectTo({
+      url:'../agreement/index'
     });
   }
   handleMessage = () => {
