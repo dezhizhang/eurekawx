@@ -3,7 +3,6 @@ import Taro, { Component, Config } from '@tarojs/taro'
 import detailStore from '../../images/icon/detail_store.png'
 import detailCart from '../../images/icon/detail_cart.png'
 import detailService from '../../images/icon/detail_service.png'
-import detailShare from '../../images/icon/detail_share.png'
 import arrow from '../../images/icon/arrow.png'
 import close from '../../images/icon/close.png'
 import  './index.less'
@@ -63,6 +62,7 @@ class Index extends Component {
         sales:0,
         inventory:0,
         goods_id:0,
+        sub_title:'',
       },
       colorArr:[
         {
@@ -327,6 +327,8 @@ class Index extends Component {
 
   render () {
     let { baseData,photoList,detailList,animationData,showModalStatus,number,colorArr,sizeArr,defaultColor,defaultSize } = this.state; 
+    console.log("baseData",baseData);
+    
     return (
      <ScrollView 
         scrollY
@@ -355,12 +357,7 @@ class Index extends Component {
             <View className="content-top">
               <View className="top-title">
                 <View className="title-left">{baseData.title}</View>
-                <View className="title-right">
-                  <View className="right-icon">
-                    <Image src={detailShare} className="image"/>
-                  </View>
-                  <View className="right-text">分享</View>
-                </View>
+                <View className="title-sub">{baseData.sub_title}</View>
               </View>
               <View className="top-price">￥{Number(baseData.price).toFixed(2)}</View>
               <View className="top-list">
