@@ -13,7 +13,8 @@ type PageStateProps = {
 
 type PageOwnProps = {}
 type PageState = {
-    checked:boolean
+    checked:boolean;
+    goodsJson:any;
 }
 
 type IProps = PageStateProps  & PageOwnProps
@@ -25,12 +26,19 @@ interface Index {
 class Index extends Component {
   state = {
     checked:false,
+    goodsJson:{},
   }
     config: Config = {
     navigationBarTitleText: '用户协议'
   }
   componentWillReceiveProps (nextProps) {
     console.log(this.props, nextProps)
+  }
+  componentDidMount() {
+    let params = this.$router.params;
+    let goods = params.goods;
+    let goodsJson = JSON.parse(goods);
+    this.setState({ goodsJson });
   }
   handleCheckbox = () => {
     let { checked } = this.state;
@@ -40,7 +48,7 @@ class Index extends Component {
   }
   //线下支付
   handleSubmit = () => {
-    let { checked } = this.state;
+    let { checked,goodsJson } = this.state;
     if(!checked) {
         showToast({
             title:'请选择协议',
@@ -48,6 +56,8 @@ class Index extends Component {
         });
         return;
     }
+    console.log(goodsJson);
+    
     Taro.redirectTo({
         url:'../order/index?status=2'
     });

@@ -125,9 +125,19 @@ class Index extends Component {
     }  
   }
   //现下支付
-  handleNowpay = () => {
+  handleNowpay = async() => {
+    let { payArr,userInfo } = this.state;
+    if(!userInfo.userName) {
+      Taro.showToast({
+        title:'请填写收货人',
+        icon:'none'
+      });
+      return
+    }
+    payArr[0].out_trade_no = payArr[0].goods_id
+    let goods = JSON.stringify(payArr[0]);
     Taro.redirectTo({
-      url:'../agreement/index'
+      url:`../agreement/index?goods=${goods}`
     });
   }
   handleMessage = () => {
