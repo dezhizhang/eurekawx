@@ -1,7 +1,7 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View,Image,ScrollView,Text} from '@tarojs/components'
-import { showToast,appid,orderNumber, } from '../../utils/tools';
+import { appid,orderNumber, } from '../../utils/tools';
 import arrow from '../../images/icon/arrow.png'
 import { payInfoList,getPayInfo,updateStatus,getUserInfo } from '../../service/api';
 import  './index.less'
