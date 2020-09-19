@@ -153,7 +153,7 @@ class Index extends Component {
                 </View>
           </View>
           <Button className="btn" onClick={this.handleSubmit}>提交</Button>
-          <View style={{textAlign:'center',color:'#ccc'}} onClick={this.handlePhoneCall}>
+          <View style={{textAlign:'center',color:'#ccc',fontSize:32}} onClick={this.handlePhoneCall}>
             <Text>电话联系客服:13025376666</Text>
           </View>
     </View>

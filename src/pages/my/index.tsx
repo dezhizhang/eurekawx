@@ -250,14 +250,14 @@ class Index extends Component {
              </View>
           </View>
         </View>
-        <View className="content-item" onClick={this.handleCollection}>
+        {/* <View className="content-item" onClick={this.handleCollection}>
           <View className="item">
              <View className="icon-left">
                <Image className="image" src={msg}/>
              </View>
              <View className="text-left">我的收藏</View>
              <View className="text-right">
-               {/* <View className="text-number">16</View> */}
+               
              </View>
              <View className="icon-right">
                <Image src={arrow} className="image"/>
@@ -272,13 +272,13 @@ class Index extends Component {
              <View className="text-left">我的卡券</View>
              <View className="text-right">
               你有3张优惠券待使用
-               {/* <View className="text-number">16</View> */}
+              
              </View>
              <View className="icon-right">
                <Image src={arrow} className="image"/>
              </View>
           </View>
-        </View>
+        </View> */}
         <View className="content-item" onClick={this.handleCompany}>
           <View className="item">
              <View className="icon-left">
