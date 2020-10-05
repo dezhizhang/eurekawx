@@ -1,6 +1,6 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config, } from '@tarojs/taro'
-import { View, Textarea, Button,Image,Text } from '@tarojs/components'
+import { View, Textarea, Button,Image,Text,Form } from '@tarojs/components'
 import { uploadInfo,getUserInfo } from '../../service/api'
 import { showLoading,hideLoading,getStorageSync,showToast } from '../../utils/tools'
 import server from '../../images/server.png'
@@ -81,10 +81,16 @@ class Index extends Component {
       })
     }
   }
-  handleSubmit = () => {
+  handleSubmit = async(ev) => {
+    console.log("ev",ev);
     const { description,tempFilePaths,userInfo } = this.state;
     const { mobile,address,openid,userName } = userInfo;
+    const { formId } = ev.detail;
+    const result = await Taro.login();
+    const { code } = result
     const params = {
+      code,
+      formId,
       openid,
       mobile,
       address,
@@ -152,7 +158,9 @@ class Index extends Component {
                   </View>
                 </View>
           </View>
-          <Button className="btn" onClick={this.handleSubmit}>提交</Button>
+          <Form reportSubmit={true} onSubmit={this.handleSubmit}>
+            <Button className="btn"formType="submit">提交</Button>
+          </Form>
           <View style={{textAlign:'center',color:'#ccc',fontSize:32}} onClick={this.handlePhoneCall}>
             <Text>电话联系客服:13025376666</Text>
           </View>
