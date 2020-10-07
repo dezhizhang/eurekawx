@@ -1,6 +1,6 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config, } from '@tarojs/taro'
-import { View, Textarea, Button,Image,Text,Form } from '@tarojs/components'
+import { View, Textarea, Button,Image,Text, } from '@tarojs/components'
 import { uploadInfo,getUserInfo } from '../../service/api'
 import { showLoading,hideLoading,getStorageSync,showToast } from '../../utils/tools'
 import server from '../../images/server.png'
@@ -8,13 +8,11 @@ import upload from '../../images/upload.png'
 import  './index.less'
 
 
-type PageStateProps = {
+type PageStateProps  = {
   counter: {
     num: number
   }
 }
-
-
 
 type PageOwnProps = {}
 
@@ -81,16 +79,23 @@ class Index extends Component {
       })
     }
   }
-  handleSubmit = async(ev) => {
-    console.log("ev",ev);
+  handleSubmit = async() => {
     const { description,tempFilePaths,userInfo } = this.state;
     const { mobile,address,openid,userName } = userInfo;
-    const { formId } = ev.detail;
-    const result = await Taro.login();
-    const { code } = result
+    const res = await Taro.getSetting({withSubscriptions:true});
+    if(res.authSetting) {
+      // Taro.requestPayment();
+    }
+    // console.log(res);
+
+    // Taro.requestSubscribeMessage({
+    //   tmplIds: ['0XK1EO7jvqJtHbt_wVfRF9f050sAe4LAo021WqG0_Ds'],
+    //   success: function (res) { 
+    //     console.log('res',res);
+    //   }
+    // })
+    
     const params = {
-      code,
-      formId,
       openid,
       mobile,
       address,
@@ -158,9 +163,8 @@ class Index extends Component {
                   </View>
                 </View>
           </View>
-          <Form reportSubmit={true} onSubmit={this.handleSubmit}>
-            <Button className="btn"formType="submit">提交</Button>
-          </Form>
+          <Button className="btn"formType="submit" onClick={this.handleSubmit}>提交</Button>
+    
           <View style={{textAlign:'center',color:'#ccc',fontSize:32}} onClick={this.handlePhoneCall}>
             <Text>电话联系客服:13025376666</Text>
           </View>
@@ -170,4 +174,4 @@ class Index extends Component {
   }
 }
 
-export default Index as unknown as ComponentClass<PageOwnProps, PageState>
+export default Index as ComponentClass<PageOwnProps, PageState>

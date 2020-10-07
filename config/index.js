@@ -1,5 +1,5 @@
 const config = {
-  projectName: 'myApp',
+  projectName: 'eurekawx',
   date: '2019-9-16',
   designWidth: 750,
   deviceRatio: {
@@ -95,7 +95,7 @@ const config = {
 }
 
 module.exports = function (merge) {
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV === 'production') {
     return merge({}, config, require('./dev'))
   }
   return merge({}, config, require('./prod'))
