@@ -13,6 +13,8 @@ Node version:
 Platform: 
   darwin x64
 
+  /usr/local/lib/node_modules/@tarojs/cli/templates/taro-temp
+
 Trace: 
   Error: https://registry.yarnpkg.com/@tarojs%2fasync-await: ESOCKETTIMEDOUT
       at ClientRequest.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141289:19)
