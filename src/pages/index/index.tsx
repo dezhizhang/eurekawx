@@ -1,5 +1,5 @@
-import { ComponentClass } from 'react'
-import Taro, { Component, Config } from '@tarojs/taro'
+import { ComponentClass,Component } from 'react'
+import Taro, { Config } from '@tarojs/taro'
 import { View, Swiper, SwiperItem,ScrollView,Image  } from '@tarojs/components'
 import { getFocusInfo,getAdvertInfo,getProductHot,getProductList } from '../../service/api'
 import { showLoading,hideLoading } from '../../utils/tools';

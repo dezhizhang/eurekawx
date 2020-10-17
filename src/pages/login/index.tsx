@@ -1,6 +1,6 @@
 
-import { ComponentClass } from 'react'
-import Taro, { Component, Config } from '@tarojs/taro'
+import { ComponentClass,Component } from 'react'
+import Taro, { Config } from '@tarojs/taro'
 import { userLogin } from '../../service/api'
 import { showModal,appid } from '../../utils/tools'
 import  './index.less'

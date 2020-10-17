@@ -1,5 +1,5 @@
-import { ComponentClass } from 'react'
-import Taro, { Component, Config } from '@tarojs/taro'
+import { ComponentClass,Component } from 'react'
+import Taro, { Config } from '@tarojs/taro'
 import { View,  Image,ScrollView, } from '@tarojs/components'
 import { getCategoryList } from '../../service/api'
 import  './index.less'

@@ -1,5 +1,5 @@
-import { ComponentClass } from 'react'
-import Taro, { Component, Config, } from '@tarojs/taro'
+import { ComponentClass,Component } from 'react'
+import Taro, { Config, } from '@tarojs/taro'
 import { View, Input,Text, Button,Image } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import { add, minus, asyncAdd } from '../../actions/counter'

@@ -1,5 +1,6 @@
 import { ComponentClass } from 'react'
-import Taro, { Component, Config, } from '@tarojs/taro'
+import Taro, {  Config, } from '@tarojs/taro'
+import { Component } from 'react'
 import { View, Button,Checkbox,Text } from '@tarojs/components'
 import { showToast } from '../../utils/tools'
 import { userPrepaid } from '../../service/api'

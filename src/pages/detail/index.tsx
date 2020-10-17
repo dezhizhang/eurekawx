@@ -1,5 +1,5 @@
-import { ComponentClass } from 'react'
-import Taro, { Component, Config } from '@tarojs/taro'
+import { ComponentClass,Component } from 'react'
+import Taro, { Config } from '@tarojs/taro'
 import detailStore from '../../images/icon/detail_store.png'
 import detailCart from '../../images/icon/detail_cart.png'
 import detailService from '../../images/icon/detail_service.png'

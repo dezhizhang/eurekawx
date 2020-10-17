@@ -1,5 +1,5 @@
-import { ComponentClass } from 'react'
-import Taro, { Component, Config } from '@tarojs/taro'
+import Taro, { Config } from '@tarojs/taro'
+import {Component,ComponentClass} from 'react';
 import { View,Button, Input,Text } from '@tarojs/components'
 import { getStorageSync } from '../../utils/tools'
 import { userInfoSave } from '../../service/api';

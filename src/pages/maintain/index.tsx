@@ -4,8 +4,8 @@
  * @date:20202-08-22
  * @desc:订单列表
 */
-import { ComponentClass } from 'react'
-import Taro, { Component, Config } from '@tarojs/taro'
+import { ComponentClass,Component } from 'react'
+import Taro, { Config } from '@tarojs/taro'
 import { View,ScrollView,Image  } from '@tarojs/components'
 import { getStorageSync,showToast,maintainType } from '../../utils/tools'
 import { maintainDelete,maintainList, } from '../../service/api';

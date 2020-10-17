@@ -1,5 +1,6 @@
 import { ComponentClass } from 'react'
-import Taro, { Component, Config } from '@tarojs/taro'
+import Taro, { Config } from '@tarojs/taro'
+import { Component } from 'react';
 import { View, Input, Radio,ScrollView,Image, Icon } from '@tarojs/components'
 import { getCartList,updateCartList,deleteCart,updateCartStatus,cartPrepaid } from '../../service/api'
 import { showToast,getStorageSync } from '../../utils/tools'
