@@ -1,65 +1,52 @@
-import { ComponentClass,Component } from 'react'
-import Taro, { Config } from '@tarojs/taro'
-import { View, Swiper, SwiperItem,ScrollView,Image  } from '@tarojs/components'
-import { getFocusInfo,getAdvertInfo,getProductHot,getProductList } from '../../service/api'
+import React, { Component } from 'react'
+import { View,Swiper, SwiperItem,ScrollView,Image  } from '@tarojs/components'
 import { showLoading,hideLoading } from '../../utils/tools';
+import { getFocusInfo,getAdvertInfo,getProductHot,getProductList } from '../../service/api'
 import category from '../../images/category.png'
 import facility from '../../images/facility.png'
 import stationery from '../../images/stationery.png'
 import evenmore from '../../images/evenmore.png'
-import  './index.less'
+import './index.less'
 
-type PageStateProps = {
-  counter: {
-    num: number
-  }
+
+interface IndexProps {
+
 }
 
-type PageOwnProps = {}
+interface IndexState {
 
-type PageState = {}
-
-type IProps = PageStateProps  & PageOwnProps
-
-interface Index {
-  props: IProps;
 }
 
-
-class Index extends Component {
-    state = {
-      focusData:[],
-      advertData:[],
-      hotData:[],
-      listData:[{'_id':'',url:'',title:'',sub_title:'',price:'',}],
-      listArr:[],
-      page:1,
-      classifyArr:[
-        {
-          name:'办公',
-          main_id:'1',
-          src:category
-        },
-        {
-          name:'设备',
-          main_id:'2',
-          src:facility
-        },
-        {
-          name:'文具',
-          main_id:'3',
-          src:stationery
-        },
-        {
-          name:'更多',
-          main_id:'4',
-          src:evenmore
-        }
-      ]
-    }
-
-  config: Config = {
-    navigationBarTitleText: '贵彩办公'
+export default class Index extends Component<IndexProps,IndexState> {
+  state = {
+    focusData:[],
+    advertData:[],
+    hotData:[],
+    listData:[{'_id':'',url:'',title:'',sub_title:'',price:'',}],
+    listArr:[],
+    page:1,
+    classifyArr:[
+      {
+        name:'办公',
+        main_id:'1',
+        src:category
+      },
+      {
+        name:'设备',
+        main_id:'2',
+        src:facility
+      },
+      {
+        name:'文具',
+        main_id:'3',
+        src:stationery
+      },
+      {
+        name:'更多',
+        main_id:'4',
+        src:evenmore
+      }
+    ]
   }
 
   componentWillReceiveProps (nextProps) {
@@ -158,6 +145,7 @@ class Index extends Component {
   componentDidShow () { }
 
   componentDidHide () { }
+
 
   render () {
     const { focusData,advertData,hotData,listData,classifyArr } = this.state;
@@ -263,4 +251,5 @@ class Index extends Component {
   }
 }
 
-export default Index as ComponentClass<PageOwnProps, PageState>
+
+

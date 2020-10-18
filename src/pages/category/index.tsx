@@ -1,39 +1,22 @@
-import { ComponentClass,Component } from 'react'
-import Taro, { Config } from '@tarojs/taro'
-import { View,  Image,ScrollView, } from '@tarojs/components'
+import React, { Component } from 'react'
+import { View,ScrollView,Image  } from '@tarojs/components'
 import { getCategoryList } from '../../service/api'
-import  './index.less'
+import './index.less'
 
-type PageStateProps = {
-  counter: {
-    num: number
-  }
+interface IndexProps {
+
 }
 
-type PageDispatchProps = {
-  add: () => void
-  dec: () => void
-  asyncAdd: () => any
+interface IndexState {
+
 }
 
-type PageOwnProps = {}
-
-type PageState = {}
-
-type IProps = PageStateProps & PageDispatchProps & PageOwnProps
-
-interface Index {
-  props: IProps;
-}
-class Index extends Component {
-  state = {
-    categoryArr:[],
-    detailArr:[],
-    currentIndex:0
-  }
-  config: Config = {
-    navigationBarTitleText: '商品分类'
-  }
+export default class Index extends Component<IndexProps,IndexState> {
+    state = {
+        categoryArr:[],
+        detailArr:[],
+        currentIndex:0
+      }
 
   componentWillReceiveProps (nextProps) {
     console.log(this.props, nextProps)
@@ -64,6 +47,8 @@ class Index extends Component {
   componentWillUnmount () { }
   componentDidShow () { }
   componentDidHide () { }
+
+
   render () {
     let { categoryArr,currentIndex,detailArr } = this.state;
     return (
@@ -103,4 +88,5 @@ class Index extends Component {
   }
 }
 
-export default Index as ComponentClass<PageOwnProps, PageState>
+
+

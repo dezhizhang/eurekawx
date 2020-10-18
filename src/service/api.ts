@@ -1,5 +1,5 @@
 import { request,uploadFile } from '../utils/request';
-import Config from '../common/config';
+import Config from '../utils/config';
 //轮播图
 export async function getFocusInfo() {
   return request(`${Config.API_HOST}/api/focus/info`);

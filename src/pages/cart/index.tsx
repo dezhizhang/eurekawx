@@ -1,52 +1,32 @@
-import { ComponentClass } from 'react'
-import Taro, { Config } from '@tarojs/taro'
-import { Component } from 'react';
-import { View, Input, Radio,ScrollView,Image, Icon } from '@tarojs/components'
+import React, { Component } from 'react'
+import { View, Input, Radio,ScrollView,Image, Icon   } from '@tarojs/components'
 import { getCartList,updateCartList,deleteCart,updateCartStatus,cartPrepaid } from '../../service/api'
 import { showToast,getStorageSync } from '../../utils/tools'
 import arror from '../../images/icon/arrow.png'
-import  './index.less'
+import './index.less'
+interface IndexProps {
 
-type PageStateProps = {
-  counter: {
-    num: number
-  }
 }
 
-type PageOwnProps = {}
+interface IndexState {
 
-type PageState = {
-  cartList:any;
-  allChecked:boolean;
-  openid:string;
 }
 
-type IProps = PageStateProps  & PageOwnProps
-
-interface Index {
-  props: IProps;
-}
-
-
-class Index extends Component {
-  state = {
-    cartList:[
-      {
-        url:'',
-        checked:false,
-        number:0,
-        title:'',
-        price:0,
-        _id:'',
-      }
-    ],
-    openid:"",
-    allChecked:false
-  }
-  config: Config = {
-    navigationBarTitleText: '购物车'
-  }
-
+export default class Index extends Component<IndexProps,IndexState> {
+    state = {
+        cartList:[
+          {
+            url:'',
+            checked:false,
+            number:0,
+            title:'',
+            price:0,
+            _id:'',
+          }
+        ],
+        openid:"",
+        allChecked:false
+    }
   componentWillReceiveProps (nextProps) {
     console.log(this.props, nextProps)
   }
@@ -198,6 +178,10 @@ class Index extends Component {
       this.getListInfo()
     }
   }
+
+
+
+
   render () {
     let { cartList,allChecked } = this.state;
     let totalPrice = 0;
@@ -269,4 +253,4 @@ class Index extends Component {
 }
 
 
-export default Index as ComponentClass<PageOwnProps, PageState>
+

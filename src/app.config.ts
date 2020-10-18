@@ -1,28 +1,9 @@
-import '@tarojs/async-await'
-
 export default {
-   
   pages: [
     'pages/index/index',
     'pages/my/index',
-    'pages/maintain/index',
-    'pages/cart/index',
     'pages/category/index',
-    'pages/detail/index',
-    'pages/classify/index',
-    'pages/login/index',
-    "pages/setting/index",
-    "pages/message/index",
-    "pages/collection/index",
-    "pages/company/index",
-    "pages/user/index",
-    "pages/address/index",
-    "pages/perLogin/index",
-    "pages/comLogin/index",
-    "pages/order/index",
-    "pages/payment/index",
-    "pages/agreement/index",
-   
+    'pages/cart/index'
   ],
   window: {
     backgroundTextStyle: 'light',
@@ -55,6 +36,5 @@ export default {
       selectedIconPath:"./images/tab/user-active.png"
     }
   ],
-  }
-
+  },
 }
