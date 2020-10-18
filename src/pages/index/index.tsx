@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Taro from '@tarojs/taro'
 import { View,Swiper, SwiperItem,ScrollView,Image  } from '@tarojs/components'
 import { showLoading,hideLoading } from '../../utils/tools';
 import { getFocusInfo,getAdvertInfo,getProductHot,getProductList } from '../../service/api'

@@ -1,0 +1,449 @@
+.detail{
+    width: 100%;
+    background:#f5f5f5;
+    .detail-header{
+        .detail-swiper{
+           height: 750px;
+           .swiper{
+               height: 750px;
+               .swiper-item{
+                   width: 100%;
+                   height: 100%;
+                   .image{
+                       width: 100%;
+                       height: 100%;
+                       display: block;
+                   }
+
+               }
+           }
+        }
+        .detail-content{
+            .content-top{
+                height: 236px;
+                width: 100%;
+                background: #fff;
+                margin-bottom: 20px;
+                overflow: hidden;
+                padding: 26px 0px;
+                .top-title{
+                    margin-bottom: 10px;
+                    .title-left{
+                        flex: 1;
+                        font-size: 28px;
+                        font-family: '微软雅黑';
+                        color: #333;
+                        line-height: 41px;
+                        margin-left: 30px;
+                        text-overflow : ellipsis;
+                    }
+                    .title-sub{
+                        font-family: '微软雅黑';
+                        font-size: 24px;
+                        color: #999;
+                        margin-bottom: 10px;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        white-space: pre-wrap;
+                        margin-left: 30px;
+                        margin-right: 30px;
+                    }
+                    .title-right{
+                        width: 136px;
+                        height: 60px;
+                        line-height: 60px;
+                        background: #DBDBDB;
+                        margin-top: 12px;
+                        border-top-left-radius: 30px;
+                        border-bottom-left-radius: 30px;
+
+                        display: flex;
+                        .right-icon{
+                            width: 26px;
+                            height: 26px;
+                            display: inline-block;
+                            margin-left: 35px;
+                            .image{
+                                width: 100%;
+                                height: 100%;
+                            }
+                        }
+                        .right-text{
+                            display: inline-block;
+                            font-size: 24px;
+                            font-family: 'Microsoft YaHei';
+                            font-weight: 400;
+                            height: 100%;
+                            margin-left: 7px;
+                            color: #666;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        }
+
+                    }
+                }
+            }
+            .top-price{
+                display: inline-block;
+                margin-left: 30px;
+                font-size: 34px;
+                font-family: 'Microsoft YaHei';
+                font-weight: bold;
+                color: #E01212;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                margin-bottom: 30px;
+            }
+            .top-list{
+                padding: 0px 30px;
+                .list-wrapper{
+                    display: flex;
+                    .list-item{
+                        flex: 1;
+                        font-size: 24px;
+                        font-weight: 400;
+                        color: #999;
+                    }
+                    .list-item:nth-of-type(2){
+                        text-align: center;
+                    }
+                    .list-item:nth-of-type(3){
+                        text-align: right;
+                    }
+
+                }
+            }
+            .content-center{
+                width: 100%;
+                height: 88px;
+                line-height: 88px;
+                margin-bottom: 20px;
+                display: flex;
+                justify-content: center;
+                background: #fff;
+                .center-wrapper{
+                    width: 94%;
+                    height: 100%;
+                    display: flex;
+                    .center-item{
+                        font-family: 'Microsoft YaHei';
+                        font-weight: 400;
+                    }
+                    .item-one{
+                        width: 56px;
+                        font-size: 28px;
+                        color: #999;
+                    }
+                    .item-two{
+                        margin-left: 28px;
+                        font-size: 24px;
+                        color: #333;
+                        flex: 1;
+                    }
+                    .item-three{
+                        width: 49px;
+                        color: #999;
+                        margin-right: 22px;
+                        font-size: 24px;
+                    }
+                    .item-four{
+                        width: 16px;
+                        height: 28px;
+                        .image{
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+
+                }
+            }
+            .content-bottom{
+                background: #fff;
+                overflow: hidden;
+                .bottom-title{
+                    font-size: 32px;
+                    margin-top: 10px;
+                    text-align: center;
+                    color: #333;
+                    margin-bottom: 10px;
+                }
+                .bottom-item{
+                    width: 100%;
+                    height: 600px;
+                    .image{
+                        width: 100%;
+                        height: 100%;
+                        display: block;
+                    }
+                }
+
+            }
+        }
+    }
+    .detail-bottom{
+        width: 100%;
+        height: 98px;
+        line-height: 98px;
+        background: #fff;
+        border: 1px solid #eee;
+        position: fixed;
+        z-index: 10;
+        bottom: 0px;
+        .detail-wrapper{
+            display: flex;
+            .detail-item{
+                flex: 1;
+                text-align: center;
+                height: 98px;
+                .item-store{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    width: 100%;
+                    height: 98px;
+                    .store-icon{
+                        width: 36px;
+                        height: 32px;
+                        .image{
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+                    .store-text{
+                        font-size: 22px;
+                        font-family: 'Microsoft YaHei';
+                        font-weight: 400;
+                        color: #666;
+                    }
+
+                }
+            }
+            .detail-bgitem{
+                width: 210px;
+                height: 98px;
+                line-height: 98px;
+                color: #fff;
+                font-size: 28px;
+                font-family: 'Microsoft YaHei';
+                font-weight: 400;
+                text-align: center;
+            }
+            .item-cart{
+                background: #FF9B19;
+            }
+            .item-buy{
+                background: #E01212;
+            }
+        }
+    
+    }
+    .detail-bg{
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: #000;
+        opacity: 0.2;
+        overflow: hidden;
+        z-index: 1000;
+        color: #fff;
+    }
+    .detail-modal{
+        height: 700px;
+        width: 100%;
+        overflow: hidden;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        z-index: 2000;
+        background: #fff;
+        .modal-wrapper{
+            width: 100%;
+            height: 100%;
+            padding: 0px 30px;
+            .modal-box{
+                width: 92%;
+                height: 100%;
+                .box-top{
+                    display: flex;
+                    overflow: hidden;
+                    margin-bottom: 30px;
+                    .top-left{
+                        width: 140px;
+                        height: 140px;
+                        border-radius: 5px;
+                        margin-top: 20px;
+                        .image{
+                            width: 100%;
+                            height: 100%;
+                            display: block;
+                        }
+                    }
+                    .top-right{
+                        flex: 1;
+                        margin-left: 20px;
+                        position: relative;
+                        overflow: hidden;
+                        .right-icon{
+                            width: 40px;
+                            height: 40px;
+                            border-radius: 50%;
+                            text-align: right;
+                            position: absolute;
+                            top: 20px;
+                            right: 0px;
+                            margin-bottom: 20px;
+                            .image{
+                                width: 100%;
+                                height: 100%;
+                                display: block;
+                            }
+                        }
+                        .right-text{
+                            margin-top: 40px;
+                            font-size:28px;
+                            font-family:'Microsoft YaHei';
+                            font-weight:normal;
+                            color:rgba(51,51,51,1);
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            margin-bottom: 10px;
+                        }
+                        .right-price{
+                            font-size:32px;
+                            font-family:'Microsoft YaHei';
+                            font-weight:normal;
+                            color:rgba(236,62,38,1)
+                        }
+                    }
+                }
+                .box-bottom{
+                    width: 100%;
+                    height: 100%;
+                    border-top: 2px solid rgba(246,246,250,1);
+                    overflow: hidden;
+                    .bottom-title{
+                        margin-top: 10px;
+                        font-size: 30px;
+                        color: #333;
+                        margin-bottom: 10px;
+                    }
+                    .bottom-item{
+                        height: 40px;
+                        display: flex;
+                        flex-wrap:  wrap;
+                        margin-bottom: 30px;
+                        .item-list{
+                            height: 50px;
+                            width: 100px;
+                            font-size: 24px;
+                            min-width:100px;
+                            margin-bottom: 20px;
+                            text-align: center;
+                            border-radius: 6px;
+                            // background: #735ff7;
+                            color: #fff;
+                            line-height: 50px;
+                        }
+                        .list-left{
+                            margin-left: 20px;
+                        }
+    
+                    }
+                    .bottom-rule{
+                        margin-top: 40px;
+                        font-size: 30px;
+                        color: #333;
+                        margin-bottom: 30px;
+                        .item-list{
+                            width: 100px;
+                            font-size: 24px;
+                            min-width:100px;
+                            margin-bottom: 20px;
+                            text-align: center;
+                            border-radius: 15px;
+                            background: #735ff7;
+                            color: #fff;
+                            line-height: 40px;
+                        }
+                    }
+                    .right-bottom{
+                        height: 70px;
+                        display: flex;
+                        margin-bottom: 70px;
+                        .bottom-left{
+                            flex: 1;
+                            font-size: 36px;
+                            font-family: 'Microsoft YaHei';
+                            font-weight: 500px;
+                            color: #FF4E6C;
+
+                        }
+                        .bottom-right{
+                            width: 210px;
+                            height: 60px;
+                            border: 1px solid #F4F4F4;
+                            display: flex;
+                            .number-left{
+                                width: 60px;
+                                height: 100%;
+                                text-align: center;
+                                line-height: 60px;
+                                border-right: 1px solid #F4F4F4;
+                                color: #999;
+                                font-size: 40px;
+                            }
+                            .number-center{
+                                flex: 1;
+                                height: 100%;
+                                .input{
+                                    width: 100%;
+                                    height: 60px;
+                                    line-height: 60px;
+                                    text-align: center;
+                                    font-size: 36px;
+                                    color: #4B4B4B;
+                                }
+                                
+                            }
+                            .number-right{
+                                width: 60px;
+                                height: 100%;
+                                text-align: center;
+                                line-height: 60px;
+                                border-left: 1px solid #F4F4F4;
+                                font-size: 30px;
+                                color: #999;
+
+                            }
+
+                        }
+                    }
+                
+                }
+                .bottom-btn{
+                    width: 100%;
+                    height: 86px;
+                    cursor: pointer;
+                    .btn{
+                        width: 100%;
+                        font-size: 30px;
+                        line-height: 86px;
+                        height: 86px;
+                        text-align: center;
+                        color: #ffff;
+                        background: #735ff7;
+                    }
+                }
+            }
+           
+        }
+  
+    }
+
+}
