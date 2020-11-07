@@ -6,6 +6,8 @@ export default {
     'pages/cart/index',
     "pages/detail/index",
     "pages/maintain/index",
+    "pages/setting/index",
+    "pages/login/index"
   ],
   window: {
     backgroundTextStyle: 'light',

@@ -130,7 +130,7 @@ export default class Index extends Component<IndexProps,IndexState> {
       //个人登录
       handlePerToLogin = () => {
         Taro.navigateTo({
-          url:'../perLogin/index'
+          url:'../login/index'
         });
       }
       //企业登录
