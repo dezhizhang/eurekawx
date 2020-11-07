@@ -10,6 +10,7 @@ export default {
     "pages/login/index",
     "pages/company/index",
     "pages/order/index",
+    "pages/payment/index",
   ],
   window: {
     backgroundTextStyle: 'light',
