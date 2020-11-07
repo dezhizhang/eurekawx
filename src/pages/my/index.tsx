@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Taro  from '@tarojs/taro'
 import { View,Image  } from '@tarojs/components'
 import { getStorageSync } from '../../utils/tools'
 import { companyInfo,getOrderContent,getUserInfo} from '../../service/api';
@@ -8,7 +9,6 @@ import allOrder from '../../images/all_order.png'
 import msg from '../../images/icon/msg.png'
 import arrow from '../../images/icon/arrow.png'
 import  './index.less'
-
 
 
 interface IndexProps {
