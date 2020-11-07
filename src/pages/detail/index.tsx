@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import Taro, { Config } from '@tarojs/taro'
+
+import Taro, { getCurrentInstance } from '@tarojs/taro'
 import detailStore from '../../images/icon/detail_store.png'
 import detailCart from '../../images/icon/detail_cart.png'
 import detailService from '../../images/icon/detail_service.png'
@@ -95,8 +96,14 @@ export default class Index extends Component<IndexProps,IndexState> {
   componentWillReceiveProps (nextProps) {
     console.log(this.props, nextProps)
   }
-  componentWillMount () {
-    let params = this.$router.params;
+  // componentWillMount () {
+  //   let params = this.$router.params;
+  //   this.baseData(params);
+  //   this.photoDetail(params);
+  //   this.detailData(params);
+  // }
+  componentDidMount() {
+    let params = getCurrentInstance().router.params;
     this.baseData(params);
     this.photoDetail(params);
     this.detailData(params);
