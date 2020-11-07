@@ -153,11 +153,7 @@ export default class Index extends Component<IndexProps,IndexState> {
       }
     componentDidHide () { }
   render () {
-   
-
     let { userInfo,orderInfo } = this.state;
-      
-    
         return (
         <View className="my">
           <View className="header">
@@ -166,11 +162,11 @@ export default class Index extends Component<IndexProps,IndexState> {
                   <Image className="image" src={myHeader}/>
                 </View>
                 <View className="header_avatar">
-                  <Image src={userInfo&&userInfo.avatarUrl ? userInfo.avatarUrl:userInfo.url ? userInfo.url:avatar} className="avatar"/>
+                  <Image src={userInfo&&userInfo?.avatarUrl ? userInfo.avatarUrl:userInfo?.url ? userInfo?.url:avatar} className="avatar"/>
                 </View>
                 <View className="header_user">
-                  <View className="user_name" onClick={this.handlePerToLogin}>{userInfo.nickName ? userInfo.nickName:'马上登录'}</View>
-                  <View className="user_address">会员:{userInfo&&userInfo.userType}</View>
+                  <View className="user_name" onClick={this.handlePerToLogin}>{userInfo?.nickName ? userInfo?.nickName:'马上登录'}</View>
+                  <View className="user_address">会员:{userInfo&&userInfo?.userType}</View>
                 </View>
                 <View className="header_right">
                    <View className="right" onClick={this.handleUserInfo}>
