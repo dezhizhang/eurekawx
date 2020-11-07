@@ -7,7 +7,8 @@ export default {
     "pages/detail/index",
     "pages/maintain/index",
     "pages/setting/index",
-    "pages/login/index"
+    "pages/login/index",
+    "pages/company/index",
   ],
   window: {
     backgroundTextStyle: 'light',
