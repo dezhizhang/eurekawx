@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import Taro, { getCurrentInstance } from '@tarojs/taro'
 import { View,ScrollView,Image,} from '@tarojs/components'
 import { getStorageSync,showToast,maintainType } from '../../utils/tools'
-import { maintainDelete,maintainList, } from '../../service/api';
+import { maintainDelete,maintainList, } from '../../service/api'
 import arrow from '../../images/icon/arrow.png'
+import Maintain from '../../components/maintain'
 import './index.less'
 interface IndexProps {
 
@@ -215,8 +216,7 @@ export default class Index extends Component<IndexProps,IndexState> {
         <ScrollView className="order-wrapper">
           {
             activeTab === '1' ? 
-            null:
-            // <Maintain/>:
+            <Maintain/>:
             orderList.map(list => {
               return  <View key={list._id} className="order-list">
               <View className="order-header">
