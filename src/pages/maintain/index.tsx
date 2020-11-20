@@ -194,6 +194,7 @@ export default class Index extends Component<IndexProps,IndexState> {
   
     render () {
       const { tabArr,activeTab,bottomBtn,activeBtn,orderList } = this.state;
+      console.log("activeTab",activeTab);
       return (
       <View className="order">
         <View className="order-tabs">

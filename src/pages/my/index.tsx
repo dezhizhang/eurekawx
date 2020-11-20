@@ -75,8 +75,6 @@ export default class Index extends Component<IndexProps,IndexState> {
           let userInfo = res.data.data;
           this.setState({userInfo});
         }
-    
-    
       }
       //获取公司信息
       getCompanyInfo = async(creditCode) => {
@@ -94,7 +92,7 @@ export default class Index extends Component<IndexProps,IndexState> {
       }
       handleOrder = () => {
         Taro.navigateTo({
-          url:'../maintain/index'
+          url:'../maintain/index?status=1'
         })
       }
       //我的设置
@@ -232,35 +230,6 @@ export default class Index extends Component<IndexProps,IndexState> {
                  </View>
               </View>
             </View>
-            {/* <View className="content-item" onClick={this.handleCollection}>
-              <View className="item">
-                 <View className="icon-left">
-                   <Image className="image" src={msg}/>
-                 </View>
-                 <View className="text-left">我的收藏</View>
-                 <View className="text-right">
-                   
-                 </View>
-                 <View className="icon-right">
-                   <Image src={arrow} className="image"/>
-                 </View>
-              </View>
-            </View>
-            <View className="content-item">
-              <View className="item">
-                 <View className="icon-left">
-                   <Image className="image" src={msg}/>
-                 </View>
-                 <View className="text-left">我的卡券</View>
-                 <View className="text-right">
-                  你有3张优惠券待使用
-                  
-                 </View>
-                 <View className="icon-right">
-                   <Image src={arrow} className="image"/>
-                 </View>
-              </View>
-            </View> */}
             <View className="content-item" onClick={this.handleCompany}>
               <View className="item">
                  <View className="icon-left">
@@ -268,7 +237,6 @@ export default class Index extends Component<IndexProps,IndexState> {
                  </View>
                  <View className="text-left">企业认证</View>
                  <View className="text-right">
-                   {/* <View className="text-number">16</View> */}
                  </View>
                  <View className="icon-right">
                    <Image src={arrow} className="image"/>
