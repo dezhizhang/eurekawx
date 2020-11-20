@@ -9,11 +9,9 @@ import './index.less'
 interface IndexProps {
 
 }
-
 interface IndexState {
 
 }
-
 export default class Index extends Component<IndexProps,IndexState> {
     state = {
         isHide:false,
