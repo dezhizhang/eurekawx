@@ -278,7 +278,7 @@ export default class Index extends Component<IndexProps,IndexState> {
                   </View>
                   <View className="text-left">官方客服</View>
                   <View className="text-right">
-                    <View className="text-number">16</View>
+                    {/* <View className="text-number">16</View> */}
                   </View>
                   <View className="icon-right">
                     <Image src={arrow} className="image"/>
