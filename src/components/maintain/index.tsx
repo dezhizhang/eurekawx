@@ -7,19 +7,11 @@ import server from '../../images/server.png'
 import upload from '../../images/upload.png'
 import  './index.less'
 
-// interface IndexProps {
-//     visible:boolean;
-//     handleCancel:() => void;
-//     handleAddress:(values) => void;
-// }
-
 interface IndexState{
   description:string;
   tempFilePaths:string;
   userInfo:any;
 }
-
-
 
 export default class Index extends Component<any,IndexState> {
   state = {
@@ -144,7 +136,7 @@ export default class Index extends Component<any,IndexState> {
           </View>
           <Button className="btn"formType="submit" onClick={this.handleSubmit}>提交</Button>
     
-          <View style={{textAlign:'center',color:'#ccc',fontSize:32}} onClick={this.handlePhoneCall}>
+          <View style={{textAlign:'center',color:'#ccc',fontSize:14}} onClick={this.handlePhoneCall}>
             <Text>电话联系客服:13025376666</Text>
           </View>
     </View>
