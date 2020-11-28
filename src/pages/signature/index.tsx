@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import Taro,{ getCurrentInstance } from '@tarojs/taro'
-import { View,Image,ScrollView,Text,Canvas, Button} from '@tarojs/components'
-import { appid,orderNumber, } from '../../utils/tools';
-import arrow from '../../images/icon/arrow.png'
+import { View,Canvas, Button} from '@tarojs/components'
+
 import { payInfoList,getPayInfo,updateStatus,getUserInfo } from '../../service/api';
 import  './index.less'
 
@@ -16,8 +15,20 @@ interface IndexState {
 }
 
 export default class Index extends Component<IndexProps,IndexState> {
+
     state = {
-      
+        // 内置数据
+        selectColor: 'black',
+        lineColor: '#1A1A1A', // 颜色
+        slideValue: 2,
+        placeholder:"签名区域",
+        cancleText:'取消',
+        canvas:'',
+        submitOk:false,
+        disabled:false,
+        buttonBg:'',
+        pointMove:false,
+        bizNo:''
     }  
 
     onShareAppMessage() {
