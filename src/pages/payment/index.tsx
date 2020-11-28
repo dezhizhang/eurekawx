@@ -217,14 +217,6 @@ export default class Index extends Component<IndexProps,IndexState> {
                </View>
             </View>
           </View>
-          {/* <View className="content-item">
-            <View className="item">
-               <View className="text-left">共优惠金额</View>
-               <View className="text-right">
-                 1000
-               </View>
-            </View>
-          </View> */}
         </View>
         <View className="footer">
           <View className="left">
