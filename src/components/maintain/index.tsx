@@ -74,36 +74,41 @@ export default class Index extends Component<any,IndexState> {
       description,
       tempFilePaths
     }
-    if(!description) {
-      Taro.showToast({
-        title:'为您更好服务请填写问题描述',
-        icon:'none'
-      });
-      return
-    }
-    if(!tempFilePaths) {
-      Taro.showToast({
-        title:'请按示例上传图片',
-        icon:'none'
-      });
-    }
-    if(tempFilePaths && description) {
-      showLoading({title:'信息上传中'});
-      uploadInfo(params).then(res => {
-        let data = JSON.parse(res.data);
-        if(data.code == 200) {
-          hideLoading();
-          showToast({
-            title:"您的问题以提交我们会尽快联系你",
-            icon:'success'
-          });
-          setTimeout(() => {
-            Taro.switchTab({
-              url: '../index/index'
+    let res = await Taro.requestSubscribeMessage({
+      tmplIds:['0XK1EO7jvqJtHbt_wVfRF9f050sAe4LAo021WqG0_Ds']
+    });
+    if(res.errMsg === 'requestSubscribeMessage:ok') { //判断用户是否授权消息
+      if(!description) { 
+        Taro.showToast({
+          title:'为您更好服务请填写问题描述',
+          icon:'none'
+        });
+        return
+      }
+      if(!tempFilePaths) {
+        Taro.showToast({
+          title:'请按示例上传图片',
+          icon:'none'
+        });
+      }
+      if(tempFilePaths && description) {
+        showLoading({title:'信息上传中'});
+        uploadInfo(params).then(res => {
+          let data = JSON.parse(res.data);
+          if(data.code == 200) {
+            hideLoading();
+            showToast({
+              title:"您的问题以提交我们会尽快联系你",
+              icon:'success'
             });
-          },2000);
-        }
-      });
+            setTimeout(() => {
+              Taro.switchTab({
+                url: '../index/index'
+              });
+            },2000);
+          }
+        });
+      }
     }
   }
   //打电话
