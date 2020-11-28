@@ -1,5 +1,6 @@
 export default {
   pages: [
+    "pages/signature/index",
     'pages/index/index',
     'pages/my/index',
     'pages/category/index',
@@ -12,7 +13,7 @@ export default {
     "pages/order/index",
     "pages/payment/index",
     "pages/agreement/index",
-    "pages/signature/index",
+  
   ],
   window: {
     backgroundTextStyle: 'light',
