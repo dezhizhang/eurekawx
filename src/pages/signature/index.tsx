@@ -270,8 +270,8 @@ export default class Index extends Component<IndexProps,IndexState> {
     uploadScaleEnd = (e) =>  {
         if (e.type != 'touchend') return 0;
         let point = {
-        x: e.changedTouches[0].x,
-        y: e.changedTouches[0].y
+            x: e.changedTouches[0].x,
+            y: e.changedTouches[0].y
         }
         this.lastPoint = this.currentPoint;
         let currentPoint = this.lastPoint;
