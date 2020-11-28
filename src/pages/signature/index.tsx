@@ -178,7 +178,7 @@ export default class Index extends Component<IndexProps,IndexState> {
         }
         return a;
     };
-    bethelDraw  = (point, is_fill, color) => {
+    bethelDraw  = (point:any, is_fill:any, color:any) => {
         this.ctx.beginPath();
         this.ctx.moveTo(point[0].mx, point[0].my);
         if (undefined != color) {
@@ -201,6 +201,7 @@ export default class Index extends Component<IndexProps,IndexState> {
     // 笔迹开始
     uploadScaleStart  =(e)=> {
         if (e.type != 'touchstart') return false;
+        this.setState({placeholder:""});
         this.ctx.setFillStyle(this.state.lineColor);  // 初始线条设置颜色
         this.ctx.setGlobalAlpha(this.transparent);  // 设置半透明
         this.currentPoint = {
@@ -268,7 +269,8 @@ export default class Index extends Component<IndexProps,IndexState> {
 
     // 笔迹结束
     uploadScaleEnd = (e) =>  {
-        if (e.type != 'touchend') return 0;
+        console.log(e);
+        if (e.type != 'touchend') return;
         let point = {
             x: e.changedTouches[0].x,
             y: e.changedTouches[0].y
@@ -299,6 +301,23 @@ export default class Index extends Component<IndexProps,IndexState> {
         this.currentLine = []
     };
 
+    handleSubmit = async() => {
+        console.log("hello")
+        console.log("hello")
+        Taro.canvasToTempFilePath({
+            x: 0,
+            y: 0,
+            width: this.canvasWidth,
+            height: this.canvasHeight,
+            destWidth: 400,
+            destHeight: 400,
+            canvasId: this.canvasName,
+        }).then(res => {
+            console.log("res",res)
+        })
+           
+    }
+
     componentDidHide () { }
     render () {
       
@@ -309,15 +328,17 @@ export default class Index extends Component<IndexProps,IndexState> {
         </View>
         <View className="singer-content">
             <View className="user-singer">
-                <Canvas canvasId='handWriting' 
+                <Canvas 
+                    canvasId='handWriting'
                     onTouchStart={this.uploadScaleStart} 
                     onTouchMove={this.uploadScaleMove} 
                     onTouchEnd={this.uploadScaleEnd}  className="singer-start" 
-                />
+                >
+                {this.state.placeholder}</Canvas>
             </View>
             <View className="singer-button">
                <View className="flex-button"><Button className="button-cancle">取消</Button></View>
-               <View className="flex-button" ><Button className="button-ok">确定</Button></View>
+               <View className="flex-button" onClick={this.handleSubmit} ><Button onClick={this.handleSubmit} className="button-ok">确定</Button></View>
             </View>
         </View>
     </View>
