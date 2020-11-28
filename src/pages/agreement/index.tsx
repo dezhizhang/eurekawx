@@ -25,10 +25,10 @@ export default class Index extends Component<IndexProps,IndexState> {
         console.log(this.props, nextProps)
       }
       componentDidMount() {
-        let params = getCurrentInstance().router.params;
-        let goods = params.goods;
-        let goodsJson = JSON.parse(goods);
-        this.setState({ goodsJson });
+        // let params = getCurrentInstance().router.params;
+        // let goods = params.goods;
+        // let goodsJson = JSON.parse(goods);
+        // this.setState({ goodsJson });
       }
       handleCheckbox = () => {
         let { checked } = this.state;
@@ -38,21 +38,31 @@ export default class Index extends Component<IndexProps,IndexState> {
       }
       //线下支付
       handleSubmit = async() => {
-        let { checked,goodsJson } = this.state;
+        let { checked } = this.state;
         if(!checked) {
             showToast({
                 title:'请选择协议',
                 icon:'none'
             });
-            return;
+            return
         }
-        goodsJson.status = 2;
-        let res =await userPrepaid(goodsJson);
-        if(res.data.code === 200) {
-            Taro.redirectTo({
-                url:'../order/index?status=2'
-            });
-        }
+        Taro.redirectTo({
+            url:'../signature/index'
+        })
+        // if(!checked) {
+        //     showToast({
+        //         title:'请选择协议',
+        //         icon:'none'
+        //     });
+        //     return;
+        // }
+        // goodsJson.status = 2;
+        // let res =await userPrepaid(goodsJson);
+        // if(res.data.code === 200) {
+        //     Taro.redirectTo({
+        //         url:'../order/index?status=2'
+        //     });
+        // }
       }
       render () {
             const { checked } = this.state;

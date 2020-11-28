@@ -12,6 +12,7 @@ export default {
     "pages/order/index",
     "pages/payment/index",
     "pages/agreement/index",
+    "pages/signature/index",
   ],
   window: {
     backgroundTextStyle: 'light',
