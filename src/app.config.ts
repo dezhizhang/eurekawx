@@ -11,6 +11,7 @@ export default {
     "pages/company/index",
     "pages/order/index",
     "pages/payment/index",
+    "pages/agreement/index",
   ],
   window: {
     backgroundTextStyle: 'light',
