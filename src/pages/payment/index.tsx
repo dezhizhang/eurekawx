@@ -121,8 +121,6 @@ export default class Index extends Component<IndexProps,IndexState> {
         return
       }
       payArr[0].out_trade_no = payArr[0].goods_id;
-      console.log("payArr",payArr);
-      
       let goods = JSON.stringify(payArr[0]);
       Taro.redirectTo({
         url:`../agreement/index?goods=${goods}`
