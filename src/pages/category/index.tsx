@@ -24,6 +24,10 @@ export default class Index extends Component<IndexProps,IndexState> {
   componentDidMount() {
     this.categoryData()
   }
+  //页面显示的时候加载一下
+  componentDidShow () { 
+    this.categoryData();
+  }
   categoryData = async () => {
     let list = await getCategoryList();
     if(list.data.code == 200) {
@@ -45,7 +49,7 @@ export default class Index extends Component<IndexProps,IndexState> {
     })
   }
   componentWillUnmount () { }
-  componentDidShow () { }
+ 
   componentDidHide () { }
 
 
