@@ -94,7 +94,7 @@ export default class Index extends Component<IndexProps,IndexState> {
   }
   handleAdvert = () => {
     Taro.navigateTo({
-      url: '../maintain/index'
+      url: '../maintain/index?status=1'
     });
   }
   //数组转换方法
