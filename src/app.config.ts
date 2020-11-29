@@ -13,6 +13,7 @@ export default {
     "pages/payment/index",
     "pages/agreement/index",
     "pages/signature/index",
+    "pages/user/index",
   
   ],
   window: {
