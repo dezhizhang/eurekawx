@@ -3,6 +3,7 @@ import Taro from '@tarojs/taro'
 import { View, Textarea, Button,Image,Text, } from '@tarojs/components'
 import { uploadInfo,getUserInfo } from '../../service/api'
 import { showLoading,hideLoading,getStorageSync,showToast } from '../../utils/tools'
+import Address from '../address/index';
 import server from '../../images/server.png'
 import upload from '../../images/upload.png'
 import  './index.less'
@@ -13,6 +14,7 @@ interface IndexProps{
 }
 
 interface IndexState{
+  visible:boolean;
   description:string;
   tempFilePaths:string;
   userInfo:any;
@@ -20,7 +22,7 @@ interface IndexState{
 
 export default class Index extends Component<IndexProps,IndexState> {
   state = {
-
+    visible:false,
     description:'',
     tempFilePaths:'',
     userInfo:{
@@ -118,10 +120,18 @@ export default class Index extends Component<IndexProps,IndexState> {
     console.log("res",res);
   }
   render () {
-    const { tempFilePaths,description } = this.state;
+    const { tempFilePaths,description,userInfo,visible } = this.state;
     return (
      <View className="maintain">
           <View className="content">
+                <View className="content-item">
+                  <View className="item" onClick={this.handleAddressOpen}>
+                    <View className="text-left">地区信息</View>
+                    <View className="text-right">
+                      {userInfo?.address ? userInfo?.address:<Text style={{fontSize:'30rpx'}} >请选择地区信息</Text>}
+                    </View>
+                  </View>
+                </View>
                 <View className="content-input">
                   <Textarea value={description} className="text-area" placeholder="请填写问题描述"  autoFocus onInput={this.handleDescription}></Textarea>                
                 </View>
@@ -141,7 +151,11 @@ export default class Index extends Component<IndexProps,IndexState> {
                 </View>
           </View>
           <Button className="btn"formType="submit" onClick={this.handleSubmit}>提交</Button>
-    
+          <Address 
+            visible={visible}
+            handleCancel={this.handleCancel}
+            handleAddress={this.handleAddress}
+          />
           <View style={{textAlign:'center',color:'#ccc',fontSize:14}} onClick={this.handlePhoneCall}>
             <Text>电话联系客服:13025376666</Text>
           </View>
