@@ -12,6 +12,7 @@ interface IndexProps {
 interface IndexState {
   tabArr:any;
   orderList:any;
+  activeTab:any;
 }
 export default class Index extends Component<IndexProps,IndexState> {
     state = {
@@ -179,6 +180,22 @@ export default class Index extends Component<IndexProps,IndexState> {
         this.getOrderList({'openid':list.openid,'status':activeTab});
       }
     }
+    //上传成功时的回调
+    handleSuccess = () => {
+      let params = {
+        openid:"",
+        status:"",
+      };
+      this.setState({
+        activeTab:"2"
+      });
+      let userInfoKey = getStorageSync('userInfoKey');
+      let userInfo = userInfoKey ? JSON.parse(userInfoKey):{};
+      params.openid = userInfo.openid;
+      params.status = "2";
+      this.getOrderList(params); //切换时调用订单列表
+     
+    }
     //联系商家
     handleConnect = () => {
       console.log('联系商家')
@@ -226,7 +243,9 @@ export default class Index extends Component<IndexProps,IndexState> {
         <ScrollView className="order-wrapper">
           {
             activeTab === '1' ? 
-            <Maintain/>:
+            <Maintain
+            handleSuccess={this.handleSuccess}
+            />:
             orderList.map(list => {
               return  <View key={list._id} className="order-list">
               <View className="order-header">

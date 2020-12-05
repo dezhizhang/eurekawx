@@ -7,13 +7,18 @@ import server from '../../images/server.png'
 import upload from '../../images/upload.png'
 import  './index.less'
 
+
+interface IndexProps{
+  handleSuccess:(value) => void; //上传成功时的回调
+}
+
 interface IndexState{
   description:string;
   tempFilePaths:string;
   userInfo:any;
 }
 
-export default class Index extends Component<any,IndexState> {
+export default class Index extends Component<IndexProps,IndexState> {
   state = {
 
     description:'',
@@ -101,11 +106,7 @@ export default class Index extends Component<any,IndexState> {
               title:"您的问题以提交我们会尽快联系你",
               icon:'success'
             });
-            setTimeout(() => {
-              Taro.switchTab({
-                url: '../index/index'
-              });
-            },2000);
+            this.props.handleSuccess(true);
           }
         });
       }
