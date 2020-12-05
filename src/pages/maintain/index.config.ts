@@ -1,4 +1,4 @@
 export default {
-    navigationBarTitleText: '商品详情'
+    navigationBarTitleText: '预约工单'
 }
   
