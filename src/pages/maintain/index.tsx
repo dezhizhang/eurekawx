@@ -10,13 +10,13 @@ interface IndexProps {
 
 }
 interface IndexState {
-
+  orderList:any;
 }
 export default class Index extends Component<IndexProps,IndexState> {
     state = {
         isHide:false,
         status:'',
-        orderList:[{title:'',_id:'',description:'',size:'',price:'',url:'',status:'',number:''}],
+        orderList:[{title:'',_id:'',description:'',size:'',price:'',url:'',status:'',number:'',orderId:""}],
         tabArr:[
           {
             key:'1',
@@ -231,6 +231,7 @@ export default class Index extends Component<IndexProps,IndexState> {
                     <Image className="left-image" src={list.url}/>
                   </View>
                   <View className="content-right">
+                    <View>订单号：{list.orderId}</View>
                     <View className="right-desc">{list.description}</View>
                   </View>
                 </View>
