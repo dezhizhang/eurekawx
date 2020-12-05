@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Taro from '@tarojs/taro'
-import { View, Textarea, Button,Image,Text, } from '@tarojs/components'
+import { View, Textarea, Button,Image,Text,Input } from '@tarojs/components'
 import { uploadInfo,getUserInfo } from '../../service/api'
 import { showLoading,hideLoading,getStorageSync,showToast } from '../../utils/tools'
 import Address from '../address/index';
@@ -18,10 +18,13 @@ interface IndexState{
   description:string;
   tempFilePaths:string;
   userInfo:any;
+  
 }
 
 export default class Index extends Component<IndexProps,IndexState> {
   state = {
+    region:'',
+    details:'',
     visible:false,
     description:'',
     tempFilePaths:'',
@@ -30,6 +33,8 @@ export default class Index extends Component<IndexProps,IndexState> {
       mobile:'',
       address:'',
       openid:'',
+      region:'', //地区信息
+      detail:'' //详细地址
     },
   }
 
@@ -72,11 +77,14 @@ export default class Index extends Component<IndexProps,IndexState> {
   }
   handleSubmit = async() => {
     const { description,tempFilePaths,userInfo } = this.state;
-    const { mobile,address,openid,userName } = userInfo;
+    const { mobile,openid,userName,detail,region,address } = userInfo;
+    let newAddress = (region&&detail ? `${region}${detail}`:`${address}`)
     const params = {
+      detail,
+      region,
       openid,
       mobile,
-      address,
+      address:newAddress,
       userName,
       description,
       tempFilePaths
@@ -119,6 +127,31 @@ export default class Index extends Component<IndexProps,IndexState> {
     let res = await Taro.makePhoneCall({phoneNumber:'13025376666'});
     console.log("res",res);
   }
+  handleAddressOpen = () => {
+    this.setState({
+      visible:true
+    })
+  }
+  handleCancel = () => {
+    this.setState({
+      visible:false
+    })
+  }
+  //地区信息
+  handleAddress = (region) => {
+    let { userInfo } = this.state;
+    userInfo.region = region;
+    this.setState({
+      userInfo,visible:false
+    });
+  }
+  //详细地址
+  handleDetail = (ev) => {
+    let { userInfo } = this.state;
+    let detail = ev.detail.value;
+    userInfo.detail = detail;
+    this.setState({userInfo});
+  }
   render () {
     const { tempFilePaths,description,userInfo,visible } = this.state;
     return (
@@ -128,7 +161,15 @@ export default class Index extends Component<IndexProps,IndexState> {
                   <View className="item" onClick={this.handleAddressOpen}>
                     <View className="text-left">地区信息</View>
                     <View className="text-right">
-                      {userInfo?.address ? userInfo?.address:<Text style={{fontSize:'30rpx'}} >请选择地区信息</Text>}
+                      {userInfo?.region ? userInfo?.region:<Text style={{fontSize:'30rpx'}} >请选择地区信息</Text>}
+                    </View>
+                  </View>
+                </View>
+                <View className="content-item">
+                  <View className="item">
+                    <View className="text-left">详细地址</View>
+                    <View className="text-right">
+                      <Input className="input" value={userInfo?.detail} placeholder="请输入详细地址" onInput={this.handleDetail}/>
                     </View>
                   </View>
                 </View>

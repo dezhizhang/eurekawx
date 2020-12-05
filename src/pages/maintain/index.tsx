@@ -261,9 +261,9 @@ export default class Index extends Component<IndexProps,IndexState> {
                     <Image className="left-image" src={list.url}/>
                   </View>
                   <View className="content-right">
-                    <View>订单号：{list.orderId}</View>
-                    <View>地址：{list.address}</View>
-                    <View>描述：{list.description}</View>
+                    <View className="right-desc">订单号：{list.orderId}</View>
+                    <View className="right-desc">地址：{list.address}</View>
+                    <View className="right-desc">描述：{list.description}</View>
                   </View>
                 </View>
               </View>
