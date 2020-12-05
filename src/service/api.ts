@@ -151,6 +151,10 @@ export async function maintainList(params) {
 export async function maintainDelete(params) {
   return request(`${Config.API_HOST}/api/maintain/delete?id=${params.id}&openid=${params.openid}`);
 }
+//确认签收
+export async function maintainSign(params) {
+  return request(`${Config.API_HOST}/api/maintain/sign?id=${params.id}&openid=${params.openid}&status=${params.status}`)
+}
 
 
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Taro, { getCurrentInstance } from '@tarojs/taro'
 import { View,ScrollView,Image,} from '@tarojs/components'
 import { getStorageSync,showToast,maintainType } from '../../utils/tools'
-import { maintainDelete,maintainList, } from '../../service/api'
+import { maintainDelete,maintainList,maintainSign } from '../../service/api'
 import arrow from '../../images/icon/arrow.png'
 import Maintain from '../../components/maintain'
 import './index.less'
@@ -10,13 +10,14 @@ interface IndexProps {
 
 }
 interface IndexState {
+  tabArr:any;
   orderList:any;
 }
 export default class Index extends Component<IndexProps,IndexState> {
     state = {
         isHide:false,
         status:'',
-        orderList:[{title:'',_id:'',description:'',size:'',price:'',url:'',status:'',number:'',orderId:""}],
+        orderList:[{title:'',_id:'',description:'',size:'',price:'',url:'',status:'',number:'',orderId:"",address:""}],
         tabArr:[
           {
             key:'1',
@@ -49,10 +50,10 @@ export default class Index extends Component<IndexProps,IndexState> {
               key:'3',
               value:'联系商家'
             },
-            {
-              key:'4',
-              value:'支付订单'
-            }
+            // {
+            //   key:'4',
+            //   value:'支付订单'
+            // }
           ],//待支付
           '2':[
             {
@@ -70,7 +71,7 @@ export default class Index extends Component<IndexProps,IndexState> {
               value:'联系商家'
             },
             {
-              key:'5',
+              key:'4',
               value:'确认签收'
             }
           ], //已签收
@@ -157,6 +158,7 @@ export default class Index extends Component<IndexProps,IndexState> {
       let params = {
         '2':this.handleDeleteOrder,
         '3':this.handleConnect,
+        '4':this.handleSignOk,
       }
       return params[item.key](list);
     }
@@ -182,8 +184,17 @@ export default class Index extends Component<IndexProps,IndexState> {
       console.log('联系商家')
     }
     //确认签收
-    handleSignOk = () => {
-      console.log("确认签收");
+    handleSignOk = async(list) => {
+      console.log(list);
+      let { activeTab } = this.state;
+      let res = await maintainSign({id:list._id,openid:list.openid,status:4});
+      if(res.data.code === 200) {
+        showToast({
+          title:`${res.data.msg}`,
+          icon:'success'
+        });
+      }
+      this.getOrderList({'openid':list.openid,'status':activeTab});
     }
     //去评价
     handleEvaluation = () => {
@@ -232,7 +243,8 @@ export default class Index extends Component<IndexProps,IndexState> {
                   </View>
                   <View className="content-right">
                     <View>订单号：{list.orderId}</View>
-                    <View className="right-desc">{list.description}</View>
+                    <View>地址：{list.address}</View>
+                    <View>描述：{list.description}</View>
                   </View>
                 </View>
               </View>
