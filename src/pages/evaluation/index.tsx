@@ -76,7 +76,7 @@ export default class Index extends Component<IndexProps,IndexState> {
             icon:'success'
         });
         Taro.navigateTo({
-            url: `../maintain/index?status=5&id=${id}`
+            url: `../maintain/index?status=5&id=${id}&openid=${openid}`
         });
     }
   }
