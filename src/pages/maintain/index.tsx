@@ -30,7 +30,7 @@ export default class Index extends Component<IndexProps,IndexState> {
           },
           {
             key:'3',
-            value:'已完结',
+            value:'处理完',
           },
           {
             key:'4',
