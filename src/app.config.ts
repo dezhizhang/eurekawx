@@ -14,7 +14,8 @@ export default {
     "pages/agreement/index",
     "pages/signature/index",
     "pages/user/index",
-    "pages/address/index"
+    "pages/address/index",
+    "pages/evaluation/index",
   
   ],
   window: {

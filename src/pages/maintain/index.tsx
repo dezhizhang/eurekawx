@@ -160,6 +160,7 @@ export default class Index extends Component<IndexProps,IndexState> {
         '2':this.handleDeleteOrder,
         '3':this.handleConnect,
         '4':this.handleSignOk,
+        '6':this.handleEvaluation,
       }
       return params[item.key](list);
     }
@@ -215,7 +216,9 @@ export default class Index extends Component<IndexProps,IndexState> {
     }
     //去评价
     handleEvaluation = () => {
-      console.log('去评价')
+      Taro.redirectTo({
+        url:'../evaluation/index'
+      })
     }
   
     componentDidHide () { }
