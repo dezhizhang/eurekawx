@@ -36,6 +36,10 @@ export default class Index extends Component<IndexProps,IndexState> {
             key:'4',
             value:'待评价'
           },
+          {
+            key:'5',
+            value:'已完成'
+          }
         ],
         bottomBtn:{
           '1':[
@@ -129,7 +133,8 @@ export default class Index extends Component<IndexProps,IndexState> {
       }
     }
     componentDidShow() {
-  
+      let params = getCurrentInstance().router.params;
+      this.getOrderList(params);
     }
     handleCompany = () => {
       Taro.navigateTo({
@@ -215,14 +220,14 @@ export default class Index extends Component<IndexProps,IndexState> {
       this.getOrderList({'openid':list.openid,'status':activeTab});
     }
     //去评价
-    handleEvaluation = () => {
+    handleEvaluation = (list) => {
       Taro.redirectTo({
-        url:'../evaluation/index'
+        url:`../evaluation/index?id=${list._id}`
       })
     }
-  
-    componentDidHide () { }
-  
+    
+   
+
     render () {
       const { tabArr,activeTab,bottomBtn,activeBtn,orderList } = this.state;
       console.log("activeTab",activeTab);

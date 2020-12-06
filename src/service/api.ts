@@ -155,6 +155,12 @@ export async function maintainDelete(params) {
 export async function maintainSign(params) {
   return request(`${Config.API_HOST}/api/maintain/sign?id=${params.id}&openid=${params.openid}&status=${params.status}`)
 }
-
+//上传评价
+export async function maintainEvaluation(params) {
+  return request(`${Config.API_HOST}/api/maintain/evaluation`,{
+    method:'POST',
+    body:params
+  })
+}
 
 

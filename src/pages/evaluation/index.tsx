@@ -1,37 +1,33 @@
 import React, { Component } from 'react'
-import Taro from '@tarojs/taro'
-import { View, Textarea, Button,Image,Text,Input } from '@tarojs/components'
-import { getUserInfo } from '../../service/api'
-import { showLoading,hideLoading,getStorageSync,showToast } from '../../utils/tools'
+import Taro,{ getCurrentInstance } from '@tarojs/taro'
+import { View, Textarea, Button } from '@tarojs/components'
+import { getUserInfo,maintainEvaluation } from '../../service/api'
+import { getStorageSync,showToast } from '../../utils/tools'
 import  './index.less'
 
 
 interface IndexProps{
-  handleSuccess:(value) => void; //上传成功时的回调
+    handleSuccess:(value) => void; //上传成功时的回调
 }
 
 interface IndexState{
-  visible:boolean;
-  description:string;
-  tempFilePaths:string;
-  userInfo:any;
+    idInfo:any; //上级传过来的id
+    description:string;
+    userInfo:any;
   
 }
 
 export default class Index extends Component<IndexProps,IndexState> {
   state = {
-    region:'',
-    details:'',
-    visible:false,
+    idInfo:{
+        id:''
+    },
     description:'',
-    tempFilePaths:'',
     userInfo:{
       userName:'',
       mobile:'',
       address:'',
       openid:'',
-      region:'', //地区信息
-      detail:'' //详细地址
     },
   }
 
@@ -45,6 +41,8 @@ export default class Index extends Component<IndexProps,IndexState> {
     this.setState({description})
   }
   componentDidMount() {
+    let idInfo = getCurrentInstance().router.params;
+    this.setState({idInfo});
     this.userInfo();
   }
   //获取用户信息
@@ -61,31 +59,26 @@ export default class Index extends Component<IndexProps,IndexState> {
     }
   }
   handleSubmit = async() => {
-    const { description,userInfo } = this.state;
+    const { description,userInfo,idInfo } = this.state;
+    const { id } = idInfo;
     const { mobile,openid,userName } = userInfo;
     const params = {
-      openid,
-      mobile,
-      userName,
-      description,
+        id,
+        openid,
+        mobile,
+        userName,
+        description,
     }
- 
-
-    //   if(tempFilePaths && description) {
-    //     showLoading({title:'信息上传中'});
-    //     uploadInfo(params).then(res => {
-    //       let data = JSON.parse(res.data);
-    //       if(data.code == 200) {
-    //         hideLoading();
-    //         showToast({
-    //           title:"您的问题以提交我们会尽快联系你",
-    //           icon:'success'
-    //         });
-    //         this.props.handleSuccess(true);
-    //       }
-    //     });
-    //   }
-    // }
+    let res = await maintainEvaluation(params);
+    if(res.data.code == 200) {
+        showToast({
+            title:res.data.msg,
+            icon:'success'
+        });
+        Taro.navigateTo({
+            url: `../maintain/index?status=5&id=${id}`
+        });
+    }
   }
   render () {
     const { description,} = this.state;
