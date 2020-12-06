@@ -204,7 +204,9 @@ export default class Index extends Component<IndexProps,IndexState> {
     }
     //联系商家
     handleConnect = () => {
-      console.log('联系商家')
+      Taro.redirectTo({
+        url:`../contact/index`
+      })
     }
     //确认签收
     handleSignOk = async(list) => {

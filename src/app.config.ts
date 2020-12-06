@@ -16,6 +16,7 @@ export default {
     "pages/user/index",
     "pages/address/index",
     "pages/evaluation/index",
+    "pages/contact/index"
   
   ],
   window: {
