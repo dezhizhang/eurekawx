@@ -1,4 +1,4 @@
 export default {
-    navigationBarTitleText: '商品分类'
+    navigationBarTitleText: '分类'
 }
   
