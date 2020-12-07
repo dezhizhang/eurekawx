@@ -152,27 +152,36 @@ export default class Index extends Component<IndexProps,IndexState> {
     userInfo.detail = detail;
     this.setState({userInfo});
   }
+
+//个人信息
+handleUserInfo = () => {
+  Taro.navigateTo({
+    url:'../user/index'
+  })
+}
   render () {
     const { tempFilePaths,description,userInfo,visible } = this.state;
     return (
      <View className="maintain">
           <View className="content">
                 <View className="content-item">
-                  <View className="item" onClick={this.handleAddressOpen}>
-                    <View className="text-left">地区信息</View>
-                    <View className="text-right">
-                      {userInfo?.region ? userInfo?.region:<Text style={{fontSize:'30rpx'}} >请选择地区信息</Text>}
+                  <View className="item" >
+                    <View style={{color:'#0A4B9D',fontSize:16}}>上门地址：</View>
+                    <View style={{color:'#FF8000',fontSize:12}}>{userInfo.address}</View >
+                   <View>   
                     </View>
                   </View>
                 </View>
                 <View className="content-item">
                   <View className="item">
-                    <View className="text-left">详细地址</View>
-                    <View className="text-right">
-                      <Input className="input" value={userInfo?.detail} placeholder="请输入详细地址" onInput={this.handleDetail}/>
-                    </View>
+                   </View>
                   </View>
-                </View>
+                <View className="content-item">
+                    <View onClick={this.handleUserInfo}>
+                        <View style={{color:'#0A4B9D',fontSize:12}}> >修改地址</View>
+                      </View>
+                  </View>
+              
                 <View className="content-input">
                   <Textarea value={description} className="text-area" placeholder="请填写问题描述"  autoFocus onInput={this.handleDescription}></Textarea>                
                 </View>
