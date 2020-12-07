@@ -176,7 +176,7 @@ handleUserInfo = () => {
                   <View className="item">
                    </View>
                   </View>
-                <View className="content-item">
+                <View className="dizhi">
                     <View onClick={this.handleUserInfo}>
                         <View style={{color:'#0A4B9D',fontSize:12}}> >修改地址</View>
                       </View>

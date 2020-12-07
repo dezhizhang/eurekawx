@@ -63,11 +63,11 @@ export default class Index extends Component<IndexProps,IndexState> {
           '2':[
             {
               key:'2',
-              value:'删除预约'
+              value:'取消预约'
             },
             {
               key:'3',
-              value:'联系商家'
+              value:'联系客服'
             }
           ],//待配送
           '3':[
