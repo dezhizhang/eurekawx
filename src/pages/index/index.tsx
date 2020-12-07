@@ -28,12 +28,12 @@ export default class Index extends Component<IndexProps,IndexState> {
     page:1,
     classifyArr:[
       {
-        name:'办公',
+        name:'耗材',
         main_id:'1',
         src:category
       },
       {
-        name:'设备',
+        name:'办公',
         main_id:'2',
         src:facility
       },
@@ -43,7 +43,7 @@ export default class Index extends Component<IndexProps,IndexState> {
         src:stationery
       },
       {
-        name:'更多',
+        name:'文体',
         main_id:'4',
         src:evenmore
       }
