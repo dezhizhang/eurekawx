@@ -6,7 +6,12 @@ import { companyInfo,getOrderContent,getUserInfo} from '../../service/api';
 import myHeader from '../../images/my_header.png'
 import avatar from '../../images/avatar.png'
 import allOrder from '../../images/all_order.png'
+import endall_order from '../../images/endall_order.png'
 import msg from '../../images/icon/msg.png'
+import fix_yuyue from '../../images/icon/fix_yuyue.png'
+import renzheng_01 from '../../images/icon/renzheng_01.png'
+import setting_01 from '../../images/icon/setting_01.png'
+import kefu_01 from '../../images/icon/kefu_01.png'
 import arrow from '../../images/icon/arrow.png'
 import  './index.less'
 
@@ -204,7 +209,7 @@ export default class Index extends Component<IndexProps,IndexState> {
                         </View>
                         <View className="bottom-item" onClick={() => this.handleToOrder(3)}>
                           <View className="item-top">
-                            <Image src={allOrder} className="image"/>
+                            <Image src={endall_order} className="image"/>
                           </View>
                           <View className="item-bottom">完成订单</View>
                         </View>
@@ -233,7 +238,7 @@ export default class Index extends Component<IndexProps,IndexState> {
             <View className="content-item" onClick={this.handleCompany}>
               <View className="item">
                  <View className="icon-left">
-                   <Image className="image" src={msg}/>
+                   <Image className="image" src={renzheng_01}/>
                  </View>
                  <View className="text-left">企业认证</View>
                  <View className="text-right">
@@ -246,7 +251,7 @@ export default class Index extends Component<IndexProps,IndexState> {
             <View className="content-item" onClick={this.handleOrder}>
               <View className="item">
                  <View className="icon-left">
-                   <Image className="image" src={msg}/>
+                   <Image className="image" src={fix_yuyue}/>
                  </View>
                  <View className="text-left">我的预约</View>
                  <View className="text-right">
@@ -261,7 +266,7 @@ export default class Index extends Component<IndexProps,IndexState> {
             <View className="content-item" onClick={this.handleSetting}>
                 <View className="item">
                   <View className="icon-left">
-                    <Image className="image" src={msg}/>
+                    <Image className="image" src={setting_01}/>
                   </View>
                   <View className="text-left">我的设置</View>
                   <View className="text-right">
@@ -274,7 +279,7 @@ export default class Index extends Component<IndexProps,IndexState> {
             <View className="content-item" onClick={this.handleCustomer}>
                 <View className="item">
                   <View className="icon-left">
-                    <Image className="image" src={msg}/>
+                    <Image className="image" src={kefu_01}/>
                   </View>
                   <View className="text-left">官方客服</View>
                   <View className="text-right">
