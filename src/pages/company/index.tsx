@@ -3,7 +3,7 @@ import Taro from '@tarojs/taro'
 import { View, Input,Text, Button,Image,} from '@tarojs/components'
 import { companyRegister,cityInfoList } from '../../service/api'
 import { showToast,showLoading,hideLoading, getStorageSync } from '../../utils/tools'
-import server from '../../images/server.png'
+import company_id from '../../images/company_id.png'
 import upload from '../../images/upload.png'
 import Address from '../../components/address';
 import  './index.less'
@@ -212,12 +212,12 @@ export default class Index extends Component<IndexProps,IndexState> {
             <View className="image-flex">
               <View className="image-top">示例图片</View>
               <View className="image-bottom">
-                <Image src={server} mode='aspectFill' className="image"/>
+                <Image src={company_id} mode='aspectFill' className="image"/>
               </View>
             </View>
             </View>
             </View>
-            <Button className="btn" style={{display:visible ? 'none':'block'}} onClick={this.handleSubmit}>保存</Button>
+            <Button className="btn" style={{display:visible ? 'none':'block'}} onClick={this.handleSubmit}>认证</Button>
             <Address 
               visible={visible}
               handleAddress={this.handleAddress} 
