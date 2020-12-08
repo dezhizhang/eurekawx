@@ -73,17 +73,17 @@ export default class Index extends Component<IndexProps,IndexState> {
           '3':[
             {
               key:'3',
-              value:'联系商家'
+              value:'联系客服'
             },
             {
               key:'4',
-              value:'确认签收'
+              value:'问题解决'
             }
           ], //已签收
           '4':[
             {
               key:'3',
-              value:'联系商家'
+              value:'联系客服'
             },
             {
               key:'6',
