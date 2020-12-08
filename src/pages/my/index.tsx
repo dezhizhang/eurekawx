@@ -10,6 +10,7 @@ import endall_order from '../../images/endall_order.png'
 import msg from '../../images/icon/msg.png'
 import fix_yuyue from '../../images/icon/fix_yuyue.png'
 import renzheng_01 from '../../images/icon/renzheng_01.png'
+import VIP_01 from '../../images/icon/VIP_01.png'
 import setting_01 from '../../images/icon/setting_01.png'
 import kefu_01 from '../../images/icon/kefu_01.png'
 import arrow from '../../images/icon/arrow.png'
@@ -241,6 +242,19 @@ export default class Index extends Component<IndexProps,IndexState> {
                    <Image className="image" src={renzheng_01}/>
                  </View>
                  <View className="text-left">企业认证</View>
+                 <View className="text-right">
+                 </View>
+                 <View className="icon-right">
+                   <Image src={arrow} className="image"/>
+                   </View>
+              </View>
+            </View>
+            <View className="content-item" onClick={this.handleMessage}>
+              <View className="item">
+                 <View className="icon-left">
+                   <Image className="image" src={VIP_01}/>
+                 </View>
+                 <View className="text-left">订阅缴费</View>
                  <View className="text-right">
                  </View>
                  <View className="icon-right">
