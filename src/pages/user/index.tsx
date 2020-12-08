@@ -108,7 +108,7 @@ export default class Index extends Component<IndexProps,IndexState> {
              
                <View className="text-left">手机</View>
                <View className="text-right">
-                  {userInfo.mobile ? userInfo.mobile:'填写手机号获取积分' }
+                  {userInfo.mobile ? userInfo.mobile:'手机号' }
                </View>
             </View>
           </View>
