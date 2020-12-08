@@ -6,6 +6,8 @@ import { showLoading,hideLoading,getStorageSync,showToast } from '../../utils/to
 import Address from '../address/index';
 import server from '../../images/server.png'
 import upload from '../../images/upload.png'
+// import arrow from '../../images/icon/arrow.png'
+import arrow from '../../images/icon/arrow.png'
 import  './index.less'
 
 
@@ -164,27 +166,16 @@ handleUserInfo = () => {
     return (
      <View className="maintain">
           <View className="content">
-                <View className="content-item">
-                  <View className="item" >
-                    <View style={{color:'#0A4B9D',fontSize:16}}>上门地址：</View>
-                    <View style={{color:'#FF8000',fontSize:12}}>{userInfo.address}</View >
-                   <View>   
-                    </View>
-                  </View>
-                </View>
-                <View className="content-item">
-                  <View className="item">
-                   </View>
-                  </View>
-                <View className="dizhi">
-                    <View onClick={this.handleUserInfo}>
-                        <View style={{color:'#0A4B9D',fontSize:12}}> >修改地址</View>
-                      </View>
-                  </View>
-              
-                <View className="content-input">
-                  <Textarea value={description} className="text-area" placeholder="请填写问题描述"  autoFocus onInput={this.handleDescription}></Textarea>                
-                </View>
+            <View className="content-item">
+              <View className="item-left">上门地址：</View>
+              <View className="item-center">{userInfo.address}</View>
+              <View className="item-right" onClick={this.handleUserInfo}>
+                >
+              </View>
+            </View>
+              <View className="content-input">
+                <Textarea value={description} className="text-area" placeholder="请填写问题描述"  autoFocus onInput={this.handleDescription}></Textarea>                
+              </View>
                 <View className="image">
                   <View onClick={this.handleChooseImage} className="image-flex">
                     <View className="image-top">点击上传</View>
