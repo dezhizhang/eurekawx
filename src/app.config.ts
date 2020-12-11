@@ -16,7 +16,9 @@ export default {
     "pages/user/index",
     "pages/address/index",
     "pages/evaluation/index",
-    "pages/contact/index"
+    "pages/contact/index",
+    "pages/message/index",
+    "pages/money/index"
   
   ],
   window: {

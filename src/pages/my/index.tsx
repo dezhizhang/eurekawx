@@ -108,9 +108,9 @@ export default class Index extends Component<IndexProps,IndexState> {
         })
       }
       //消息
-      handleMessage = () => {
-        Taro.navigateTo({
-          url:'../message/index'
+      handleMessage = (status) => {
+          Taro.navigateTo({
+            url:`../message/index?status=${status}`
         })
       }
       //收藏
@@ -153,6 +153,18 @@ export default class Index extends Component<IndexProps,IndexState> {
       handleToOrder = (status) => {
         Taro.navigateTo({
           url:`../order/index?status=${status}`
+        })
+      }
+      //跳转联系我们单页
+      handleContact = (status) => {
+        Taro.navigateTo({
+          url:`../contact/index?status=${status}`
+        })
+      }
+      //跳转订阅缴费单页
+      handleMoney = (status) => {
+        Taro.navigateTo({
+          url:`../money/index?status=${status}`
         })
       }
     componentDidHide () { }
@@ -249,7 +261,7 @@ export default class Index extends Component<IndexProps,IndexState> {
                    </View>
               </View>
             </View>
-            <View className="content-item" onClick={this.handleMessage}>
+            <View className="content-item" onClick={this.handleMoney}>
               <View className="item">
                  <View className="icon-left">
                    <Image className="image" src={VIP_01}/>
@@ -290,7 +302,7 @@ export default class Index extends Component<IndexProps,IndexState> {
                   </View>
                 </View>
             </View>
-            <View className="content-item" onClick={this.handleCustomer}>
+            <View className="content-item" onClick={this.handleContact}>
                 <View className="item">
                   <View className="icon-left">
                     <Image className="image" src={kefu_01}/>
