@@ -1,5 +1,6 @@
 export default {
   pages: [
+    "pages/addressList/index",
     'pages/index/index',
     'pages/my/index',
     'pages/category/index',
@@ -16,7 +17,8 @@ export default {
     "pages/user/index",
     "pages/address/index",
     "pages/evaluation/index",
-    "pages/contact/index"
+    "pages/contact/index",
+    
   
   ],
   window: {
