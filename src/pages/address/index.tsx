@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import Taro,{ getCurrentInstance } from '@tarojs/taro'
 import { View,Button,Input,Text,Switch } from '@tarojs/components'
-import { getStorageSync } from '../../utils/tools'
-import { userInfoSave } from '../../service/api';
+import { getStorageSync, showToast} from '../../utils/tools'
+import { UserAddressAdd } from '../../service/api';
 import Address from '../../components/address'
 import './index.less'
 
@@ -17,6 +17,7 @@ interface IndexState {
     cityInfo:string;
     userName:string;
     mobile:string;
+    checked:boolean; //是否选中
     detail:string; //详细地址
     current:string; //当前跳转进来页面1表示用户，2表示支付
 }
@@ -25,6 +26,7 @@ export default class Index extends Component<IndexProps,IndexState> {
     state = {
         userInfo:{},
         visible:false,
+        checked:false,
         cityInfo:'',
         userName:'',
         mobile:'',
@@ -118,13 +120,11 @@ export default class Index extends Component<IndexProps,IndexState> {
       })
     }
     handleSubmit = async() => {
-      const {detail,userName,mobile,cityInfo,current} = this.state;
+      const {detail,userName,mobile,cityInfo,current,checked } = this.state;
       const userInfoKey = getStorageSync("userInfoKey"); //用户key
-      const userinfoItem = getStorageSync("userInfo")
       const userInfo = userInfoKey ? JSON.parse(userInfoKey):{}
-      const userItem = userinfoItem ? JSON.parse(userinfoItem):{}
       const { openid } = userInfo;
-      const { nickName,avatarUrl,gender } = userItem
+  
       
       let address = `${cityInfo}${detail}`;
       let params = {
@@ -132,9 +132,7 @@ export default class Index extends Component<IndexProps,IndexState> {
         openid,
         userName,
         address,
-        nickName,
-        url:avatarUrl,
-        gender
+        checked,
       }
       if(!mobile) {
         Taro.showToast({
@@ -143,17 +141,23 @@ export default class Index extends Component<IndexProps,IndexState> {
         });
         return
       }
-      let res = await userInfoSave(params);
-      if(res.data.code === 200) {
-        switch(current) {
-          case '1': //用户页面
-            this.handleUser();
-          break;
-          case '2':
-            this.handlePayment(openid);
-          break;
-        }
+      let res = await UserAddressAdd(params);
+      if(res.data.code !== 200) { //返回错误
+        showToast({
+          icon:'none',
+          title:res.data.msg,
+        });
+        return
       }
+      showToast({
+        icon:'success',
+        title:res.data.msg,
+      });
+      setTimeout(() => {
+        Taro.redirectTo({
+          url:'../addressList/index'
+        });
+      },200);
     }
     //跳转到用户
     handleUser = () => {
@@ -166,10 +170,15 @@ export default class Index extends Component<IndexProps,IndexState> {
         url:`../payment/index?openid=${openid}`
       });
     }
+    //是否选中
+    handleChecked = (ev) => {
+      let checked = ev.target.value;
+      this.setState({checked});
+    }
     componentDidHide () { }
   
     render () {
-      let { visible,cityInfo } = this.state;
+      let { visible,cityInfo,checked } = this.state;
       return (
       <View className="address">
         <View className="content">
@@ -209,7 +218,7 @@ export default class Index extends Component<IndexProps,IndexState> {
             <View className="item">
                <View className="text-left">设为默认</View>
                <View className="right-switch">
-                <Switch checked color="#735ff7"/>
+                <Switch color="#735ff7" checked={checked} onChange={this.handleChecked}/>
                </View>
             </View>
           </View>

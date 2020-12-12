@@ -163,4 +163,12 @@ export async function maintainEvaluation(params) {
   })
 }
 
+//增加地址
+export async function UserAddressAdd(params) {
+  return request(`${Config.API_HOST}/api/address/add`,{
+    method:"POST",
+    body:params
+  })
+}
+
 
