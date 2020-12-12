@@ -164,11 +164,15 @@ export async function maintainEvaluation(params) {
 }
 
 //增加地址
-export async function UserAddressAdd(params) {
+export async function userAddressAdd(params) {
   return request(`${Config.API_HOST}/api/address/add`,{
     method:"POST",
     body:params
   })
+}
+//获取地址列表
+export async function userAddressList(params) {
+  return request(`${Config.API_HOST}/api/address/list?openid=${params.openid}`)
 }
 
 

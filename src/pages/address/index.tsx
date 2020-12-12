@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Taro,{ getCurrentInstance } from '@tarojs/taro'
 import { View,Button,Input,Text,Switch } from '@tarojs/components'
 import { getStorageSync, showToast} from '../../utils/tools'
-import { UserAddressAdd } from '../../service/api';
+import { userAddressAdd } from '../../service/api';
 import Address from '../../components/address'
 import './index.less'
 
@@ -141,7 +141,7 @@ export default class Index extends Component<IndexProps,IndexState> {
         });
         return
       }
-      let res = await UserAddressAdd(params);
+      let res = await userAddressAdd(params);
       if(res.data.code !== 200) { //返回错误
         showToast({
           icon:'none',
