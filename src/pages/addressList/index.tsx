@@ -52,12 +52,11 @@ export default class Index extends Component<IndexProps,IndexState> {
               <View className="right-delete">
               <View className="edit-left"> <Image src={arrow} className="edit-icon"/></View>
                 <View className="edit-right">  <Text>删除</Text></View>
-              
               </View>
             </View>
           </View>
         </View>
-        <View>新建收货地址</View>
+        <Button className="list-bottom-btn">新建收货地址</Button>
       </View>
       )
     }
