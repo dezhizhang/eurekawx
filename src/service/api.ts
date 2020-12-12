@@ -178,7 +178,17 @@ export async function userAddressList(params) {
 export async function userAddressDelete(params) {
   return request(`${Config.API_HOST}/api/address/delete?id=${params.id}&openid=${params.openid}`)
 }
-
+//获取单条地址
+export async function userAddressInfo(params) {
+  return request(`${Config.API_HOST}/api/address/info?id=${params.id}&openid=${params.openid}`)
+}
+//更新地址
+export async function userAddressUpdate(params) {
+  return request(`${Config.API_HOST}/api/address/update`,{
+    method:"POST",
+    body:params
+  })
+}
 
 
 

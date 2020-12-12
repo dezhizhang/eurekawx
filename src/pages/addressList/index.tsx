@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import Taro,{ getCurrentInstance } from '@tarojs/taro'
-import { View,Button,Input,Text,Radio,Image } from '@tarojs/components'
+import { View,Button,Text,Radio,Image } from '@tarojs/components'
 import { getStorageSync,showToast } from '../../utils/tools'
 import { userAddressList,userAddressDelete } from '../../service/api';
-import Address from '../../components/address'
 import arrow from '../../images/icon/detail_store.png'
 import './index.less'
 
@@ -20,7 +19,7 @@ interface IndexState {
 export default class Index extends Component<IndexProps,IndexState> {
     state = {
       openid:"",
-      list:[{userName:"",mobile:"",address:"",checked:false}],
+      list:[{userName:"",mobile:"",address:"",checked:false,cityInfo:"",detail:""}],
     }
     componentWillReceiveProps (nextProps) {
       console.log(this.props, nextProps)
@@ -49,7 +48,7 @@ export default class Index extends Component<IndexProps,IndexState> {
 
     handleAddress = () => {
       Taro.redirectTo({
-        url:'../address/index'
+        url:`../address/index?type=create`
       })
     }
     handleAddressDelete = async(item) => {
@@ -63,6 +62,11 @@ export default class Index extends Component<IndexProps,IndexState> {
         this.getAddressList();
       }
     }
+    handleAddressEdit = (item) => {
+      Taro.redirectTo({
+        url:`../address/index?id=${item?._id}&type=edit`
+      })
+    }
     componentDidHide () { }
   
     render () {
@@ -74,16 +78,16 @@ export default class Index extends Component<IndexProps,IndexState> {
         {
           list?.map((item,index) => {
             return (
-              <View className="list-wrapper">
+              <View className="list-wrapper" key={index}>
               <View className="list-header">
                 <View className="item-title">姓名：<Text className="item-text">{item?.userName}</Text></View>
                 <View className="item-title">电话：<Text className="item-text">{item?.mobile}</Text></View>
-                <View style={{marginBottom:10}} className="item-title">地址：<Text className="item-text">{item?.address}</Text></View>
+                <View style={{marginBottom:10}} className="item-title">地址：<Text className="item-text">{`${item?.cityInfo}${item?.detail}`}</Text></View>
               </View>
               <View className="list-bottom">
                 <View className="bottom-left"><Radio checked={item?.checked}  color="#735ff7" className="bottom-radio" />默认地址</View>
                 <View className="bottom-right">
-                  <View className="right-edit">
+                  <View className="right-edit" onClick={() => this.handleAddressEdit(item)}>
                     <View className="edit-left"> <Image src={arrow} className="edit-icon"/></View>
                     <View className="edit-right"><Text>编辑</Text></View>
                   </View>
