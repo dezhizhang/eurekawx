@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import Taro,{ getCurrentInstance } from '@tarojs/taro'
-import { View,Button,Input,Text,Radio } from '@tarojs/components'
+import { View,Button,Input,Text,Radio,Image } from '@tarojs/components'
 import { getStorageSync } from '../../utils/tools'
 import { userInfoSave } from '../../service/api';
 import Address from '../../components/address'
+import arrow from '../../images/icon/detail_store.png'
 import './index.less'
 
 
@@ -44,8 +45,15 @@ export default class Index extends Component<IndexProps,IndexState> {
           <View className="list-bottom">
             <View className="bottom-left"><Radio  color="#735ff7" className="bottom-radio" />默认地址</View>
             <View className="bottom-right">
-              <Text>编辑</Text>
-              <Text>删除</Text>
+              <View className="right-edit">
+                <View className="edit-left"> <Image src={arrow} className="edit-icon"/></View>
+                <View className="edit-right"><Text>编辑</Text></View>
+              </View>
+              <View className="right-delete">
+              <View className="edit-left"> <Image src={arrow} className="edit-icon"/></View>
+                <View className="edit-right">  <Text>删除</Text></View>
+              
+              </View>
             </View>
           </View>
         </View>
