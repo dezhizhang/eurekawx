@@ -163,4 +163,33 @@ export async function maintainEvaluation(params) {
   })
 }
 
+//增加地址
+export async function userAddressAdd(params) {
+  return request(`${Config.API_HOST}/api/address/add`,{
+    method:"POST",
+    body:params
+  })
+}
+//获取地址列表
+export async function userAddressList(params) {
+  return request(`${Config.API_HOST}/api/address/list?openid=${params.openid}`)
+}
+//删除地址
+export async function userAddressDelete(params) {
+  return request(`${Config.API_HOST}/api/address/delete?id=${params.id}&openid=${params.openid}`)
+}
+//获取单条地址
+export async function userAddressInfo(params) {
+  return request(`${Config.API_HOST}/api/address/info?id=${params.id}&openid=${params.openid}`)
+}
+//更新地址
+export async function userAddressUpdate(params) {
+  return request(`${Config.API_HOST}/api/address/update`,{
+    method:"POST",
+    body:params
+  })
+}
+
+
+
 

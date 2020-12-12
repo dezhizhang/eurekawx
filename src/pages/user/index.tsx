@@ -71,7 +71,7 @@ export default class Index extends Component<IndexProps,IndexState> {
     //个人信息
     handleAddress = () => {
       Taro.navigateTo({
-          url:'../address/index?current=1'
+          url:'../addressList/index?current=1'
       })
     }
   
