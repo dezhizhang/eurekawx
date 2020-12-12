@@ -29,6 +29,12 @@ export default class Index extends Component<IndexProps,IndexState> {
     componentDidShow() {
      
     }
+
+    handleAddress = () => {
+      Taro.redirectTo({
+        url:'../address/index'
+      })
+    }
    
     componentDidHide () { }
   
@@ -56,7 +62,7 @@ export default class Index extends Component<IndexProps,IndexState> {
             </View>
           </View>
         </View>
-        <Button className="list-bottom-btn">新建收货地址</Button>
+        <Button className="list-bottom-btn" onClick={this.handleAddress}>新建收货地址</Button>
       </View>
       )
     }
