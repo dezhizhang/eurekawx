@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Taro,{ getCurrentInstance } from '@tarojs/taro'
-import { View,Button,Input,Text } from '@tarojs/components'
+import { View,Button,Input,Text,Switch } from '@tarojs/components'
 import { getStorageSync } from '../../utils/tools'
 import { userInfoSave } from '../../service/api';
 import Address from '../../components/address'
@@ -202,6 +202,14 @@ export default class Index extends Component<IndexProps,IndexState> {
                <View className="text-left">详细地址</View>
                <View className="text-right">
                   <Input className="input" placeholder="请输入详细地址" onInput={this.handleDetail}/>
+               </View>
+            </View>
+          </View>
+          <View className="content-item">
+            <View className="item">
+               <View className="text-left">设为默认</View>
+               <View className="right-switch">
+                <Switch checked color="#735ff7"/>
                </View>
             </View>
           </View>
