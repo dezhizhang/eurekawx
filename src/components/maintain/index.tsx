@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import Taro from '@tarojs/taro'
-import { View, Textarea, Button,Image,Text,Input } from '@tarojs/components'
+import { View, Textarea, Button,Image,Text,} from '@tarojs/components'
 import { uploadInfo,getUserInfo } from '../../service/api'
 import { showLoading,hideLoading,getStorageSync,showToast } from '../../utils/tools'
 import Address from '../address/index';
 import server from '../../images/server.png'
 import upload from '../../images/upload.png'
-// import arrow from '../../images/icon/arrow.png'
-// import arrow from '../../images/icon/arrow.png'
+import arrow from '../../images/icon/arrow.png'
 import  './index.less'
 
 
@@ -168,9 +167,9 @@ handleUserInfo = () => {
     return (
      <View className="maintain">
           <View className="content">
-            <View className="content-item">
+            <View className="content-item" onClick={this.handleUserInfo}>
               <View className="item-left">{`${defaultAddredd?.cityInfo}${defaultAddredd?.detail}`}</View>
-              <View className="item-right" onClick={this.handleUserInfo}>
+              <View className="item-right" >
                 <Image src={arrow} className="image"/>
               </View>
             </View>

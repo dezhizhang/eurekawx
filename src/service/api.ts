@@ -189,7 +189,7 @@ export async function userAddressUpdate(params) {
     body:params
   })
 }
-//获取用户
+//获取用户默认地址
 export async function userAddressDefault(params) {
   return request(`${Config.API_HOST}/api/address/default?openid=${params.openid}`)
 }

@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-12-13 16:46:08
+ * @LastEditTime: 2020-12-13 16:48:38
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: /eurekawx/src/utils/config.ts
+ */
 const config = {
     development: {
       API_HOST: 'http://127.0.0.1:8082',
@@ -46,7 +54,7 @@ const config = {
   };
   
   export default {
-    // ...config.development,
-    ...config.production,
+    ...config.development,
+    // ...config.production,
     ...config.common
   };

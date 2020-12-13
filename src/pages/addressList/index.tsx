@@ -68,6 +68,11 @@ export default class Index extends Component<IndexProps,IndexState> {
       })
     }
     componentDidHide () { }
+
+    handleRadio = (ev) => {
+      ev.preventDefault;
+      return;
+    }
   
     render () {
       let { list } = this.state;
@@ -85,7 +90,7 @@ export default class Index extends Component<IndexProps,IndexState> {
                 <View style={{marginBottom:10}} className="item-title">地址：<Text className="item-text">{`${item?.cityInfo}${item?.detail}`}</Text></View>
               </View>
               <View className="list-bottom">
-                <View className="bottom-left"><Radio checked={item?.checked}  color="#735ff7" className="bottom-radio" />默认地址</View>
+                <View className="bottom-left"><Radio checked={item?.checked}  color="#735ff7" className="bottom-radio" disabled={!item?.checked} />默认地址</View>
                 <View className="bottom-right">
                   <View className="right-edit" onClick={() => this.handleAddressEdit(item)}>
                     <View className="edit-left"> <Image src={arrow} className="edit-icon"/></View>

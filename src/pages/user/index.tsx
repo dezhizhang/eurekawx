@@ -3,7 +3,7 @@ import Taro from '@tarojs/taro'
 import { View,Image} from '@tarojs/components'
 import arrow from '../../images/icon/arrow.png'
 import { getStorageSync } from '../../utils/tools'
-import { companyInfo,getUserInfo } from '../../service/api';
+import { companyInfo,getUserInfo,userAddressDefault } from '../../service/api';
 import avatar from '../../images/avatar.png'
 import  './index.less'
 
@@ -13,11 +13,13 @@ interface IndexProps {
 }
 
 interface IndexState {
-
+  userInfo:any;
+  defaultAddress:any;
 }
 
 export default class Index extends Component<IndexProps,IndexState> {
     state = {
+        defaultAddress:{},
         userInfo:{
           nickName:'',
           url:'',
@@ -31,8 +33,24 @@ export default class Index extends Component<IndexProps,IndexState> {
     componentWillReceiveProps (nextProps) {
       console.log(this.props, nextProps)
     }
+
+    componentDidMount() {
+      this.getDefaultAddress();
+    }
   
-    componentWillUnmount () { }
+    componentWillUnmount () { 
+      
+    }
+
+    getDefaultAddress = async() => {
+      const userInfoKey = getStorageSync("userInfoKey");
+      const userInfo = userInfoKey ? JSON.parse(userInfoKey):{}
+      let res = await userAddressDefault(userInfo);
+      if(res.data.code === 200) {
+        let defaultAddress = res.data.data;
+        this.setState({ defaultAddress });
+      }
+    }
   
     componentDidShow() {
       let creditCode = getStorageSync("creditCode");
@@ -40,7 +58,9 @@ export default class Index extends Component<IndexProps,IndexState> {
         this.getCompanyInfo(creditCode);
       } else {
         this.userInfo();
+        
       } 
+      this.getDefaultAddress()
     }
     userInfo = async() => {
       const userInfoKey = getStorageSync("userInfoKey");
@@ -78,9 +98,8 @@ export default class Index extends Component<IndexProps,IndexState> {
     componentDidHide () { }
   
     render () {
-      const { userInfo } = this.state;
-      console.log("userInfo",userInfo);
-  
+      const { userInfo,defaultAddress } = this.state;
+      console.log("defaultAddress",defaultAddress);
       return (
       <View className="user">
         <View className="content">
