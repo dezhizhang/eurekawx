@@ -108,9 +108,9 @@ export default class Index extends Component<IndexProps,IndexState> {
         })
       }
       //消息
-      handleMessage = () => {
-        Taro.navigateTo({
-          url:'../message/index'
+      handleMessage = (status) => {
+          Taro.navigateTo({
+            url:`../message/index?status=${status}`
         })
       }
       //收藏
@@ -155,6 +155,18 @@ export default class Index extends Component<IndexProps,IndexState> {
           url:`../order/index?status=${status}`
         })
       }
+      //跳转联系我们单页
+      handleContact = (status) => {
+        Taro.navigateTo({
+          url:`../contact/index?status=${status}`
+        })
+      }
+      //跳转订阅缴费单页
+      handleMoney = (status) => {
+        Taro.navigateTo({
+          url:`../money/index?status=${status}`
+        })
+      }
     componentDidHide () { }
   render () {
     let { userInfo,orderInfo } = this.state;
@@ -169,7 +181,7 @@ export default class Index extends Component<IndexProps,IndexState> {
                   <Image src={userInfo&&userInfo?.avatarUrl ? userInfo.avatarUrl:userInfo?.url ? userInfo?.url:avatar} className="avatar"/>
                 </View>
                 <View className="header_user">
-                  <View className="user_name" onClick={this.handlePerToLogin}>{userInfo?.nickName ? userInfo?.nickName:'马上登录'}</View>
+                  <View className="user_name" onClick={this.handlePerToLogin}>{userInfo?.nickName ? userInfo?.nickName:'点击登录'}</View>
                   <View className="user_address">会员:{userInfo&&userInfo?.userType}</View>
                 </View>
                 <View className="header_right">
@@ -249,7 +261,7 @@ export default class Index extends Component<IndexProps,IndexState> {
                    </View>
               </View>
             </View>
-            <View className="content-item" onClick={this.handleMessage}>
+            <View className="content-item" onClick={this.handleMoney}>
               <View className="item">
                  <View className="icon-left">
                    <Image className="image" src={VIP_01}/>
@@ -290,7 +302,7 @@ export default class Index extends Component<IndexProps,IndexState> {
                   </View>
                 </View>
             </View>
-            <View className="content-item" onClick={this.handleCustomer}>
+            <View className="content-item" onClick={this.handleContact}>
                 <View className="item">
                   <View className="icon-left">
                     <Image className="image" src={kefu_01}/>

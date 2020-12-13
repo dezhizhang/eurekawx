@@ -81,7 +81,7 @@ export default class Index extends Component<IndexProps,IndexState> {
       return (
       <View className="login">
         <View className="login-weapper">
-          <Button openType="getUserInfo" className="btn" type="primary" onGetUserInfo={this.bindGetUserInfo}>个人登录</Button>
+          <Button openType="getUserInfo" className="btn" type="primary" onGetUserInfo={this.bindGetUserInfo}>微信登录</Button>
         </View>
       </View>
       )
