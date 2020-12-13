@@ -133,7 +133,7 @@ export default class Index extends Component<IndexProps,IndexState> {
     }
     render () {
       const { provinces,citys,countys,value} = this.state;
-      const { visible,handleCancel } = this.props;
+      const { visible,handleCancel, } = this.props;
       console.log("visible",visible);
   
       return (

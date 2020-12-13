@@ -12,6 +12,7 @@ import  './index.less'
 
 
 interface IndexProps{
+  defaultAddredd?:any
   handleSuccess:(value) => void; //上传成功时的回调
 }
 
@@ -158,19 +159,19 @@ export default class Index extends Component<IndexProps,IndexState> {
 //个人信息
 handleUserInfo = () => {
   Taro.navigateTo({
-    url:'../user/index'
+    url:'../addressList/index'
   })
 }
   render () {
-    const { tempFilePaths,description,userInfo,visible } = this.state;
+    const { tempFilePaths,description,visible } = this.state;
+    const { defaultAddredd } = this.props;
     return (
      <View className="maintain">
           <View className="content">
             <View className="content-item">
-              <View className="item-left">上门地址：</View>
-              <View className="item-center">{userInfo.address}</View>
+              <View className="item-left">{`${defaultAddredd?.cityInfo}${defaultAddredd?.detail}`}</View>
               <View className="item-right" onClick={this.handleUserInfo}>
-                >
+                <Image src={arrow} className="image"/>
               </View>
             </View>
               <View className="content-input">

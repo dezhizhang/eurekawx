@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Taro, { getCurrentInstance } from '@tarojs/taro'
 import { View,ScrollView,Image,} from '@tarojs/components'
 import { getStorageSync,showToast,maintainType } from '../../utils/tools'
-import { maintainDelete,maintainList,maintainSign } from '../../service/api'
+import { maintainDelete,maintainList,maintainSign,userAddressDefault } from '../../service/api'
 import arrow from '../../images/icon/arrow.png'
 import Maintain from '../../components/maintain'
 import './index.less'
@@ -13,11 +13,13 @@ interface IndexState {
   tabArr:any;
   orderList:any;
   activeTab:any;
+  defaultAddredd:any;
 }
 export default class Index extends Component<IndexProps,IndexState> {
     state = {
         isHide:false,
         status:'',
+        defaultAddredd:{},
         orderList:[{title:'',_id:'',description:'',size:'',price:'',url:'',status:'',number:'',orderId:"",address:""}],
         tabArr:[
           {
@@ -120,6 +122,7 @@ export default class Index extends Component<IndexProps,IndexState> {
         return;
       }
       params.openid = userInfo.openid;
+      this.getAddressDefault(params);
       this.setState({
         activeTab:status
       });
@@ -134,7 +137,18 @@ export default class Index extends Component<IndexProps,IndexState> {
     }
     componentDidShow() {
       let params = getCurrentInstance().router.params;
+      let userInfoKey = getStorageSync('userInfoKey');
+      let userInfo = userInfoKey ? JSON.parse(userInfoKey):{};
       this.getOrderList(params);
+      this.getAddressDefault(userInfo);
+    }
+    //获取地址
+    getAddressDefault = async(params) => {
+      let res = await userAddressDefault(params);
+      if(res.data.code === 200) {
+        let defaultAddredd = res.data.data;
+        this.setState({ defaultAddredd })
+      }
     }
     handleCompany = () => {
       Taro.navigateTo({
@@ -231,8 +245,8 @@ export default class Index extends Component<IndexProps,IndexState> {
    
 
     render () {
-      const { tabArr,activeTab,bottomBtn,activeBtn,orderList } = this.state;
-      console.log("activeTab",activeTab);
+      const { tabArr,activeTab,bottomBtn,activeBtn,orderList,defaultAddredd } = this.state;
+      console.log("defaultAddredd",defaultAddredd);
       return (
       <View className="order">
         <View className="order-tabs">
@@ -254,7 +268,8 @@ export default class Index extends Component<IndexProps,IndexState> {
           {
             activeTab === '1' ? 
             <Maintain
-            handleSuccess={this.handleSuccess}
+              defaultAddredd={defaultAddredd}
+              handleSuccess={this.handleSuccess}
             />:
             orderList.map(list => {
               return  <View key={list._id} className="order-list">
