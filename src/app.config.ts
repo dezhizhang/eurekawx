@@ -17,13 +17,8 @@ export default {
     "pages/address/index",
     "pages/evaluation/index",
     "pages/contact/index",
-<<<<<<< HEAD
-    "pages/message/index",
-    "pages/money/index"
-=======
     "pages/addressList/index",
     
->>>>>>> 574d8d6540d677529668c3497e2a31ee2a94bcb6
   
   ],
   window: {

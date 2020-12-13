@@ -7,7 +7,7 @@ import Address from '../address/index';
 import server from '../../images/server.png'
 import upload from '../../images/upload.png'
 // import arrow from '../../images/icon/arrow.png'
-import arrow from '../../images/icon/arrow.png'
+// import arrow from '../../images/icon/arrow.png'
 import  './index.less'
 
 
