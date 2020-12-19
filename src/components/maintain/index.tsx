@@ -78,29 +78,31 @@ export default class Index extends Component<IndexProps,IndexState> {
     }
   }
   handleSubmit = async() => {
+    const { defaultAddredd } = this.props;
     const { description,tempFilePaths,userInfo } = this.state;
-    const { mobile,openid,userName,detail,region,address } = userInfo;
-    // const { defaultAddredd } = this.props;
-    let newAddress = (region&&detail ? `${region}${detail}`:`${address}`)
+    const { mobile,openid,userName,detail,region,} = userInfo;
+    let address = defaultAddredd ? `${defaultAddredd?.cityInfo}${defaultAddredd?.detail}`:""
     const params = {
       detail,
       region,
       openid,
       mobile,
-      address:newAddress,
+      address,
       userName,
       description,
       tempFilePaths
     }
-    // console.log("newAddress",newAddress);
 
-    // if(!newAddress) {
-    //   Taro.showToast({
-    //     title:'请填写地址',
-    //     icon:'none'
-    //   });
-    //   return;
-    // }
+    console.log(address);
+
+    //判断地址是否存在
+    if(!address) {
+      Taro.showToast({
+        title:'请填写地址',
+        icon:'none'
+      });
+      return;
+    }
     let res = await Taro.requestSubscribeMessage({
       tmplIds:['0XK1EO7jvqJtHbt_wVfRF9f050sAe4LAo021WqG0_Ds']
     });
