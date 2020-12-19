@@ -168,7 +168,7 @@ handleUserInfo = () => {
      <View className="maintain">
           <View className="content">
             <View className="content-item" onClick={this.handleUserInfo}>
-              <View className="item-left">{`${defaultAddredd?.cityInfo}${defaultAddredd?.detail}`}</View>
+              <View className="item-left">{defaultAddredd?.cityInfo ? `${defaultAddredd?.cityInfo}${defaultAddredd?.detail}`:'请填写地址'}</View>
               <View className="item-right" >
                 <Image src={arrow} className="image"/>
               </View>
