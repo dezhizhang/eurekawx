@@ -103,24 +103,24 @@ export default class Index extends Component<IndexProps,IndexState> {
       });
       return;
     }
+
+    if(!description) { 
+      Taro.showToast({
+        title:'为您更好服务请填写问题描述',
+        icon:'none'
+      });
+      return
+    }
+    if(!tempFilePaths) {
+      Taro.showToast({
+        title:'请按示例上传图片',
+        icon:'none'
+      });
+    }
     let res = await Taro.requestSubscribeMessage({
       tmplIds:['0XK1EO7jvqJtHbt_wVfRF9f050sAe4LAo021WqG0_Ds']
     });
     if(res.errMsg === 'requestSubscribeMessage:ok') { //判断用户是否授权消息
-      if(!description) { 
-        Taro.showToast({
-          title:'为您更好服务请填写问题描述',
-          icon:'none'
-        });
-        return
-      }
-      if(!tempFilePaths) {
-        Taro.showToast({
-          title:'请按示例上传图片',
-          icon:'none'
-        });
-      }
-  
       if(tempFilePaths && description) {
         showLoading({title:'信息上传中'});
         uploadInfo(params).then(res => {
