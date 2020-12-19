@@ -80,6 +80,7 @@ export default class Index extends Component<IndexProps,IndexState> {
   handleSubmit = async() => {
     const { description,tempFilePaths,userInfo } = this.state;
     const { mobile,openid,userName,detail,region,address } = userInfo;
+    // const { defaultAddredd } = this.props;
     let newAddress = (region&&detail ? `${region}${detail}`:`${address}`)
     const params = {
       detail,
@@ -91,6 +92,15 @@ export default class Index extends Component<IndexProps,IndexState> {
       description,
       tempFilePaths
     }
+    // console.log("newAddress",newAddress);
+
+    // if(!newAddress) {
+    //   Taro.showToast({
+    //     title:'请填写地址',
+    //     icon:'none'
+    //   });
+    //   return;
+    // }
     let res = await Taro.requestSubscribeMessage({
       tmplIds:['0XK1EO7jvqJtHbt_wVfRF9f050sAe4LAo021WqG0_Ds']
     });
@@ -108,6 +118,7 @@ export default class Index extends Component<IndexProps,IndexState> {
           icon:'none'
         });
       }
+  
       if(tempFilePaths && description) {
         showLoading({title:'信息上传中'});
         uploadInfo(params).then(res => {
