@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Taro  from '@tarojs/taro'
 import { View,ScrollView,Image  } from '@tarojs/components'
 import { getCategoryList } from '../../service/api'
 import './index.less'

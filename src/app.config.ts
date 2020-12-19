@@ -17,8 +17,8 @@ export default {
     "pages/address/index",
     "pages/evaluation/index",
     "pages/contact/index",
+    "pages/classify/index",
     "pages/addressList/index",
-    
   
   ],
   window: {
