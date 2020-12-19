@@ -18,6 +18,8 @@ export default {
     "pages/evaluation/index",
     "pages/contact/index",
     "pages/classify/index",
+    "pages/message/index",
+    "pages/money/index",
     "pages/addressList/index",
   
   ],

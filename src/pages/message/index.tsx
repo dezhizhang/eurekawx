@@ -25,12 +25,10 @@ export default class Index extends Component<IndexProps,IndexState> {
   render () {
     return (
      <View className="contact">
-     
-          <View className="phone" style={{textAlign:'center',color:'#ccc',fontSize:14}}>
-            <Text>没有消息...</Text>
-          </View>
+        <View className="phone" style={{textAlign:'center',color:'#ccc',fontSize:14}}>
+          <Text>没有消息...</Text>
+        </View>
     </View>
-     
     )
   }
 }
