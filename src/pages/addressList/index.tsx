@@ -96,7 +96,7 @@ export default class Index extends Component<IndexProps,IndexState> {
                     <View className="edit-right"><Text>编辑</Text></View>
                   </View>
                   <View className="right-delete" onClick={() => this.handleAddressDelete(item)}>
-                  <View className="edit-left"> <Image src={arrow} className="edit-icon"/></View>
+                  <View className="edit-left"> <Image src={arrow_1} className="edit-icon"/></View>
                     <View className="edit-right">  <Text>删除</Text></View>
                   </View>
                 </View>
