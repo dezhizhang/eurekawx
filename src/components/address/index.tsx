@@ -141,7 +141,7 @@ export default class Index extends Component<IndexProps,IndexState> {
           <View className="animation-element">
           <Text className="left-btn" onClick={handleCancel}>取消</Text>
           <Text className="right-btn" onClick={this.handleOk}>确定</Text>
-          <View className="line"></View>
+          {/* <View className="line"></View> */}
           <PickerView className="picker-view" indicatorStyle='height: 50px;' style='width: 100%; height: 380px;' value={value} onChange={this.bindChange}>
               <PickerViewColumn className="picker-view-column">
               {provinces.map((item,index) => {
