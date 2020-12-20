@@ -19,7 +19,10 @@ interface IndexState {
 
 export default class Index extends Component<IndexProps,IndexState> {
     state = {
-        defaultAddress:{},
+        defaultAddress:{
+          cityInfo:'',
+          detail:'',
+        },
         userInfo:{
           nickName:'',
           url:'',
@@ -41,17 +44,17 @@ export default class Index extends Component<IndexProps,IndexState> {
     componentWillUnmount () { 
       
     }
-
+    //获取默认地址
     getDefaultAddress = async() => {
       const userInfoKey = getStorageSync("userInfoKey");
       const userInfo = userInfoKey ? JSON.parse(userInfoKey):{}
       let res = await userAddressDefault(userInfo);
       if(res.data.code === 200) {
         let defaultAddress = res.data.data;
+        console.log("defaultAddress",defaultAddress);
         this.setState({ defaultAddress });
       }
     }
-  
     componentDidShow() {
       let creditCode = getStorageSync("creditCode");
       if(creditCode) {
@@ -135,7 +138,8 @@ export default class Index extends Component<IndexProps,IndexState> {
             <View className="item">
                <View className="text-left">地址</View>
                <View className="text-right">
-                  {userInfo.address}
+                 {defaultAddress ? `${defaultAddress?.cityInfo}${defaultAddress?.detail}`:'请选择地址'}
+                 
                </View>
                <View className="icon-right">
                  <Image src={arrow} className="image"/>
