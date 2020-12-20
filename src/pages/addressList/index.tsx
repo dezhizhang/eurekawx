@@ -85,8 +85,8 @@ export default class Index extends Component<IndexProps,IndexState> {
                 <View style={{marginBottom:10}} className="item-title">地址：<Text className="item-text">{`${item?.cityInfo}${item?.detail}`}</Text></View>
               </View>
               <View className="list-bottom">
-                <View className="bottom-left">
-                  <Radio checked={item?.checked}  color="#735ff7" className="bottom-radio" disabled={!item?.checked}/>
+                <View className="bottom-left" onClick={() => this.handleAddressEdit(item)}>
+                  <Radio checked={item?.checked}   color="#735ff7" className="bottom-radio" disabled={!item?.checked}/>
                   默认地址
                 </View>
                 <View className="bottom-right">
