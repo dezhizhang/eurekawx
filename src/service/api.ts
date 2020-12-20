@@ -193,6 +193,10 @@ export async function userAddressUpdate(params) {
 export async function userAddressDefault(params) {
   return request(`${Config.API_HOST}/api/address/default?openid=${params.openid}`)
 }
+//修改当前选中的默认地址
+export async function userAddressCurrent(params) {
+  return request(`${Config.API_HOST}/api/address/update/current?openid=${params.openid}&id=${params.id}`)
+} 
 
 
 

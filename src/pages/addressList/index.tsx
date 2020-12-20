@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import Taro,{ getCurrentInstance } from '@tarojs/taro'
-import { View,Button,Text,Radio,Image } from '@tarojs/components'
+import { View,Button,Text,Checkbox,Image,Radio } from '@tarojs/components'
 import { getStorageSync,showToast } from '../../utils/tools'
-import { userAddressList,userAddressDelete } from '../../service/api';
+import { userAddressList,userAddressDelete,userAddressCurrent } from '../../service/api';
 import arrow from '../../images/icon/detail_store.png'
 import './index.less'
 
@@ -68,11 +68,6 @@ export default class Index extends Component<IndexProps,IndexState> {
       })
     }
     componentDidHide () { }
-
-    handleRadio = (ev) => {
-      ev.preventDefault;
-      return;
-    }
   
     render () {
       let { list } = this.state;
@@ -90,7 +85,10 @@ export default class Index extends Component<IndexProps,IndexState> {
                 <View style={{marginBottom:10}} className="item-title">地址：<Text className="item-text">{`${item?.cityInfo}${item?.detail}`}</Text></View>
               </View>
               <View className="list-bottom">
-                <View className="bottom-left"><Radio checked={item?.checked}  color="#735ff7" className="bottom-radio" disabled={!item?.checked} />默认地址</View>
+                <View className="bottom-left">
+                  <Radio checked={item?.checked}  color="#735ff7" className="bottom-radio" disabled={!item?.checked}/>
+                  默认地址
+                </View>
                 <View className="bottom-right">
                   <View className="right-edit" onClick={() => this.handleAddressEdit(item)}>
                     <View className="edit-left"> <Image src={arrow} className="edit-icon"/></View>
