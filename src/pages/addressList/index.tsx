@@ -4,6 +4,7 @@ import { View,Button,Text,Checkbox,Image,Radio } from '@tarojs/components'
 import { getStorageSync,showToast } from '../../utils/tools'
 import { userAddressList,userAddressDelete,userAddressCurrent } from '../../service/api';
 import arrow from '../../images/icon/detail_store.png'
+import arrow_1 from '../../images/icon/del_store.png'
 import './index.less'
 
 
@@ -80,9 +81,8 @@ export default class Index extends Component<IndexProps,IndexState> {
             return (
               <View className="list-wrapper" key={index}>
               <View className="list-header">
-                <View className="item-title">姓名：<Text className="item-text">{item?.userName}</Text></View>
-                <View className="item-title">电话：<Text className="item-text">{item?.mobile}</Text></View>
-                <View style={{marginBottom:10}} className="item-title">地址：<Text className="item-text">{`${item?.cityInfo}${item?.detail}`}</Text></View>
+                <View className="item-title"><Text className="item-text">{item?.userName} {item?.mobile}</Text></View>
+                <View style={{marginBottom:10}} className="item-mobile"><Text className="item-text">{`${item?.cityInfo}${item?.detail}`}</Text></View>
               </View>
               <View className="list-bottom">
                 <View className="bottom-left" onClick={() => this.handleAddressEdit(item)}>
@@ -95,7 +95,7 @@ export default class Index extends Component<IndexProps,IndexState> {
                     <View className="edit-right"><Text>编辑</Text></View>
                   </View>
                   <View className="right-delete" onClick={() => this.handleAddressDelete(item)}>
-                  <View className="edit-left"> <Image src={arrow} className="edit-icon"/></View>
+                  <View className="edit-left"> <Image src={arrow_1} className="edit-icon"/></View>
                     <View className="edit-right">  <Text>删除</Text></View>
                   </View>
                 </View>
