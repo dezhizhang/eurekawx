@@ -4,6 +4,7 @@ import { userMessageInfo } from '../../service/api';
 import { View,Text,Image } from '@tarojs/components';
 import { getStorageSync } from '../../utils/tools'
 import arrow from '../../images/icon/arrow.png'
+import tongzhi from '../../images/tongzhi.png'
 import  './index.less'
 
 
@@ -48,7 +49,9 @@ export default class Index extends Component<IndexProps,IndexState> {
             return (
             <View key={index} className="message-content">
               <View className="content-header">
-                <View className="header-icon"></View>
+                <View className="header-icon">
+                  <Image src={tongzhi} className="icon-image"/>
+                </View>
                 <View className="header-title">通知</View>
               <View className="header-time">{item.add_time}</View>
               </View>
