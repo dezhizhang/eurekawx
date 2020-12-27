@@ -22,6 +22,8 @@ export default class Index extends Component<IndexProps,IndexState> {
         defaultAddress:{
           cityInfo:'',
           detail:'',
+          mobile:'',
+          userName:'',
         },
         userInfo:{
           nickName:'',
@@ -118,10 +120,17 @@ export default class Index extends Component<IndexProps,IndexState> {
           </View>
           <View className="content-item">
             <View className="item">
-             
-              <View className="text-left">{userInfo.userName ? '姓名':'呢称'}</View>
+              <View className="text-left">呢称</View>
               <View className="text-right">
                  <View className="text-right">{userInfo.userName ? userInfo.userName:userInfo.nickName}</View>
+              </View>
+            </View>
+          </View>
+          <View className="content-item">
+            <View className="item">
+              <View className="text-left">姓名</View>
+              <View className="text-right">
+                 <View className="text-right">{defaultAddress?.userName}</View>
               </View>
             </View>
           </View>
@@ -130,7 +139,7 @@ export default class Index extends Component<IndexProps,IndexState> {
              
                <View className="text-left">手机</View>
                <View className="text-right">
-                  {userInfo.mobile ? userInfo.mobile:'手机号' }
+                  {defaultAddress?.mobile}
                </View>
             </View>
           </View>
