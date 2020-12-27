@@ -193,6 +193,10 @@ export async function userAddressUpdate(params) {
 export async function userAddressDefault(params) {
   return request(`${Config.API_HOST}/api/address/default?openid=${params.openid}`)
 }
+//获取用户消息
+export async function userMessageInfo(params) {
+  return request(`${Config.API_HOST}/api/user/message?openid=${params.openid}`)
+}
 
 
 

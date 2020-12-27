@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Taro  from '@tarojs/taro'
 import { View,Image  } from '@tarojs/components'
 import { getStorageSync } from '../../utils/tools'
-import { companyInfo,getOrderContent,getUserInfo} from '../../service/api';
 import myHeader from '../../images/my_header.png'
 import avatar from '../../images/avatar.png'
 import allOrder from '../../images/all_order.png'
@@ -15,6 +14,12 @@ import setting_01 from '../../images/icon/setting_01.png'
 import kefu_01 from '../../images/icon/kefu_01.png'
 import arrow from '../../images/icon/arrow.png'
 import  './index.less'
+import { 
+  companyInfo,
+  getUserInfo,
+  userMessageInfo,
+  getOrderContent,
+} from '../../service/api';
 
 
 interface IndexProps {
@@ -22,7 +27,8 @@ interface IndexProps {
 }
 
 interface IndexState {
-
+  messageInfo:any;
+  orderInfo:any;
 }
 
 export default class Index extends Component<IndexProps,IndexState> {
@@ -35,6 +41,7 @@ export default class Index extends Component<IndexProps,IndexState> {
           url:'',
           isLogin:false, //当削是否登录过
         },
+        messageInfo:[],
         orderInfo:{
           stayDelivery: 0,
           stayDistribution: 0,
@@ -57,8 +64,22 @@ export default class Index extends Component<IndexProps,IndexState> {
           this.setState({ orderInfo });
         }
       }
+      componentDidMount() {
+        this.getMessage();
+      }
+      //获取消息
+      getMessage = async() => {
+        let userInfoKey = getStorageSync('userInfoKey');
+        let userInfo = userInfoKey ? JSON.parse(userInfoKey):{};
+        let res = await userMessageInfo({'openid':userInfo.openid});
+        if(res.data.code === 200) {
+          let messageInfo = res.data.data;
+          this.setState({ messageInfo });
+        }
+      }
       componentDidShow() {
         this.orderCount() //统计订单数量
+        this.getMessage();
         let creditCode =  getStorageSync('creditCode');
         if(creditCode) { //证明企业用户
           this.getCompanyInfo(creditCode);
@@ -169,7 +190,8 @@ export default class Index extends Component<IndexProps,IndexState> {
       }
     componentDidHide () { }
   render () {
-    let { userInfo,orderInfo } = this.state;
+        let { userInfo,orderInfo,messageInfo } = this.state;
+        console.log("messageInfo",messageInfo);
         return (
         <View className="my">
           <View className="header">
@@ -239,9 +261,9 @@ export default class Index extends Component<IndexProps,IndexState> {
                  <View className="icon-left">
                    <Image className="image" src={msg}/>
                  </View>
-                 <View className="text-left">我的消息</View>
+                <View className="text-left">我的消息</View>
                  <View className="text-right">
-                   <View className="text-number">0</View>
+                <View className="text-number">{messageInfo?.length}</View>
                  </View>
                  <View className="icon-right">
                    <Image src={arrow} className="image"/>
