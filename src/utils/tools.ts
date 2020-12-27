@@ -1,5 +1,5 @@
 import Taro from '@tarojs/taro';
-export const appid = 'wx2198b51c8406aed0';
+export const appid = 'wx33e7ec4a857e6f99';
 
 //提示
 export const showToast = (params) => {
