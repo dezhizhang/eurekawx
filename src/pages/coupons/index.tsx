@@ -56,7 +56,14 @@ export default class Index extends Component<IndexProps,IndexState> {
             })}
         </View>
         <View className="coupons-body">
-            
+            <View className="coupons-list">
+                <View className="circle circle-top"></View>
+                <View className="circle circle-bottom"></View>
+                <View className="list-wrapper">
+                    <View className="list-left"></View>
+                    <View className="list-right"></View>
+                </View>
+            </View>
         </View>
     </View>
      
