@@ -197,6 +197,7 @@ export async function userAddressDefault(params) {
 export async function userMessageInfo(params) {
   return request(`${Config.API_HOST}/api/user/message?openid=${params.openid}`)
 }
+//获取优惠
 
 
 

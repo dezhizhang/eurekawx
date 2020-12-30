@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Taro from '@tarojs/taro'
 import { View,Text } from '@tarojs/components'
+import { getStorageSync } from '../../utils/tools';
 import  './index.less'
 
 
@@ -39,6 +40,17 @@ export default class Index extends Component<IndexProps,IndexState> {
   }
   componentWillReceiveProps (nextProps) {
     console.log(this.props, nextProps)
+  }
+  componentDidMount() {
+    this.getCouponsList();
+  }
+  //获取优惠券列表
+  getCouponsList = () => {
+    let userInfoKey = getStorageSync('userInfoKey');
+    let userInfo = userInfoKey ? JSON.parse(userInfoKey):{};
+  }
+  componentDidShow() {
+    this.getCouponsList();
   }
   //改变tabs
   handleTabs = (item) => {
