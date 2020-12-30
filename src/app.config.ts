@@ -1,6 +1,5 @@
 export default {
   pages: [
-    "pages/coupons/index",
     'pages/index/index',
     'pages/my/index',
     'pages/category/index',
@@ -21,6 +20,7 @@ export default {
     "pages/classify/index",
     "pages/message/index",
     "pages/money/index",
+    "pages/coupons/index",
     "pages/addressList/index",
   
   ],

@@ -188,158 +188,178 @@ export default class Index extends Component<IndexProps,IndexState> {
           url:`../money/index?status=${status}`
         })
       }
+      handleCoupons = () => {
+        Taro.navigateTo({
+          url:`../coupons/index`
+        })
+      }
     componentDidHide () { }
-  render () {
-        let { userInfo,orderInfo,messageInfo } = this.state;
-        console.log("messageInfo",messageInfo);
-        return (
-        <View className="my">
-          <View className="header">
-              <View className="header_top">
-                <View className="header_image">
-                  <Image className="image" src={myHeader}/>
-                </View>
-                <View className="header_avatar">
-                  <Image src={userInfo&&userInfo?.avatarUrl ? userInfo.avatarUrl:userInfo?.url ? userInfo?.url:avatar} className="avatar"/>
-                </View>
-                <View className="header_user">
-                  <View className="user_name" onClick={this.handlePerToLogin}>{userInfo?.nickName ? userInfo?.nickName:'点击登录'}</View>
-                  <View className="user_address">会员:{userInfo&&userInfo?.userType}</View>
-                </View>
-                <View className="header_right">
-                   <View className="right" onClick={this.handleUserInfo}>
-                      <View className="text">个人资料管理</View>
-                   </View>
-                </View>
-              </View>
-              <View className="header_content">
-              <View className="content_card">
-                <View className="card_info">
-                  <View className="info_box">
-                    <View className="box_top">
-                      <View className="top_item" onClick={() => this.handleToOrder(1)}>
-                        <View className="item_top">待付款</View>
-                        <View className="item_bottom">{orderInfo.stayPayment}</View>
-                      </View>
-                      <View className="top_item" onClick={() => this.handleToOrder(2)}>
-                        <View className="item_top">待配送</View>
-                        <View className="item_bottom">{orderInfo.stayDelivery}</View>
-                      </View>
-                      <View className="top_item" onClick={() => this.handleToOrder(3)}>
-                        <View className="item_top">己完成</View>
-                        <View className="item_bottom">{orderInfo.stayDistribution}</View>
-                      </View>
-                      <View className="top_item" onClick={() => this.handleToOrder(4)}>
-                        <View className="item_top">待评价</View>
-                        <View className="item_bottom">{orderInfo.stayEvaluation}</View>
-                      </View>
+    render () {
+          let { userInfo,orderInfo,messageInfo } = this.state;
+          console.log("messageInfo",messageInfo);
+          return (
+          <View className="my">
+            <View className="header">
+                <View className="header_top">
+                  <View className="header_image">
+                    <Image className="image" src={myHeader}/>
+                  </View>
+                  <View className="header_avatar">
+                    <Image src={userInfo&&userInfo?.avatarUrl ? userInfo.avatarUrl:userInfo?.url ? userInfo?.url:avatar} className="avatar"/>
+                  </View>
+                  <View className="header_user">
+                    <View className="user_name" onClick={this.handlePerToLogin}>{userInfo?.nickName ? userInfo?.nickName:'点击登录'}</View>
+                    <View className="user_address">会员:{userInfo&&userInfo?.userType}</View>
+                  </View>
+                  <View className="header_right">
+                    <View className="right" onClick={this.handleUserInfo}>
+                        <View className="text">个人资料管理</View>
                     </View>
-                    <View className="box-bottom">
-                      <View className="bottom-wrapper">
-                        <View className="bottom-item" onClick={() => this.handleToOrder(0)}>
-                          <View className="item-top">
-                              <Image src={allOrder} className="image"/>
-                          </View>
-                          <View className="item-bottom">所有订单</View>
+                  </View>
+                </View>
+                <View className="header_content">
+                <View className="content_card">
+                  <View className="card_info">
+                    <View className="info_box">
+                      <View className="box_top">
+                        <View className="top_item" onClick={() => this.handleToOrder(1)}>
+                          <View className="item_top">待付款</View>
+                          <View className="item_bottom">{orderInfo.stayPayment}</View>
                         </View>
-                        <View className="bottom-item" onClick={() => this.handleToOrder(3)}>
-                          <View className="item-top">
-                            <Image src={endall_order} className="image"/>
+                        <View className="top_item" onClick={() => this.handleToOrder(2)}>
+                          <View className="item_top">待配送</View>
+                          <View className="item_bottom">{orderInfo.stayDelivery}</View>
+                        </View>
+                        <View className="top_item" onClick={() => this.handleToOrder(3)}>
+                          <View className="item_top">己完成</View>
+                          <View className="item_bottom">{orderInfo.stayDistribution}</View>
+                        </View>
+                        <View className="top_item" onClick={() => this.handleToOrder(4)}>
+                          <View className="item_top">待评价</View>
+                          <View className="item_bottom">{orderInfo.stayEvaluation}</View>
+                        </View>
+                      </View>
+                      <View className="box-bottom">
+                        <View className="bottom-wrapper">
+                          <View className="bottom-item" onClick={() => this.handleToOrder(0)}>
+                            <View className="item-top">
+                                <Image src={allOrder} className="image"/>
+                            </View>
+                            <View className="item-bottom">所有订单</View>
                           </View>
-                          <View className="item-bottom">完成订单</View>
+                          <View className="bottom-item" onClick={() => this.handleToOrder(3)}>
+                            <View className="item-top">
+                              <Image src={endall_order} className="image"/>
+                            </View>
+                            <View className="item-bottom">完成订单</View>
+                          </View>
                         </View>
                       </View>
                     </View>
                   </View>
                 </View>
-              </View>
-          </View>
-          </View>
-          <View className="content">
-            <View className="content-item" onClick={this.handleMessage}>
-              <View className="item">
-                 <View className="icon-left">
-                   <Image className="image" src={msg}/>
-                 </View>
-                <View className="text-left">我的消息</View>
-                 <View className="text-right">
-                <View className="text-number">{messageInfo?.length}</View>
-                 </View>
-                 <View className="icon-right">
-                   <Image src={arrow} className="image"/>
-                 </View>
-              </View>
             </View>
-            <View className="content-item" onClick={this.handleCompany}>
-              <View className="item">
-                 <View className="icon-left">
-                   <Image className="image" src={renzheng_01}/>
-                 </View>
-                 <View className="text-left">企业认证</View>
-                 <View className="text-right">
-                 </View>
-                 <View className="icon-right">
-                   <Image src={arrow} className="image"/>
-                   </View>
-              </View>
             </View>
-            <View className="content-item" onClick={this.handleMoney}>
-              <View className="item">
-                 <View className="icon-left">
-                   <Image className="image" src={VIP_01}/>
-                 </View>
-                 <View className="text-left">订阅缴费</View>
-                 <View className="text-right">
-                 </View>
-                 <View className="icon-right">
-                   <Image src={arrow} className="image"/>
-                 </View>
-              </View>
-            </View>
-            <View className="content-item" onClick={this.handleOrder}>
-              <View className="item">
-                 <View className="icon-left">
-                   <Image className="image" src={fix_yuyue}/>
-                 </View>
-                 <View className="text-left">我的预约</View>
-                 <View className="text-right">
-                 </View>
-                 <View className="icon-right">
-                   <Image src={arrow} className="image"/>
-                 </View>
-              </View>
-            </View>
-          </View>
-          <View className="footer">
-            <View className="content-item" onClick={this.handleSetting}>
+            <View className="content">
+            <View className="content-item" onClick={this.handleCoupons}>
                 <View className="item">
                   <View className="icon-left">
-                    <Image className="image" src={setting_01}/>
+                    <Image className="image" src={msg}/>
                   </View>
-                  <View className="text-left">我的设置</View>
+                  <View className="text-left">我的卡券</View>
+                  <View className="text-right">
+                  <View className="text-number">{messageInfo?.length}</View>
+                  </View>
+                  <View className="icon-right">
+                    <Image src={arrow} className="image"/>
+                  </View>
+                </View>
+              </View>
+              <View className="content-item" onClick={this.handleMessage}>
+                <View className="item">
+                  <View className="icon-left">
+                    <Image className="image" src={msg}/>
+                  </View>
+                  <View className="text-left">我的消息</View>
+                  <View className="text-right">
+                  <View className="text-number">{messageInfo?.length}</View>
+                  </View>
+                  <View className="icon-right">
+                    <Image src={arrow} className="image"/>
+                  </View>
+                </View>
+              </View>
+            
+              <View className="content-item" onClick={this.handleCompany}>
+                <View className="item">
+                  <View className="icon-left">
+                    <Image className="image" src={renzheng_01}/>
+                  </View>
+                  <View className="text-left">企业认证</View>
+                  <View className="text-right">
+                  </View>
+                  <View className="icon-right">
+                    <Image src={arrow} className="image"/>
+                    </View>
+                </View>
+              </View>
+              <View className="content-item" onClick={this.handleMoney}>
+                <View className="item">
+                  <View className="icon-left">
+                    <Image className="image" src={VIP_01}/>
+                  </View>
+                  <View className="text-left">订阅缴费</View>
                   <View className="text-right">
                   </View>
                   <View className="icon-right">
                     <Image src={arrow} className="image"/>
                   </View>
                 </View>
-            </View>
-            <View className="content-item" onClick={this.handleContact}>
+              </View>
+              <View className="content-item" onClick={this.handleOrder}>
                 <View className="item">
                   <View className="icon-left">
-                    <Image className="image" src={kefu_01}/>
+                    <Image className="image" src={fix_yuyue}/>
                   </View>
-                  <View className="text-left">官方客服</View>
+                  <View className="text-left">我的预约</View>
                   <View className="text-right">
-                    {/* <View className="text-number">16</View> */}
                   </View>
                   <View className="icon-right">
                     <Image src={arrow} className="image"/>
                   </View>
                 </View>
+              </View>
+            </View>
+            <View className="footer">
+              <View className="content-item" onClick={this.handleSetting}>
+                  <View className="item">
+                    <View className="icon-left">
+                      <Image className="image" src={setting_01}/>
+                    </View>
+                    <View className="text-left">我的设置</View>
+                    <View className="text-right">
+                    </View>
+                    <View className="icon-right">
+                      <Image src={arrow} className="image"/>
+                    </View>
+                  </View>
+              </View>
+              <View className="content-item" onClick={this.handleContact}>
+                  <View className="item">
+                    <View className="icon-left">
+                      <Image className="image" src={kefu_01}/>
+                    </View>
+                    <View className="text-left">官方客服</View>
+                    <View className="text-right">
+                      {/* <View className="text-number">16</View> */}
+                    </View>
+                    <View className="icon-right">
+                      <Image src={arrow} className="image"/>
+                    </View>
+                  </View>
+              </View>
             </View>
           </View>
-        </View>
         
     )
   }
