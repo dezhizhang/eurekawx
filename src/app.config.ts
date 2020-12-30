@@ -1,5 +1,6 @@
 export default {
   pages: [
+    "pages/coupons/index",
     'pages/index/index',
     'pages/my/index',
     'pages/category/index',
