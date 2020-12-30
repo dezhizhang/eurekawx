@@ -60,8 +60,15 @@ export default class Index extends Component<IndexProps,IndexState> {
                 <View className="circle circle-top"></View>
                 <View className="circle circle-bottom"></View>
                 <View className="list-wrapper">
-                    <View className="list-left"></View>
-                    <View className="list-right"></View>
+                    <View className="list-left">
+                        <Text className="left-symbol">￥</Text>
+                        <Text className="left-monay">5</Text>
+                    </View>
+                    <View className="list-right">
+                        {/* <View className="right-header">仅限部分商店部分商品使用</View>
+                        <View>使用时间：2019.08.10-2019.08.20</View>
+                        <View></View> */}
+                    </View>
                 </View>
             </View>
         </View>
