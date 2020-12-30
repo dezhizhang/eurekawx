@@ -65,9 +65,9 @@ export default class Index extends Component<IndexProps,IndexState> {
                         <Text className="left-monay">5</Text>
                     </View>
                     <View className="list-right">
-                        {/* <View className="right-header">仅限部分商店部分商品使用</View>
-                        <View>使用时间：2019.08.10-2019.08.20</View>
-                        <View></View> */}
+                        <View className="right-header">仅限部分商店部分商品使用</View>
+                        <View className="right-center">使用时间：2019.08.10-2019.08.20</View>
+                        <View className="right-bottom">马上使用</View>
                     </View>
                 </View>
             </View>
