@@ -23,7 +23,8 @@ export default class Index extends Component<IndexProps,IndexState> {
                         <View className="wrapper-panel">1111</View>
                     </View>
                     <View className="wrapper-body">
-                            111
+                        <View className="body-sign"></View>
+                        <View className="body-task"></View>
                     </View>
                 </View>
             </View>
