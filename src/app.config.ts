@@ -1,5 +1,6 @@
 export default {
   pages: [
+    "pages/integral/index",
     'pages/index/index',
     'pages/my/index',
     'pages/category/index',
@@ -26,9 +27,11 @@ export default {
   ],
   window: {
     backgroundTextStyle: 'light',
-    navigationBarBackgroundColor: '#735ff7',
+    navigationBarBackgroundColor: '#FF5250',
     navigationBarTitleText: 'WeChat',
-    navigationBarTextStyle: 'white'
+    navigationBarTextStyle: 'white',
+    navigationStyle: "custom",
+    enablePullDownRefresh: true
   },
   tabBar: {
     list: [{

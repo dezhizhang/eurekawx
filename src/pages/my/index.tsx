@@ -289,7 +289,20 @@ export default class Index extends Component<IndexProps,IndexState> {
                   </View>
                 </View>
               </View>
-            
+              <View className="content-item" onClick={this.handleMessage}>
+                <View className="item">
+                  <View className="icon-left">
+                    <Image className="image" src={msg}/>
+                  </View>
+                  <View className="text-left">我的积分</View>
+                  <View className="text-right">
+                  <View className="text-number">{messageInfo?.length}</View>
+                  </View>
+                  <View className="icon-right">
+                    <Image src={arrow} className="image"/>
+                  </View>
+                </View>
+              </View>
               <View className="content-item" onClick={this.handleCompany}>
                 <View className="item">
                   <View className="icon-left">
