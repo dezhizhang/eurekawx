@@ -33,7 +33,9 @@ export default class Index extends Component<IndexProps,IndexState> {
                     </View>
                     <View className="wrapper-body">
                         <View className="body-sign"></View>
-                        <View className="body-task"></View>
+                        <View className="body-task">
+                            <View className="tash"></View>
+                        </View>
                     </View>
                 </View>
             </View>
