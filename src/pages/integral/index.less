@@ -31,6 +31,48 @@
                 background: #fff;
                 height: 200px;
                 border-radius: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 30px;
+                box-sizing: border-box;
+                .panel-item{
+                    flex: 1;
+                }
+                .panel-left{
+                    .left-text{
+                        font-size: 24px;
+                        font-family: '微软雅黑';
+                        color: #999999;
+                    }
+                    .left-number{
+                        font-size: 52px;
+                        font-family: '微软雅黑';
+                        color: #FF5250
+                    }
+                }
+                .panel-right{
+                    flex: 1.6!important;
+                    display: flex;
+                    .right-text{
+                        width: 160px;
+                        height: 72px;
+                        text-align: center;
+                        line-height: 72px;
+                        border: 2px solid #FFFFFF;
+                        background: linear-gradient(90deg, #FFCB2D 0%, #FF8236 100%);
+                        box-shadow: 0px 10px 20px 0px rgba(104, 114, 255, 0.25);
+                        border-radius: 36px; 
+                        font-size: 28px;
+                        font-family: '微软雅黑';
+                        color: #FFFFFF;
+                    }
+                    .text-shop{
+                        margin-left: 30px;
+                        background: linear-gradient(90deg, #2D6DFF 0%, #7A73FF 100%);
+                        box-shadow: 0px 10px 20px 0px rgba(104, 114, 255, 0.25);
+                    }
+                }
             }
         }
         .wrapper-body{
